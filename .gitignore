@@ -31,6 +31,7 @@ data/common/abbr
 data/common/*.idf_phrase
 data/common/*.idf_text
 data/common/temp-lang
+data/common/corpus.db
 data/v3/*
 data/v1/*
 data/bench/*.cache

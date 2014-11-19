@@ -7,6 +7,7 @@ use utf8;
 use Unicode::Normalize;
 use Encode;
 use Config;
+use DBI;
 
 require Exporter;
 
@@ -113,6 +114,14 @@ our %is_word = (
 	'grc' => qr([$wchar_greek]+),
 	'en'  => qr('?[$wchar_latin]+(?:['-][$wchar_latin]*)?) 
 	);
+
+#
+# metadata database
+#	
+
+my $metadata_db_file = catfile($fs{data}, 'common', 'corpus.db');
+our $metadata_db_table = 'texts';
+metadata_init();
 
 ########################################
 # subroutines
@@ -485,25 +494,27 @@ sub check_mod {
 sub check_prose_list {
 
 	my $name = shift;
+	
+	return metadata_get($name, 'prose');
 		
-	my $file_prose_list = catfile($fs{text}, 'prose_list');
-	
-	return 0 unless (-s $file_prose_list);
-	
-	open (FH, '<:utf8', $file_prose_list) or die "can't read $file_prose_list";
-	
-	while (my $line = <FH>) { 
-	
-		chomp $line;
-		
-		$line =~ s/#.*//;
-		
-		next unless $line =~ /\S/;
-		
-		return 1 if $name =~ /$line/;
-	}
-	
-	return 0;
+	# my $file_prose_list = catfile($fs{text}, 'prose_list');
+	#
+	# return 0 unless (-s $file_prose_list);
+	#
+	# open (FH, '<:utf8', $file_prose_list) or die "can't read $file_prose_list";
+	#
+	# while (my $line = <FH>) {
+	#
+	# 	chomp $line;
+	#
+	# 	$line =~ s/#.*//;
+	#
+	# 	next unless $line =~ /\S/;
+	#
+	# 	return 1 if $name =~ /$line/;
+	# }
+	#
+	# return 0;
 }
 
 
@@ -580,22 +591,33 @@ sub text_sort {
 
 sub lang {
 	
-	my ($text, $lang) = @_;
+	my ($name, $lang) = @_;
 	
-	my $file_lang = catfile($fs{data}, 'common', 'lang');
-
-	if (! %lang and -s $file_lang) {
-		
-		%lang = %{retrieve($file_lang)};
-	}
+	my $dbh = metadata_dbh();
 	
 	if ($lang) {
-	
-		$lang{$text} = $lang;
-		nstore \%lang, $file_lang;
+		
+		metadata_set($name, 'lang', $lang, $dbh);
 	}
 	
-	return $lang{$text};
+	return metadata_get($name, 'lang', $dbh);
+	
+	# my $file_lang = catfile($fs{data}, 'common', 'lang');
+	#
+	# if (! %lang and -s $file_lang) {
+	#
+	# 	%lang = %{retrieve($file_lang)};
+	# }
+	#
+	# if ($lang) {
+	#
+	# 	$lang{$text} = $lang;
+	# 	nstore \%lang, $file_lang;
+	#
+	# 	metadata_set($text, 'lang', $lang);
+	# }
+	#
+	# return $lang{$text};
 }
 
 # check the feature dictionary
@@ -794,7 +816,7 @@ sub write_freq_score {
 
 sub process_file_list {
 	
-	my ($listref, $lang, $optref) = @_;
+	my ($listref, $optref) = @_;
 	my @list_in = @$listref;
 	my %opt     = %$optref;
 	
@@ -825,24 +847,6 @@ sub process_file_list {
 	
 		next unless ($suffix eq ".tess");
 		
-		# get the language for this doc.
-		
-		if ( defined $lang and $lang ne "") {
-			
-			lang($name, $lang);
-		}
-		elsif ( defined lang($name) ) {
-		}
-		elsif (Cwd::abs_path($file_in) =~ m/$fs{text}\/([a-z]{1,4})\//) {
-
-			lang($name, $1);
-		}
-		else {
-
-			warn "Skipping $file_in: can't guess language";
-			next;
-		}
-
 		$list_out{$name} = $file_in;
 	}
 
@@ -917,9 +921,9 @@ sub initialize_lingua_stem {
 
 sub get_base {
 
-	my $text = shift;
+	my $name = shift;
 	
-	my $lang = lang($text);
+	my $lang = metadata_get($name, 'lang');
 	
 	unless ($lang) {
 	
@@ -945,4 +949,52 @@ sub escape_path {
 	
 	return $path;
 }
+
+sub metadata_get {
+	my ($name, $field, $dbh_open) = @_;
+	
+	my $dbh = $dbh_open || metadata_dbh();
+
+	my $value;
+
+	my $res = $dbh->selectrow_arrayref("select $field from $metadata_db_table where name=\"$name\";");
+	
+	if ($res) {
+		$value = $res->[0];
+	}
+	
+	return $value;
+}
+
+sub metadata_set {
+	my ($name, $field, $value, $dbh_open) = @_;
+
+	my $dbh = $dbh_open || metadata_dbh();
+	
+	$dbh->do("update $metadata_db_table set $field=\"$value\" where name=\"$name\";");
+}
+
+sub metadata_dbh {
+	
+	my $dbh = DBI->connect("dbi:SQLite:dbname=$metadata_db_file", "", "", {RaiseError=>1});
+	return $dbh;
+}
+
+sub metadata_init {
+	
+	my $dbh = metadata_dbh();
+	
+	my @cols = (
+		'name varchar(128) unique',
+		'lang char(3)',
+		'abbr varchar(24)',
+		'prose int'
+	);
+	
+	$dbh->do(
+		"create table if not exists $metadata_db_table (" . join(",", @cols) . ");"
+	);
+}
+
+
 1;

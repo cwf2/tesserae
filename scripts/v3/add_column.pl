@@ -198,7 +198,7 @@ my $pm;
 # declare language tools
 #
 
-my $lang;
+my $lang_default;
 
 # don't print messages to STDERR 
 my $quiet = 0;
@@ -217,7 +217,7 @@ binmode STDERR, ':utf8';
 #
 
 GetOptions( 
-	"lang=s"          => \$lang,
+	"lang=s"          => \$lang_default,
 	"parallel=i"      => \$max_processes,
 	"quiet"           => \$quiet,
 	"prose"           => \$prose,
@@ -264,7 +264,7 @@ if ($max_processes) {
 # get files to be processed from cmd line args
 
 my @files = @ARGV;
-my %file = %{Tesserae::process_file_list(\@files, $lang, {filenames=>1})};
+my %file = %{Tesserae::process_file_list(\@files, {filenames=>1})};
 
 unless (keys %file) {
 
@@ -274,7 +274,7 @@ unless (keys %file) {
 
 # write the abbreviations database
 
-get_abbr(\%file);
+# get_abbr(\%file);
 
 #
 # process the files
@@ -300,14 +300,38 @@ for my $name (keys %file) {
 	my @phrase = ({});
 
 	my %index_word;
-
-	my $lang = Tesserae::lang($name);
-
-	#
-	# check prose list
-	#
+	my %cit;
 	
-	my $prose = $prose || Tesserae::check_prose_list($name);
+	my $dbh = Tesserae::metadata_dbh;
+	
+	# get the language for this doc.
+	
+	my $lang;
+	
+	if ( defined $lang_default and $lang_default ne "") {
+		
+		$lang = $lang_default;
+	}
+	elsif (Cwd::abs_path($file{$name}) =~ m/$fs{text}\/([a-z]{1,4})\//) {
+
+		$lang = $1;
+	}
+
+	unless ( $lang ) {
+		warn "Skipping $file{$name}: can't guess language";
+		
+		if ($max_processes) { $pm->finish }
+		next;
+	}
+
+	# check prose list
+	
+	my $prose = $prose || check_prose_list($name);
+	
+	# add the text into metadata table
+	
+	$dbh->do("insert or replace into $Tesserae::metadata_db_table (name, lang, prose) "
+		. "values (\"$name\", \"$lang\", $prose);");
 	
 	#
 	# assume unknown lang is like english
@@ -357,6 +381,10 @@ for my $name (keys %file) {
 		# examine the locus of each line
 
 		$locus =~ s/^(.*)\s//;
+		
+		# save abbreviation of auth/work
+		
+		$cit{$1} ++;
 		
 		# save the book/poem/line number
 
@@ -551,7 +579,17 @@ for my $name (keys %file) {
 			
 		$phrase[$phrase_id]{LOCUS} = $line[$phrase[$phrase_id]{LINE_ID}[0]]{LOCUS};
 	}
-		
+	
+	# save auth/work abbreviation
+	
+	{
+		my @choice = sort {$cit{$b} <=> $cit{$a}} grep {/\w/} keys %cit;
+
+		if ($choice[0]) {
+			Tesserae::metadata_set($name, 'abbr', $choice[0], $dbh);
+		}
+	}
+	
 	#
 	# save the data
 	#
@@ -645,4 +683,28 @@ sub get_abbr {
 	print STDERR "Writing $file_abbr\n";
 	
 	nstore \%abbr, $file_abbr;
+}
+
+sub check_prose_list {
+
+	my $name = shift;
+		
+	my $file_prose_list = catfile($fs{text}, 'prose_list');
+	
+	return 0 unless (-s $file_prose_list);
+	
+	open (FH, '<:utf8', $file_prose_list) or die "can't read $file_prose_list";
+	
+	while (my $line = <FH>) { 
+	
+		chomp $line;
+		
+		$line =~ s/#.*//;
+		
+		next unless $line =~ /\S/;
+		
+		return 1 if $name =~ /$line/;
+	}
+	
+	return 0;
 }

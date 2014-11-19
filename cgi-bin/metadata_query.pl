@@ -1,42 +1,28 @@
-#! /usr/bin/perl
-
-# clean.pl
-#
-# delete existing data
+#!/usr/bin/env perl
 
 =head1 NAME
 
-clean.pl - delete existing data
+metadata_query.pl - query metadata database
 
 =head1 SYNOPSIS
 
-perl clean.pl [options] [LANG [LANG2 [...]]
+metadata_query.pl [options] COL=VALUE [COL=VALUE ...]
 
 =head1 DESCRIPTION
 
-Deletes some or all elements of the internal database used by Tesserae.
+Return texts for which specified columns have respective values.
 
 =head1 OPTIONS AND ARGUMENTS
 
 =over
 
-=item I<LANG>
+=item B<--help>
 
-Language code(s) to clean.  If none specified, apply to all languages.
-
-=item B<--text>
-
-Clean texts database.  Deletes all feature indices for all installed texts.
-
-=item B<--dict>
-
-Clean cached stem and synonym dictionaries.
+Print usage and exit.
 
 =back
 
 =head1 KNOWN BUGS
-
-Haven't tested this script in a while.  Could have some unexpected results at this point.
 
 =head1 SEE ALSO
 
@@ -47,7 +33,7 @@ The contents of this file are subject to the University at Buffalo Public Licens
 
 Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitations under the License.
 
-The Original Code is clean.pl.
+The Original Code is metadata_query.pl.
 
 The Initial Developer of the Original Code is Research Foundation of State University of New York, on behalf of University at Buffalo.
 
@@ -112,8 +98,8 @@ BEGIN {
 		
 		die "can't find .tesserae.conf!\n";
 	}
-
-	$lib = catdir($lib, 'TessPerl');	
+	
+	$lib = catdir($lib, 'TessPerl');
 }
 
 # load Tesserae-specific modules
@@ -129,74 +115,126 @@ use Pod::Usage;
 
 # load additional modules necessary for this script
 
-use File::Path qw(mkpath rmtree);
-use File::Basename;
-use Storable qw(nstore retrieve);
+use CGI qw/standard/;
 
-# user options
+# initialize some variables
 
 my $help = 0;
+
+my @allowed_keys = qw/lang prose/;
+my %val;
+
+# is the program being run from the web or
+# from the command line?
+
+my $query = CGI->new() || die "$!";
+
+my $no_cgi = defined($query->request_method()) ? 0 : 1;
+
+# print debugging messages to stderr?
+
 my $quiet = 0;
 
-my %clean = (
-	text => 0,
-	dict => 0
-			 );
-			
-GetOptions( 
-	"text"  => \$clean{text}, 
-	"dict"  => \$clean{dict},
-	"quiet" => \$quiet,
-	"help"  => \$help );
-
 #
-# print usage if the user needs help
+# check web, cli for query args
 #
-# you could also use perldoc name.pl
-	
-if ($help) {
 
-	pod2usage(1);
+if ($no_cgi) {
+	# get cli query args
+
+	GetOptions(
+		'help'  => \$help,
+		'quiet' => \$quiet
+	);
+	
+	# print usage if the user needs help
+	
+	if ($help) {
+
+		pod2usage(1);
+	}
+	
+	# otherwise, parse query args
+	
+	my %val_;
+	
+	for my $pair (@ARGV) {
+		
+		next unless $pair =~ /(.+)=(.+)/;
+		
+		my ($k, $v) = ($1, $2);
+
+		$val_{$k} = $v;
+	}
+	
+	for my $k (@allowed_keys) {
+		$val{$k} = $val_{$k} if defined $val_{$k};
+	}
 }
-
-# specify languages to clean as arguments
-
-my @lang = @ARGV;
-
-# if none specified, clean all
-
-unless (@lang) {
-
-	opendir (DH, catdir($fs{data}, 'v3'));
+else {
+	# get web-based query args
 	
-	@lang = grep {/^[^.]/ && -d catdir($fs{data}, 'v3', $_) } readdir DH;
-	
-	closedir DH;
-}
+	for my $k (@allowed_keys) {
 
-# clear preprocessed texts from the database
-
-if ($clean{text}) {
-	
-	for (@lang) {
-	
-		rmtree catdir($fs{data}, 'v3', $_);
-		mkpath catdir($fs{data}, 'v3', $_);
-
-		unlink glob(catfile($fs{data}, 'common', $_ . '.*.count'));
-		unlink glob(catfile($fs{data}, 'common', $_ . '.*.freq'));
-
-		my $dbh = Tesserae::metadata_dbh;
-		$dbh->do("delete from $Tesserae::metadata_db_table where lang=\"$_\";");
+		$val{$k} = $query->param($k);
 	}
 }
 
-# remove dictionaries
+# fail if no valid query
 
-if ($clean{dict}) {
+{
+	unless (keys %val) {
+		
+		die "no valid query fields\n";
+	}
+}
 
-	for (@lang) {
+#
+# construct query
+#
 
-		unlink glob(catfile($fs{data}, 'common', $_ . '.*.cache'));
+my $sql_str;
+{
+	my @elements;
+	for my $k (keys %val) {
+	
+		my $v = $val{$k};
+		if ($v =~ /[^0-9]/) { $v = "\"$v\"" }
+	
+		push @elements, "$k=$v"
+	}
+	
+	$sql_str = "select name from $Tesserae::metadata_db_table where "
+		. join(', ', @elements)
+		. ' order by name;';
+
+		print STDERR "sql_str='$sql_str'\n";
+}
+
+#
+# execute query
+#
+
+my @name;
+
+{
+	my $dbh = Tesserae::metadata_dbh;
+		
+	my $res = $dbh->selectcol_arrayref($sql_str, {RaiseError=>1});
+	
+	if ($res) {
+		
+		@name = @$res;
+	}
+}
+
+#
+# print results
+#
+
+{
+	for (@name) {
+		
+		print "$_\n";
 	}
 }
