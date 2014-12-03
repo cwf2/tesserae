@@ -74,6 +74,23 @@ our %feature_score = (
 	'3gr'    => '3gr'
 );
 
+our %feature_display = (
+	'word'	=> 'exact word',
+	'stem'	=> 'lemma',
+	'trans1' => 'parallel texts method',
+	'trans2' => 'pivot method',
+	'syn'  	=> 'synonyms',
+	'3gr'    => 'character 3-grams'
+);
+
+# display values for language codes
+
+our %lang_display = (
+	'la'  => 'Latin',
+	'grc' => 'Greek',
+	'en'  => 'English'
+);
+
 # some features require special code
 
 my %feature_override = (
@@ -953,6 +970,8 @@ sub escape_path {
 sub metadata_get {
 	my ($name, $field, $dbh_open) = @_;
 	
+	$name =~ s/\.part\..*//;
+
 	my $dbh = $dbh_open || metadata_dbh();
 
 	my $value;
@@ -969,13 +988,15 @@ sub metadata_get {
 sub metadata_set {
 	my ($name, $field, $value, $dbh_open) = @_;
 
+	$name =~ s/\.part\..*//;
+
 	my $dbh = $dbh_open || metadata_dbh();
 	
 	$dbh->do("update $metadata_db_table set $field=\"$value\" where name=\"$name\";");
 }
 
 sub metadata_dbh {
-	
+
 	my $dbh = DBI->connect("dbi:SQLite:dbname=$metadata_db_file", "", "", {RaiseError=>1});
 	return $dbh;
 }
@@ -984,17 +1005,38 @@ sub metadata_init {
 	
 	my $dbh = metadata_dbh();
 	
-	my @cols = (
+	db_create_table($dbh, 'texts', [
 		'name varchar(128) unique',
+		'display varchar(80)',
+		'author varchar(40)',
 		'lang char(3)',
 		'abbr varchar(24)',
-		'prose int'
+		'prose int',
+		'feat_word int']
 	);
 	
-	$dbh->do(
-		"create table if not exists $metadata_db_table (" . join(",", @cols) . ");"
+	# table for recording searchable sub-text units
+
+	db_create_table($dbh, 'parts', [
+		'name varchar(128) unique',
+		'sort int',
+		'display varchar(24)',
+		'fulltext varchar(128)']
+	);
+
+	# table for recording author data
+
+	db_create_table($dbh, "authors", [
+		'author varchar(40) unique',
+		'display varchar(24)']
 	);
 }
 
+sub db_create_table {
+	my ($dbh, $table, $cols_ref) = @_;
+	my @cols = @$cols_ref;
+
+	$dbh->do("create table if not exists $table (" . join(",", @cols) . ");");
+}
 
 1;
