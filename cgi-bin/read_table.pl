@@ -314,16 +314,6 @@ unless ($no_cgi) {
 
 	print header();
 
-	my $stylesheet = "$url{css}/style.css";
-
-	print <<END;
-
-<html>
-<head>
-	<title>Tesserae results</title>
-	<link rel="stylesheet" type="text/css" href="$stylesheet" />
-END
-
 	#
 	# determine the session ID
 	# 
@@ -412,18 +402,6 @@ else {
 		fulltext => "$url{cgi}/fulltext.pl?session=$session",
 		multi    => "$url{cgi}/multitext.pl?session=$session;mcutoff=$multi_cutoff;list=1"
 	);
-
-	
-	print <<END;
-	<meta http-equiv="Refresh" content="0; url='$redirect{$frontend}'">
-	</head>
-	<body>
-		<div class="waiting">
-		<p>
-			Searching...
-		</p>
-END
-
 }
 
 #
@@ -468,7 +446,11 @@ unless ($quiet) {
 	print STDERR "score basis=$score_basis\n";
 }
 
+# start session
 
+rmtree($file_results);
+mkpath($file_results);
+	
 #
 # calculate feature frequencies
 #
@@ -550,7 +532,8 @@ if ($no_cgi) {
 	$pr = ProgressBar->new(scalar(keys %index_source), $quiet);
 }
 else {
-	$pr = HTMLProgress->new(scalar(keys %index_source));
+	$pr = AJAXProgress->new(scalar(keys %index_source), $file_results);
+	$pr->message("Comparing $source and $target");
 }
 
 # start with each key in the source
@@ -609,9 +592,8 @@ if ($no_cgi) {
 }
 else {
 
-	print "<p>Scoring...</p>\n";
-
-	$pr = HTMLProgress->new(scalar(keys %match_target));
+	$pr = AJAXProgress->new(scalar(keys %match_target), $file_results);
+	$pr->message("Calculating scores...");
 }
 
 #
@@ -765,14 +747,7 @@ if ($no_cgi) {
 	
 	print STDERR "writing $file_results\n" unless $quiet;
 }
-else {
 
-	print "<p>Writing session data.</p>";
-}
-
-rmtree($file_results);
-mkpath($file_results);
-	
 nstore \%match_target, catfile($file_results, "match.target");
 nstore \%match_source, catfile($file_results, "match.source");
 nstore \%match_score,  catfile($file_results, "match.score" );
@@ -783,21 +758,16 @@ if (@include) {
 	write_multi_list($file_results, \@include);
 }
 
+unless ($no_cgi) {
+
+	print encode_json({
+		session=>$session
+	});
+
+	print STDERR "Web process finished: ".(time-$t0) . " seconds\n";
+}
+
 print "store>>" . (time-$t1) . "\n" if $no_cgi and $bench;
-
-print <<END unless ($no_cgi);
-
-	<p>
-      Your search is done.  If you are not redirected automatically, 
-      <a href="$redirect{$frontend}">click here</a>.
-	</p>
-	</div>
-</body>
-</html>
-
-END
-
-
 print "total>>" . (time-$t0)  . "\n" if $no_cgi and $bench;
 
 #

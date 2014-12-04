@@ -1,9 +1,11 @@
 require Exporter;
 use POSIX ();
+use File::Spec::Functions;
+use JSON;
 
 our @ISA = qw(Exporter);
 
-our @EXPORT = qw(ProgressBar HTMLProgress);
+our @EXPORT = qw(ProgressBar HTMLProgress AJAXProgress);
 
 # how to draw a simple progress bar
 
@@ -263,33 +265,51 @@ sub terminus {
 	return $self->{END};
 }
 
-# A modification of ProgressBar for very long running jobs
 
-package VerySlowProgressBar;
-	
+#
+# AJAX progress bar
+# 
+
+package AJAXProgress;
+
 sub new {
 	my $self = {};
 	
 	shift;
 	
-	my $terminus = shift || die "VerySlowProgressBar->new() called with no final value";
+	my $terminus = shift;
 	
 	$self->{END} = $terminus;
 	
-	my $quiet = shift || 0;
+	my $session = shift;
 	
 	$self->{COUNT}    = 0;
 	$self->{PROGRESS} = 0;
+	$self->{FILE}  = File::Spec::Functions::catfile($session, ".progress");
 	$self->{DONE}     = 0;
-	$self->{T0}       = time;
-	$self->{REFRESH}  = .005;
-	$self->{QUIET}    = $quiet;
+	$self->{MESSAGE}  = "Please wait...";
 	
 	bless($self);
 	
+	$self->init();
+
+	if ($terminus <= 0) {
+		$self->finish();
+	}
+
 	$self->draw();
-		
+	
 	return $self;
+}
+
+sub init {
+
+	my $self = shift;
+	my $file = $self->{FILE};
+
+	open(my $fh, ">", $file) or die "Can't write $file: $!";
+	print $fh JSON::encode_json({msg=>$self->{MESSAGE}, progress=>"0%"}) . "\n";
+	close($fh);
 }
 
 sub advance {
@@ -300,17 +320,7 @@ sub advance {
 	
 	$self->{COUNT} += ($incr || 1);
 	
-	if ($self->{COUNT}/$self->{END} > $self->{PROGRESS} + $self->{REFRESH}) {
-		
-		$self->{PROGRESS} = $self->{COUNT} / $self->{END};
-
-		$self->draw();
-	}
-	
-	if ($self->{COUNT} >= $self->{END}) {
-	
-		$self->finish();
-	}
+	$self->draw();
 }
 
 sub set {
@@ -324,60 +334,45 @@ sub set {
 	$self->draw();
 }
 
-sub t0 {
-
-	my $self = shift;
-
-	my $new = shift;
-
-	if (defined $new) {
-
-		$self->{T0} = $new;
-
-		$self->draw();
-	}
-
-	return $self->{T0};	
-}
-
 sub draw {
 
 	my $self = shift;
+
+	return if $self->{DONE};
 		
-	unless ($self->{QUIET} or $self->{DONE}) {
+	if ($self->{COUNT}/$self->{END} > $self->{PROGRESS} + .005) {
+	
+		$self->{PROGRESS} = $self->{COUNT} / $self->{END};
 
-		my $dur  = time - $self->{T0};
-		my $eta;
-		
-		if ($dur > 0) {
-
-			my $rate = $self->{COUNT} / $dur;
-		
-			$eta = $self->{T0} + $self->{END} / $rate;
-
-			$eta = localtime($eta);
-		}
-		else {
-
-			my $len = length(localtime(time));
-
-			$eta = sprintf("%-${len}s", 'NA');
-		}
-		
-		print STDERR sprintf("% 5.1f%% done; ETA %s", 100*$self->{PROGRESS}, $eta) . "\r";
+		my $file=$self->{FILE};
+		open (my $fh, ">>", $file) or die "Can't write $file: $!";	
+		print $fh JSON::encode_json({
+			msg => $self->{MESSAGE},
+			progress => sprintf("%.0f%%\n", 100 * $self->{PROGRESS})
+		}) . "\n";
+		close ($fh);
 	}
+	
+	if ($self->{COUNT} >= $self->{END}) {
+				
+		$self->finish();
+	}	
 }
 
 sub finish {
 
 	my $self = shift;
 
-	unless ($self->{QUIET} or $self->{DONE}) {
+	return if $self->{DONE};
 
-		print STDERR "\nyour very-long-running task is done!\n";
-	}
+	$self->{PROGRESS} = $self->{COUNT} / $self->{END};
 	
-	$self->{DONE} = 1;	
+	my $file=$self->{FILE};
+	open (my $fh, ">>", $file) or die "Can't write $file: $!";	
+	print $fh JSON::encode_json({msg => "Finished!", progress=>"100%"}) . "\n";	
+	close $fh;
+	
+	$self->{DONE} = 1;
 }
 
 sub progress {
@@ -410,5 +405,11 @@ sub terminus {
 	return $self->{END};
 }
 
+sub message {
+
+	my ($self, $message) = @_;
+
+	$self->{MESSAGE} = $message;
+}
 
 1;

@@ -26,6 +26,23 @@
 				}
 				is_adv = ! is_adv
 			}
+
+			function run_tess_search() {
+				var target = $("#sel_target_parts").val()
+				var source = $("#sel_source_parts").val()
+				var unit = $("#sel_units").val()
+				var feature = $("#sel_features").val()
+
+				$.getJSON("/cgi-bin/read_table.pl", {
+					source: source,
+					target: target,
+					unit: unit,
+					feature: feature
+				},
+				function(r) {
+					window.location.assign("/cgi-bin/read_bin.pl?session="+r.session)
+				})
+			}
 		</script>
 		
 		<style type="text/css">
@@ -66,7 +83,6 @@
 		For explanations of advanced features, see the <a href="/help_advanced.php">Instructions</a> page.
 		</p>
 	
-		<form action="/cgi-bin/read_table.pl" method="get" ID="Form1">
 
 			<table class="input">
 				<tr>
@@ -195,9 +211,10 @@
 				</table>
 			</div>
 			<div style="text-align:center; padding:20px;">
-				<input type="submit" value="Compare Texts" ID="btnSubmit" NAME="btnSubmit" />
+				<input type="button" value="Compare Texts" id="btnSearch" onclick="run_tess_search();" />
+				<!-- <input type="submit" value="Compare Texts" ID="btnSubmit" NAME="btnSubmit" /> -->
 			</div>
-		</form>
+
 		<script type="text/javascript">
 			get_langs('target', 'la')
 			get_langs('source', 'la')

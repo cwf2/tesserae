@@ -38,6 +38,7 @@ var presets = {
 		source_texts: "homer.iliad",
 		source_parts: "homer.iliad",
 
+		features: "trans1",
 		units: "phrase"
 	},
 	lucan: {
@@ -56,111 +57,96 @@ var presets = {
 	}
 }
 
-function get_langs(prefix, preset_label) {
-	var preset = presets[preset_label]
+function get_langs(prefix) {
 	var request = "/cgi-bin/metadata_langs.pl"
 	var criteria = {}
-	var dest = prefix + "_langs"
+	var dest = $("#sel_" + prefix + "_langs")
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
-		get_authors(prefix, preset_label)
+		populate_dropdown(dest, jsonlist)
+		get_authors(prefix)
 	}
 
-	$("#sel_"+dest).empty()
+	//dest.empty()
 	$.getJSON(request, criteria, callback)
 }
 
-function get_authors(prefix, preset_label) {
-
-	if (preset_label == undefined) { 
-		preset_label = $("#sel_" + prefix + "_langs").val() 
-	}
-	
-	var preset = presets[preset_label]
+function get_authors(prefix) {
 	var request = "/cgi-bin/metadata_authors.pl"
 	var criteria = {
 		lang: $("#sel_" + prefix + "_langs").val()
 	}
-	var dest = prefix + "_authors"
+	var dest = $("#sel_" + prefix + "_authors")
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
-		get_texts(prefix, preset_label)
+		populate_dropdown(dest, jsonlist)
+		get_texts(prefix)
 	}
 	
-	$("#sel_"+dest).empty()
+	//dest.empty()
 	$.getJSON(request, criteria, callback)
 }
 
-function get_texts(prefix, preset_label) {
-
-	var preset = presets[preset_label]
+function get_texts(prefix) {
 	var request = "/cgi-bin/metadata_texts.pl"
 	var criteria = {
 		author: $("#sel_" + prefix + "_authors").val()
 	}
-	var dest = prefix + "_texts"
+	var dest = $("#sel_" + prefix + "_texts")
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
-		get_features(preset_label)
-		get_units(preset_label)
-		get_parts(prefix, preset_label)
+		populate_dropdown(dest, jsonlist)
+		get_features()
+		get_units()
+		get_parts(prefix)
 	}
 
-	$("#sel_"+dest).empty()
+	//dest.empty()
 	$.getJSON(request, criteria, callback)
 }
 
-function get_parts(prefix, preset_label) {
-
-	var preset = presets[preset_label]
+function get_parts(prefix) {
 	var request = "/cgi-bin/metadata_parts.pl"
 	var criteria = {
 		name: $("#sel_" + prefix + "_texts").val()
 	}
-	var dest = prefix + "_parts"
+	var dest = $("#sel_" + prefix + "_parts")
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+		populate_dropdown(dest, jsonlist)
 	}
 
-	$("#sel_"+dest).empty()
+	//dest.empty()
 	$.getJSON(request, criteria, callback)
 }
 
-function get_features(preset_label) {
-
-	var preset = presets[preset_label]
+function get_features() {
 	var request = "/cgi-bin/metadata_features.pl"
 	var criteria = {
 		target: $("#sel_target_texts").val(),
 		source: $("#sel_source_texts").val()
 	}
-	var dest = "features"
+	var dest = $("#sel_features")
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+		populate_dropdown(dest, jsonlist)
 	}
 
-	$("#sel_"+dest).empty()
+	//dest.empty()
 	$.getJSON(request, criteria, callback)
 }
 
-function get_units(preset_label) {
-
-	var preset = presets[preset_label]
+function get_units() {
 	var request = "/cgi-bin/metadata_units.pl"
 	var criteria = {
 		target: $("#sel_target_texts").val(),
 		source: $("#sel_source_texts").val()
 	}
-	var dest = "units"
+	var dest = $("#sel_units")
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist)
+		populate_dropdown(dest, jsonlist)
 	}
 
-	$("#sel_"+dest).empty()
+	//dest.empty()
 	$.getJSON(request, criteria, callback)
 }
 
-function populate_dropdown(dropdown, jsonlist, selected) {
+function populate_dropdown(dropdown, jsonlist) {
 	dropdown.empty()
 
 	for (i in jsonlist) {
@@ -170,13 +156,23 @@ function populate_dropdown(dropdown, jsonlist, selected) {
 		})
 
 		dropdown.append(o)
-
-		if (selected != undefined) {
-			if (jsonlist[i].name == selected) { 
-				dropdown.val(jsonlist[i].name)
-			}
-		}
 	}
 }
 
 
+function set_defaults(preset, dest) {
+/*
+	$("#sel_source_" + dest).val(presets[preset]["source_langs"]).change()
+	$("#sel_source_authors").val(presets[preset]["source_authors"]).change()
+	$("#sel_source_texts").val(presets[preset]["source_texts"]).change()
+	$("#sel_source_parts").val(presets[preset]["source_parts"]).change()
+
+	$("#sel_target_langs").val(presets[preset]["target_langs"]).change()
+	$("#sel_target_authors").val(presets[preset]["target_authors"]).change()
+	$("#sel_target_texts").val(presets[preset]["target_texts"]).change()
+	$("#sel_target_parts").val(presets[preset]["target_parts"]).change()
+
+	$("#sel_features").val(presets[preset]["features"]).change()
+	$("#sel_units").val(presets[preset]["units"]).change()
+*/
+}
