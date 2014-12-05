@@ -198,10 +198,9 @@ my $target;
 
 my $unit = "line";
 
-# feature means the feature set compared: 
-# - choice is 'word' or 'stem'
+# feature means the feature set compared
 
-my $feature = "stem";
+my @features;
 
 # stopwords is the number of words on the stoplist
 
@@ -272,22 +271,34 @@ my $score_basis;
 my $frontend = 'default';
 my %redirect;
 
+# only consider a subset of units
+
+my $mask_target_lower;
+my $mask_target_upper;
+my $mask_source_lower;
+my $mask_source_upper;
+
 GetOptions( 
-			'source=s'     => \$source,
-			'target=s'     => \$target,
-			'unit=s'       => \$unit,
-			'feature=s'    => \$feature,
-			'stopwords=i'  => \$stopwords, 
-			'stbasis=s'    => \$stoplist_basis,
-			'binary=s'     => \$file_results,
-			'distance=i'   => \$max_dist,
-			'dibasis=s'    => \$distance_metric,
-			'cutoff=f'     => \$cutoff,
-			'score=s'      => \$score_basis,
-			'benchmark'    => \$bench,
-			'no-cgi'       => \$no_cgi,
-			'quiet'        => \$quiet,
-			'help'         => \$help);
+	'source=s'     => \$source,
+	'target=s'     => \$target,
+	'unit=s'       => \$unit,
+	'feature=s'    => \@features,
+	'stopwords=i'  => \$stopwords, 
+	'stbasis=s'    => \$stoplist_basis,
+	'binary=s'     => \$file_results,
+	'distance=i'   => \$max_dist,
+	'dibasis=s'    => \$distance_metric,
+	'cutoff=f'     => \$cutoff,
+	'score=s'      => \$score_basis,
+	'benchmark'    => \$bench,
+	'no-cgi'       => \$no_cgi,
+	'quiet'        => \$quiet,
+	'help'         => \$help,
+	'mtl=i'        => \$mask_target_lower,
+	'mtu=i'        => \$mask_target_upper,
+	'msl=i'        => \$mask_source_lower,
+	'msu=i'        => \$mask_source_upper
+);
 
 #
 # print usage info if help flag set
@@ -302,7 +313,7 @@ if ($help) {
 
 unless (defined $score_basis)  { 
 	
-	$score_basis = $Tesserae::feature_score{$feature} || 'word';
+	$score_basis = "word"; # $Tesserae::feature_score{$feature} || 'word';
 }
 
 # html header
@@ -388,7 +399,7 @@ else {
 	$source          = $query->param('source');
 	$target          = $query->param('target');
 	$unit            = $query->param('unit')         || $unit;
-	$feature         = $query->param('feature')      || $feature;
+	@features        = $query->param('feature');
 	$stopwords       = defined($query->param('stopwords')) ? $query->param('stopwords') : $stopwords;
 	$stoplist_basis  = $query->param('stbasis')      || $stoplist_basis;
 	$max_dist        = $query->param('dist')         || $max_dist;
@@ -399,7 +410,11 @@ else {
 	$multi_cutoff    = $query->param('mcutoff')      || $multi_cutoff;
 	@include         = $query->param('include');
 	$recall_cache    = $query->param('recall_cache') || $recall_cache;
-	
+	$mask_target_lower = $query->param('mtl');
+	$mask_target_upper = $query->param('mtu');
+	$mask_source_lower = $query->param('msl');
+	$mask_source_upper = $query->param('msu');
+		
 	unless (defined $source) {
 	
 		die "read_table.pl called from web interface with no source";
@@ -433,6 +448,8 @@ END
 
 }
 
+unless (@features) { @features = ("word") }
+
 #
 # force unit=phrase if either work is prose
 #
@@ -454,7 +471,7 @@ if (Tesserae::check_prose_list($target) or Tesserae::check_prose_list($source)) 
 
 if ($score_basis =~ /^feat/) {
 
-	$score_basis = $feature;
+	$score_basis = "stem"; # $feature;
 }
 
 # print all params for debugging
@@ -463,11 +480,17 @@ unless ($quiet) {
 
 	print STDERR "target=$target\n";
 	print STDERR "source=$source\n";
+	# print STDERR "mask_target_lower=$mask_target_lower\n";
+	# print STDERR "mask_target_upper=$mask_target_upper\n";
+	# print STDERR "mask_source_lower=$mask_source_lower\n";
+	# print STDERR "mask_source_upper=$mask_source_upper\n";
 	print STDERR "lang(target)=" . Tesserae::lang($target) . ";\n";
-	print STDERR "lang(source)=" . Tesserae::lang($source) . ";\n";		
-	print STDERR "feature=$feature\n";
-	print STDERR "unit=$unit\n";
+	print STDERR "lang(source)=" . Tesserae::lang($source) . ";\n";
+	for my $feature (@features) {
+		print STDERR "feature=$feature\n";		
+	}
 	print STDERR "stopwords=$stopwords\n";
+	print STDERR "unit=$unit\n";
 	print STDERR "stoplist basis=$stoplist_basis\n";
 	print STDERR "max_dist=$max_dist\n";
 	print STDERR "distance basis=$distance_metric\n";
@@ -480,23 +503,19 @@ unless ($quiet) {
 # calculate feature frequencies
 #
 
-# token frequencies from the target text
+my %freq;
 
-my $file_freq_target = select_file_freq($target) . ".freq_score_" . $score_basis;
-my %freq_target = %{Tesserae::stoplist_hash($file_freq_target)};
+for my $name ($source, $target) {
+	
+	my @f = @features;
+	unless (grep {/$_ eq "word"/} @f) { push @f, "word" }
+	
+	for my $feature (@f) {
+		my $file_freq = select_file_freq($name) . ".freq_score_" . $score_basis;
+		$freq{$name}{$feature} = Tesserae::stoplist_hash($file_freq);
+	}
+}
 
-# token frequencies from the source text
-
-my $file_freq_source = select_file_freq($source) . ".freq_score_" . $score_basis;
-my %freq_source = %{Tesserae::stoplist_hash($file_freq_source)};
-
-#
-# basis for stoplist is feature frequency from one or both texts
-#
-
-my @stoplist = @{load_stoplist($stoplist_basis, $stopwords)};
-
-unless ($quiet) { print STDERR "stoplist: " . join(",", @stoplist) . "\n"}
 
 
 #
@@ -513,7 +532,9 @@ my $file_source = catfile($fs{data}, 'v3', Tesserae::lang($source), $source, $so
 
 my @token_source   = @{ retrieve("$file_source.token") };
 my @unit_source    = @{ retrieve("$file_source.$unit") };
-my %index_source   = %{ retrieve("$file_source.index_$feature")};
+
+unless (defined $mask_source_upper) { $mask_source_upper = $#unit_source }
+unless (defined $mask_source_lower) { $mask_source_lower = 0 }
 
 unless ($quiet) {
 
@@ -524,7 +545,9 @@ my $file_target = catfile($fs{data}, 'v3', Tesserae::lang($target), $target, $ta
 
 my @token_target   = @{ retrieve("$file_target.token") };
 my @unit_target    = @{ retrieve("$file_target.$unit") };
-my %index_target   = %{ retrieve("$file_target.index_$feature" ) };
+
+unless (defined $mask_target_upper) { $mask_target_upper = $#unit_target }
+unless (defined $mask_target_lower) { $mask_target_lower = 0 }
 
 #
 #
@@ -544,50 +567,68 @@ my %match_score;
 # consider each key in the source doc
 #
 
-unless ($quiet) {
+my %stoplist;
 
-	print STDERR "comparing $target and $source\n";
-}
+for my $feature (@features) {
 
-# draw a progress bar
+	print STDERR "Checking feature set $feature\n" unless $quiet;
+	
+	# load feature indices
 
-my $pr;
+	my %index_source   = %{ retrieve("$file_source.index_$feature")};
+	my %index_target   = %{ retrieve("$file_target.index_$feature")};
+	
+	# basis for stoplist is feature frequency from one or both texts
 
-if ($no_cgi) {
-	$pr = ProgressBar->new(scalar(keys %index_source), $quiet);
-}
-else {
-	$pr = HTMLProgress->new(scalar(keys %index_source));
-}
+	@{$stoplist{$feature}} = @{load_stoplist($feature, $stoplist_basis, $stopwords)};
+	unless ($quiet) { print STDERR "stoplist: " . join(",", @{$stoplist{$feature}}) . "\n"}
+	
+	# draw a progress bar
 
-# start with each key in the source
+	my $pr;
 
-for my $key (keys %index_source) {
+	if ($no_cgi) {
+		$pr = ProgressBar->new(scalar(keys %index_source), $quiet);
+	}
+	else {
+		$pr = HTMLProgress->new(scalar(keys %index_source));
+	}
 
-	# advance the progress bar
+	# start with each key in the source
 
-	$pr->advance();
+	for my $key (keys %index_source) {
 
-	# skip key if it doesn't exist in the target doc
+		# advance the progress bar
 
-	next unless ( defined $index_target{$key} );
+		$pr->advance();
 
-	# skip key if it's in the stoplist
+		# skip key if it doesn't exist in the target doc
 
-	next if ( grep { $_ eq $key } @stoplist);
+		next unless ( defined $index_target{$key} );
 
-	# link every occurrence in one text to every one in the other text
+		# skip key if it's in the stoplist
 
-	for my $token_id_target ( @{$index_target{$key}} ) {
+		next if ( grep { $_ eq $key } @{$stoplist{$feature}});
 
-		my $unit_id_target = $token_target[$token_id_target]{uc($unit) . '_ID'};
+		# link every occurrence in one text to every one in the other text
+
+		for my $token_id_target ( @{$index_target{$key}} ) {
+
+			my $unit_id_target = $token_target[$token_id_target]{uc($unit) . '_ID'};
 		
-		for my $token_id_source ( @{$index_source{$key}} ) {
+			next if $unit_id_target > $mask_target_upper;
+			next if $unit_id_target < $mask_target_lower;
+		
+			for my $token_id_source ( @{$index_source{$key}} ) {
 
-			my $unit_id_source = $token_source[$token_id_source]{uc($unit) . '_ID'};
+				my $unit_id_source = $token_source[$token_id_source]{uc($unit) . '_ID'};
 			
-			$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$key} = 1;
-			$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$key} = 1;
+				next if $unit_id_source > $mask_source_upper;
+				next if $unit_id_source < $mask_source_lower;
+			
+				$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}{$key} = 1;
+				$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}{$key} = 1;
+			}
 		}
 	}
 }
@@ -607,6 +648,7 @@ $t1 = time;
 my $total_matches = 0;
 
 # draw a progress bar
+my $pr;
 
 if ($no_cgi) {
 
@@ -733,13 +775,6 @@ for my $unit_id_target (keys %match_target) {
 	}
 }
 
-my %feature_notes = (
-	
-	word => "Exact matching only.",
-	stem => "Stem matching enabled.  Forms whose stem is ambiguous will match all possibilities.",
-	syn  => "Stem + synonym matching.  This search is still in development.  Note that stopwords may match on less-common synonyms."
-	);
-
 print "score>>" . (time-$t1) . "\n" if $no_cgi and $bench;
 
 #
@@ -753,16 +788,16 @@ my %match_meta = (
 	SOURCE    => $source,
 	TARGET    => $target,
 	UNIT      => $unit,
-	FEATURE   => $feature,
+	FEATURE   => join(":", @features),
 	STOP      => $stopwords,
-	STOPLIST  => [@stoplist],
+	STOPLIST  => [map {(@{$stoplist{$_}})} keys %stoplist],
 	STBASIS   => $stoplist_basis,
 	DIST      => $max_dist,
 	DIBASIS   => $distance_metric,
 	SESSION   => $session,
 	CUTOFF    => $cutoff,
 	SCBASIS   => $score_basis,
-	COMMENT   => $feature_notes{$feature},
+	COMMENT   => "",
 	VERSION   => $Tesserae::VERSION,
 	TOTAL     => $total_matches
 );
@@ -823,11 +858,22 @@ sub dist {
 	
 	my %match_target = %$match_t_ref;
 	my %match_source = %$match_s_ref;
+
+	my $feature = "word";
 	
-	my @target_id = sort {$a <=> $b} keys %match_target;
-	my @source_id = sort {$a <=> $b} keys %match_source;
+	my @target_id = map {
+		{id=>$_, 
+		freq=>$freq{$target}{$feature}{$token_target[$_]{FORM}}
+		}
+	} keys %match_target;
 	
-	my $dist = 0;
+	my @source_id = map { 
+		{id=>$_, 
+		freq=>$freq{$source}{$feature}{$token_source[$_]{FORM}}
+		}
+	} keys %match_source;
+
+	my $dist;
 	
 	#
 	# distance is calculated by one of the following metrics
@@ -840,7 +886,7 @@ sub dist {
 	
 		# sort target token ids by frequency of the forms
 		
-		my @t = sort {$freq_target{$token_target[$a]{FORM}} <=> $freq_target{$token_target[$b]{FORM}}} @target_id; 
+		my @t = map { $_->{id} } sort {$a->{freq} <=> $b->{freq}} @target_id; 
 			      
 		# consider the two lowest;
 		# put them in order from left to right
@@ -857,35 +903,7 @@ sub dist {
 			
 		# now do the same in the source phrase
 			
-		my @s = sort {$freq_source{$token_source[$a]{FORM}} <=> $freq_source{$token_source[$b]{FORM}}} @source_id; 
-		
-		if ($s[0] > $s[1]) { @s[0,1] = @s[1,0] }
-			
-		for ($s[0]..$s[1]) {
-		
-		  $dist++ if $token_source[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# freq_target: as above, but only in the target phrase
-	
-	elsif ($metric eq "freq_target") {
-		
-		my @t = sort {$freq_target{$token_target[$a]{FORM}} <=> $freq_target{$token_target[$b]{FORM}}} @target_id; 
-			
-		if ($t[0] > $t[1]) { @t[0,1] = @t[1,0] }
-			
-		for ($t[0]..$t[1]) {
-		
-		  $dist++ if $token_target[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# freq_source: ditto, but source phrase only
-	
-	elsif ($metric eq "freq_source") {
-		
-		my @s = sort {$freq_source{$token_source[$a]{FORM}} <=> $freq_source{$token_source[$b]{FORM}}} @source_id; 
+		my @s = map {$_->{id}} sort {$a->{freq} <=> $b->{freq}} @source_id; 
 		
 		if ($s[0] > $s[1]) { @s[0,1] = @s[1,0] }
 			
@@ -897,7 +915,9 @@ sub dist {
 	
 	# span: count all words between (and including) first and last matching words
 	
-	elsif ($metric eq "span") {
+	else {
+	
+		my @t = sort {$a <=> $b} map {$_->{id}} @target_id;
 	
 		# check all tokens from the first (lowest-id) matching word
 		# to the last.  increment distance only if token is of type WORD.
@@ -907,38 +927,20 @@ sub dist {
 		  $dist++ if $token_target[$_]{TYPE} eq 'WORD';
 		}
 		
-		for ($source_id[0]..$source_id[-1]) {
-		
-		  $dist++ if $token_source[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# span_target: as above, but in the target only
-	
-	elsif ($metric eq "span_target") {
-		
-		for ($target_id[0]..$target_id[-1]) {
-		
-		  $dist++ if $token_target[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# span_source: ditto, but source only
-	
-	elsif ($metric eq "span_source") {
+		my @s = sort {$a <=> $b} map {$_->{id}} @source_id;
 		
 		for ($source_id[0]..$source_id[-1]) {
 		
 		  $dist++ if $token_source[$_]{TYPE} eq 'WORD';
 		}
 	}
-		
+			
 	return $dist;
 }
 
 sub load_stoplist {
 
-	my ($stoplist_basis, $stopwords) = @_[0,1];
+	my ($feature, $stoplist_basis, $stopwords) = @_;
 	
 	my %basis;
 	my @stoplist;
@@ -1034,35 +1036,41 @@ sub score_default {
 	my $score = 0;
 		
 	for my $token_id_target (keys %match_target ) {
+		
+		for my $feature (keys %{$match_target{$token_id_target}}) {
 									
-		# add the frequency score for this term
+			# add the frequency score for this term
 		
-		my $freq = 1/$freq_target{$token_target[$token_id_target]{FORM}}; 
+			my $freq = 1/$freq{$target}{$feature}{$token_target[$token_id_target]{FORM}};
 				
-		# for 3-grams only, consider how many features the word matches on
+			# for 3-grams only, consider how many features the word matches on
 				
-	if ($feature eq '3gr') {
+			if ($feature eq '3gr') {
 		
-			$freq *= scalar(keys %{$match_target{$token_id_target}});
+				$freq *= scalar(keys %{$match_target{$token_id_target}{$feature}})/5;
+			}
+		
+			$score += $freq;
 		}
-		
-		$score += $freq;
 	}
 	
 	for my $token_id_source ( keys %match_source ) {
 
-		# add the frequency score for this term
+		for my $feature (keys %{$match_source{$token_id_source}}) {
 
-		my $freq = 1/$freq_source{$token_source[$token_id_source]{FORM}};
+			# add the frequency score for this term
+
+			my $freq = 1/$freq{$source}{$feature}{$token_source[$token_id_source]{FORM}};
 		
-		# for 3-grams only, consider how many features the word matches on
+			# for 3-grams only, consider how many features the word matches on
 				
-		if ($feature eq '3gr') {
+			if ($feature eq '3gr') {
 		
-			$freq *= scalar(keys %{$match_source{$token_id_source}});
+				$freq *= scalar(keys %{$match_source{$token_id_source}{$feature}})/5;
+			}
+		
+			$score += $freq;
 		}
-		
-		$score += $freq;
 	}
 	
 	$score = sprintf("%.3f", log($score/$distance));

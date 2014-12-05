@@ -310,7 +310,7 @@ my $feature = $meta{FEATURE};
 
 my $stop = $meta{STOP};
 
-my @stoplist = @{$meta{STOPLIST}};
+my @stoplist = ("na");#@{$meta{STOPLIST}};
 
 # stoplist basis
 
@@ -374,7 +374,6 @@ my $path_source = catfile($fs{data}, 'v3', Tesserae::lang($source), $source, $so
 
 my @token_source   = @{ retrieve( "$path_source.token"    ) };
 my @unit_source    = @{ retrieve( "$path_source.${unit}" ) };
-my %index_source   = %{ retrieve( "$path_source.index_$feature" ) };
 
 # read target text
 
@@ -387,7 +386,6 @@ my $path_target = catfile($fs{data}, 'v3', Tesserae::lang($target), $target, $ta
 
 my @token_target   = @{ retrieve( "$path_target.token"    ) };
 my @unit_target    = @{ retrieve( "$path_target.${unit}" ) };
-my %index_target   = %{ retrieve( "$path_target.index_$feature" ) };
 
 
 #
@@ -590,6 +588,16 @@ sub print_html {
 	$top =~ s/<!--pager-->/&nav_page()/e;
 	$top =~ s/<!--sorter-->/&re_sort()/e;
 	$top =~ s/<!--session-->/$session/;
+	
+	my $style = <<END;
+	<style type="text/css">
+		.matched_word { color: black; }
+		.matched_stem { color: red; }
+		.matched_3gr { color: blue; }
+	</style>
+END
+
+	$top =~ s/<!--head_insert-->/$style/;
 
 	print $top;
 
@@ -611,18 +619,28 @@ sub print_html {
 
 		my %seen_keys;
 
-		for (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
+		for my $token_id_target (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
 
-			$marked_target{$_} = 1;
+			for my $feature (sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}}) {
+				
+				$marked_target{$token_id_target} = $feature;
 
-			$seen_keys{join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$seen_keys{"<span class=\"matched_$feature\">"
+					. join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}})
+					. "</span>"} = 1;
+			}
 		}
 
-		for (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
+		for my $token_id_source (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
 
-			$marked_source{$_} = 1;
+			for my $feature (sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}}) {
+				
+				$marked_source{$token_id_source} = $feature;
 
-			$seen_keys{join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$seen_keys{"<span class=\"matched_$feature\">" 
+					. join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}})
+					. "</span>"} = 1;
+			}
 		}
 
 		# format the list of all unique shared words
@@ -663,7 +681,8 @@ sub print_html {
 
 		for my $token_id_target (@{$unit_target[$unit_id_target]{TOKEN_ID}}) {
 
-			if (defined $marked_target{$token_id_target}) { print '<span class="matched">' }
+			if (defined $marked_target{$token_id_target}) { 
+				print "<span class=\"matched_$marked_target{$token_id_target}\">" }
 			print $token_target[$token_id_target]{DISPLAY};
 			if (defined $marked_target{$token_id_target}) { print "</span>" }
 		}
@@ -693,7 +712,8 @@ sub print_html {
 
 		for my $token_id_source (@{$unit_source[$unit_id_source]{TOKEN_ID}}) {
 
-			if (defined $marked_source{$token_id_source}) { print '<span class="matched">' }
+			if (defined $marked_source{$token_id_source}) { 
+				print "<span class=\"matched_$marked_source{$token_id_source}\">" }
 			print $token_source[$token_id_source]{DISPLAY};
 			if (defined $marked_source{$token_id_source}) { print '</span>' }
 		}
@@ -793,19 +813,25 @@ END
 		# collect the keys
 
 		my %seen_keys;
+		
+		for my $token_id_target (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
 
-		for (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
+			for my $feature (keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}}) {
 
-			$marked_target{$_} = 1;
+				$marked_target{$token_id_target} = $feature;
 
-			$seen_keys{join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$seen_keys{$feature . ":" . join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}})} = 1;
+			}
 		}
 
-		for (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
+		for my $token_id_source (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
 
-			$marked_source{$_} = 1;
+			for my $feature (keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}}) {
 
-			$seen_keys{join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$marked_source{$token_id_source} = 1;
+
+				$seen_keys{$feature . ":" . join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}})} = 1;
+			}
 		}
 
 		# format the list of all unique shared words
