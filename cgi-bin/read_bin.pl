@@ -354,14 +354,17 @@ if ($batch eq 'all') {
 	$page  = 1;
 }
 
+# text abbreviations
+
+my %abbr = (
+	$source => Tesserae::metadata_get($source, "abbr"),
+	$target => Tesserae::metadata_get($target, "abbr"),
+);
+
+
 #
 # load texts
 #
-
-# abbreviations of canonical citation refs
-
-my $file_abbr = catfile($fs{data}, 'common', 'abbr');
-my %abbr = %{retrieve($file_abbr)};
 
 # read source text
 

@@ -233,6 +233,18 @@ my @files = map { glob } @ARGV;
 @files = @{check_feature_dep(Tesserae::process_file_list(\@files))};
 
 #
+# add feature column to metadata table
+#
+
+my $dbh = Tesserae::metadata_dbh;
+
+for my $feature (@feature) {
+	my $sql = "alter table texts add column feat_$feature int default 0;";
+	print STDERR "sql=$sql\n";
+	$dbh->do($sql);
+}
+
+#
 # process the files
 #
 
@@ -275,6 +287,8 @@ for my $file (@files) {
 		
 		Tesserae::write_freq_stop($file, $feature, \%index_feat, $quiet);
 		Tesserae::write_freq_score($file, $feature, \%index_word, $quiet);
+
+		Tesserae::metadata_set($file, "feat_$feature", 1);
 	}
 	
 	$pm->finish if $max_processes;	

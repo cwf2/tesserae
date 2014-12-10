@@ -366,13 +366,6 @@ END
 }
 
 
-#
-# abbreviations of canonical citation refs
-#
-
-my $file_abbr = catfile($fs{data}, 'common', 'abbr');
-my %abbr = %{ retrieve($file_abbr) };
-
 # if web input doesn't seem to be there, 
 # then check command line arguments
 
@@ -1102,7 +1095,7 @@ sub select_file_freq {
 		my $origin = $name;
 		$origin =~ s/\.part\..*//;
 		
-		if (defined $abbr{$origin} and defined Tesserae::lang($origin)) {
+		if (defined Tesserae::lang($origin)) {
 		
 			$name = $origin;
 		}

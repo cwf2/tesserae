@@ -1,182 +1,182 @@
-function populate_author(lang, dest) {
+var presets = {
+	la: {
+		target_langs: "la",
+		target_authors: "vergil",
+		target_texts: "vergil.georgics",
+		target_parts: "vergil.georgics.part.1",
 
-	var select_full = document.getElementById(lang.concat('_texts'));
-	var select_auth = document.getElementsByName(dest.concat('_auth'))[0];
-	
-	var authors = {};
-	
-	for (var i=0; i<select_full.length; i++) { 
-	
-		var opt_this = select_full.options[i];
-		
-		var seg_value = opt_this.value.split('.');
-		var seg_name = opt_this.text.split(' - ');
-						
-		authors[seg_value[0]] = seg_name[0];			
+		source_langs: "la",
+		source_authors: "catullus",
+		source_texts: "catullus.carmina",
+		source_parts: "catullus.carmina",
+
+		features: "stem",
+		units: "line"
+	},
+	grc: {
+		target_langs: "grc",
+		target_authors: "apollonius",
+		target_texts: "apollonius.argonautica",
+		target_parts: "apollonius.argonautica.part.1",
+
+		source_langs: "grc",
+		source_authors: "homer",
+		source_texts: "homer.iliad",
+		source_parts: "homer.iliad",
+
+		features: "stem",
+		units: "line"
+	},
+	knauer: {
+		target_langs: "la",
+		target_authors: "vergil",
+		target_texts: "vergil.aeneid",
+		target_parts: "vergil.aeneid.part.1",
+
+		source_langs: "grc",
+		source_authors: "homer",
+		source_texts: "homer.iliad",
+		source_parts: "homer.iliad",
+
+		units: "phrase"
+	},
+	lucan: {
+		target_langs: "la",
+		target_authors: "lucan",
+		target_texts: "lucan.bellum_civile",
+		target_parts: "lucan.bellum_civile.part.1",
+
+		source_langs: "la",
+		source_authors: "vergil",
+		source_texts: "vergil.aeneid",
+		source_parts: "vergil.aeneid.part.1",
+
+		features: "stem",
+		units: "phrase"
 	}
-	
-	for (var i in authors) {
-	
-		var opt_new = new Option(authors[i], i);
-		select_auth.add(opt_new);
-	}
-	
-	populate_work(lang,dest);
 }
 
-function populate_work(lang, dest) {
+function get_langs(prefix, preset_label) {
+	var preset = presets[preset_label]
+	var request = "/cgi-bin/metadata_langs.pl"
+	var criteria = {}
+	var dest = prefix + "_langs"
+	var callback = function(jsonlist) {
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+		get_authors(prefix, preset_label)
+	}
 
-	var select_full = document.getElementById(lang.concat('_texts'));
-	var select_auth = document.getElementsByName(dest.concat('_auth'))[0];				
-	var select_work = document.getElementsByName(dest.concat('_work'))[0];
+	$("#sel_"+dest).empty()
+	$.getJSON(request, criteria, callback)
+}
+
+function get_authors(prefix, preset_label) {
+
+	if (preset_label == undefined) { 
+		preset_label = $("#sel_" + prefix + "_langs").val() 
+	}
 	
-	var auth_master = select_auth.options[select_auth.selectedIndex].value
-	var works = {};
+	var preset = presets[preset_label]
+	var request = "/cgi-bin/metadata_authors.pl"
+	var criteria = {
+		lang: $("#sel_" + prefix + "_langs").val()
+	}
+	var dest = prefix + "_authors"
+	var callback = function(jsonlist) {
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+		get_texts(prefix, preset_label)
+	}
 	
-	for (var i=0; i<select_full.length; i++) { 
-	
-		var opt_this = select_full.options[i];
-		
-		var seg_value = opt_this.value.split('.');
-		var seg_name = opt_this.text.split(' - ');
-		
-		var auth_this = seg_value[0];
-		var work_this = seg_value[1];
-	
-		if (auth_this == auth_master) {
-			
-			works[work_this] = seg_name[1];			
+	$("#sel_"+dest).empty()
+	$.getJSON(request, criteria, callback)
+}
+
+function get_texts(prefix, preset_label) {
+
+	var preset = presets[preset_label]
+	var request = "/cgi-bin/metadata_texts.pl"
+	var criteria = {
+		author: $("#sel_" + prefix + "_authors").val()
+	}
+	var dest = prefix + "_texts"
+	var callback = function(jsonlist) {
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+		get_features(preset_label)
+		get_units(preset_label)
+		get_parts(prefix, preset_label)
+	}
+
+	$("#sel_"+dest).empty()
+	$.getJSON(request, criteria, callback)
+}
+
+function get_parts(prefix, preset_label) {
+
+	var preset = presets[preset_label]
+	var request = "/cgi-bin/metadata_parts.pl"
+	var criteria = {
+		name: $("#sel_" + prefix + "_texts").val()
+	}
+	var dest = prefix + "_parts"
+	var callback = function(jsonlist) {
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+	}
+
+	$("#sel_"+dest).empty()
+	$.getJSON(request, criteria, callback)
+}
+
+function get_features(preset_label) {
+
+	var preset = presets[preset_label]
+	var request = "/cgi-bin/metadata_features.pl"
+	var criteria = {
+		target: $("#sel_target_texts").val(),
+		source: $("#sel_source_texts").val()
+	}
+	var dest = "features"
+	var callback = function(jsonlist) {
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
+	}
+
+	$("#sel_"+dest).empty()
+	$.getJSON(request, criteria, callback)
+}
+
+function get_units(preset_label) {
+
+	var preset = presets[preset_label]
+	var request = "/cgi-bin/metadata_units.pl"
+	var criteria = {
+		target: $("#sel_target_texts").val(),
+		source: $("#sel_source_texts").val()
+	}
+	var dest = "units"
+	var callback = function(jsonlist) {
+		populate_dropdown($("#sel_"+dest), jsonlist)
+	}
+
+	$("#sel_"+dest).empty()
+	$.getJSON(request, criteria, callback)
+}
+
+function populate_dropdown(dropdown, jsonlist, selected) {
+	dropdown.empty()
+
+	for (i in jsonlist) {
+		var o = jQuery("<option />", {
+			value: jsonlist[i].name,
+			text: jsonlist[i].display
+		})
+
+		dropdown.append(o)
+
+		if (selected != undefined) {
+			if (jsonlist[i].name == selected) { 
+				dropdown.val(jsonlist[i].name)
+			}
 		}
 	}
-	
-	for (var i=select_work.length-1; i>=0; i -= 1) {
-		
-		select_work.remove(i);
-	}
-	
-	for (var i in works) {
-	
-		var opt_new = new Option(works[i], i);
-		select_work.add(opt_new);
-	}
-			
-	populate_part(lang,dest);
 }
 
-function populate_part(lang, dest) {
-	
-	var select_full = document.getElementById(lang.concat('_texts'));
-	var select_auth = document.getElementsByName(dest.concat('_auth'))[0];
-	var select_work = document.getElementsByName(dest.concat('_work'))[0];
-	var select_part = document.getElementsByName(dest)[0];
-	
-	var auth_master = select_auth.options[select_auth.selectedIndex].value;
-	var work_master = select_work.options[select_work.selectedIndex].value;
-	var parts = {};
-	
-	for (var i=0; i<select_full.length; i++) { 
-	
-		var opt_this = select_full.options[i];
-		
-		var seg_value = opt_this.value.split('.');
-		var seg_name = opt_this.text.split(' - ');
-		
-		var auth_this = seg_value[0];
-		var work_this = seg_value[1];
-						
-		if (auth_this == auth_master && work_this == work_master) {
-			
-			if (seg_name.length > 2) {
-				
-				parts[seg_name[2]] = opt_this.value;
-			}
-			else {
-			
-				parts['Full Text'] = opt_this.value;
-			}
-		}
-	}
-	
-	for (var i=select_part.length-1; i>=0; i -= 1) {
-		
-		select_part.remove(i);
-	}
-	
-	for (var i in parts) {
-	
-		var opt_new = new Option(i, parts[i]);
-		select_part.add(opt_new);
-	}		
-}
 
-function populate_feature(features, sel_position) {
-
-	var list_feature = document.getElementsByName('feature')[0];
-
-	for (var feat in features) {
-		var opt = document.createElement('option');
-		opt.value = feat;
-		opt.text = features[feat];
-
-		list_feature.add(opt);
-		
-		list_feature.selectedIndex=sel_position;
-	}
-}
-
-function set_defaults(lang, selected) {
-		
-	for (prefix in selected) {
-	
-		var select_auth = document.getElementsByName(prefix.concat('_auth'))[0];
-		var select_work = document.getElementsByName(prefix.concat('_work'))[0];
-		var select_part = document.getElementsByName(prefix)[0];
-		
-		var seg = selected[prefix].split('.');
-		var auth = seg[0];
-		var work = seg[1];
-		
-		for (var i=0; i < select_auth.options.length; i++) {
-		
-			if (select_auth.options[i].value == auth) {
-			
-				select_auth.selectedIndex = i;
-			}
-		}
-		
-		populate_work(lang[prefix],prefix);
-
-		for (var i=0; i < select_work.options.length; i++) {
-		
-			if (select_work.options[i].value == work) {
-		
-				select_work.selectedIndex = i;
-			}
-		}
-		
-		populate_part(lang[prefix],prefix);
-
-		for (var i=0; i < select_part.options.length; i++) {
-		
-			if (select_part.options[i].value == selected[prefix]) {
-			
-				select_part.selectedIndex = i;
-			}
-		}
-	}	
-}
-
-function hideshow() {
-
-	var adv = document.getElementById('advanced');
-	var msg = document.getElementById('moremsg');
-	
-	if (adv.style.display !== 'none') {
-		adv.style.display = 'none';
-		msg.innerHTML = 'show advanced'
-	}
-	else {
-		adv.style.display = 'block';
-		msg.innerHTML = 'hide advanced'
-	}
-}

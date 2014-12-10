@@ -2,19 +2,23 @@
 
 =head1 NAME
 
-metadata_query.pl - query metadata database
+metadata_units.pl - list units available for a search
 
 =head1 SYNOPSIS
 
-metadata_query.pl [options] COL=VALUE [COL=VALUE ...]
+metadata_units.pl [options] --target TEXT1 --source TEXT2
 
 =head1 DESCRIPTION
 
-Return texts for which specified columns have respective values.
+If both texts are verse, return "line" and "phrase"; if either text is prose, return only "phrase".
 
 =head1 OPTIONS AND ARGUMENTS
 
 =over
+
+=item I<TEXT1>, I<TEXT2>
+
+The texts to check.
 
 =item B<--help>
 
@@ -33,7 +37,7 @@ The contents of this file are subject to the University at Buffalo Public Licens
 
 Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitations under the License.
 
-The Original Code is metadata_query.pl.
+The Original Code is metadata_units.pl.
 
 The Initial Developer of the Original Code is Research Foundation of State University of New York, on behalf of University at Buffalo.
 
@@ -115,14 +119,14 @@ use Pod::Usage;
 
 # load additional modules necessary for this script
 
-use CGI qw/standard/;
+use CGI qw/:standard/;
+use JSON;
+use Data::Dumper;
 
 # initialize some variables
 
 my $help = 0;
-
-my @allowed_keys = qw/lang prose/;
-my %val;
+my $name;
 
 # is the program being run from the web or
 # from the command line?
@@ -134,6 +138,8 @@ my $no_cgi = defined($query->request_method()) ? 0 : 1;
 # print debugging messages to stderr?
 
 my $quiet = 0;
+my $target;
+my $source;
 
 #
 # check web, cli for query args
@@ -144,7 +150,9 @@ if ($no_cgi) {
 
 	GetOptions(
 		'help'  => \$help,
-		'quiet' => \$quiet
+		'quiet' => \$quiet,
+		'target=s' => \$target,
+		'source=s' => \$source
 	);
 	
 	# print usage if the user needs help
@@ -153,88 +161,46 @@ if ($no_cgi) {
 
 		pod2usage(1);
 	}
-	
-	# otherwise, parse query args
-	
-	my %val_;
-	
-	for my $pair (@ARGV) {
-		
-		next unless $pair =~ /(.+)=(.+)/;
-		
-		my ($k, $v) = ($1, $2);
-
-		$val_{$k} = $v;
-	}
-	
-	for my $k (@allowed_keys) {
-		$val{$k} = $val_{$k} if defined $val_{$k};
-	}
 }
 else {
+	print header(-type => 'text/plain');
+
 	# get web-based query args
 	
-	for my $k (@allowed_keys) {
+	$target = $query->param('target');
+	$source = $query->param('source');
 
-		$val{$k} = $query->param($k);
-	}
+	$quiet = 1;
 }
 
-# fail if no valid query
 
-{
-	unless (keys %val) {
+my @units;
+
+if ($target and $source) {
 		
-		die "no valid query fields\n";
-	}
-}
+	push @units, {name=>'phrase', display=>'Phrase'};
 
-#
-# construct query
-#
-
-my $sql_str;
-{
-	my @elements;
-	for my $k (keys %val) {
-	
-		my $v = $val{$k};
-		if ($v =~ /[^0-9]/) { $v = "\"$v\"" }
-	
-		push @elements, "$k=$v"
-	}
-	
-	$sql_str = "select name from $Tesserae::metadata_db_table where "
-		. join(', ', @elements)
-		. ' order by name;';
-
-		print STDERR "sql_str='$sql_str'\n";
-}
-
-#
-# execute query
-#
-
-my @name;
-
-{
 	my $dbh = Tesserae::metadata_dbh;
-		
-	my $res = $dbh->selectcol_arrayref($sql_str, {RaiseError=>1});
-	
-	if ($res) {
-		
-		@name = @$res;
+
+	my $sql = "select sum(prose) from texts where name=\"$target\" or name=\"$source\";";
+	print STDERR "sql='$sql'\n" unless $quiet;
+
+	my $count = $dbh->selectrow_arrayref($sql)->[0];
+
+	if ($count == 0) {
+		push @units, {name=>'line', display=>'Line'};
 	}
 }
+
 
 #
 # print results
 #
 
 {
-	for (@name) {
-		
-		print "$_\n";
-	}
+	print encode_json(\@units) if @units;
+	print "\n";
 }
+
+
+

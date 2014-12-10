@@ -316,14 +316,57 @@ for my $name (keys %file) {
 		next;
 	}
 
+
 	# check prose list
 	
 	my $prose = $prose || check_prose_list($name);
 	
 	# add the text into metadata table
-	
-	$dbh->do("insert or replace into $Tesserae::metadata_db_table (name, lang, prose) "
-		. "values (\"$name\", \"$lang\", $prose);");
+
+	my $fulltext = $name;
+	my $part_display;
+	my $part_sort;
+
+	if ($fulltext =~ s/\.part\.(.+)//) {
+		my $part = $1;
+
+		if ($part =~ /(\d+)\.(.+)/) {
+			($part_sort, $part) = ($1, $2);
+		}
+		else {
+			$part_sort = int($part);
+			$part = "Book $part";
+		}
+
+		$part_display = display($part);
+	}
+	else {
+		$part_sort = 0;
+		$part_display = "Full Text"; 
+	}
+
+	$dbh->do("insert or replace into parts (name, sort, display, fulltext) "
+			. "values (\"$name\", $part_sort, \"$part_display\", \"$fulltext\");");
+
+	my $author;
+	my $work;
+
+	if ($fulltext =~ /(.+?)\.(.+)/) {
+		$author = $1;
+		$work = $2;
+	}
+	else {
+		$author = "anonymous";
+		$work = $fulltext;
+	}
+
+	$work = display($work);
+	my $auth_display = display($author);
+
+	$dbh->do("insert or replace into texts (name, display, author, lang, prose) "
+		. "values (\"$fulltext\", \"$work\", \"$author\", \"$lang\", $prose);");
+
+	$dbh->do("insert or replace into authors (author, display) values (\"$author\", \"$auth_display\");");
 	
 	#
 	# assume unknown lang is like english
@@ -618,6 +661,9 @@ for my $name (keys %file) {
 	print STDERR "Writing $to\n" unless $quiet;
 	copy($from, $to);
 	
+	# mark text as indexed by word
+	Tesserae::metadata_set($name, "feat_word", 1, $dbh);
+
 	$pm->finish if $max_processes;
 }
 
@@ -680,6 +726,9 @@ sub get_abbr {
 sub check_prose_list {
 
 	my $name = shift;
+
+	# if this is a part text, metadata pertains to full text
+	$name =~ s/\.part\..*//;	
 		
 	my $file_prose_list = catfile($fs{text}, 'prose_list');
 	
@@ -700,3 +749,18 @@ sub check_prose_list {
 	
 	return 0;
 }
+
+sub display {
+
+	my $name = shift;
+	
+	my $display = $name;
+
+	$display =~ s/\./ - /g;
+	$display =~ s/\_/ /g;
+
+	$display =~ s/(^|\s)([[:alpha:]])/$1 . uc($2)/eg;
+
+	return $display;
+}
+
