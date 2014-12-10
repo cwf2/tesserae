@@ -841,25 +841,6 @@ sub process_file_list {
 
 	for my $file_in (@list_in) {
 	
-		# large files split into parts are kept in their
-		# own subdirectories; if an arg has no .tess extension
-		# it may be such a directory
-
-		if (-d $file_in) {
-
-			opendir (DH, $file_in);
-
-			my @parts = (grep {/\.part\./ && -f} map { catfile($file_in, $_) } readdir DH);
-
-			push @list_in, @parts;
-					
-			closedir (DH);
-		
-			# move on to the next full text
-
-			next;
-		}
-	
 		my ($name, $path, $suffix) = fileparse($file_in, qr/\.[^.]*/);
 	
 		next unless ($suffix eq ".tess");

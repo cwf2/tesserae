@@ -22,11 +22,6 @@ first setting Tesserae up.  E.g. (from the Tesserae root dir),
 
    perl scripts/v3/add_column.pl texts/la/*
 
-If the script is passed a directory instead of a file, it will search inside for
-.tess files; this is designed for works which have been partitioned into separate
-files, e.g. by internal "book".  These .part. files are stored inside a directory
-named for the original work.
-
 If you have a file in the I<texts/> directory called I<prose_list>, this will be
 read and any texts whose names are found in the prose list will be added to the
 database in "prose mode".  Because the "line" unit of text doesn't make much sense
@@ -176,7 +171,7 @@ my $override_parallel = Tesserae::check_mod("Parallel::ForkManager");
 # if you match this $1 and $2 will be set to the parts
 # belonging to the left and right phrases respectively
 
-my $split_punct = qr/(.*"?$phrase_delimiter"?)(\s*)(.*)/;
+my $split_punct = qr/(.*$phrase_delimiter['"’”]?)(\s*)(.*)/;
 
 # 
 # initialize some parameters
@@ -272,9 +267,6 @@ unless (keys %file) {
 	pod2usage(2);
 }
 
-# write the abbreviations database
-
-# get_abbr(\%file);
 
 #
 # process the files
