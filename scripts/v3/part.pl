@@ -173,8 +173,6 @@ for my $unit_id (1..$#unit) {
 	my @components = split(/\./, $loc);
 	my @token_id = @{$unit[$unit_id]{TOKEN_ID}};
 	
-	print STDERR "[$unit_id $loc]";
-	
 	if ($components[0] ne $prev) {
 		print STDERR "prev -> $components[0]\n";
 		push @chunk, {
@@ -184,7 +182,6 @@ for my $unit_id (1..$#unit) {
 		};
 	}
 	else {
-		print STDERR "\n";
 		$chunk[-1]{loc}[-1] = $loc;
 		$chunk[-1]{token}[-1] = $token_id[-1];		
 	}

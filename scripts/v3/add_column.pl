@@ -323,48 +323,26 @@ for my $name (keys %file) {
 	
 	# add the text into metadata table
 
-	my $fulltext = $name;
-	my $part_display;
-	my $part_sort;
-
-	if ($fulltext =~ s/\.part\.(.+)//) {
-		my $part = $1;
-
-		if ($part =~ /(\d+)\.(.+)/) {
-			($part_sort, $part) = ($1, $2);
-		}
-		else {
-			$part_sort = int($part);
-			$part = "Book $part";
-		}
-
-		$part_display = display($part);
-	}
-	else {
-		$part_sort = 0;
-		$part_display = "Full Text"; 
-	}
-
 	$dbh->do("insert or replace into parts (name, sort, display, fulltext) "
-			. "values (\"$name\", $part_sort, \"$part_display\", \"$fulltext\");");
+			. "values (\"$name\", 0, \"Full Text\", \"$name\");");
 
 	my $author;
 	my $work;
 
-	if ($fulltext =~ /(.+?)\.(.+)/) {
+	if ($name =~ /(.+?)\.(.+)/) {
 		$author = $1;
 		$work = $2;
 	}
 	else {
 		$author = "anonymous";
-		$work = $fulltext;
+		$work = $name;
 	}
 
 	$work = display($work);
 	my $auth_display = display($author);
 
 	$dbh->do("insert or replace into texts (name, display, author, lang, prose) "
-		. "values (\"$fulltext\", \"$work\", \"$author\", \"$lang\", $prose);");
+		. "values (\"$name\", \"$work\", \"$author\", \"$lang\", $prose);");
 
 	$dbh->do("insert or replace into authors (author, display) values (\"$author\", \"$auth_display\");");
 	
