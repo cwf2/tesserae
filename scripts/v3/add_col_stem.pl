@@ -238,11 +238,10 @@ my @files = map { glob } @ARGV;
 
 my $dbh = Tesserae::metadata_dbh;
 
-for my $feature (@feature) {
-	my $sql = "alter table texts add column feat_$feature int default 0;";
-	print STDERR "sql=$sql\n";
-	$dbh->do($sql);
-}
+# check if specified feature columns exist in texts table,
+# create them if they don't
+update_features($dbh, \@features);
+
 
 #
 # process the files
@@ -325,3 +324,27 @@ sub check_feature_dep {
 	return [grep { $file_ok{$_} } @file];
 }
 
+sub update_features {
+	my ($dbh, $feat_ref) = @_;
+	my @features = @$feat_ref;
+	
+	my $table_ref = $dbh->selectall_arrayref("pragma table_info(texts);");
+
+	my %exists;
+	
+	for my $row(@$table_ref) {
+		my $col = $row->[1];
+		next unless $col =~ s/feat_//;
+		
+		$exists{$col} = 1;
+	}
+
+	for my $feature (@feature) {
+	
+		unless $exists{$col} {
+			my $sql = "alter table texts add column feat_$feature int default 0;";
+			# print STDERR "sql=$sql\n";
+			$dbh->do($sql);
+		}
+	}
+}

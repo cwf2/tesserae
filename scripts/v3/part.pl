@@ -121,7 +121,6 @@ use Pod::Usage;
 
 # load additional modules necessary for this script
 
-use DBI;
 use Storable qw/nstore retrieve/;
 
 # initialize some variables
@@ -174,7 +173,10 @@ for my $unit_id (1..$#unit) {
 	my @components = split(/\./, $loc);
 	my @token_id = @{$unit[$unit_id]{TOKEN_ID}};
 	
+	print STDERR "[$unit_id $loc]";
+	
 	if ($components[0] ne $prev) {
+		print STDERR "prev -> $components[0]\n";
 		push @chunk, {
 			display => $prefix . " " . $components[0],
 			loc => [$loc, $loc],
@@ -182,6 +184,7 @@ for my $unit_id (1..$#unit) {
 		};
 	}
 	else {
+		print STDERR "\n";
 		$chunk[-1]{loc}[-1] = $loc;
 		$chunk[-1]{token}[-1] = $token_id[-1];		
 	}
@@ -189,14 +192,36 @@ for my $unit_id (1..$#unit) {
 	$prev = $components[0];
 }
 
+print "<Parts text=\"$name\">\n";
+print xml_part({
+	n => 0,
+	display => "Full Text",
+	loc => join("-", $unit[0]{LOCUS}, $unit[-1]{LOCUS}),
+	mask => join(":", 0, $unit[-1]{TOKEN_ID}[-1])
+});
+
+
 for my $i (0..$#chunk) {
 	
-	print join("\t", 
-		$chunk[$i]{display},
-		join(":", @{$chunk[$i]{loc}}),
-		join(":", @{$chunk[$i]{token}}),
-		$chunk[$i]{token}[1] - $chunk[$i]{token}[0]
-	);
-	print "\n";
+	print xml_part({
+		n => $i + 1,
+		display => $chunk[$i]{display},
+		loc => join("-", @{$chunk[$i]{loc}}),
+		mask => join(":", @{$chunk[$i]{token}})
+	});
 }
 
+print "</Parts>\n";
+
+
+sub xml_part {
+	my $part = shift;
+	
+	return <<END_XML;
+<Part n="$part->{n}">
+	<Display>$part->{display}</Display>
+	<LocRange>$part->{loc}<LocRange>
+	<Mask>$part->{mask}</Mask>
+</Part>
+END_XML
+}

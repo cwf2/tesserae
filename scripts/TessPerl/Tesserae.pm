@@ -925,15 +925,15 @@ sub get_base {
 	
 	unless ($lang) {
 	
-		print STDERR "Can't find language for $text. Have you run add_column.pl?\n";
+		print STDERR "Can't find language for $name. Have you run add_column.pl?\n";
 		return undef;
 	}
 	
-	my $base = catfile($fs{data}, 'v3', $lang, $text, $text);
+	my $base = catfile($fs{data}, 'v3', $lang, $name, $name);
 	
 	unless (-e "$base.token") {
 	
-		print STDERR "Can't find token data for $text. Have you run add_column.pl?\n";
+		print STDERR "Can't find token data for $name. Have you run add_column.pl?\n";
 		return undef;
 	}
 	
