@@ -951,8 +951,6 @@ sub escape_path {
 sub metadata_get {
 	my ($name, $field, $dbh_open) = @_;
 	
-	$name =~ s/\.part\..*//;
-
 	my $dbh = $dbh_open || metadata_dbh();
 
 	my $value;
@@ -974,6 +972,27 @@ sub metadata_set {
 	my $dbh = $dbh_open || metadata_dbh();
 	
 	$dbh->do("update $metadata_db_table set $field=\"$value\" where name=\"$name\";");
+}
+
+sub metadata_textlist {
+	my ($ref_opt, $dbh_open) = @_;
+	
+	my $dbh = $dbh_open || metadata_dbh();
+
+	my $where_clause = "";
+
+	if (defined $ref_opt) {
+		my %opt = %$ref_opt;
+		
+		if (%opt) {
+			$where_clause = " where " . join(" and ", map {"$_ = '$opt{$_}'"} keys %opt);
+		}
+	}
+	
+	my $sql = "select name from texts" . $where_clause . ";";
+	
+	my $ref = $dbh->selectcol_arrayref($sql);
+	return $ref;
 }
 
 sub metadata_dbh {
@@ -1002,6 +1021,8 @@ sub metadata_init {
 		'name varchar(128) unique',
 		'sort int',
 		'display varchar(24)',
+		'mask_lower int',
+		'mask_upper int',
 		'fulltext varchar(128)']
 	);
 

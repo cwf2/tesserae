@@ -145,71 +145,78 @@ if ($help) {
 }
 
 
-my $name = shift @ARGV;
+# get files to be processed from cmd line args
 
-my $base = Tesserae::get_base($name) or die "Invalid text";
+my @files = @ARGV;
+my %file = %{Tesserae::process_file_list(\@files, {filenames=>1})};
 
-my @unit = @{retrieve($base . ".line")};
+unless (keys %file) {
 
-my @chunk;
-my $prev;
+	print STDERR "No files specified\n";
+	pod2usage(2);
+}
 
-{
+for my $name (keys %file) {
+	my $base = Tesserae::get_base($name) or die "Invalid text";
+
+	my @unit = @{retrieve($base . ".line")};
+
+	my @chunk;
+	my $prev;
+
 	my $loc = $unit[0]{LOCUS};
 	my @components = split(/\./, $loc);
 	$prev = $components[0];
-	
+
 	my @token_id = @{$unit[0]{TOKEN_ID}};
-	
+
 	push @chunk, {
 		display => $prefix . " " . $components[0],
 		loc => [$loc, $loc],
 		token => [$token_id[0], $token_id[-1]]
 	};
-}
-
-for my $unit_id (1..$#unit) {
-	my $loc = $unit[$unit_id]{LOCUS};
-	my @components = split(/\./, $loc);
-	my @token_id = @{$unit[$unit_id]{TOKEN_ID}};
 	
-	if ($components[0] ne $prev) {
-		print STDERR "prev -> $components[0]\n";
-		push @chunk, {
-			display => $prefix . " " . $components[0],
-			loc => [$loc, $loc],
-			token => [$token_id[0], $token_id[-1]]
-		};
+	for my $unit_id (1..$#unit) {
+		my $loc = $unit[$unit_id]{LOCUS};
+		my @components = split(/\./, $loc);
+		my @token_id = @{$unit[$unit_id]{TOKEN_ID}};
+	
+		if ($components[0] ne $prev) {
+			push @chunk, {
+				display => $prefix . " " . $components[0],
+				loc => [$loc, $loc],
+				token => [$token_id[0], $token_id[-1]]
+			};
+		}
+		else {
+			$chunk[-1]{loc}[-1] = $loc;
+			$chunk[-1]{token}[-1] = $token_id[-1];		
+		}
+	
+		$prev = $components[0];
 	}
-	else {
-		$chunk[-1]{loc}[-1] = $loc;
-		$chunk[-1]{token}[-1] = $token_id[-1];		
-	}
-	
-	$prev = $components[0];
-}
 
-print "<Parts text=\"$name\">\n";
-print xml_part({
-	n => 0,
-	display => "Full Text",
-	loc => join("-", $unit[0]{LOCUS}, $unit[-1]{LOCUS}),
-	mask => join(":", 0, $unit[-1]{TOKEN_ID}[-1])
-});
-
-
-for my $i (0..$#chunk) {
-	
+	print "<Parts text=\"$name\">\n";
 	print xml_part({
-		n => $i + 1,
-		display => $chunk[$i]{display},
-		loc => join("-", @{$chunk[$i]{loc}}),
-		mask => join(":", @{$chunk[$i]{token}})
+		n => 0,
+		display => "Full Text",
+		loc => join("-", $unit[0]{LOCUS}, $unit[-1]{LOCUS}),
+		mask => join(":", 0, $unit[-1]{TOKEN_ID}[-1])
 	});
+
+
+	for my $i (0..$#chunk) {
+	
+		print xml_part({
+			n => $i + 1,
+			display => $chunk[$i]{display},
+			loc => join("-", @{$chunk[$i]{loc}}),
+			mask => join(":", @{$chunk[$i]{token}})
+		});
+	}
+
+	print "</Parts>\n";
 }
-
-print "</Parts>\n";
-
 
 sub xml_part {
 	my $part = shift;
