@@ -60,6 +60,10 @@ Presuming that you had previously run read_table.pl using the default name "tesr
 
 % cgi-bin/read_bin.pl --export tab tesresults > results.txt
 
+=head1 KNOWN BUGS
+
+XML output not working as of 12.17.2014.
+
 =head1 SEE ALSO
 
 I<cgi-bin/read_table.pl>
@@ -252,7 +256,7 @@ unless ($no_cgi) {
 
 	my %h = ('-charset'=>'utf-8', '-type'=>'text/html');
 
-	if ($export eq "xml") { $h{'-type'} = "text/xml"; $h{'-attachment'} = "tesresults-$session.xml" }
+#	if ($export eq "xml") { $h{'-type'} = "text/xml"; $h{'-attachment'} = "tesresults-$session.xml" }
 	if ($export eq "csv") { $h{'-type'} = "text/csv"; $h{'-attachment'} = "tesresults-$session.csv" }
 	if ($export eq "tab") { $h{'-type'} = "text/plain"; $h{'-attachment'} = "tesresults-$session.txt" }
 
@@ -328,10 +332,6 @@ my $distance_metric = $meta{DIBASIS};
 
 my $cutoff = $meta{CUTOFF};
 
-# score team filter state
-
-my $filter = $meta{FILTER};
-
 # session id
 
 $session = $meta{SESSION};
@@ -357,8 +357,12 @@ if ($batch eq 'all') {
 # text abbreviations
 
 my %abbr = (
-	$source => Tesserae::metadata_get($source, "abbr"),
-	$target => Tesserae::metadata_get($target, "abbr"),
+	$source => Tesserae::metadata_get($source, "Abbr"),
+	$target => Tesserae::metadata_get($target, "Abbr"),
+);
+my %lang = (
+	$source => Tesserae::metadata_get($source, "Lang"),
+	$target => Tesserae::metadata_get($target, "Lang"),
 );
 
 
@@ -373,7 +377,7 @@ unless ($quiet) {
 	print STDERR "reading source data\n";
 }
 
-my $path_source = catfile($fs{data}, 'v3', Tesserae::lang($source), $source, $source);
+my $path_source = catfile($fs{data}, 'v3', $lang{$source}, $source, $source);
 
 my @token_source   = @{ retrieve( "$path_source.token"    ) };
 my @unit_source    = @{ retrieve( "$path_source.${unit}" ) };
@@ -385,7 +389,7 @@ unless ($quiet) {
 	print STDERR "reading target data\n";
 }
 
-my $path_target = catfile($fs{data}, 'v3', Tesserae::lang($target), $target, $target);
+my $path_target = catfile($fs{data}, 'v3', $lang{$target}, $target, $target);
 
 my @token_target   = @{ retrieve( "$path_target.token"    ) };
 my @unit_target    = @{ retrieve( "$path_target.${unit}" ) };
@@ -406,10 +410,6 @@ elsif ($export eq "csv") {
 elsif ($export eq "tab") {
 
 	print_delim("\t");
-}
-elsif  ($export eq "xml") {
-
-	print_xml();
 }
 
 
@@ -739,7 +739,6 @@ END
 	}
 
 	my $stoplist = join(", ", @stoplist);
-	my $filtertoggle = $filter ? 'on' : 'off';
 
 	$bottom =~ s/<!--session_id-->/$session/;
 	$bottom =~ s/<!--source-->/$source/;
@@ -752,7 +751,6 @@ END
 	$bottom =~ s/<!--maxdist-->/$max_dist/;
 	$bottom =~ s/<!--dibasis-->/$distance_metric/;
 	$bottom =~ s/<!--cutoff-->/$cutoff/;
-	$bottom =~ s/<!--filter-->/$filtertoggle/;
 
 	print $bottom;
 }
@@ -766,7 +764,6 @@ sub print_delim {
 	#
 
 	my $stoplist = join(" ", @stoplist);
-	my $filtertoggle = $filter ? 'on' : 'off';
 
 	print <<END;
 # Tesserae V3 results
@@ -782,7 +779,6 @@ sub print_delim {
 # max_dist  = $max_dist
 # dibasis   = $distance_metric
 # cutoff    = $cutoff
-# filter    = $filtertoggle
 
 END
 

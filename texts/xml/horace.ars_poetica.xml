@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TessDocument id="horace.ars_poetica">
+  <Metadata>
+    <Author>horace</Author>
+    <Display>Ars Poetica</Display>
+    <Abbr>hor. a.p.</Abbr>
+    <Lang>la</Lang>
+    <Prose>0</Prose>
+    <PrintSource>C. Smart, The Works of Horace. Philadelphia: Joseph Whetham, 1836.</PrintSource>
+    <DigitalSourceDisplay>Perseus</DigitalSourceDisplay>
+    <DigitalSourceURL>http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3atext%3a1999.02.0064</DigitalSourceURL>
+    <AddedBy>Chris Forstall</AddedBy>
+    <URI>urn:cts:latinLit:phi0893.phi006.perseus-lat1</URI>
+  </Metadata>
+  <Text>
+    <TextUnit id="0" loc="1">Humano capiti cervicem pictor equinam</TextUnit>
+    <TextUnit id="1" loc="2">iungere si velit, et varias inducere plumas,</TextUnit>
+    <TextUnit id="2" loc="3">undique conlatis membris, ut turpiter atrum</TextUnit>
+    <TextUnit id="3" loc="4">desinat in piscem mulier formosa superne,</TextUnit>
+    <TextUnit id="4" loc="5">spectatum admissi risum teneatis, amici?</TextUnit>
+    <TextUnit id="5" loc="6">credite, Pisones, isti tabulae fore librum</TextUnit>
+    <TextUnit id="6" loc="7">persimilem, cuius, velut aegri somnia, vanae</TextUnit>
+    <TextUnit id="7" loc="8">fingentur species, ut nec pes nec caput uni</TextUnit>
+    <TextUnit id="8" loc="9">reddatur formae. 'pictoribus atque poetis</TextUnit>
+    <TextUnit id="9" loc="10">quidlibet audendi semper fuit aequa potestas.'</TextUnit>
+    <TextUnit id="10" loc="11">scimus, et hanc veniam petimusque damusque vicissim;</TextUnit>
+    <TextUnit id="11" loc="12">sed non ut placidis coeant inmitia, non ut</TextUnit>
+    <TextUnit id="12" loc="13">serpentes avibus geminentur, tigribus agni.</TextUnit>
+    <TextUnit id="13" loc="14">inceptis gravibus plerumque et magna professis</TextUnit>
+    <TextUnit id="14" loc="15">purpureus, late qui splendeat, unus et alter</TextUnit>
+    <TextUnit id="15" loc="16">adsuitur pannus, cum lucus et ara Dianae</TextUnit>
+    <TextUnit id="16" loc="17">et properantis aquae per amoenos ambitus agros</TextUnit>
+    <TextUnit id="17" loc="18">aut flumen Rhenum aut pluvius describitur arcus;</TextUnit>
+    <TextUnit id="18" loc="19">sed nunc non erat his locus. et fortasse cupressum</TextUnit>
+    <TextUnit id="19" loc="20">scis simulare: quid hoc, si fractis enatat exspes</TextUnit>
+    <TextUnit id="20" loc="21">navibus, aere dato qui pingitur? amphora coepit</TextUnit>
+    <TextUnit id="21" loc="22">institui: currente rota cur urceus exit?</TextUnit>
+    <TextUnit id="22" loc="23">denique sit quodvis, simplex dumtaxat et unum.</TextUnit>
+    <TextUnit id="23" loc="24">maxima pars vatum, pater et iuvenes patre digni,</TextUnit>
+    <TextUnit id="24" loc="25">decipimur specie recti: brevis esse laboro,</TextUnit>
+    <TextUnit id="25" loc="26">obscurus fio; sectantem levia nervi</TextUnit>
+    <TextUnit id="26" loc="27">deficiunt animique; professus grandia turget;</TextUnit>
+    <TextUnit id="27" loc="28">serpit humi tutus nimium timidusque procellae:</TextUnit>
+    <TextUnit id="28" loc="29">qui variare cupit rem prodigialiter unam,</TextUnit>
+    <TextUnit id="29" loc="30">delphinum silvis adpingit, fluctibus aprum:</TextUnit>
+    <TextUnit id="30" loc="31">in vitium ducit culpae fuga, si caret arte.</TextUnit>
+    <TextUnit id="31" loc="32">Aemilium circa ludum faber imus et unguis</TextUnit>
+    <TextUnit id="32" loc="33">exprimet et mollis imitabitur aere capillos,</TextUnit>
+    <TextUnit id="33" loc="34">infelix operis summa, quia ponere totum</TextUnit>
+    <TextUnit id="34" loc="35">nesciet: hunc ego me, si quid componere curem,</TextUnit>
+    <TextUnit id="35" loc="36">non magis esse velim quam naso vivere pravo,</TextUnit>
+    <TextUnit id="36" loc="37">spectandum nigris oculis nigroque capillo.</TextUnit>
+    <TextUnit id="37" loc="38">sumite materiam vestris, qui scribitis, aequam</TextUnit>
+    <TextUnit id="38" loc="39">viribus et versate diu, quid ferre recusent,</TextUnit>
+    <TextUnit id="39" loc="40">quid valeant umeri. cui lecta potenter erit res,</TextUnit>
+    <TextUnit id="40" loc="41">nec facundia deseret hunc nec lucidus ordo.</TextUnit>
+    <TextUnit id="41" loc="42">ordinis haec virtus erit et venus, aut ego fallor,</TextUnit>
+    <TextUnit id="42" loc="43">ut iam nunc dicat iam nunc debentia dici,</TextUnit>
+    <TextUnit id="43" loc="44">pleraque differat et praesens in tempus omittat.</TextUnit>
+    <TextUnit id="44" loc="45">in verbis etiam tenuis cautusque serendis</TextUnit>
+    <TextUnit id="45" loc="45">hoc amet, hoc spernat promissi carminis auctor.</TextUnit>
+    <TextUnit id="46" loc="46">dixeris egregie, notum si callida verbum</TextUnit>
+    <TextUnit id="47" loc="47">reddiderit iunctura novum. si forte necesse est</TextUnit>
+    <TextUnit id="48" loc="48">indiciis monstrare recentibus abdita rerum et</TextUnit>
+    <TextUnit id="49" loc="50">fingere cinctutis non exaudita Cethegis,</TextUnit>
+    <TextUnit id="50" loc="51">continget dabiturque licentia sumpta pudenter,</TextUnit>
+    <TextUnit id="51" loc="52">et nova fictaque nuper habebunt verba fidem, si</TextUnit>
+    <TextUnit id="52" loc="53">Graeco fonte cadent parce detorta. quid autem</TextUnit>
+    <TextUnit id="53" loc="54">Caecilio Plautoque dabit Romanus ademptum</TextUnit>
+    <TextUnit id="54" loc="55">Vergilio Varioque? ego cur, adquirere pauca</TextUnit>
+    <TextUnit id="55" loc="56">si possum, invideor, cum lingua Catonis et Enni</TextUnit>
+    <TextUnit id="56" loc="57">sermonem patrium ditaverit et nova rerum</TextUnit>
+    <TextUnit id="57" loc="58">nomina protulerit? licuit semperque licebit</TextUnit>
+    <TextUnit id="58" loc="59">signatum praesente nota producere nomen.</TextUnit>
+    <TextUnit id="59" loc="60">ut silvae foliis pronos mutantur in annos,</TextUnit>
+    <TextUnit id="60" loc="61">prima cadunt: ita verborum vetus interit aetas,</TextUnit>
+    <TextUnit id="61" loc="62">et iuvenum ritu florent modo nata vigentque.</TextUnit>
+    <TextUnit id="62" loc="63">debemur morti nos nostraque: sive receptus</TextUnit>
+    <TextUnit id="63" loc="64">terra Neptunus classes Aquilonibus arcet,</TextUnit>
+    <TextUnit id="64" loc="65">regis opus, sterilisve diu palus aptaque remis</TextUnit>
+    <TextUnit id="65" loc="66">vicinas urbes alit et grave sentit aratrum,</TextUnit>
+    <TextUnit id="66" loc="67">seu cursum mutavit iniquum frugibus amnis</TextUnit>
+    <TextUnit id="67" loc="68">doctus iter melius: mortalia facta peribunt,</TextUnit>
+    <TextUnit id="68" loc="69">nedum sermonum stet honos et gratia vivax.</TextUnit>
+    <TextUnit id="69" loc="70">multa renascentur quae iam cecidere cadentque</TextUnit>
+    <TextUnit id="70" loc="71">quae nunc sunt in honore vocabula, si volet usus,</TextUnit>
+    <TextUnit id="71" loc="72">quem penes arbitrium est et ius et norma loquendi.</TextUnit>
+    <TextUnit id="72" loc="73">res gestae regumque ducumque et tristia bella</TextUnit>
+    <TextUnit id="73" loc="74">quo scribi possent numero, monstravit Homerus;</TextUnit>
+    <TextUnit id="74" loc="75">versibus inpariter iunctis querimonia primum,</TextUnit>
+    <TextUnit id="75" loc="76">post etiam inclusa est voti sententia compos;</TextUnit>
+    <TextUnit id="76" loc="77">quis tamen exiguos elegos emiserit auctor,</TextUnit>
+    <TextUnit id="77" loc="78">grammatici certant et adhuc sub iudice lis est;</TextUnit>
+    <TextUnit id="78" loc="79">Archilochum proprio rabies armavit iambo;</TextUnit>
+    <TextUnit id="79" loc="80">hunc socci cepere pedem grandesque cothurni,</TextUnit>
+    <TextUnit id="80" loc="81">alternis aptum sermonibus et popularis</TextUnit>
+    <TextUnit id="81" loc="82">vincentem strepitus et natum rebus agendis;</TextUnit>
+    <TextUnit id="82" loc="83">musa dedit fidibus Divos puerosque Deorum</TextUnit>
+    <TextUnit id="83" loc="84">et pugilem victorem et equum certamine primum</TextUnit>
+    <TextUnit id="84" loc="85">et iuvenum curas et libera vina referre:</TextUnit>
+    <TextUnit id="85" loc="86">descriptas servare vices operumque colores</TextUnit>
+    <TextUnit id="86" loc="87">cur ego si nequeo ignoroque poeta salutor?</TextUnit>
+    <TextUnit id="87" loc="88">cur nescire pudens prave quam discere malo?</TextUnit>
+    <TextUnit id="88" loc="89">versibus exponi tragicis res comica non volt;</TextUnit>
+    <TextUnit id="89" loc="90">indignatur item privatis ac prope socco</TextUnit>
+    <TextUnit id="90" loc="91">dignis carminibus narrari cena Thyestae:</TextUnit>
+    <TextUnit id="91" loc="92">singula quaeque locum teneant sortita decentem.</TextUnit>
+    <TextUnit id="92" loc="93">interdum tamen et vocem comoedia tollit</TextUnit>
+    <TextUnit id="93" loc="94">iratusque Chremes tumido delitigat ore;</TextUnit>
+    <TextUnit id="94" loc="95">et tragicus plerumque dolet sermone pedestri,</TextUnit>
+    <TextUnit id="95" loc="96">Telephus et Peleus cum pauper et exsul uterque</TextUnit>
+    <TextUnit id="96" loc="97">proiicit ampullas et sesquipedalia verba,</TextUnit>
+    <TextUnit id="97" loc="98">si curat cor spectantis tetigisse querella.</TextUnit>
+    <TextUnit id="98" loc="99">non satis est pulchra esse poemata: dulcia sunto</TextUnit>
+    <TextUnit id="99" loc="100">et quocumque volent animum auditoris agunto.</TextUnit>
+    <TextUnit id="100" loc="101">ut ridentibus adrident, ita flentibus adflent</TextUnit>
+    <TextUnit id="101" loc="102">humani voltus. si vis me flere, dolendum est</TextUnit>
+    <TextUnit id="102" loc="103">primum ipsi tibi: tum tua me infortunia laedent,</TextUnit>
+    <TextUnit id="103" loc="104">Telephe vel Peleu; male si mandata loqueris,</TextUnit>
+    <TextUnit id="104" loc="105">aut dormitabo aut ridebo. tristia maestum</TextUnit>
+    <TextUnit id="105" loc="106">voltum verba decent, iratum plena minarum,</TextUnit>
+    <TextUnit id="106" loc="107">ludentem lasciva, severum seria dictu.</TextUnit>
+    <TextUnit id="107" loc="108">format enim natura prius nos intus ad omnem</TextUnit>
+    <TextUnit id="108" loc="109">fortunarum habitum: iuvat aut inpellit ad iram</TextUnit>
+    <TextUnit id="109" loc="110">aut ad humum maerore gravi deducit et angit:</TextUnit>
+    <TextUnit id="110" loc="111">post effert animi motus interprete lingua.</TextUnit>
+    <TextUnit id="111" loc="112">si dicentis erunt fortunis absona dicta,</TextUnit>
+    <TextUnit id="112" loc="113">Romani tollent equites peditesque cachinnum.</TextUnit>
+    <TextUnit id="113" loc="114">intererit multum, Davusne loquatur an heros,</TextUnit>
+    <TextUnit id="114" loc="115">maturusne senex an adhuc florente iuventa</TextUnit>
+    <TextUnit id="115" loc="116">fervidus, et matrona potens an sedula nutrix,</TextUnit>
+    <TextUnit id="116" loc="117">mercatorne vagus cultorne virentis agelli,</TextUnit>
+    <TextUnit id="117" loc="118">Colchus an Assyrius, Thebis nutritus, an Argis.</TextUnit>
+    <TextUnit id="118" loc="119">aut famam sequere aut sibi convenientia finge</TextUnit>
+    <TextUnit id="119" loc="120">scriptor. honoratum si forte reponis Achillem,</TextUnit>
+    <TextUnit id="120" loc="121">inpiger, iracundus, inexorabilis, acer</TextUnit>
+    <TextUnit id="121" loc="122">iura neget sibi nata, nihil non adroget armis.</TextUnit>
+    <TextUnit id="122" loc="123">sit Medea ferox invictaque, flebilis Ino,</TextUnit>
+    <TextUnit id="123" loc="124">perfidus Ixion, Io vaga, tristis Orestes.</TextUnit>
+    <TextUnit id="124" loc="125">si quid inexpertum scaenae conmittis et audes</TextUnit>
+    <TextUnit id="125" loc="126">personam formare novam, servetur ad imum,</TextUnit>
+    <TextUnit id="126" loc="127">qualis ab incepto processerit, et sibi constet.</TextUnit>
+    <TextUnit id="127" loc="128">difficile est proprie communia dicere, tuque</TextUnit>
+    <TextUnit id="128" loc="129">rectius Iliacum carmen deducis in actus</TextUnit>
+    <TextUnit id="129" loc="130">quam si proferres ignota indictaque primus:</TextUnit>
+    <TextUnit id="130" loc="131">publica materies privati iuris erit, si</TextUnit>
+    <TextUnit id="131" loc="132">non circa vilem patulumque moraberis orbem</TextUnit>
+    <TextUnit id="132" loc="133">nec verbo verbum curabis reddere fidus</TextUnit>
+    <TextUnit id="133" loc="134">interpres nec desilies imitator in artum,</TextUnit>
+    <TextUnit id="134" loc="135">unde pedem proferre pudor vetet aut operis lex,</TextUnit>
+    <TextUnit id="135" loc="136">nec sic incipies, ut scriptor cyclicus olim:</TextUnit>
+    <TextUnit id="136" loc="137">'fortunam Priami cantabo et nobile bellum.'</TextUnit>
+    <TextUnit id="137" loc="138">quid dignum tanto feret hic promissor hiatu?</TextUnit>
+    <TextUnit id="138" loc="139">parturient montes, nascetur ridiculus mus.</TextUnit>
+    <TextUnit id="139" loc="140">quanto rectius hic, qui nil molitur inepte:</TextUnit>
+    <TextUnit id="140" loc="141">'dic mihi, Musa, virum, captae post tempora Troiae</TextUnit>
+    <TextUnit id="141" loc="142">qui mores hominum multorum vidit et urbes.'</TextUnit>
+    <TextUnit id="142" loc="143">non fumum ex fulgore, sed ex fumo dare lucem</TextUnit>
+    <TextUnit id="143" loc="144">cogitat, ut speciosa dehinc miracula promat,</TextUnit>
+    <TextUnit id="144" loc="145">Antiphaten, Scyllamque, et cum Cyclope Charybdim;</TextUnit>
+    <TextUnit id="145" loc="146">nec reditum Diomedis ab interitu Meleagri</TextUnit>
+    <TextUnit id="146" loc="147">nec gemino bellum Troianum orditur ab ovo:</TextUnit>
+    <TextUnit id="147" loc="148">semper ad eventum festinat et in medias res</TextUnit>
+    <TextUnit id="148" loc="149">non secus ac notas auditorem rapit et quae</TextUnit>
+    <TextUnit id="149" loc="150">desperat tractata nitescere posse relinquit</TextUnit>
+    <TextUnit id="150" loc="151">atque ita mentitur, sic veris falsa remiscet,</TextUnit>
+    <TextUnit id="151" loc="152">primo ne medium, medio ne discrepet imum.</TextUnit>
+    <TextUnit id="152" loc="153">tu, quid ego et populus mecum desideret, audi,</TextUnit>
+    <TextUnit id="153" loc="154">si plausoris eges aulaea manentis et usque</TextUnit>
+    <TextUnit id="154" loc="155">sessuri, donec cantor 'vos plaudite' dicat.</TextUnit>
+    <TextUnit id="155" loc="156">aetatis cuiusque notandi sunt tibi mores,</TextUnit>
+    <TextUnit id="156" loc="157">mobilibusque decor naturis dandus et annis.</TextUnit>
+    <TextUnit id="157" loc="158">reddere qui voces iam scit puer et pede certo</TextUnit>
+    <TextUnit id="158" loc="159">signat humum, gestit paribus conludere et iram</TextUnit>
+    <TextUnit id="159" loc="160">colligit ac ponit temere et mutatur in horas.</TextUnit>
+    <TextUnit id="160" loc="161">inberbis iuvenis, tandem custode remoto,</TextUnit>
+    <TextUnit id="161" loc="162">gaudet equis canibusque et aprici gramine campi,</TextUnit>
+    <TextUnit id="162" loc="163">cereus in vitium flecti, monitoribus asper,</TextUnit>
+    <TextUnit id="163" loc="164">utilium tardus provisor, prodigus aeris,</TextUnit>
+    <TextUnit id="164" loc="165">sublimis cupidusque et amata relinquere pernix.</TextUnit>
+    <TextUnit id="165" loc="166">conversis studiis aetas animusque virilis</TextUnit>
+    <TextUnit id="166" loc="167">quaerit opes et amicitias, inservit honori,</TextUnit>
+    <TextUnit id="167" loc="168">conmisisse cavet quod mox mutare laboret.</TextUnit>
+    <TextUnit id="168" loc="169">multa senem circumveniunt incommoda, vel quod</TextUnit>
+    <TextUnit id="169" loc="170">quaerit et inventis miser abstinet ac timet uti,</TextUnit>
+    <TextUnit id="170" loc="171">vel quod res omnis timide gelideque ministrat,</TextUnit>
+    <TextUnit id="171" loc="172">dilator, spe longus, iners avidusque futuri,</TextUnit>
+    <TextUnit id="172" loc="173">difficilis, querulus, laudator temporis acti</TextUnit>
+    <TextUnit id="173" loc="174">se puero, castigator censorque minorum.</TextUnit>
+    <TextUnit id="174" loc="175">multa ferunt anni venientes commoda secum,</TextUnit>
+    <TextUnit id="175" loc="176">multa recedentes adimunt: ne forte seniles</TextUnit>
+    <TextUnit id="176" loc="177">mandentur iuveni partes pueroque viriles:</TextUnit>
+    <TextUnit id="177" loc="178">semper in adiunctis aevoque morabitur aptis.</TextUnit>
+    <TextUnit id="178" loc="179">aut agitur res in scaenis aut acta refertur.</TextUnit>
+    <TextUnit id="179" loc="180">segnius inritant animos demissa per aurem</TextUnit>
+    <TextUnit id="180" loc="181">quam quae sunt oculis subiecta fidelibus et quae</TextUnit>
+    <TextUnit id="181" loc="182">ipse sibi tradit spectator: non tamen intus</TextUnit>
+    <TextUnit id="182" loc="183">digna geri promes in scaenam multaque tolles</TextUnit>
+    <TextUnit id="183" loc="184">ex oculis, quae mox narret facundia praesens:</TextUnit>
+    <TextUnit id="184" loc="185">ne pueros coram populo Medea trucidet</TextUnit>
+    <TextUnit id="185" loc="186">aut humana palam coquat exta nefarius atreus</TextUnit>
+    <TextUnit id="186" loc="187">aut in avem Procne vertatur, Cadmus in anguem.</TextUnit>
+    <TextUnit id="187" loc="188">quodcumque ostendis mihi sic, incredulus odi.</TextUnit>
+    <TextUnit id="188" loc="189">neve minor neu sit quinto productior actu</TextUnit>
+    <TextUnit id="189" loc="190">fabula quae posci volt et spectanda reponi.</TextUnit>
+    <TextUnit id="190" loc="191">nec Deus intersit, nisi dignus vindice nodus</TextUnit>
+    <TextUnit id="191" loc="192">inciderit, nec quarta loqui persona laboret.</TextUnit>
+    <TextUnit id="192" loc="193">actoris partis chorus officiumque virile</TextUnit>
+    <TextUnit id="193" loc="194">defendat, neu quid medios intercinat actus</TextUnit>
+    <TextUnit id="194" loc="195">quod non proposito conducat et haereat apte.</TextUnit>
+    <TextUnit id="195" loc="196">ille bonis faveatque et consilietur amice</TextUnit>
+    <TextUnit id="196" loc="197">et regat iratos et amet pacare tumentis,</TextUnit>
+    <TextUnit id="197" loc="198">ille dapes laudet mensae brevis, ille salubrem</TextUnit>
+    <TextUnit id="198" loc="199">iustitiam legesque et apertis otia portis,</TextUnit>
+    <TextUnit id="199" loc="200">ille tegat conmissa Deosque precetur et oret,</TextUnit>
+    <TextUnit id="200" loc="201">ut redeat miseris, abeat fortuna superbis.</TextUnit>
+    <TextUnit id="201" loc="202">tibia non, ut nunc orichalco, vincta tubaeque</TextUnit>
+    <TextUnit id="202" loc="203">aemula, sed tenuis simplexque foramine pauco</TextUnit>
+    <TextUnit id="203" loc="204">adspirare et adesse choris erat utilis atque</TextUnit>
+    <TextUnit id="204" loc="205">nondum spissa nimis complere sedilia flatu;</TextUnit>
+    <TextUnit id="205" loc="206">quo sane populus numerabilis, utpote parvos,</TextUnit>
+    <TextUnit id="206" loc="207">et frugi castusque verecundusque coibat.</TextUnit>
+    <TextUnit id="207" loc="208">postquam coepit agros extendere victor et urbis</TextUnit>
+    <TextUnit id="208" loc="209">latior amplecti murus vinoque diurno</TextUnit>
+    <TextUnit id="209" loc="210">placari Genius festis inpune diebus,</TextUnit>
+    <TextUnit id="210" loc="211">accessit numerisque modisque licentia maior.</TextUnit>
+    <TextUnit id="211" loc="212">indoctus quid enim saperet liberque laborum</TextUnit>
+    <TextUnit id="212" loc="213">rusticus urbano confusus, turpis honesto?</TextUnit>
+    <TextUnit id="213" loc="214">sic priscae motumque et luxuriem addidit arti</TextUnit>
+    <TextUnit id="214" loc="215">tibicen traxitque vagus per pulpita vestem;</TextUnit>
+    <TextUnit id="215" loc="216">sic etiam fidibus voces crevere severis,</TextUnit>
+    <TextUnit id="216" loc="217">et tulit eloquium insolitum facundia praeceps</TextUnit>
+    <TextUnit id="217" loc="218">utiliumque sagax rerum et divina futuri</TextUnit>
+    <TextUnit id="218" loc="219">sortilegis non discrepuit sententia Delphis.</TextUnit>
+    <TextUnit id="219" loc="220">carmine qui tragico vilem certavit ob hircum,</TextUnit>
+    <TextUnit id="220" loc="221">mox etiam agrestis Satyros nudavit et asper</TextUnit>
+    <TextUnit id="221" loc="222">incolumi gravitate iocum temptavit eo quod</TextUnit>
+    <TextUnit id="222" loc="223">inlecebris erat et grata novitate morandus</TextUnit>
+    <TextUnit id="223" loc="224">spectator functusque sacris et potus et exlex.</TextUnit>
+    <TextUnit id="224" loc="225">verum ita risores, ita commendare dicacis</TextUnit>
+    <TextUnit id="225" loc="226">conveniet Satyros, ita vertere seria ludo,</TextUnit>
+    <TextUnit id="226" loc="227">ne, quicumque Deus, quicumque adhibebitur heros,</TextUnit>
+    <TextUnit id="227" loc="228">regali conspectus in auro nuper et ostro,</TextUnit>
+    <TextUnit id="228" loc="229">migret in obscuras humili sermone tabernas</TextUnit>
+    <TextUnit id="229" loc="230">aut, dum vitat humum, nubis et inania captet.</TextUnit>
+    <TextUnit id="230" loc="231">effutire levis indigna tragoedia versus,</TextUnit>
+    <TextUnit id="231" loc="232">ut festis matrona moveri iussa diebus,</TextUnit>
+    <TextUnit id="232" loc="233">intererit Satyris paulum pudibunda protervis.</TextUnit>
+    <TextUnit id="233" loc="234">non ego inornata et dominantia nomina solum</TextUnit>
+    <TextUnit id="234" loc="235">verbaque, Pisones, Satyrorum scriptor amabo</TextUnit>
+    <TextUnit id="235" loc="236">nec sic enitar tragico differre colori,</TextUnit>
+    <TextUnit id="236" loc="237">ut nihil intersit, Davusne loquatur et audax</TextUnit>
+    <TextUnit id="237" loc="238">Pythias, emuncto lucrata Simone talentum,</TextUnit>
+    <TextUnit id="238" loc="239">an custos famulusque Dei Silenus alumni.</TextUnit>
+    <TextUnit id="239" loc="240">ex noto fictum carmen sequar, ut sibi quivis</TextUnit>
+    <TextUnit id="240" loc="241">speret idem, sudet multum frustraque laboret</TextUnit>
+    <TextUnit id="241" loc="242">ausus idem: tantum series iuncturaque pollet,</TextUnit>
+    <TextUnit id="242" loc="243">tantum de medio sumptis accedit honoris.</TextUnit>
+    <TextUnit id="243" loc="244">silvis deducti caveant, me iudice, Fauni,</TextUnit>
+    <TextUnit id="244" loc="245">ne velut innati triviis ac paene forenses.</TextUnit>
+    <TextUnit id="245" loc="246">aut nimium teneris iuvenentur versibus umquam</TextUnit>
+    <TextUnit id="246" loc="247">aut inmunda crepent ignominiosaque dicta.</TextUnit>
+    <TextUnit id="247" loc="248">offenduntur enim, quibus est equus et pater et res,</TextUnit>
+    <TextUnit id="248" loc="249">nec, siquid fricti ciceris probat et nucis emptor,</TextUnit>
+    <TextUnit id="249" loc="250">aequis accipiunt animis donantve corona.</TextUnit>
+    <TextUnit id="250" loc="251">syllaba longa brevi subiecta vocatur Iambus,</TextUnit>
+    <TextUnit id="251" loc="252">pes citus: unde etiam trimetris adcrescere iussit</TextUnit>
+    <TextUnit id="252" loc="253">nomen iambeis, cum senos redderet ictus,</TextUnit>
+    <TextUnit id="253" loc="254">primus ad extremum similis sibi: non ita pridem,</TextUnit>
+    <TextUnit id="254" loc="255">tardior ut paulo graviorque veniret ad auris,</TextUnit>
+    <TextUnit id="255" loc="256">spondeos stabilis in iura paterna recepit</TextUnit>
+    <TextUnit id="256" loc="257">commodus et patiens, non ut de sede secunda</TextUnit>
+    <TextUnit id="257" loc="258">cederet aut quarta socialiter. hic et in Acci</TextUnit>
+    <TextUnit id="258" loc="259">nobilibus trimetris adparet rarus et Enni</TextUnit>
+    <TextUnit id="259" loc="260">in scaenam missos cum magno pondere versus</TextUnit>
+    <TextUnit id="260" loc="261">aut operae celeris nimium curaque carentis</TextUnit>
+    <TextUnit id="261" loc="262">aut ignoratae premit artis crimine turpi.</TextUnit>
+    <TextUnit id="262" loc="263">non quivis videt inmodulata poemata iudex</TextUnit>
+    <TextUnit id="263" loc="264">et data Romanis venia est indigna poetis.</TextUnit>
+    <TextUnit id="264" loc="265">idcircone vager scribamque licenter? an omnis</TextUnit>
+    <TextUnit id="265" loc="266">visuros peccata putem mea, tutus et intra</TextUnit>
+    <TextUnit id="266" loc="267">spem veniae cautus? vitavi denique culpam,</TextUnit>
+    <TextUnit id="267" loc="268">non laudem merui. vos exemplaria Graeca</TextUnit>
+    <TextUnit id="268" loc="269">nocturna versate manu, versate diurna.</TextUnit>
+    <TextUnit id="269" loc="270">at nostri proavi Plautinos et numeros et</TextUnit>
+    <TextUnit id="270" loc="271">laudavere sales, nimium patienter utrumque,</TextUnit>
+    <TextUnit id="271" loc="272">ne dicam stulte, mirati, si modo ego et vos</TextUnit>
+    <TextUnit id="272" loc="273">scimus inurbanum lepido seponere dicto</TextUnit>
+    <TextUnit id="273" loc="274">legitimumque sonum digitis callemus et aure.</TextUnit>
+    <TextUnit id="274" loc="275">ignotum tragicae genus invenisse Camenae</TextUnit>
+    <TextUnit id="275" loc="276">dicitur et plaustris vexisse poemata Thespis,</TextUnit>
+    <TextUnit id="276" loc="277">quae canerent agerentque peruncti faecibus ora.</TextUnit>
+    <TextUnit id="277" loc="278">post hunc personae pallaeque repertor honestae</TextUnit>
+    <TextUnit id="278" loc="279">Aeschylus et modicis instravit pulpita tignis</TextUnit>
+    <TextUnit id="279" loc="280">et docuit magnumque loqui nitique cothurno.</TextUnit>
+    <TextUnit id="280" loc="281">successit vetus his comoedia, non sine multa</TextUnit>
+    <TextUnit id="281" loc="282">laude; sed in vitium libertas excidit et vim</TextUnit>
+    <TextUnit id="282" loc="283">dignam lege regi: lex est accepta chorusque</TextUnit>
+    <TextUnit id="283" loc="284">turpiter obticuit sublato iure nocendi.</TextUnit>
+    <TextUnit id="284" loc="285">nil intemptatum nostri liquere poetae</TextUnit>
+    <TextUnit id="285" loc="286">nec minimum meruere decus vestigia Graeca</TextUnit>
+    <TextUnit id="286" loc="287">ausi deserere et celebrare domestica facta</TextUnit>
+    <TextUnit id="287" loc="288">vel qui praetextas vel qui docuere togatas.</TextUnit>
+    <TextUnit id="288" loc="289">nec virtute foret clarisve potentius armis</TextUnit>
+    <TextUnit id="289" loc="290">quam lingua Latium, si non offenderet unum</TextUnit>
+    <TextUnit id="290" loc="291">quemque poetarum limae labor et mora. vos, o</TextUnit>
+    <TextUnit id="291" loc="292">Pompilius sanguis, carmen reprehendite, quod non</TextUnit>
+    <TextUnit id="292" loc="293">multa dies et multa litura coercuit atque</TextUnit>
+    <TextUnit id="293" loc="294">praesectum deciens non castigavit ad unguem.</TextUnit>
+    <TextUnit id="294" loc="295">ingenium misera quia fortunatius arte</TextUnit>
+    <TextUnit id="295" loc="296">credit et excludit sanos Helicone poetas</TextUnit>
+    <TextUnit id="296" loc="297">Democritus, bona pars non unguis ponere curat,</TextUnit>
+    <TextUnit id="297" loc="298">non barbam, secreta petit loca, balnea vitat.</TextUnit>
+    <TextUnit id="298" loc="299">nanciscetur enim pretium nomenque poetae,</TextUnit>
+    <TextUnit id="299" loc="300">si tribus Anticyris caput insanabile numquam</TextUnit>
+    <TextUnit id="300" loc="301">tonsori Licino conmiserit. o ego laevus,</TextUnit>
+    <TextUnit id="301" loc="302">qui purgor bilem sub verni temporis horam.</TextUnit>
+    <TextUnit id="302" loc="303">non alius faceret meliora poemata; verum</TextUnit>
+    <TextUnit id="303" loc="304">nil tanti est. ergo fungar vice cotis, acutum</TextUnit>
+    <TextUnit id="304" loc="305">reddere quae ferrum valet exsors ipsa secandi;</TextUnit>
+    <TextUnit id="305" loc="306">munus et officium, nil scribens ipse, docebo,</TextUnit>
+    <TextUnit id="306" loc="307">unde parentur opes, quid alat formetque poetam,</TextUnit>
+    <TextUnit id="307" loc="308">quid deceat, quid non, quo virtus, quo ferat error.</TextUnit>
+    <TextUnit id="308" loc="309">scribendi recte sapere est et principium et fons.</TextUnit>
+    <TextUnit id="309" loc="310">rem tibi Socraticae poterunt ostendere chartae</TextUnit>
+    <TextUnit id="310" loc="311">verbaque provisam rem non invita sequentur.</TextUnit>
+    <TextUnit id="311" loc="312">qui didicit, patriae quid debeat et quid amicis,</TextUnit>
+    <TextUnit id="312" loc="313">quo sit amore parens, quo frater amandus et hospes,</TextUnit>
+    <TextUnit id="313" loc="314">quod sit conscripti, quod iudicis officium, quae</TextUnit>
+    <TextUnit id="314" loc="315">partes in bellum missi ducis, ille profecto</TextUnit>
+    <TextUnit id="315" loc="316">reddere personae scit convenientia cuique.</TextUnit>
+    <TextUnit id="316" loc="317">respicere exemplar vitae morumque iubebo</TextUnit>
+    <TextUnit id="317" loc="318">doctum imitatorem et vivas hinc ducere voces.</TextUnit>
+    <TextUnit id="318" loc="319">interdum speciosa locis morataque recte</TextUnit>
+    <TextUnit id="319" loc="320">fabula nullius veneris, sine pondere et arte,</TextUnit>
+    <TextUnit id="320" loc="321">valdius oblectat populum meliusque moratur</TextUnit>
+    <TextUnit id="321" loc="322">quam versus inopes rerum nugaeque canorae.</TextUnit>
+    <TextUnit id="322" loc="323">Graiis ingenium, Graiis dedit ore rotundo</TextUnit>
+    <TextUnit id="323" loc="324">Musa loqui, praeter laudem nullius avaris.</TextUnit>
+    <TextUnit id="324" loc="325">Romani pueri longis rationibus assem</TextUnit>
+    <TextUnit id="325" loc="326">discunt in partis centum diducere. 'dicat</TextUnit>
+    <TextUnit id="326" loc="327">filius Albini: si de quincunce remota est</TextUnit>
+    <TextUnit id="327" loc="328">uncia, quid superat? poteras dixisse.' 'triens.' 'eu,</TextUnit>
+    <TextUnit id="328" loc="329">rem poteris servare tuam. redit uncia, quid fit?'</TextUnit>
+    <TextUnit id="329" loc="330">'semis.' an, haec animos aerugo et cura peculi</TextUnit>
+    <TextUnit id="330" loc="331">cum semel imbuerit, speremus carmina fingi</TextUnit>
+    <TextUnit id="331" loc="332">posse linenda cedro et levi servanda cupresso?</TextUnit>
+    <TextUnit id="332" loc="333">aut prodesse volunt aut delectare poetae</TextUnit>
+    <TextUnit id="333" loc="334">aut simul et iucunda et idonea dicere vitae.</TextUnit>
+    <TextUnit id="334" loc="335">quidquid praecipies, esto brevis, ut cito dicta</TextUnit>
+    <TextUnit id="335" loc="336">percipiant animi dociles teneantque fideles:</TextUnit>
+    <TextUnit id="336" loc="337">omne supervacuum pleno de pectore manat.</TextUnit>
+    <TextUnit id="337" loc="338">ficta voluptatis causa sint proxima veris:</TextUnit>
+    <TextUnit id="338" loc="339">ne quodcumque volet poscat sibi fabula credi</TextUnit>
+    <TextUnit id="339" loc="340">neu pransae Lamiae vivum puerum extrahat alvo.</TextUnit>
+    <TextUnit id="340" loc="341">centuriae seniorum agitant expertia frugis,</TextUnit>
+    <TextUnit id="341" loc="342">celsi praetereunt austera poemata Rhamnes:</TextUnit>
+    <TextUnit id="342" loc="343">omne tulit punctum, qui miscuit utile dulci</TextUnit>
+    <TextUnit id="343" loc="344">lectorem delectando pariterque monendo.</TextUnit>
+    <TextUnit id="344" loc="345">hic meret aera liber Sosiis, hic et mare transit</TextUnit>
+    <TextUnit id="345" loc="346">et longum noto scriptori prorogat aevum.</TextUnit>
+    <TextUnit id="346" loc="347">sunt delicta tamen, quibus ignovisse velimus:</TextUnit>
+    <TextUnit id="347" loc="348">nam neque chorda sonum reddit quem volt manus et mens,</TextUnit>
+    <TextUnit id="348" loc="349">poscentique gravem persaepe remittit acutum,</TextUnit>
+    <TextUnit id="349" loc="350">nec semper feriet quodcumque minabitur arcus.</TextUnit>
+    <TextUnit id="350" loc="351">verum ubi plura nitent in carmine, non ego paucis</TextUnit>
+    <TextUnit id="351" loc="352">offendar maculis, quas aut incuria fudit</TextUnit>
+    <TextUnit id="352" loc="353">aut humana parum cavit natura. quid ergo est?</TextUnit>
+    <TextUnit id="353" loc="354">ut scriptor si peccat idem librarius usque,</TextUnit>
+    <TextUnit id="354" loc="355">quamvis est monitus, venia caret, et citharoedus</TextUnit>
+    <TextUnit id="355" loc="356">ridetur, chorda qui semper oberrat eadem,</TextUnit>
+    <TextUnit id="356" loc="357">sic mihi, qui multum cessat, fit Choerilus ille,</TextUnit>
+    <TextUnit id="357" loc="358">quem bis terve bonum cum risu miror; et idem</TextUnit>
+    <TextUnit id="358" loc="359">indignor, quandoque bonus dormitat Homerus;</TextUnit>
+    <TextUnit id="359" loc="360">verum operi longo fas est obrepere somnum.</TextUnit>
+    <TextUnit id="360" loc="361">ut pictura poesis: erit quae, si propius stes,</TextUnit>
+    <TextUnit id="361" loc="362">te capiat magis, et quaedam, si longius abstes;</TextUnit>
+    <TextUnit id="362" loc="363">haec amat obscurum, volet haec sub luce videri,</TextUnit>
+    <TextUnit id="363" loc="364">iudicis argutum quae non formidat acumen;</TextUnit>
+    <TextUnit id="364" loc="365">haec placuit semel, haec deciens repetita placebit.</TextUnit>
+    <TextUnit id="365" loc="366">o maior iuvenum, quamvis et voce paterna</TextUnit>
+    <TextUnit id="366" loc="367">fingeris ad rectum et per te sapis, hoc tibi dictum</TextUnit>
+    <TextUnit id="367" loc="368">tolle memor, certis medium et tolerabile rebus</TextUnit>
+    <TextUnit id="368" loc="369">recte concedi: consultus iuris et actor</TextUnit>
+    <TextUnit id="369" loc="370">causarum mediocris abest virtute diserti</TextUnit>
+    <TextUnit id="370" loc="371">Messallae nec scit quantum Cascellius Aulus,</TextUnit>
+    <TextUnit id="371" loc="372">sed tamen in pretio est: mediocribus esse poetis</TextUnit>
+    <TextUnit id="372" loc="373">non homines, non Di, non concessere columnae.</TextUnit>
+    <TextUnit id="373" loc="374">ut gratas inter mensas symphonia discors</TextUnit>
+    <TextUnit id="374" loc="375">et crassum unguentum et Sardo cum melle papaver</TextUnit>
+    <TextUnit id="375" loc="376">offendunt, poterat duci quia cena sine istis:</TextUnit>
+    <TextUnit id="376" loc="377">sic animis natum inventumque poema iuvandis,</TextUnit>
+    <TextUnit id="377" loc="378">si paulum summo decessit, vergit ad imum.</TextUnit>
+    <TextUnit id="378" loc="379">ludere qui nescit, campestribus abstinet armis</TextUnit>
+    <TextUnit id="379" loc="380">indoctusque pilae discive trochive quiescit,</TextUnit>
+    <TextUnit id="380" loc="381">ne spissae risum tollant inpune coronae:</TextUnit>
+    <TextUnit id="381" loc="382">qui nescit versus, tamen audet fingere. quidni?</TextUnit>
+    <TextUnit id="382" loc="383">liber et ingenuus, praesertim census equestrem</TextUnit>
+    <TextUnit id="383" loc="384">summam nummorum vitioque remotus ab omni.</TextUnit>
+    <TextUnit id="384" loc="385">tu nihil invita dices faciesve Minerva:</TextUnit>
+    <TextUnit id="385" loc="386">id tibi iudicium est, ea mens. siquid tamen olim</TextUnit>
+    <TextUnit id="386" loc="387">scripseris, in Meti descendat iudicis auris</TextUnit>
+    <TextUnit id="387" loc="388">et patris et nostras nonumque prematur in annum</TextUnit>
+    <TextUnit id="388" loc="389">membranis intus positis: delere licebit,</TextUnit>
+    <TextUnit id="389" loc="390">quod non edideris, nescit vox missa reverti.</TextUnit>
+    <TextUnit id="390" loc="391">silvestris homines sacer interpresque Deorum</TextUnit>
+    <TextUnit id="391" loc="392">caedibus et victu foedo deterruit Orpheus,</TextUnit>
+    <TextUnit id="392" loc="393">dictus ob hoc lenire tigres rabidosque leones;</TextUnit>
+    <TextUnit id="393" loc="394">dictus et Amphion, Thebanae conditor urbis,</TextUnit>
+    <TextUnit id="394" loc="395">saxa movere sono testudinis et prece blanda</TextUnit>
+    <TextUnit id="395" loc="396">ducere quo vellet. fuit haec sapientia quondam,</TextUnit>
+    <TextUnit id="396" loc="397">publica privatis secernere, sacra profanis,</TextUnit>
+    <TextUnit id="397" loc="398">concubitu prohibere vago, dare iura maritis,</TextUnit>
+    <TextUnit id="398" loc="399">oppida moliri, leges incidere ligno.</TextUnit>
+    <TextUnit id="399" loc="400">sic honor et nomen divinis vatibus atque</TextUnit>
+    <TextUnit id="400" loc="401">carminibus venit. post hos insignis Homerus</TextUnit>
+    <TextUnit id="401" loc="402">Tyrtaeusque mares animos in Martia bella</TextUnit>
+    <TextUnit id="402" loc="403">versibus exacuit; dictae per carmina sortes</TextUnit>
+    <TextUnit id="403" loc="404">et vitae monstrata via est et gratia regum</TextUnit>
+    <TextUnit id="404" loc="405">Pieriis temptata modis ludusque repertus</TextUnit>
+    <TextUnit id="405" loc="406">et longorum operum finis: ne forte pudori</TextUnit>
+    <TextUnit id="406" loc="407">sit tibi Musa lyrae sollers et cantor Apollo.</TextUnit>
+    <TextUnit id="407" loc="408">natura fieret laudabile carmen an arte,</TextUnit>
+    <TextUnit id="408" loc="409">quaesitum est: ego nec studium sine divite vena</TextUnit>
+    <TextUnit id="409" loc="410">nec rude quid prosit video ingenium: alterius sic</TextUnit>
+    <TextUnit id="410" loc="411">altera poscit opem res et coniurat amice.</TextUnit>
+    <TextUnit id="411" loc="412">qui studet optatam cursu contingere metam,</TextUnit>
+    <TextUnit id="412" loc="413">multa tulit fecitque puer, sudavit et alsit,</TextUnit>
+    <TextUnit id="413" loc="414">abstinuit venere et vino; qui Pythia cantat</TextUnit>
+    <TextUnit id="414" loc="415">tibicen, didicit prius extimuitque magistrum.</TextUnit>
+    <TextUnit id="415" loc="416">nunc satis est dixisse 'ego mira poemata pango;</TextUnit>
+    <TextUnit id="416" loc="417">occupet extremum scabies; mihi turpe relinqui est</TextUnit>
+    <TextUnit id="417" loc="418">et quod non didici sane nescire fateri'.</TextUnit>
+    <TextUnit id="418" loc="419">ut praeco, ad merces turbam qui cogit emendas,</TextUnit>
+    <TextUnit id="419" loc="420">adsentatores iubet ad lucrum ire poeta</TextUnit>
+    <TextUnit id="420" loc="421">dives agris, dives positis in fenore nummis.</TextUnit>
+    <TextUnit id="421" loc="422">si vero est, unctum qui recte ponere possit</TextUnit>
+    <TextUnit id="422" loc="423">et spondere levi pro paupere et eripere artis</TextUnit>
+    <TextUnit id="423" loc="424">litibus inplicitum, mirabor, si sciet inter-</TextUnit>
+    <TextUnit id="424" loc="425">noscere mendacem verumque beatus amicum.</TextUnit>
+    <TextUnit id="425" loc="426">tu seu donaris seu quid donare voles cui,</TextUnit>
+    <TextUnit id="426" loc="427">nolito ad versus tibi factos ducere plenum</TextUnit>
+    <TextUnit id="427" loc="428">laetitiae; clamabit enim 'pulchre! bene! recte!'</TextUnit>
+    <TextUnit id="428" loc="429">pallescet, super his etiam stillabit amicis</TextUnit>
+    <TextUnit id="429" loc="430">ex oculis rorem, saliet, tundet pede terram.</TextUnit>
+    <TextUnit id="430" loc="431">ut, qui conducti plorant in funere, dicunt</TextUnit>
+    <TextUnit id="431" loc="432">et faciunt prope plura dolentibus ex animo, sic</TextUnit>
+    <TextUnit id="432" loc="433">derisor vero plus laudatore movetur.</TextUnit>
+    <TextUnit id="433" loc="434">reges dicuntur multis urgere culillis</TextUnit>
+    <TextUnit id="434" loc="435">et torquere mero, quem perspexisse laborent</TextUnit>
+    <TextUnit id="435" loc="436">an sit amicitia dignus; si carmina condes,</TextUnit>
+    <TextUnit id="436" loc="437">numquam te fallent animi sub vulpe latentes.</TextUnit>
+    <TextUnit id="437" loc="438">Quintilio siquid recitares, 'corrige sodes</TextUnit>
+    <TextUnit id="438" loc="439">hoc' aiebat 'et hoc'. mulius te posse negares</TextUnit>
+    <TextUnit id="439" loc="440">bis terque expertum frustra: delere iubebat</TextUnit>
+    <TextUnit id="440" loc="441">et male tornatos incudi reddere versus.</TextUnit>
+    <TextUnit id="441" loc="442">si defendere delictum quam vertere malles,</TextUnit>
+    <TextUnit id="442" loc="443">nullum ultra verbum aut operam insumebat inanem,</TextUnit>
+    <TextUnit id="443" loc="444">quin sine rivali teque et tua solus amares.</TextUnit>
+    <TextUnit id="444" loc="445">vir bonus et prudens versus reprehendet inertis,</TextUnit>
+    <TextUnit id="445" loc="446">culpabit duros, incomptis adlinet atrum</TextUnit>
+    <TextUnit id="446" loc="447">transverso calamo signum, ambitiosa recidet</TextUnit>
+    <TextUnit id="447" loc="448">ornamenta, parum claris lucem dare coget,</TextUnit>
+    <TextUnit id="448" loc="449">arguet ambigue dictum, mutanda notabit:</TextUnit>
+    <TextUnit id="449" loc="450">fiet Aristarchus; non dicet 'cur ego amicum</TextUnit>
+    <TextUnit id="450" loc="451">offendam in nugis?' hae nugae seria ducent</TextUnit>
+    <TextUnit id="451" loc="452">in mala derisum semel exceptumque sinistre.</TextUnit>
+    <TextUnit id="452" loc="453">ut mala quem scabies aut morbus regius urget</TextUnit>
+    <TextUnit id="453" loc="454">aut fanaticus error et iracunda Diana,</TextUnit>
+    <TextUnit id="454" loc="455">vesanum tetigisse timent fugiuntque poetam</TextUnit>
+    <TextUnit id="455" loc="456">qui sapiunt, agitant pueri incautique sequuntur.</TextUnit>
+    <TextUnit id="456" loc="457">hic, dum sublimis versus ructatur et errat,</TextUnit>
+    <TextUnit id="457" loc="458">si veluti merulis intentus decidit auceps</TextUnit>
+    <TextUnit id="458" loc="459">in puteum foveamve, licet 'succurrite' longum</TextUnit>
+    <TextUnit id="459" loc="460">clamet, 'io cives', non sit qui tollere curet.</TextUnit>
+    <TextUnit id="460" loc="461">si curet quis opem ferre et demittere funem,</TextUnit>
+    <TextUnit id="461" loc="462">'qui scis, an prudens huc se deiecerit atque</TextUnit>
+    <TextUnit id="462" loc="463">servari nolit?' dicam siculique poetae</TextUnit>
+    <TextUnit id="463" loc="464">narrabo interitum. 'Deus inmortalis haberi</TextUnit>
+    <TextUnit id="464" loc="465">dum cupit Empedocles, ardentem frigidus Aetnam</TextUnit>
+    <TextUnit id="465" loc="466">insiluit. sit ius liceatque perire poetis:</TextUnit>
+    <TextUnit id="466" loc="467">invitum qui servat, idem facit occidenti.</TextUnit>
+    <TextUnit id="467" loc="468">nec semel hoc fecit nec, si retractus erit, iam</TextUnit>
+    <TextUnit id="468" loc="469">fiet homo et ponet famosae mortis amorem.</TextUnit>
+    <TextUnit id="469" loc="470">nec satis adparet, cur versus factitet, utrum</TextUnit>
+    <TextUnit id="470" loc="471">minxerit in patrios cineres an triste bidental</TextUnit>
+    <TextUnit id="471" loc="472">moverit incestus: certe furit ac velut ursus,</TextUnit>
+    <TextUnit id="472" loc="473">obiectos caveae valuit si frangere clatros,</TextUnit>
+    <TextUnit id="473" loc="474">indoctum doctumque fugat recitator acerbus;</TextUnit>
+    <TextUnit id="474" loc="475">quem vero arripuit, tenet occiditque legendo,</TextUnit>
+    <TextUnit id="475" loc="476">non missura cutem, nisi plena cruoris, hirudo.'</TextUnit>
+  </Text>
+</TessDocument>

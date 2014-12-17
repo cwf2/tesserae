@@ -443,21 +443,12 @@ END
 
 unless (@features) { @features = ("word") }
 
-#
 # force unit=phrase if either work is prose
-#
-# Note: This is a hack!  Fix later!!
 
-if (Tesserae::check_prose_list($target) or Tesserae::check_prose_list($source)) {
+if (Tesserae::metadata_get($target, "Prose") or Tesserae::metadata_get($source, "Prose")) {
 
 	$unit = 'phrase';
 }
-
-# assume unicode text names are utf8,
-# whether input via cmd line or cgi
-
-# $target = decode('utf8', $target);
-# $source = decode('utf8', $source);
 
 # if user selected 'feature' as score basis,
 # set it to whatever the feature is
@@ -473,12 +464,12 @@ unless ($quiet) {
 
 	print STDERR "target=$target\n";
 	print STDERR "source=$source\n";
-	# print STDERR "mask_target_lower=$mask_target_lower\n";
-	# print STDERR "mask_target_upper=$mask_target_upper\n";
-	# print STDERR "mask_source_lower=$mask_source_lower\n";
-	# print STDERR "mask_source_upper=$mask_source_upper\n";
-	print STDERR "lang(target)=" . Tesserae::lang($target) . ";\n";
-	print STDERR "lang(source)=" . Tesserae::lang($source) . ";\n";
+	print STDERR "mask_target_lower=$mask_target_lower\n";
+	print STDERR "mask_target_upper=$mask_target_upper\n";
+	print STDERR "mask_source_lower=$mask_source_lower\n";
+	print STDERR "mask_source_upper=$mask_source_upper\n";
+	print STDERR "lang(target)=" . Tesserae::metadata_get($target, "Lang") . ";\n";
+	print STDERR "lang(source)=" . Tesserae::metadata_get($source, "Lang") . ";\n";
 	for my $feature (@features) {
 		print STDERR "feature=$feature\n";		
 	}
@@ -498,14 +489,14 @@ unless ($quiet) {
 
 my %freq;
 
-for my $name ($source, $target) {
+for my $text_id ($source, $target) {
 	
 	my @f = @features;
 	unless (grep {/$_ eq "word"/} @f) { push @f, "word" }
 	
 	for my $feature (@f) {
-		my $file_freq = select_file_freq($name) . ".freq_score_" . $score_basis;
-		$freq{$name}{$feature} = Tesserae::stoplist_hash($file_freq);
+		my $file_freq = select_file_freq($text_id) . ".freq_score_" . $score_basis;
+		$freq{$text_id}{$feature} = Tesserae::stoplist_hash($file_freq);
 	}
 }
 
@@ -521,7 +512,7 @@ unless ($quiet) {
 	print STDERR "reading source data\n";
 }
 
-my $file_source = catfile($fs{data}, 'v3', Tesserae::lang($source), $source, $source);
+my $file_source = catfile($fs{data}, 'v3', Tesserae::metadata_get($source, "Lang"), $source, $source);
 
 my @token_source   = @{ retrieve("$file_source.token") };
 my @unit_source    = @{ retrieve("$file_source.$unit") };
@@ -534,7 +525,7 @@ unless ($quiet) {
 	print STDERR "reading target data\n";
 }
 
-my $file_target = catfile($fs{data}, 'v3', Tesserae::lang($target), $target, $target);
+my $file_target = catfile($fs{data}, 'v3', Tesserae::metadata_get($target, "Lang"), $target, $target);
 
 my @token_target   = @{ retrieve("$file_target.token") };
 my @unit_target    = @{ retrieve("$file_target.$unit") };
@@ -781,6 +772,10 @@ my %match_meta = (
 	SOURCE    => $source,
 	TARGET    => $target,
 	UNIT      => $unit,
+	MTU       => $mask_target_upper,
+	MTL       => $mask_target_lower,
+	MSU       => $mask_source_upper,
+	MSL       => $mask_source_lower,
 	FEATURE   => join(":", @features),
 	STOP      => $stopwords,
 	STOPLIST  => [map {(@{$stoplist{$_}})} keys %stoplist],
@@ -990,33 +985,6 @@ sub load_stoplist {
 	return \@stoplist;
 }
 
-sub exact_match {
-
-	my ($ref_target, $ref_source) = @_[0,1];
-
-	my @target_id = keys %$ref_target;
-	my @source_id = keys %$ref_source;
-	
-	my @ttokens;
-	my @stokens;
-		
-	for (@target_id) {
-	
-		push @ttokens, $token_target[$_]{FORM};
-	}
-	
-	for (@source_id) {
-		push @stokens, $token_source[$_]{FORM};
-	}
-	
-	@ttokens = @{Tesserae::uniq(\@ttokens)};
-	@stokens = @{Tesserae::uniq(\@ttokens)};
-	
-	my @exact_match = @{Tesserae::intersection(\@ttokens, \@stokens)};
-	
-	return scalar(@exact_match);
-}
-
 sub score_default {
 	
 	my ($match_t_ref, $match_s_ref, $distance) = @_;
@@ -1096,26 +1064,15 @@ sub write_multi_list {
 
 sub select_file_freq {
 
-	my $name = shift;
+	my $id = shift;
 	
-	if ($name =~ /\.part\./) {
-	
-		my $origin = $name;
-		$origin =~ s/\.part\..*//;
-		
-		if (defined Tesserae::lang($origin)) {
-		
-			$name = $origin;
-		}
-	}
-	
-	my $lang = Tesserae::lang($name);
+	my $lang = Tesserae::metadata_get($id, "Lang");
 	my $file_freq = catfile(
 		$fs{data}, 
 		'v3', 
 		$lang, 
-		$name, 
-		$name
+		$id, 
+		$id
 	);
 	
 	return $file_freq;

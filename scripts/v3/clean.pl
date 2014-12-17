@@ -140,12 +140,14 @@ my $quiet = 0;
 
 my %clean = (
 	text => 0,
-	dict => 0
-			 );
+	dict => 0,
+	db   => 0
+);
 			
 GetOptions( 
 	"text"  => \$clean{text}, 
 	"dict"  => \$clean{dict},
+	"db"    => \$clean{db},
 	"quiet" => \$quiet,
 	"help"  => \$help );
 
@@ -199,4 +201,11 @@ if ($clean{dict}) {
 
 		unlink glob(catfile($fs{data}, 'common', $_ . '.*.cache'));
 	}
+}
+
+# remove database
+
+if ($clean{db}) {
+	
+	unlink catfile($fs{data}, "common", "corpus.db");
 }

@@ -99,6 +99,20 @@ my %feature_override = (
 	'porter' => \&porter
 );
 
+# metadata fields for texts
+
+our @metadata_fields_texts = qw/
+	Author
+	Display
+	Abbr
+	Lang
+	Prose
+	PrintSource
+	DigitalSourceDisplay
+	DigitalSourceURL
+	URI	
+	AddedBy
+	/;
 
 # cache for feature lookup
 
@@ -512,26 +526,7 @@ sub check_prose_list {
 
 	my $name = shift;
 	
-	return metadata_get($name, 'prose');
-		
-	# my $file_prose_list = catfile($fs{text}, 'prose_list');
-	#
-	# return 0 unless (-s $file_prose_list);
-	#
-	# open (FH, '<:utf8', $file_prose_list) or die "can't read $file_prose_list";
-	#
-	# while (my $line = <FH>) {
-	#
-	# 	chomp $line;
-	#
-	# 	$line =~ s/#.*//;
-	#
-	# 	next unless $line =~ /\S/;
-	#
-	# 	return 1 if $name =~ /$line/;
-	# }
-	#
-	# return 0;
+	return metadata_get($name, 'prose');		
 }
 
 
@@ -608,33 +603,16 @@ sub text_sort {
 
 sub lang {
 	
-	my ($name, $lang) = @_;
+	my ($id, $lang) = @_;
 	
 	my $dbh = metadata_dbh();
 	
 	if ($lang) {
 		
-		metadata_set($name, 'lang', $lang, $dbh);
+		metadata_set($id, 'Lang', $lang, $dbh);
 	}
 	
-	return metadata_get($name, 'lang', $dbh);
-	
-	# my $file_lang = catfile($fs{data}, 'common', 'lang');
-	#
-	# if (! %lang and -s $file_lang) {
-	#
-	# 	%lang = %{retrieve($file_lang)};
-	# }
-	#
-	# if ($lang) {
-	#
-	# 	$lang{$text} = $lang;
-	# 	nstore \%lang, $file_lang;
-	#
-	# 	metadata_set($text, 'lang', $lang);
-	# }
-	#
-	# return $lang{$text};
+	return metadata_get($id, 'Lang', $dbh);
 }
 
 # check the feature dictionary
@@ -949,13 +927,13 @@ sub escape_path {
 }
 
 sub metadata_get {
-	my ($name, $field, $dbh_open) = @_;
+	my ($id, $field, $dbh_open) = @_;
 	
 	my $dbh = $dbh_open || metadata_dbh();
 
 	my $value;
 
-	my $res = $dbh->selectrow_arrayref("select $field from $metadata_db_table where name=\"$name\";");
+	my $res = $dbh->selectrow_arrayref("select $field from $metadata_db_table where id=\"$id\";");
 	
 	if ($res) {
 		$value = $res->[0];
@@ -965,13 +943,11 @@ sub metadata_get {
 }
 
 sub metadata_set {
-	my ($name, $field, $value, $dbh_open) = @_;
-
-	$name =~ s/\.part\..*//;
+	my ($id, $field, $value, $dbh_open) = @_;
 
 	my $dbh = $dbh_open || metadata_dbh();
 	
-	$dbh->do("update $metadata_db_table set $field=\"$value\" where name=\"$name\";");
+	$dbh->do("update $metadata_db_table set $field=\"$value\" where id=\"$id\";");
 }
 
 sub metadata_textlist {
@@ -989,7 +965,7 @@ sub metadata_textlist {
 		}
 	}
 	
-	my $sql = "select name from texts" . $where_clause . ";";
+	my $sql = "select id from texts" . $where_clause . ";";
 	
 	my $ref = $dbh->selectcol_arrayref($sql);
 	return $ref;
@@ -1006,31 +982,37 @@ sub metadata_init {
 	my $dbh = metadata_dbh();
 	
 	db_create_table($dbh, 'texts', [
-		'name varchar(128) unique',
-		'display varchar(80)',
-		'author varchar(40)',
-		'lang char(3)',
-		'abbr varchar(24)',
-		'prose int',
+		'id varchar(128) unique',
+		'Display varchar(80)',
+		'Author varchar(40)',
+		'Lang char(3)',
+		'Abbr varchar(24)',
+		'Prose int',
+		'PrintSource varchar(256)',
+		'DigitalSourceDisplay varchar(24)',
+		'DigitalSourceURL varchar(128)',
+		'URI varchar(80)',
+		'AddedBy varchar(24)',
 		'feat_word int']
 	);
 	
 	# table for recording searchable sub-text units
 
 	db_create_table($dbh, 'parts', [
-		'name varchar(128) unique',
-		'sort int',
-		'display varchar(24)',
-		'mask_lower int',
-		'mask_upper int',
-		'fulltext varchar(128)']
+		'id int unique',
+		'Display varchar(24)',
+		'MaskLower int',
+		'MaskUpper int',
+		'TextId varchar(128)']
 	);
 
 	# table for recording author data
 
 	db_create_table($dbh, "authors", [
-		'author varchar(40) unique',
-		'display varchar(24)']
+		'id varchar(40) unique',
+		'Display varchar(24)',
+		'Birth int',
+		'Death int']
 	);
 }
 

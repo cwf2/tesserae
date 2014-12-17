@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TessDocument id="aeschylus.suppliant_women">
+  <Metadata>
+    <Author>aeschylus</Author>
+    <Display>Suppliant Women</Display>
+    <Abbr>aesch. supp.</Abbr>
+    <Lang>grc</Lang>
+    <Prose>0</Prose>
+    <PrintSource>Herbert Weir Smyth, Ph.D., Aeschylus, with an English translation by Herbert Weir Smyth, Ph. D. in two volumes.. Cambridge: Cambridge, Mass., Harvard University Press; London, William Heinemann, Ltd., 1926.</PrintSource>
+    <DigitalSourceDisplay>Perseus</DigitalSourceDisplay>
+    <DigitalSourceURL>http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3atext%3a1999.01.0005</DigitalSourceURL>
+    <AddedBy>Anna Glenn</AddedBy>
+    <URI>urn:cts:greekLit:tlg0085.tlg007.perseus-grc1</URI>
+  </Metadata>
+  <Text>
+    <TextUnit id="0" loc="1">Ζεὺς μὲν ἀφίκτωρ ἐπίδοι προφρόνως</TextUnit>
+    <TextUnit id="1" loc="2">στόλον ἡμέτερον νάιον ἀρθέντ'</TextUnit>
+    <TextUnit id="2" loc="3">ἀπὸ προστομίων λεπτοψαμάθων</TextUnit>
+    <TextUnit id="3" loc="4">Νείλου. Δίαν δὲ λιποῦσαι</TextUnit>
+    <TextUnit id="4" loc="5">χθόνα σύγχορτον Συρίᾳ φεύγομεν,</TextUnit>
+    <TextUnit id="5" loc="6">οὔτιν' ἐφ' αἵματι δημηλασίαν</TextUnit>
+    <TextUnit id="6" loc="7">ψήφῳ πόλεως γνωσθεῖσαν,</TextUnit>
+    <TextUnit id="7" loc="8">ἀλλ' αὐτογενεῖ φυξανορίᾳ</TextUnit>
+    <TextUnit id="8" loc="9">γάμον Αἰγύπτου παίδων ἀσεβῆ</TextUnit>
+    <TextUnit id="9" loc="10">'ξονοταζόμεναι.</TextUnit>
+    <TextUnit id="10" loc="11">Δαναὸς δὲ πατὴρ καὶ βούλαρχος</TextUnit>
+    <TextUnit id="11" loc="12">καὶ στασίαρχος τάδε πεσσονομῶν</TextUnit>
+    <TextUnit id="12" loc="13">κύδιστ' ἀχέων ἐπέκρανε,</TextUnit>
+    <TextUnit id="13" loc="14">φεύγειν ἀνέδην διὰ κῦμ' ἅλιον,</TextUnit>
+    <TextUnit id="14" loc="15">κέλσαι δ' ̓́Αργους γαῖαν, ὅθεν δὴ</TextUnit>
+    <TextUnit id="15" loc="16">γένος ἡμέτερον τῆς οἰστροδόνου</TextUnit>
+    <TextUnit id="16" loc="17">βοὸς ἐξ ἐπαφῆς κἀξ ἐπιπνοίας</TextUnit>
+    <TextUnit id="17" loc="18">Διὸς εὐχόμενον τετέλεσται.</TextUnit>
+    <TextUnit id="18" loc="19">τίν' ἂν οὖν χώραν εὔφρονα μᾶλλον</TextUnit>
+    <TextUnit id="19" loc="20">τῆσδ' ἀφικοίμεθα</TextUnit>
+    <TextUnit id="20" loc="21">σὺν τοῖσδ' ἱκετῶν ἐγχειριδίοις</TextUnit>
+    <TextUnit id="21" loc="22">ἐριοστέπτοισι κλάδοισιν;</TextUnit>
+    <TextUnit id="22" loc="23">ὦ πόλις, ὦ γῆ, καὶ λευκὸν ὕδωρ,</TextUnit>
+    <TextUnit id="23" loc="24">ὕπατοί τε θεοί, καὶ βαρύτιμοι</TextUnit>
+    <TextUnit id="24" loc="25">χθόνιοι θήκας κατέχοντες,</TextUnit>
+    <TextUnit id="25" loc="26">καὶ Ζεὺς σωτὴρ τρίτος, οἰκοφύλαξ</TextUnit>
+    <TextUnit id="26" loc="27">ὁσίων ἀνδρῶν, δέξασθ' ἱκέτην</TextUnit>
+    <TextUnit id="27" loc="28">τὸν θηλυγενῆ στόλον αἰδοίῳ</TextUnit>
+    <TextUnit id="28" loc="29">πνεύματι χώρας: ἀρσενοπληθῆ δ'</TextUnit>
+    <TextUnit id="29" loc="30">ἑσμὸν ὑβριστὴν Αἰγυπτογενῆ,</TextUnit>
+    <TextUnit id="30" loc="31">πρὶν πόδα χέρσῳ τῆ δ' ἐν ἀσώδει</TextUnit>
+    <TextUnit id="31" loc="32">θεῖναι, ξὺν ὄχῳ ταχυήρει</TextUnit>
+    <TextUnit id="32" loc="33">πέμψατε πόντονδ': ἔνθα δὲ λαίλαπι</TextUnit>
+    <TextUnit id="33" loc="34">χειμωνοτύπῳ, βροντῇ στεροπῇ τ'</TextUnit>
+    <TextUnit id="34" loc="35">ὀμβροφόροισίν τ' ἀνέμοις ἀγρίας</TextUnit>
+    <TextUnit id="35" loc="36">ἁλὸς ἀντήσαντες, ὄλοιντο,</TextUnit>
+    <TextUnit id="36" loc="37">πρίν ποτε λέκτρων, ὧν θέμις εἴργει,</TextUnit>
+    <TextUnit id="37" loc="38">σφετεριξάμενοι πατραδέλφειαν</TextUnit>
+    <TextUnit id="38" loc="39">τήνδ' ἀεκόντων ἐπιβῆναι.</TextUnit>
+    <TextUnit id="39" loc="40">νῦν δ' ἐπικεκλομένα</TextUnit>
+    <TextUnit id="40" loc="41">Δῖον πόρτιν ὑπερ-</TextUnit>
+    <TextUnit id="41" loc="42">πόντιον τιμάορ', ἶνίν τ'</TextUnit>
+    <TextUnit id="42" loc="43">ἀνθονομούσας προγόνου</TextUnit>
+    <TextUnit id="43" loc="44">βοὸς ἐξ ἐπιπνοίας</TextUnit>
+    <TextUnit id="44" loc="45">Ζηνὸς ἔφαψιν: ἐπωνυμίᾳ δ'</TextUnit>
+    <TextUnit id="45" loc="46">ἐπεκραίνετο μόρσιμος αἰὼν</TextUnit>
+    <TextUnit id="46" loc="47">εὐλόγως,</TextUnit>
+    <TextUnit id="47" loc="48">̓́Επαφόν τ' ἐγέννασεν:</TextUnit>
+    <TextUnit id="48" loc="49">ὅντ' ἐπιλεξαμένα,</TextUnit>
+    <TextUnit id="49" loc="50">νῦν ἐν ποιονόμοις</TextUnit>
+    <TextUnit id="50" loc="51">ματρὸς ἀρχαίας τόποις τῶν</TextUnit>
+    <TextUnit id="51" loc="52">πρόσθε πόνων μνασαμένα,</TextUnit>
+    <TextUnit id="52" loc="53">τά τε νῦν ἐπιδείξω</TextUnit>
+    <TextUnit id="53" loc="54">πιστὰ τεκμήρια γαιονόμοις,</TextUnit>
+    <TextUnit id="54" loc="55">τὰ δ' ἄελπτά περ ὄντα φανεῖται.</TextUnit>
+    <TextUnit id="55" loc="56">γνώσεται</TextUnit>
+    <TextUnit id="56" loc="57">δὲ λόγους τις ἐν μάκει.</TextUnit>
+    <TextUnit id="57" loc="58">εἰ δὲ κυρεῖ τις πέλας οἰωνοπόλων</TextUnit>
+    <TextUnit id="58" loc="59">ἔγγαιος οἶκτον οἰκτρὸν ἀίων,</TextUnit>
+    <TextUnit id="59" loc="60">δοξάσει τις ἀκούειν ὄπα τᾶς Τηρεί̈ας</TextUnit>
+    <TextUnit id="60" loc="61">Μήτιδος οἰκτρᾶς ἀλόχου,</TextUnit>
+    <TextUnit id="61" loc="62">κιρκηλάτου τ' ἀηδόνος,</TextUnit>
+    <TextUnit id="62" loc="63">ἅτ' ἀπὸ χλωρῶν πετάλων ἐργομένα</TextUnit>
+    <TextUnit id="63" loc="64">πενθεῖ μὲν οἶκτον ἠθέων:</TextUnit>
+    <TextUnit id="64" loc="65">ξυντίθησι δὲ παιδὸς μόρον, ὡς αὐτοφόνως</TextUnit>
+    <TextUnit id="65" loc="66">ὤλετο πρὸς χειρὸς ἕθεν</TextUnit>
+    <TextUnit id="66" loc="67">δυσμάτορος κότου τυχών:</TextUnit>
+    <TextUnit id="67" loc="68">τὼς καὶ ἐγὼ φιλόδυρ-</TextUnit>
+    <TextUnit id="68" loc="69">τος ̓Ιαονίοισι νόμοισι</TextUnit>
+    <TextUnit id="69" loc="70">δάπτω τὰν ἁπαλὰν</TextUnit>
+    <TextUnit id="70" loc="71">Νειλοθερῆ παρειὰν</TextUnit>
+    <TextUnit id="71" loc="72">ἀπειρόδακρύν τε καρδίαν.</TextUnit>
+    <TextUnit id="72" loc="73">γοεδνὰ δ' ἀνθεμίζομαι</TextUnit>
+    <TextUnit id="73" loc="74">δειμαίνουσα φίλους, τᾶσδε φυγᾶς</TextUnit>
+    <TextUnit id="74" loc="75">ἀερίας ἀπὸ γᾶς</TextUnit>
+    <TextUnit id="75" loc="76">εἴ τις ἐστὶ κηδεμών.</TextUnit>
+    <TextUnit id="76" loc="77">ἀλλά, θεοὶ γενέται</TextUnit>
+    <TextUnit id="77" loc="78">κλύετ' εὖ τὸ δίκαιον ἰδόντες:</TextUnit>
+    <TextUnit id="78" loc="79">ἥβᾳ μὴ τέλεον</TextUnit>
+    <TextUnit id="79" loc="80">δόντες ἔχειν παρ' αἶσαν,</TextUnit>
+    <TextUnit id="80" loc="81">ὕβριν δ' ἑτοίμως στυγοῦντες,</TextUnit>
+    <TextUnit id="81" loc="82">πέλοιτ' ἂν ἔνδικοι γάμοις.</TextUnit>
+    <TextUnit id="82" loc="83">ἔστι δὲ κἀκ πολέμου τειρομένοις</TextUnit>
+    <TextUnit id="83" loc="84">βωμὸς ἀρῆς φυγάσιν</TextUnit>
+    <TextUnit id="84" loc="85">ῥῦμα, δαιμόνων σέβας.</TextUnit>
+    <TextUnit id="85" loc="86">εὖ δ' εἴη Διόθεν παναληθῶς.</TextUnit>
+    <TextUnit id="86" loc="87">Διὸς ἵμερος οὐκ εὐθήρατος ἐτύχθη.</TextUnit>
+    <TextUnit id="87" loc="88">παντᾷ τοι φλεγέθει</TextUnit>
+    <TextUnit id="88" loc="89">κἀν σκότῳ μελαίνᾳ ξὺν τύχᾳ</TextUnit>
+    <TextUnit id="89" loc="90">μερόπεσσι λαοῖς.</TextUnit>
+    <TextUnit id="90" loc="91">πίπτει δ' ἀσφαλὲς οὐδ' ἐπὶ νώτῳ,</TextUnit>
+    <TextUnit id="91" loc="92">κορυφᾷ Διὸς εἰ κρανθῇ , πρᾶγμα τέλειον.</TextUnit>
+    <TextUnit id="92" loc="93">δαυλοὶ γὰρ πραπίδων</TextUnit>
+    <TextUnit id="93" loc="94">δάσκιοί τε τείνουσιν πόροι</TextUnit>
+    <TextUnit id="94" loc="95">κατιδεῖν ἄφραστοι.</TextUnit>
+    <TextUnit id="95" loc="96">ἰάπτει δ' ἐλπίδων</TextUnit>
+    <TextUnit id="96" loc="97">ἀφ' ὑψιπύργων πανώλεις</TextUnit>
+    <TextUnit id="97" loc="98">βροτούς, βίαν δ'</TextUnit>
+    <TextUnit id="98" loc="99">οὔτιν' ἐξοπλίζει:</TextUnit>
+    <TextUnit id="99" loc="100">πᾶν ἄπονον δαιμονίων.</TextUnit>
+    <TextUnit id="100" loc="101">ἥμενος ὃν φρόνημά πως</TextUnit>
+    <TextUnit id="101" loc="102">αὐτόθεν ἐξέπραξεν ἔμπας</TextUnit>
+    <TextUnit id="102" loc="103">ἑδράνων ἐφ' ἁγνῶν.</TextUnit>
+    <TextUnit id="103" loc="104">ἰδέσθω δ' εἰς ὕβριν</TextUnit>
+    <TextUnit id="104" loc="105">βρότειον, οἵα νεάζει</TextUnit>
+    <TextUnit id="105" loc="106">πυθμὴν δι' ἁ-</TextUnit>
+    <TextUnit id="106" loc="107">μὸν γάμον τεθαλὼς</TextUnit>
+    <TextUnit id="107" loc="108">δυσπαραβούλοισι φρεσίν,</TextUnit>
+    <TextUnit id="108" loc="109">καὶ διάνοιαν μαινόλιν</TextUnit>
+    <TextUnit id="109" loc="110">κέντρον ἔχων ἄφυκτον, ἄταν δ'</TextUnit>
+    <TextUnit id="110" loc="111">ἀπάτᾳ μεταγνούς.</TextUnit>
+    <TextUnit id="111" loc="112">τοιαῦτα πάθεα μέλεα θρεομένα λέγω</TextUnit>
+    <TextUnit id="112" loc="113">λιγέα βαρέα δακρυοπετῆ,</TextUnit>
+    <TextUnit id="113" loc="114">ἰὴ ἰή,</TextUnit>
+    <TextUnit id="114" loc="115">ἰηλέμοισιν ἐμπρεπῆ: θρεομένη μέλη</TextUnit>
+    <TextUnit id="115" loc="116">ζῶσα γόοις με τιμῶ.</TextUnit>
+    <TextUnit id="116" loc="117">ἱλεοῦμαι μὲν ̓Απίαν βοῦνιν,</TextUnit>
+    <TextUnit id="117" loc="118">καρβᾶνα δ' αὐδὰν</TextUnit>
+    <TextUnit id="118" loc="119">εὖ, γᾶ, κοννεῖς.</TextUnit>
+    <TextUnit id="119" loc="120">πολλάκι δ' ἐμπίτνω ξὺν λακίδι</TextUnit>
+    <TextUnit id="120" loc="121">λινοσινεῖ</TextUnit>
+    <TextUnit id="121" loc="122">Σιδονία καλύπτρᾳ.</TextUnit>
+    <TextUnit id="122" loc="123">θεοῖς δ' ἐναγέα τέλεα πελομένων καλῶς</TextUnit>
+    <TextUnit id="123" loc="124">ἐπίδρομ', ὁπόθι θάνατος ἀπῇ.</TextUnit>
+    <TextUnit id="124" loc="125">ἰὼ ἰώ,</TextUnit>
+    <TextUnit id="125" loc="126">ἰὼ δυσάγκριτοι πόνοι.</TextUnit>
+    <TextUnit id="126" loc="127">ποῖ τόδε κῦμ' ἀπάξει;</TextUnit>
+    <TextUnit id="127" loc="128">ἱλεοῦμαι μὲν ̓Απίαν βοῦνιν,</TextUnit>
+    <TextUnit id="128" loc="129">καρβᾶνα δ' αὐδὰν</TextUnit>
+    <TextUnit id="129" loc="130">εὖ, γᾶ, κοννεῖς.</TextUnit>
+    <TextUnit id="130" loc="131">πολλάκι δ' ἐμπίτνω ξὺν λακίδι</TextUnit>
+    <TextUnit id="131" loc="132">λινοσινεῖ</TextUnit>
+    <TextUnit id="132" loc="133">Σιδονίᾳ καλύπτρᾳ.</TextUnit>
+    <TextUnit id="133" loc="134">πλάτα μὲν οὖν λινορραφής τε</TextUnit>
+    <TextUnit id="134" loc="135">δόμος ἅλα στέγων δορὸς</TextUnit>
+    <TextUnit id="135" loc="136">ἀχείματόν μ' ἔπεμπε σὺν πνοαῖς:</TextUnit>
+    <TextUnit id="136" loc="137">οὐδὲ μέμφομαι:</TextUnit>
+    <TextUnit id="137" loc="138">τελευτὰς δ' ἐν χρόνῳ</TextUnit>
+    <TextUnit id="138" loc="139">πατήρ μοι παντόπτας</TextUnit>
+    <TextUnit id="139" loc="140">πρευμενεῖς κτίσειεν,</TextUnit>
+    <TextUnit id="140" loc="141">σπέρμα σεμνᾶς μέγα ματρὸς</TextUnit>
+    <TextUnit id="141" loc="142">εὐνὰς ἀνδρῶν, ἒ ἔ,</TextUnit>
+    <TextUnit id="142" loc="143">ἄγαμον ἀδάματον ἐκφυγεῖν.</TextUnit>
+    <TextUnit id="143" loc="144">θέλουσα δ' αὖ θέλουσαν ἁγνά μ'</TextUnit>
+    <TextUnit id="144" loc="145">ἐπιδέτω Διὸς κόρα,</TextUnit>
+    <TextUnit id="145" loc="146">ἔχουσα σέμν' ἐνώπι' ἀσφαλῶς,</TextUnit>
+    <TextUnit id="146" loc="147">παντὶ δὲ σθένει</TextUnit>
+    <TextUnit id="147" loc="148">διωγμοῖς ἀσχαλῶς'</TextUnit>
+    <TextUnit id="148" loc="149">ἀδμήτας ἀδμήτα</TextUnit>
+    <TextUnit id="149" loc="150">ῥύσιος γενέσθω,</TextUnit>
+    <TextUnit id="150" loc="151">σπέρμα σεμνᾶς μέγα ματρὸς</TextUnit>
+    <TextUnit id="151" loc="152">εὐνὰς ἀνδρῶν, ἒ ἔ,</TextUnit>
+    <TextUnit id="152" loc="153">ἄγαμον ἀδάματον ἐκφυγεῖν.</TextUnit>
+    <TextUnit id="153" loc="154">εἰ δὲ μή, μελανθὲς</TextUnit>
+    <TextUnit id="154" loc="155">ἡλιόκτυπον γένος</TextUnit>
+    <TextUnit id="155" loc="155">τὸν γάιον,</TextUnit>
+    <TextUnit id="156" loc="156">τὸν πολυξενώτατον</TextUnit>
+    <TextUnit id="157" loc="157">Ζῆνα τῶν κεκμηκότων</TextUnit>
+    <TextUnit id="158" loc="158">ἱξόμεθα σὺν κλάδοις</TextUnit>
+    <TextUnit id="159" loc="160">ἀρτάναις θανοῦσαι,</TextUnit>
+    <TextUnit id="160" loc="161">μὴ τυχοῦσαι θεῶν ̓Ολυμπίων.</TextUnit>
+    <TextUnit id="161" loc="162">ἆ Ζήν, ̓Ιοῦς ἰῷ</TextUnit>
+    <TextUnit id="162" loc="163">μῆνις μάστειρ' ἐκ θεῶν:</TextUnit>
+    <TextUnit id="163" loc="164">κοννῶ δ' ἄγαν</TextUnit>
+    <TextUnit id="164" loc="165">γαμετᾶς οὐρανόνικον.</TextUnit>
+    <TextUnit id="165" loc="166">χαλεποῦ γὰρ ἐκ</TextUnit>
+    <TextUnit id="166" loc="167">πνεύματος εἶσι χειμών.</TextUnit>
+    <TextUnit id="167" loc="168">καὶ τότ' οὐ δικαίοις</TextUnit>
+    <TextUnit id="168" loc="169">Ζεὺς ἐνέξεται λόγοις,</TextUnit>
+    <TextUnit id="169" loc="170">τὸν τᾶς βοὸς</TextUnit>
+    <TextUnit id="170" loc="171">παῖδ' ἀτιμάσας, τὸν αὐ-</TextUnit>
+    <TextUnit id="171" loc="172">τός ποτ' ἔκτισεν γόνῳ,</TextUnit>
+    <TextUnit id="172" loc="173">νῦν ἔχων παλίντροπον</TextUnit>
+    <TextUnit id="173" loc="174">ὄψιν ἐν λιταῖσιν;</TextUnit>
+    <TextUnit id="174" loc="175">ὑψόθεν δ' εὖ κλύοι καλούμενος.</TextUnit>
+    <TextUnit id="175" loc="162a">ἆ Ζήν, ̓Ιοῦς ἰῶ ,</TextUnit>
+    <TextUnit id="176" loc="163a">μῆνις μάστειρ' ἐκ θεῶν:</TextUnit>
+    <TextUnit id="177" loc="164a">κοννῶ δ' ἄγαν</TextUnit>
+    <TextUnit id="178" loc="165a">γαμετᾶς οὐρανόνικον</TextUnit>
+    <TextUnit id="179" loc="166a">χαλεποῦ γὰρ ἐκ</TextUnit>
+    <TextUnit id="180" loc="167a">πνεύματος εἶσι χειμών.</TextUnit>
+    <TextUnit id="181" loc="176">παῖδες, φρονεῖν χρή: ξὺν φρονοῦντι δ' ἥκετε</TextUnit>
+    <TextUnit id="182" loc="177">πιστῷ γέροντι τῷ δε ναυκλήρῳ πατρί.</TextUnit>
+    <TextUnit id="183" loc="178">καὶ τἀπὶ χέρσου νῦν προμηθίαν λαβὼν</TextUnit>
+    <TextUnit id="184" loc="179">αἰνῶ φυλάξαι τἄμ' ἔπη δελτουμένας.</TextUnit>
+    <TextUnit id="185" loc="180">ὁρῶ κόνιν, ἄναυδον ἄγγελον στρατοῦ:</TextUnit>
+    <TextUnit id="186" loc="181">σύριγγες οὐ σιγῶσιν ἀξονήλατοι:</TextUnit>
+    <TextUnit id="187" loc="182">ὄχλον δ' ὑπασπιστῆρα καὶ δορυσσόον</TextUnit>
+    <TextUnit id="188" loc="183">λεύσσω, ξὺν ἵπποις καμπύλοις τ' ὀχήμασιν:</TextUnit>
+    <TextUnit id="189" loc="184">τάχ' ἂν πρὸς ἡμᾶς τῆσδε γῆς ἀρχηγέται</TextUnit>
+    <TextUnit id="190" loc="185">ὀπτῆρες εἶεν ἀγγέλων πεπυσμένοι.</TextUnit>
+    <TextUnit id="191" loc="186">ἀλλ' εἴτ' ἀπήμων εἴτε καὶ τεθηγμένος</TextUnit>
+    <TextUnit id="192" loc="187">ὠμῇ ξὺν ὀργῇ τόνδ' ἐπόρνυται στόλον,</TextUnit>
+    <TextUnit id="193" loc="188">ἄμεινόν ἐστι παντὸς εἵνεκ', ὦ κόραι,</TextUnit>
+    <TextUnit id="194" loc="189">πάγον προσίζειν τόνδ' ἀγωνίων θεῶν.</TextUnit>
+    <TextUnit id="195" loc="190">κρεῖσσον δὲ πύργου βωμός, ἄρρηκτον σάκος</TextUnit>
+    <TextUnit id="196" loc="191">ἀλλ' ὡς τάχιστα βᾶτε, καὶ λευκοστεφεῖς</TextUnit>
+    <TextUnit id="197" loc="192">ἱκετηρίας, ἁγάλματ' αἰδοίου Διός,</TextUnit>
+    <TextUnit id="198" loc="193">σεμνῶς ἔχουσαι διὰ χερῶν εὐωνύμων,</TextUnit>
+    <TextUnit id="199" loc="194">αἰδοῖα καὶ γοεδνὰ καὶ ζαχρεῖ' ἔπη</TextUnit>
+    <TextUnit id="200" loc="195">ξένους ἀμείβεσθ', ὡς ἐπήλυδας πρέπει,</TextUnit>
+    <TextUnit id="201" loc="196">τορῶς λέγουσαι τάσδ' ἀναιμάκτους φυγάς.</TextUnit>
+    <TextUnit id="202" loc="197">φθογγῇ δ' ἑπέσθω πρῶτα μὲν τὸ μὴ θρασύ,</TextUnit>
+    <TextUnit id="203" loc="198">τὸ μὴ μάταιον δ' ἐκ μετωποσωφρόνων</TextUnit>
+    <TextUnit id="204" loc="199">ἴτω προσώπων ὄμματος παρ' ἡσύχου.</TextUnit>
+    <TextUnit id="205" loc="200">καὶ μὴ πρόλεσχος μηδ' ἐφολκὸς ἐν λόγῳ</TextUnit>
+    <TextUnit id="206" loc="201">γένῃ. τὸ τῇδε κάρτ' ἐπίφθονον γένος.</TextUnit>
+    <TextUnit id="207" loc="202">μέμνησο δ' εἴκειν: χρεῖος εἶ ξένη φυγάς.</TextUnit>
+    <TextUnit id="208" loc="203">θρασυστομεῖν γὰρ οὐ πρέπει τοὺς ἥσσονας.</TextUnit>
+    <TextUnit id="209" loc="204">πάτερ, φρονούντως πρὸς φρονοῦντας ἐννέπεις.</TextUnit>
+    <TextUnit id="210" loc="205">φυλάξομαι δὲ τάσδε μεμνῆσθαι σέθεν</TextUnit>
+    <TextUnit id="211" loc="206">κεδνὰς ἐφετμάς. Ζεὺς δὲ γεννήτωρ ἴδοι:</TextUnit>
+    <TextUnit id="212" loc="207">ἴδοιτο δῆτα πρευμενοῦς ἀπ' ὄμματος:</TextUnit>
+    <TextUnit id="213" loc="208">θέλοιμ' ἂν ἤδη σοὶ πέλας θρόνους ἔχειν.</TextUnit>
+    <TextUnit id="214" loc="209">μή νυν σχόλαζε, μηχανῆς δ' ἔστω κράτος.</TextUnit>
+    <TextUnit id="215" loc="210">ὦ Ζεῦ, κόπων οἴκτιρε μὴ ἀπολωλότας.</TextUnit>
+    <TextUnit id="216" loc="211">κείνου θέλοντος εὖ τελευτήσει τάδε.</TextUnit>
+    <TextUnit id="217" loc="213">καὶ Ζηνὸς ὄρνιν τόνδε νῦν κικλῄσκετε.</TextUnit>
+    <TextUnit id="218" loc="214">καλοῦμεν αὐγὰς ἡλίου σωτηρίους,—</TextUnit>
+    <TextUnit id="219" loc="215">ἁγνόν τ' ̓Απόλλω, φυγάδ' ἀπ' οὐρανοῦ θεόν.</TextUnit>
+    <TextUnit id="220" loc="215">εἰδὼς ἂν αἶσαν τήνδε συγγνοίη βροτοῖς.</TextUnit>
+    <TextUnit id="221" loc="216">συγγνοῖτο δῆτα καὶ παρασταίη πρόφρων.</TextUnit>
+    <TextUnit id="222" loc="217">τίν' οὖν κικλῄσκω τῶνδε δαιμόνων ἔτι;</TextUnit>
+    <TextUnit id="223" loc="218">ὁρῶ τρίαιναν τήνδε σημεῖον θεοῦ.</TextUnit>
+    <TextUnit id="224" loc="219">ἀλλ' εὖ τ' ἔπεμψεν εὖ τε δεξάσθω χθονί.</TextUnit>
+    <TextUnit id="225" loc="220">̔Ερμῆς ὅδ' ἄλλος τοῖσιν ̔Ελλήνων νόμοις.</TextUnit>
+    <TextUnit id="226" loc="221">ἐλευθέροις νυν ἐσθλὰ κηρυκευέτω.</TextUnit>
+    <TextUnit id="227" loc="222">πάντων δ' ἀνάκτων τῶνδε κοινοβωμίαν</TextUnit>
+    <TextUnit id="228" loc="223">σέβεσθ': ἐν ἁγνῷ δ' ἑσμὸς ὡς πελειάδων</TextUnit>
+    <TextUnit id="229" loc="224">ἵζεσθε κίρκων τῶν ὁμοπτέρων φόβῳ,</TextUnit>
+    <TextUnit id="230" loc="225">ἐχθρῶν ὁμαίμων καὶ μιαινόντων γένος.</TextUnit>
+    <TextUnit id="231" loc="226">ὄρνιθος ὄρνις πῶς ἂν ἁγνεύοι φαγών;</TextUnit>
+    <TextUnit id="232" loc="227">πῶς δ' ἂν γαμῶν ἄκουσαν ἄκοντος πάρα</TextUnit>
+    <TextUnit id="233" loc="228">ἁγνὸς γένοιτ' ἄν; οὐδὲ μὴ 'ν ̔́Αιδου θανὼν</TextUnit>
+    <TextUnit id="234" loc="229">φύγῃ ματαίων αἰτίας, πράξας τάδε.</TextUnit>
+    <TextUnit id="235" loc="230">κἀκεῖ δικάζει τἀπλακήμαθ', ὡς λόγος,</TextUnit>
+    <TextUnit id="236" loc="231">Ζεὺς ἄλλος ἐν καμοῦσιν ὑστάτας δίκας.</TextUnit>
+    <TextUnit id="237" loc="232">σκοπεῖτε, κἀμείβεσθε τόνδε τὸν τρόπον,</TextUnit>
+    <TextUnit id="238" loc="233">ὅπως ἂν ὑμῖν πρᾶγος εὖ νικᾷ τόδε.</TextUnit>
+    <TextUnit id="239" loc="234">ποδαπὸν ὅμιλον τόνδ' ἀνελληνόστολον</TextUnit>
+    <TextUnit id="240" loc="235">πέπλοισι βαρβάροισι καὶ πυκνώμασι</TextUnit>
+    <TextUnit id="241" loc="236">χλίοντα προσφωνοῦμεν; οὐ γὰρ ̓Αργολὶς</TextUnit>
+    <TextUnit id="242" loc="237">ἐσθὴς γυναικῶν οὐδ' ἀφ' ̔Ελλάδος τόπων.</TextUnit>
+    <TextUnit id="243" loc="238">ὅπως δὲ χώραν οὔτε κηρύκων ὕπο,</TextUnit>
+    <TextUnit id="244" loc="239">ἀπρόξενοί τε, νόσφιν ἡγητῶν, μολεῖν</TextUnit>
+    <TextUnit id="245" loc="240">ἔτλητ' ἀτρέστως, τοῦτο θαυμαστὸν πέλει.</TextUnit>
+    <TextUnit id="246" loc="241">κλάδοι γε μὲν δὴ κατὰ νόμους ἀφικτόρων</TextUnit>
+    <TextUnit id="247" loc="242">κεῖνται παρ' ὑμῖν πρὸς θεοῖς ἀγωνίοις:</TextUnit>
+    <TextUnit id="248" loc="243">μόνον τόδ' ̔Ελλὰς χθὼν συνοίσεται στόχῳ.</TextUnit>
+    <TextUnit id="249" loc="244">καὶ τἄλλα πόλλ' ἔτ' εἰκάσαι δίκαιον ἦν,</TextUnit>
+    <TextUnit id="250" loc="245">εἰ μὴ παρόντι φθόγγος ἦν ὁ σημανῶν.</TextUnit>
+    <TextUnit id="251" loc="246">εἴρηκας ἀμφὶ κόσμον ἀψευδῆ λόγον.</TextUnit>
+    <TextUnit id="252" loc="247">ἐγὼ δὲ πρὸς σὲ πότερον ὡς ἔτην λέγω,</TextUnit>
+    <TextUnit id="253" loc="248">ἢ ῥήτορ' ἱεροράβδον, ἢ πόλεως ἀγόν;</TextUnit>
+    <TextUnit id="254" loc="249">πρὸς ταῦτ' ἀμείβου καὶ λέγ' εὐθαρσὴς ἐμοί.</TextUnit>
+    <TextUnit id="255" loc="250">τοῦ γηγενοῦς γάρ εἰμ' ἐγὼ Παλαίχθονος</TextUnit>
+    <TextUnit id="256" loc="251">ἶνις Πελασγός, τῆσδε γῆς ἀρχηγέτης.</TextUnit>
+    <TextUnit id="257" loc="252">ἐμοῦ δ' ἄνακτος εὐλόγως ἐπώνυμον</TextUnit>
+    <TextUnit id="258" loc="253">γένος Πελασγῶν τήνδε καρποῦται χθόνα.</TextUnit>
+    <TextUnit id="259" loc="254">καὶ πᾶσαν αἶαν, ἧς δι' ἁγνὸς ἔρχεται</TextUnit>
+    <TextUnit id="260" loc="255">Στρυμών, τὸ πρὸς δύνοντος ἡλίου, κρατῶ.</TextUnit>
+    <TextUnit id="261" loc="256">ὁρίζομαι δὲ τήν τε Περραίβων χθόνα,</TextUnit>
+    <TextUnit id="262" loc="257">Πίνδου τε τἀπέκεινα, Παιόνων πέλας,</TextUnit>
+    <TextUnit id="263" loc="258">ὄρη τε Δωδωναῖα. συντέμνει δ' ὅρος</TextUnit>
+    <TextUnit id="264" loc="259">ὑγρᾶς θαλάσσης: τῶνδε τἀπὶ τάδε κρατῶ.</TextUnit>
+    <TextUnit id="265" loc="260">αὐτῆς δὲ χώρας ̓Απίας πέδον τόδε</TextUnit>
+    <TextUnit id="266" loc="261">πάλαι κέκληται φωτὸς ἰατροῦ χάριν.</TextUnit>
+    <TextUnit id="267" loc="262">̓͂Απις γὰρ ἐλθὼν ἐκ πέρας Ναυπακτίας</TextUnit>
+    <TextUnit id="268" loc="263">ἰατρόμαντις παῖς ̓Απόλλωνος χθόνα</TextUnit>
+    <TextUnit id="269" loc="264">τήνδ' ἐκκαθαίρει κνωδάλων βροτοφθόρων,</TextUnit>
+    <TextUnit id="270" loc="265">τὰ δὴ παλαιῶν αἱμάτων μιάσμασιν</TextUnit>
+    <TextUnit id="271" loc="266">χρανθεῖς' ἀνῆκε γαῖα μηνιταῖ' ἄχη</TextUnit>
+    <TextUnit id="272" loc="267">δρακονθόμιλον δυσμενῆ ξυνοικίαν.</TextUnit>
+    <TextUnit id="273" loc="268">τούτων ἄκη τομαῖα καὶ λυτήρια</TextUnit>
+    <TextUnit id="274" loc="269">πράξας ἀμέμπτως ̓͂Απις ̓Αργείᾳ χθονὶ</TextUnit>
+    <TextUnit id="275" loc="270">μνήμην ποτ' ἀντίμισθον ηὕρετ' ἐν λιταῖς.</TextUnit>
+    <TextUnit id="276" loc="271">ἔχουσα δ' ἤδη τἀπ' ἐμοῦ τεκμήρια</TextUnit>
+    <TextUnit id="277" loc="272">γένος τ' ἂν ἐξεύχοιο καὶ λέγοις πρόσω.</TextUnit>
+    <TextUnit id="278" loc="273">μακράν γε μὲν δὴ ῥῆσιν οὐ στέργει πόλις.</TextUnit>
+    <TextUnit id="279" loc="274">βραχὺς τορός θ' ὁ μῦθος: ̓Αργεῖαι γένος</TextUnit>
+    <TextUnit id="280" loc="275">ἐξευχόμεσθα, σπέρματ' εὐτέκνου βοός:</TextUnit>
+    <TextUnit id="281" loc="276">καὶ ταῦτ' ἀληθῆ πάντα προσφύσω λόγῳ.</TextUnit>
+    <TextUnit id="282" loc="277">ἄπιστα μυθεῖσθ', ὦ ξέναι, κλύειν ἐμοί,</TextUnit>
+    <TextUnit id="283" loc="278">ὅπως τόδ' ὑμῖν ἐστιν ̓Αργεῖον γένος.</TextUnit>
+    <TextUnit id="284" loc="279">Λιβυστικαῖς γὰρ μᾶλλον ἐμφερέστεραι</TextUnit>
+    <TextUnit id="285" loc="280">γυναιξίν ἐστε κοὐδαμῶς ἐγχωρίαις.</TextUnit>
+    <TextUnit id="286" loc="281">καὶ Νεῖλος ἂν θρέψειε τοιοῦτον φυτόν,</TextUnit>
+    <TextUnit id="287" loc="282">Κύπριος χαρακτήρ τ' ἐν γυναικείοις τύποις</TextUnit>
+    <TextUnit id="288" loc="283">εἰκὼς πέπληκται τεκτόνων πρὸς ἀρσένων:</TextUnit>
+    <TextUnit id="289" loc="284">τοίας τ' ἀκούω νομάδας ἱπποβάμοσιν</TextUnit>
+    <TextUnit id="290" loc="285">εἶναι καμήλοις ἀστραβιζούσας, χθόνα</TextUnit>
+    <TextUnit id="291" loc="286">παρ' Αἰθίοψιν ἀστυγειτονουμένας.</TextUnit>
+    <TextUnit id="292" loc="287">καὶ τὰς ἀνάνδρους κρεοβόρους τ' ̓Αμαζόνας,</TextUnit>
+    <TextUnit id="293" loc="288">εἰ τοξοτευχεῖς ἦτε, κάρτ' ἂν ᾔκασα</TextUnit>
+    <TextUnit id="294" loc="289">ὑμᾶς. διδαχθεὶς δ' ἂν τόδ' εἰδείην πλέον,</TextUnit>
+    <TextUnit id="295" loc="290">ὅπως γένεθλον σπέρμα τ' ̓Αργεῖον τὸ σόν.</TextUnit>
+    <TextUnit id="296" loc="291">κλῃδοῦχον ̔́Ηρας φασὶ δωμάτων ποτὲ</TextUnit>
+    <TextUnit id="297" loc="292">̓Ιὼ γενέσθαι τῇ δ' ἐν ̓Αργείᾳ χθονί;</TextUnit>
+    <TextUnit id="298" loc="293">ἦν ὡς μάλιστα, καὶ φάτις πολλὴ κρατεῖ.</TextUnit>
+    <TextUnit id="299" loc="295">μὴ καὶ λόγος τις Ζῆνα μειχθῆναι βροτῷ;</TextUnit>
+    <TextUnit id="300" loc="296">κἄκρυπτά γ' ̔́Ηρας ταῦτα τἀμπαλάγματα.</TextUnit>
+    <TextUnit id="301" loc="297">πῶς οὖν τελευτᾷ βασιλέων νείκη τάδε;</TextUnit>
+    <TextUnit id="302" loc="298">βοῦν τὴν γυναῖκ' ἔθηκεν ̓Αργεία θεός.</TextUnit>
+    <TextUnit id="303" loc="300">οὔκουν πελάζει Ζεὺς ἐπ' εὐκραίρῳ βοί̈;</TextUnit>
+    <TextUnit id="304" loc="301">φασίν, πρέποντα βουθόρῳ ταύρῳ δέμας.</TextUnit>
+    <TextUnit id="305" loc="302">τί δῆτα πρὸς ταῦτ' ἄλοχος ἰσχυρὰ Διός;</TextUnit>
+    <TextUnit id="306" loc="303">τὸν πάνθ' ὁρῶντα φύλακ' ἐπέστησεν βοί̈.</TextUnit>
+    <TextUnit id="307" loc="304">ποῖον πανόπτην οἰοβουκόλον λέγεις;</TextUnit>
+    <TextUnit id="308" loc="305">̓́Αργον, τὸν ̔Ερμῆς παῖδα γῆς κατέκτανεν.</TextUnit>
+    <TextUnit id="309" loc="306">τί οὖν ἔτευξεν ἄλλο δυσπότμῳ βοί̈;</TextUnit>
+    <TextUnit id="310" loc="307">βοηλάτην μύωπα κινητήριον.</TextUnit>
+    <TextUnit id="311" loc="308">οἶστρον καλοῦσιν αὐτὸν οἱ Νείλου πέλας.</TextUnit>
+    <TextUnit id="312" loc="309">τοιγάρ νιν ἐκ γῆς ἤλασεν μακρῷ δρόμῳ.</TextUnit>
+    <TextUnit id="313" loc="310">καὶ ταῦτ' ἔλεξας πάντα συγκόλλως ἐμοί.</TextUnit>
+    <TextUnit id="314" loc="311">καὶ μὴν Κάνωβον κἀπὶ Μέμφιν ἵκετο.</TextUnit>
+    <TextUnit id="315" loc="312">καὶ Ζεύς γ' ἐφάπτωρ χειρὶ φιτύει γόνον.</TextUnit>
+    <TextUnit id="316" loc="313">τίς οὖν ὁ Δῖος πόρτις εὔχεται βοός;</TextUnit>
+    <TextUnit id="317" loc="315">̓́Επαφος ἀληθῶς ῥυσίων ἐπώνυμος.</TextUnit>
+    <TextUnit id="318" loc="317">Λιβύη, μέγιστον γῆς πέδον καρπουμένη.</TextUnit>
+    <TextUnit id="319" loc="320">τίν' οὖν ἔτ' ἄλλον τῆσδε βλαστημὸν λέγεις;</TextUnit>
+    <TextUnit id="320" loc="321">Βῆλον δίπαιδα πατέρα τοῦδ' ἐμοῦ πατρός.</TextUnit>
+    <TextUnit id="321" loc="320">τὸ πάνσοφον νῦν ὄνομα τοῦτό μοι φράσον.</TextUnit>
+    <TextUnit id="322" loc="321">Δαναός, ἀδελφὸς δ' ἐστὶ πεντηκοντάπαις.</TextUnit>
+    <TextUnit id="323" loc="322">καὶ τοῦδ' ἄνοιγε τοὔνομ' ἀφθόνῳ λόγῳ.</TextUnit>
+    <TextUnit id="324" loc="323">Αἴγυπτος. εἰδὼς δ' ἁμὸν ἀρχαῖον γένος</TextUnit>
+    <TextUnit id="325" loc="324">πράσσοις ἂν ὡς ̓Αργεῖον ἀνστήσῃς στόλον.</TextUnit>
+    <TextUnit id="326" loc="325">δοκεῖτε δή μοι τῆσδε κοινωνεῖν χθονὸς</TextUnit>
+    <TextUnit id="327" loc="326">τἀρχαῖον. ἀλλὰ πῶς πατρῷα δώματα</TextUnit>
+    <TextUnit id="328" loc="327">λιπεῖν ἔτλητε; τίς κατέσκηψεν τύχη;</TextUnit>
+    <TextUnit id="329" loc="328">ἄναξ Πελασγῶν, αἰόλ' ἀνθρώπων κακά.</TextUnit>
+    <TextUnit id="330" loc="329">πόνου δ' ἴδοις ἂν οὐδαμοῦ ταὐτὸν πτερόν:</TextUnit>
+    <TextUnit id="331" loc="330">ἐπεὶ τίς ηὔχει τήνδ' ἀνέλπιστον φυγὴν</TextUnit>
+    <TextUnit id="332" loc="331">κέλσειν ἐς ̓́Αργος κῆδος ἐγγενὲς τὸ πρίν,</TextUnit>
+    <TextUnit id="333" loc="332">ἔχθει μεταπτοιοῦσαν εὐναίων γάμων;</TextUnit>
+    <TextUnit id="334" loc="333">τί φὴς ἱκνεῖσθαι τῶνδ' ἀγωνίων θεῶν,</TextUnit>
+    <TextUnit id="335" loc="334">λευκοστεφεῖς ἔχουσα νεοδρέπτους κλάδους;</TextUnit>
+    <TextUnit id="336" loc="335">ὡς μὴ γένωμαι δμωὶς Αἰγύπτου γένει.</TextUnit>
+    <TextUnit id="337" loc="336">πότερα κατ' ἔχθραν, ἢ τὸ μὴ θέμις λέγεις;</TextUnit>
+    <TextUnit id="338" loc="337">τίς δ' ἂν φίλους ὠνοῖτο τοὺς κεκτημένους;</TextUnit>
+    <TextUnit id="339" loc="338">σθένος μὲν οὕτως μεῖζον αὔξεται βροτοῖς.</TextUnit>
+    <TextUnit id="340" loc="339">καὶ δυστυχούντων γ' εὐμαρὴς ἀπαλλαγή.</TextUnit>
+    <TextUnit id="341" loc="340">πῶς οὖν πρὸς ὑμᾶς εὐσεβὴς ἐγὼ πέλω;</TextUnit>
+    <TextUnit id="342" loc="341">αἰτοῦσι μὴ 'κδοὺς παισὶν Αἰγύπτου πάλιν.</TextUnit>
+    <TextUnit id="343" loc="342">βαρέα σύ γ' εἶπας, πόλεμον ἄρασθαι νέον.</TextUnit>
+    <TextUnit id="344" loc="343">ἀλλ' ἡ δίκη γε ξυμμάχων ὑπερστατεῖ.</TextUnit>
+    <TextUnit id="345" loc="344">εἴπερ γ' ἀπ' ἀρχῆς πραγμάτων κοινωνὸς ἦν.</TextUnit>
+    <TextUnit id="346" loc="345">αἰδοῦ σὺ πρύμναν πόλεος ὧδ' ἐστεμμένην.</TextUnit>
+    <TextUnit id="347" loc="346">πέφρικα λεύσσων τάσδ' ἕδρας κατασκίους.</TextUnit>
+    <TextUnit id="348" loc="347">βαρύς γε μέντοι Ζηνὸς ἱκεσίου κότος.</TextUnit>
+    <TextUnit id="349" loc="348">Παλαίχθονος τέκος, κλῦθί μου</TextUnit>
+    <TextUnit id="350" loc="349">πρόφρονι καρδίᾳ, Πελασγῶν ἄναξ.</TextUnit>
+    <TextUnit id="351" loc="350">ἴδε με τὰν ἱκέτιν φυγάδα περίδρομον,</TextUnit>
+    <TextUnit id="352" loc="351">λυκοδίωκτον ὡς δάμαλιν ἂμ πέτραις</TextUnit>
+    <TextUnit id="353" loc="352">ἠλιβάτοις, ἵν' ἀλκᾷ πίσυνος μέμυ-</TextUnit>
+    <TextUnit id="354" loc="353">κε φράζουσα βοτῆρι μόχθους.</TextUnit>
+    <TextUnit id="355" loc="354">ὁρῶ κλάδοισι νεοδρόποις κατάσκιον</TextUnit>
+    <TextUnit id="356" loc="355">νεύονθ' ὅμιλον τόνδ' ἀγωνίων θεῶν.</TextUnit>
+    <TextUnit id="357" loc="356">εἴη δ' ἄνατον πρᾶγμα τοῦτ' ἀστοξένων.</TextUnit>
+    <TextUnit id="358" loc="357">μηδ' ἐξ ἀέλπτων κἀπρομηθήτων πόλει</TextUnit>
+    <TextUnit id="359" loc="358">νεῖκος γένηται: τῶν γὰρ οὐ δεῖται πόλις.</TextUnit>
+    <TextUnit id="360" loc="359">ἴδοιτο δῆτ' ἄνατον φυγὰν</TextUnit>
+    <TextUnit id="361" loc="360">ἱκεσία Θέμις Διὸς κλαρίου.</TextUnit>
+    <TextUnit id="362" loc="361">σὺ δὲ παρ' ὀψιγόνου μάθε γεραιόφρων:</TextUnit>
+    <TextUnit id="363" loc="362">ποτιτρόπαιον αἰδόμενος †οὖνπερ</TextUnit>
+    <TextUnit id="364" loc="363">ἱεροδόκα† . .</TextUnit>
+    <TextUnit id="365" loc="364">θεῶν λήματ' ἀπ' ἀνδρὸς ἁγνοῦ.</TextUnit>
+    <TextUnit id="366" loc="365">οὔτοι κάθησθε δωμάτων ἐφέστιοι</TextUnit>
+    <TextUnit id="367" loc="366">ἐμῶν. τὸ κοινὸν δ' εἰ μιαίνεται πόλις,</TextUnit>
+    <TextUnit id="368" loc="367">ξυνῇ μελέσθω λαὸς ἐκπονεῖν ἄκη.</TextUnit>
+    <TextUnit id="369" loc="368">ἐγὼ δ' ἂν οὐ κραίνοιμ' ὑπόσχεσιν πάρος,</TextUnit>
+    <TextUnit id="370" loc="369">ἀστοῖς δὲ πᾶσι τῶνδε κοινώσας πέρι.</TextUnit>
+    <TextUnit id="371" loc="370">σύ τοι πόλις, σὺ δὲ τὸ δάμιον.</TextUnit>
+    <TextUnit id="372" loc="371">πρύτανις ἄκριτος ὤν,</TextUnit>
+    <TextUnit id="373" loc="372">κρατύνεις βωμόν, ἑστίαν χθονός,</TextUnit>
+    <TextUnit id="374" loc="373">μονοψήφοισι νεύμασιν σέθεν,</TextUnit>
+    <TextUnit id="375" loc="374">μονοσκήπτροισι δ' ἐν θρόνοις χρέος</TextUnit>
+    <TextUnit id="376" loc="375">πᾶν ἐπικραίνεις: ἄγος φυλάσσου.</TextUnit>
+    <TextUnit id="377" loc="376">ἄγος μὲν εἴη τοῖς ἐμοῖς παλιγκότοις,</TextUnit>
+    <TextUnit id="378" loc="377">ὑμῖν δ' ἀρήγειν οὐκ ἔχω βλάβης ἄτερ.</TextUnit>
+    <TextUnit id="379" loc="378">οὐδ' αὖ τόδ' εὖφρον, τάσδ' ἀτιμάσαι λιτάς.</TextUnit>
+    <TextUnit id="380" loc="379">ἀμηχανῶ δὲ καὶ φόβος μ' ἔχει φρένας</TextUnit>
+    <TextUnit id="381" loc="380">δρᾶσαί τε μὴ δρᾶσαί τε καὶ τύχην ἑλεῖν.</TextUnit>
+    <TextUnit id="382" loc="381">τὸν ὑψόθεν σκοπὸν ἐπισκόπει,</TextUnit>
+    <TextUnit id="383" loc="382">φύλακα πολυπόνων</TextUnit>
+    <TextUnit id="384" loc="383">βροτῶν, οἳ τοῖς πέλας προσήμενοι</TextUnit>
+    <TextUnit id="385" loc="384">δίκας οὐ τυγχάνουσιν ἐννόμου.</TextUnit>
+    <TextUnit id="386" loc="385">μένει τοι Ζηνὸς ἱκταίου κότος</TextUnit>
+    <TextUnit id="387" loc="386">δυσπαραθέλκτους παθόντος οἴκτοις.</TextUnit>
+    <TextUnit id="388" loc="387">εἴ τοι κρατοῦσι παῖδες Αἰγύπτου σέθεν</TextUnit>
+    <TextUnit id="389" loc="388">νόμῳ πόλεως, φάσκοντες ἐγγύτατα γένους</TextUnit>
+    <TextUnit id="390" loc="389">εἶναι, τίς ἂν τοῖσδ' ἀντιωθῆναι θέλοι;</TextUnit>
+    <TextUnit id="391" loc="390">δεῖ τοί σε φεύγειν κατὰ νόμους τοὺς οἴκοθεν,</TextUnit>
+    <TextUnit id="392" loc="391">ὡς οὐκ ἔχουσιν κῦρος οὐδὲν ἀμφὶ σοῦ.</TextUnit>
+    <TextUnit id="393" loc="392">μή τί ποτ' οὖν γενοίμαν ὑποχείριος</TextUnit>
+    <TextUnit id="394" loc="393">κράτεσιν ἀρσένων. ὕπαστρον δέ τοι</TextUnit>
+    <TextUnit id="395" loc="394">μῆχαρ ὁρίζομαι γάμου δύσφρονος</TextUnit>
+    <TextUnit id="396" loc="395">φυγάν: ξύμμαχον δ' ἑλόμενος δίκαν</TextUnit>
+    <TextUnit id="397" loc="396">κρῖνε σέβας τὸ πρὸς θεῶν.</TextUnit>
+    <TextUnit id="398" loc="397">οὐκ εὔκριτον τὸ κρῖμα. μή μ' αἱροῦ κριτήν.</TextUnit>
+    <TextUnit id="399" loc="398">εἶπον δὲ καὶ πρίν, οὐκ ἄνευ δήμου τάδε</TextUnit>
+    <TextUnit id="400" loc="399">πράξαιμ' ἄν, οὐδέ περ κρατῶν, μὴ καί ποτε</TextUnit>
+    <TextUnit id="401" loc="400">εἴπῃ λεώς, εἴ πού τι μὴ τοῖον τύχοι,</TextUnit>
+    <TextUnit id="402" loc="401">“ἐπήλυδας τιμῶν ἀπώλεσας πόλιν.”</TextUnit>
+    <TextUnit id="403" loc="402">ἀμφοτέρους ὁμαίμων τάδ' ἐπισκοπεῖ</TextUnit>
+    <TextUnit id="404" loc="403">Ζεὺς ἑτερορρεπής, νέμων εἰκότως</TextUnit>
+    <TextUnit id="405" loc="404">ἄδικα μὲν κακοῖς, ὅσια δ' ἐννόμοις.</TextUnit>
+    <TextUnit id="406" loc="405">τί τῶνδ' ἐξ ἴσου ῥεπομένων μεταλ-</TextUnit>
+    <TextUnit id="407" loc="406">γεῖς τὸ δίκαιον ἔρξας;</TextUnit>
+    <TextUnit id="408" loc="407">δεῖ τοι βαθείας φροντίδος σωτηρίου,</TextUnit>
+    <TextUnit id="409" loc="408">δίκην κολυμβητῆρος, ἐς βυθὸν μολεῖν</TextUnit>
+    <TextUnit id="410" loc="409">δεδορκὸς ὄμμα, μηδ' ἄγαν ᾠνωμένον,</TextUnit>
+    <TextUnit id="411" loc="410">ὅπως ἄνατα ταῦτα πρῶτα μὲν πόλει,</TextUnit>
+    <TextUnit id="412" loc="411">αὐτοῖσί θ' ἡμῖν ἐκτελευτήσει καλῶς,</TextUnit>
+    <TextUnit id="413" loc="412">καὶ μήτε δῆρις ῥυσίων ἐφάψεται</TextUnit>
+    <TextUnit id="414" loc="413">μήτ' ἐν θεῶν ἕδραισιν ὧδ' ἱδρυμένας</TextUnit>
+    <TextUnit id="415" loc="414">ἐκδόντες ὑμᾶς τὸν πανώλεθρον θεὸν</TextUnit>
+    <TextUnit id="416" loc="415">βαρὺν ξύνοικον θησόμεσθ' ἀλάστορα,</TextUnit>
+    <TextUnit id="417" loc="416">ὃς οὐδ' ἐν ̔́Αιδου τὸν θανόντ' ἐλευθεροῖ.</TextUnit>
+    <TextUnit id="418" loc="417">μῶν οὐ δοκεῖ δεῖν φροντίδος σωτηρίου;</TextUnit>
+    <TextUnit id="419" loc="418">φρόντισον καὶ γενοῦ</TextUnit>
+    <TextUnit id="420" loc="419">πανδίκως εὐσεβὴς</TextUnit>
+    <TextUnit id="421" loc="420">πρόξενος: τὰν φυγάδα μὴ προδῷς,</TextUnit>
+    <TextUnit id="422" loc="421">τὰν ἕκαθεν ἐκβολαῖς</TextUnit>
+    <TextUnit id="423" loc="422">δυσθέοις ὀρμέναν:</TextUnit>
+    <TextUnit id="424" loc="423">μηδ' ἴδῃς μ' ἐξ ἑδρᾶν</TextUnit>
+    <TextUnit id="425" loc="424">πολυθέων ῥυσια-</TextUnit>
+    <TextUnit id="426" loc="425">σθεῖσαν, ὦ πᾶν κράτος ἔχων χθονός.</TextUnit>
+    <TextUnit id="427" loc="426">γνῶθι δ' ὕβριν ἀνέρων</TextUnit>
+    <TextUnit id="428" loc="427">καὶ φύλαξαι κότον.</TextUnit>
+    <TextUnit id="429" loc="428">μή τι τλῇς τὰν ἱκέτιν εἰσιδεῖν</TextUnit>
+    <TextUnit id="430" loc="429">ἀπὸ βρετέων βίᾳ</TextUnit>
+    <TextUnit id="431" loc="430">δίκας ἀγομέναν</TextUnit>
+    <TextUnit id="432" loc="431">ἱππηδὸν ἀμπύκων,</TextUnit>
+    <TextUnit id="433" loc="432">πολυμίτων πέπλων τ' ἐπιλαβὰς ἐμῶν.</TextUnit>
+    <TextUnit id="434" loc="433">ἴσθι γάρ: παισὶ τάδε καὶ δόμοις,</TextUnit>
+    <TextUnit id="435" loc="434">ὁπότερ' ἂν κτίσῃς,</TextUnit>
+    <TextUnit id="436" loc="435">μένει ἄρ ἐκτίνειν</TextUnit>
+    <TextUnit id="437" loc="436">ὁμοιί̈αν θέμιν.</TextUnit>
+    <TextUnit id="438" loc="437">τάδε φράσαι δίκαια Διόθεν κράτη.</TextUnit>
+    <TextUnit id="439" loc="438">καὶ δὴ πέφρασμαι. δεῦρο δ' ἐξοκέλλεται.</TextUnit>
+    <TextUnit id="440" loc="439">ἢ τοῖσιν ἢ τοῖς πόλεμον αἴρεσθαι μέγαν</TextUnit>
+    <TextUnit id="441" loc="440">πᾶς' ἔστ' ἀνάγκη, καὶ γεγόμφωται σκάφος</TextUnit>
+    <TextUnit id="442" loc="441">στρέβλαισι ναυτικαῖσιν ὡς προσηγμένον.</TextUnit>
+    <TextUnit id="443" loc="442">ἄνευ δὲ λύπης οὐδαμοῦ καταστροφή.</TextUnit>
+    <TextUnit id="444" loc="443">καὶ χρημάτων μὲν ἐκ δόμων πορθουμένων,</TextUnit>
+    <TextUnit id="445" loc="444">†ἄτην γε μείζω καὶ μέγ' ἐμπλήσας γόμου†</TextUnit>
+    <TextUnit id="446" loc="445">γένοιτ' ἂν ἄλλα Κτησίου Διὸς χάριν:</TextUnit>
+    <TextUnit id="447" loc="446">καὶ γλῶσσα τοξεύσασα μὴ τὰ καίρια,</TextUnit>
+    <TextUnit id="448" loc="447">γένοιτο μύθου μῦθος ἂν θελκτήριος</TextUnit>
+    <TextUnit id="449" loc="448">ἀλγεινὰ θυμοῦ κάρτα κινητήρια.</TextUnit>
+    <TextUnit id="450" loc="449">ὅπως δ' ὅμαιμον αἷμα μὴ γενήσεται,</TextUnit>
+    <TextUnit id="451" loc="450">δεῖ κάρτα θύειν καὶ πεσεῖν χρηστήρια</TextUnit>
+    <TextUnit id="452" loc="451">θεοῖσι πολλοῖς πολλά, πημονῆς ἄκη.</TextUnit>
+    <TextUnit id="453" loc="452">ἦ κάρτα νείκους τοῦδ' ἔσω παροίχομαι</TextUnit>
+    <TextUnit id="454" loc="453">θέλω δ' ἄιδρις μᾶλλον ἢ σοφὸς κακῶν</TextUnit>
+    <TextUnit id="455" loc="454">εἶναι. γένοιτο δ' εὖ παρὰ γνώμην ἐμήν.</TextUnit>
+    <TextUnit id="456" loc="455">πολλῶν ἄκουσον τέρματ' αἰδοίων λόγων.</TextUnit>
+    <TextUnit id="457" loc="456">ἤκουσα, καὶ λέγοις ἄν. οὔ με φεύξεται.</TextUnit>
+    <TextUnit id="458" loc="457">ἔχω στρόφους ζώνας τε, συλλαβὰς πέπλων</TextUnit>
+    <TextUnit id="459" loc="458">τάχ' ἂν γυναιξὶ ταῦτα συμπρεπῆ πέλοι.</TextUnit>
+    <TextUnit id="460" loc="459">ἐκ τῶνδε τοίνυν, ἴσθι, μηχανὴ καλή—</TextUnit>
+    <TextUnit id="461" loc="460">λέξον τίν' αὐδὴν τήνδε γηρυθεῖς' ἔσῃ.</TextUnit>
+    <TextUnit id="462" loc="461">εἰ μή τι πιστὸν τῷδ' ὑποστήσεις στόλῳ—</TextUnit>
+    <TextUnit id="463" loc="462">τί σοι περαίνει μηχανὴ συζωμάτων;</TextUnit>
+    <TextUnit id="464" loc="463">νέοις πίναξι βρέτεα κοσμῆσαι τάδε.</TextUnit>
+    <TextUnit id="465" loc="464">αἰνιγματῶδες τοὔπος: ἀλλ' ἁπλῶς φράσον.</TextUnit>
+    <TextUnit id="466" loc="465">ἐκ τῶνδ' ὅπως τάχιστ' ἀπάγξασθαι θεῶν.</TextUnit>
+    <TextUnit id="467" loc="466">ἤκουσα μαστικτῆρα καρδίας λόγον.</TextUnit>
+    <TextUnit id="468" loc="467">ξυνῆκας: ὠμμάτωσα γὰρ σαφέστερον.</TextUnit>
+    <TextUnit id="469" loc="468">καὶ πολλαχῇ γε δυσπάλαιστα πράγματα,</TextUnit>
+    <TextUnit id="470" loc="469">κακῶν δὲ πλῆθος ποταμὸς ὣς ἐπέρχεται:</TextUnit>
+    <TextUnit id="471" loc="470">ἄτης δ' ἄβυσσον πέλαγος οὐ μάλ' εὔπορον</TextUnit>
+    <TextUnit id="472" loc="471">τόδ' ἐσβέβηκα, κοὐδαμοῦ λιμὴν κακῶν.</TextUnit>
+    <TextUnit id="473" loc="472">εἰ μὲν γὰρ ὑμῖν μὴ τόδ' ἐκπράξω χρέος,</TextUnit>
+    <TextUnit id="474" loc="473">μίασμ' ἔλεξας οὐχ ὑπερτοξεύσιμον.</TextUnit>
+    <TextUnit id="475" loc="474">εἰ δ' αὖθ' ὁμαίμοις παισὶν Αἰγύπτου σέθεν</TextUnit>
+    <TextUnit id="476" loc="475">σταθεὶς πρὸ τειχέων διὰ μάχης ἥξω τέλους,</TextUnit>
+    <TextUnit id="477" loc="476">πῶς οὐχὶ τἀνάλωμα γίγνεται πικρόν,</TextUnit>
+    <TextUnit id="478" loc="477">ἄνδρας γυναικῶν οὕνεχ' αἱμάξαι πέδον;</TextUnit>
+    <TextUnit id="479" loc="478">ὅμως δ' ἀνάγκη Ζηνὸς αἰδεῖσθαι κότον</TextUnit>
+    <TextUnit id="480" loc="479">ἱκτῆρος: ὕψιστος γὰρ ἐν βροτοῖς φόβος.</TextUnit>
+    <TextUnit id="481" loc="480">σὺ μέν, πάτερ γεραιὲ τῶνδε παρθένων,</TextUnit>
+    <TextUnit id="482" loc="481">κλάδους τε τούτους αἶψ' ἐν ἀγκάλαις λαβὼν</TextUnit>
+    <TextUnit id="483" loc="482">βωμοὺς ἐπ' ἄλλους δαιμόνων ἐγχωρίων</TextUnit>
+    <TextUnit id="484" loc="483">θές, ὡς ἴδωσι τῆσδ' ἀφίξεως τέκμαρ</TextUnit>
+    <TextUnit id="485" loc="484">πάντες πολῖται, μηδ' ἀπορριφθῇ ψόγος</TextUnit>
+    <TextUnit id="486" loc="485">ἐμοῦ: κατ' ἀρχῆς γὰρ φιλαίτιος λεώς.</TextUnit>
+    <TextUnit id="487" loc="486">καὶ γὰρ τάχ' ἄν τις οἰκτίσας ἰδὼν τάδε</TextUnit>
+    <TextUnit id="488" loc="487">ὕβριν μὲν ἐχθήρειεν ἄρσενος στόλου,</TextUnit>
+    <TextUnit id="489" loc="488">ὑμῖν δ' ἂν εἴη δῆμος εὐμενέστερος:</TextUnit>
+    <TextUnit id="490" loc="489">τοῖς ἥσσοσιν γὰρ πᾶς τις εὐνοίας φέρει.</TextUnit>
+    <TextUnit id="491" loc="490">πολλῶν τάδ' ἡμῖν ἐστιν ἠξιωμένα,</TextUnit>
+    <TextUnit id="492" loc="491">αἰδοῖον εὑρεθέντα πρόξενον λαβεῖν.</TextUnit>
+    <TextUnit id="493" loc="492">ὀπάονας δὲ φράστοράς τ' ἐγχωρίων</TextUnit>
+    <TextUnit id="494" loc="493">ξύμπεμψον, ὡς ἂν τῶν πολισσούχων θεῶν</TextUnit>
+    <TextUnit id="495" loc="494">βωμοὺς προνάους καὶ †πολισσούχων ἕδρας</TextUnit>
+    <TextUnit id="496" loc="495">εὕρωμεν, ἀσφάλεια δ' ᾖ δι' ἄστεως</TextUnit>
+    <TextUnit id="497" loc="496">στείχουσι: μορφῆς δ' οὐχ ὁμόστολος φύσις.</TextUnit>
+    <TextUnit id="498" loc="497">Νεῖλος γὰρ οὐχ ὅμοιον ̓Ινάχῳ γένος</TextUnit>
+    <TextUnit id="499" loc="498">τρέφει. φύλαξαι μὴ θράσος τέκῃ φόβον:</TextUnit>
+    <TextUnit id="500" loc="499">καὶ δὴ φίλον τις ἔκταν' ἀγνοίας ὕπο.</TextUnit>
+    <TextUnit id="501" loc="500">στείχοιτ' ἄν, ἄνδρες: εὖ γὰρ ὁ ξένος λέγει.</TextUnit>
+    <TextUnit id="502" loc="501">ἡγεῖσθε βωμοὺς ἀστικούς, θεῶν ἕδρας:</TextUnit>
+    <TextUnit id="503" loc="502">καὶ ξυμβολοῦσιν οὐ πολυστομεῖν χρεὼν</TextUnit>
+    <TextUnit id="504" loc="503">ναύτην ἄγοντας τόνδ' ἐφέστιον θεῶν.</TextUnit>
+    <TextUnit id="505" loc="504">τούτῳ μὲν εἶπας, καὶ τεταγμένος κίοι:</TextUnit>
+    <TextUnit id="506" loc="505">ἐγὼ δὲ πῶς δρῶ; ποῦ θράσος νέμεις ἐμοί;</TextUnit>
+    <TextUnit id="507" loc="506">κλάδους μὲν αὐτοῦ λεῖπε, σημεῖον πόνου.</TextUnit>
+    <TextUnit id="508" loc="507">καὶ δή σφε λείπω χειρὶ καὶ λόγοις σέθεν.</TextUnit>
+    <TextUnit id="509" loc="508">λευρὸν κατ' ἄλσος νῦν ἐπιστρέφου τόδε.</TextUnit>
+    <TextUnit id="510" loc="509">καὶ πῶς βέβηλον ἄλσος ἂν ῥύοιτό με;</TextUnit>
+    <TextUnit id="511" loc="510">οὔτοι πτερωτῶν ἁρπαγαῖς ς' ἐκδώσομεν.</TextUnit>
+    <TextUnit id="512" loc="511">ἀλλ' εἰ δρακόντων δυσφρόνων ἐχθίοσιν;</TextUnit>
+    <TextUnit id="513" loc="512">εὔφημον εἴη τοὔπος εὐφημουμένῃ.</TextUnit>
+    <TextUnit id="514" loc="513">οὔτοι τι θαῦμα δυσφορεῖν φόβῳ φρενός.</TextUnit>
+    <TextUnit id="515" loc="514">ἀεί γ' ἄναρκτόν ἐστι δεῖμ' ἐξαίσιον.</TextUnit>
+    <TextUnit id="516" loc="515">σὺ καὶ λέγων εὔφραινε καὶ πράσσων φρένα.</TextUnit>
+    <TextUnit id="517" loc="516">ἀλλ' οὔτι δαρὸν χρόνον ἐρημώσει πατήρ.</TextUnit>
+    <TextUnit id="518" loc="517">ἐγὼ δὲ λαοὺς συγκαλῶν ἐγχωρίους</TextUnit>
+    <TextUnit id="519" loc="518">στείχω, τὸ κοινὸν ὡς ἂν εὐμενὲς τιθῶ:</TextUnit>
+    <TextUnit id="520" loc="519">καὶ σὸν διδάξω πατέρα ποῖα χρὴ λέγειν.</TextUnit>
+    <TextUnit id="521" loc="520">πρὸς ταῦτα μίμνε καὶ θεοὺς ἐγχωρίους</TextUnit>
+    <TextUnit id="522" loc="521">λιταῖς παραιτοῦ τῶν ς' ἔρως ἔχει τυχεῖν.</TextUnit>
+    <TextUnit id="523" loc="522">ἐγὼ δὲ ταῦτα πορσυνῶν ἐλεύσομαι.</TextUnit>
+    <TextUnit id="524" loc="523">πειθὼ δ' ἕποιτο καὶ τύχη πρακτήριος.</TextUnit>
+    <TextUnit id="525" loc="524">ἄναξ ἀνάκτων, μακάρων</TextUnit>
+    <TextUnit id="526" loc="525">μακάρτατε καὶ τελέων</TextUnit>
+    <TextUnit id="527" loc="526">τελειότατον κράτος, ὄλβιε Ζεῦ,</TextUnit>
+    <TextUnit id="528" loc="527">πιθοῦ τε καὶ γένει σῷ</TextUnit>
+    <TextUnit id="529" loc="528">ἄλευσον ἀνδρῶν ὕβριν εὖ στυγήσας.</TextUnit>
+    <TextUnit id="530" loc="529">λίμνᾳ δ' ἔμβαλε πορφυροειδεῖ</TextUnit>
+    <TextUnit id="531" loc="530">τὰν μελανόζυγ' ἄταν.</TextUnit>
+    <TextUnit id="532" loc="531">τὸ πρὸς γυναικῶν δ' ἐπιδὼν</TextUnit>
+    <TextUnit id="533" loc="532">παλαίφατον ἁμέτερον</TextUnit>
+    <TextUnit id="534" loc="533">γένος φιλίας προγόνου γυναικὸς</TextUnit>
+    <TextUnit id="535" loc="534">νέωσον εὔφρον' αἶνον,</TextUnit>
+    <TextUnit id="536" loc="535">γενοῦ πολυμνάστωρ, ἔφαπτορ ̓Ιοῦς:</TextUnit>
+    <TextUnit id="537" loc="536">Δῖαί τοι γένος εὐχόμεθ' εἶναι</TextUnit>
+    <TextUnit id="538" loc="537">γᾶς ἀπὸ τᾶσδ' ἄποικοι.</TextUnit>
+    <TextUnit id="539" loc="538">παλαιὸν, δ' εἰς ἴχνος μετέσταν</TextUnit>
+    <TextUnit id="540" loc="539">ματέρος ἀνθονόμους ἐπωπάς,</TextUnit>
+    <TextUnit id="541" loc="540">λειμῶνα βούχιλον, ἔνθεν ̓Ιὼ</TextUnit>
+    <TextUnit id="542" loc="541">οἴστρῳ ἐρεθομένα</TextUnit>
+    <TextUnit id="543" loc="542">φεύγει ἁμαρτίνοος,</TextUnit>
+    <TextUnit id="544" loc="543">πολλὰ βροτῶν διαμειβομένα</TextUnit>
+    <TextUnit id="545" loc="544">φῦλα, διχῇ δ' ἀντίπορον</TextUnit>
+    <TextUnit id="546" loc="545">γαῖαν ἐν αἴσᾳ διατέμ-</TextUnit>
+    <TextUnit id="547" loc="546">νουσα πόρον κυματίαν ὁρίζει:</TextUnit>
+    <TextUnit id="548" loc="547">ἰάπτει δ' ̓Ασίδος δι' αἴας</TextUnit>
+    <TextUnit id="549" loc="548">μηλοβότου Φρυγίας διαμπάξ.</TextUnit>
+    <TextUnit id="550" loc="549">περᾷ δὲ Τεύθραντος ἄστυ Μυσῶν,</TextUnit>
+    <TextUnit id="551" loc="550">Λύδιά τε γύαλα,</TextUnit>
+    <TextUnit id="552" loc="551">καὶ δι' ὀρῶν Κιλίκων</TextUnit>
+    <TextUnit id="553" loc="552">Παμφύλων τε γένη διορνυμένα</TextUnit>
+    <TextUnit id="554" loc="553">καί ποταμοὺς ἀενάους</TextUnit>
+    <TextUnit id="555" loc="554">καὶ βαθύπλουτον χθόνα καὶ</TextUnit>
+    <TextUnit id="556" loc="555">τὰν ̓Αφροδίτας πολύπυρον αἶαν.</TextUnit>
+    <TextUnit id="557" loc="556">ἱκνεῖται δὴ σινουμένα βέλει</TextUnit>
+    <TextUnit id="558" loc="557">βουκόλου πτερόεντος</TextUnit>
+    <TextUnit id="559" loc="558">Δῖον πάμβοτον ἄλσος,</TextUnit>
+    <TextUnit id="560" loc="559">λειμῶνα χιονόβοσκον, ὅντ' ἐπέρχεται</TextUnit>
+    <TextUnit id="561" loc="560">Τυφῶ μένος,</TextUnit>
+    <TextUnit id="562" loc="561">ὕδωρ τε Νείλου νόσοις ἄθικτον,</TextUnit>
+    <TextUnit id="563" loc="562">μαινομένα πόνοις ἀτί-</TextUnit>
+    <TextUnit id="564" loc="563">μοις ὀδύναις τε κεντροδα-</TextUnit>
+    <TextUnit id="565" loc="564">λήτισι, θυιὰς ̔́Ηρας.</TextUnit>
+    <TextUnit id="566" loc="565">βροτοὶ δ', οἳ γᾶς τότ' ἦσαν ἔννομοι</TextUnit>
+    <TextUnit id="567" loc="566">χλωρῷ δείματι θυμὸν</TextUnit>
+    <TextUnit id="568" loc="567">πάλλοντ' ὄψιν ἀήθη,</TextUnit>
+    <TextUnit id="569" loc="568">βοτὸν ἐσορῶντες δυσχερὲς μειξόμβροτον,</TextUnit>
+    <TextUnit id="570" loc="569">τὰν μὲν βοός,</TextUnit>
+    <TextUnit id="571" loc="570">τὰν δ' αὖ γυναικός: τέρας δ' ἐθάμβουν.</TextUnit>
+    <TextUnit id="572" loc="571">καὶ τότε δὴ τίς ἦν ὁ θέλ-</TextUnit>
+    <TextUnit id="573" loc="572">ξας πολύπλαγκτον ἀθλίαν</TextUnit>
+    <TextUnit id="574" loc="573">οἰστροδόνητον ̓Ιώ;</TextUnit>
+    <TextUnit id="575" loc="574">δι' αἰῶνος κρέων ἀπαύστου</TextUnit>
+    <TextUnit id="576" loc="575">Ζεὺς</TextUnit>
+    <TextUnit id="577" loc="576">Διὸς δ' ἀπημάντῳ σθένει</TextUnit>
+    <TextUnit id="578" loc="577">καὶ θείαις ἐπιπνοίαις</TextUnit>
+    <TextUnit id="579" loc="578">παύεται, δακρύων δ' ἀπο-</TextUnit>
+    <TextUnit id="580" loc="579">στάζει πένθιμον αἰδῶ.</TextUnit>
+    <TextUnit id="581" loc="580">λαβοῦσα δ' ἕρμα Δῖον ἀψευδεῖ λόγῳ</TextUnit>
+    <TextUnit id="582" loc="581">γείνατο παῖδ' ἀμεμφῆ,</TextUnit>
+    <TextUnit id="583" loc="582">δι' αἰῶνος μακροῦ πάνολβον:</TextUnit>
+    <TextUnit id="584" loc="583">ἔνθεν πᾶσα βοᾷ χθών,</TextUnit>
+    <TextUnit id="585" loc="584">“φυσιζόου γένος τόδε</TextUnit>
+    <TextUnit id="586" loc="585">Ζηνός ἐστιν ἀληθῶς:</TextUnit>
+    <TextUnit id="587" loc="586">τίς γὰρ ἂν κατέπαυσεν ̔́Η-</TextUnit>
+    <TextUnit id="588" loc="587">ρας νόσους ἐπιβούλους;”</TextUnit>
+    <TextUnit id="589" loc="588">Διὸς τόδ' ἔργον καὶ τόδ' ἂν γένος λέγων</TextUnit>
+    <TextUnit id="590" loc="589">ἐξ ̓Επάφου κυρήσαις.</TextUnit>
+    <TextUnit id="591" loc="590">τίν' ἂν θεῶν ἐνδικωτέροισιν</TextUnit>
+    <TextUnit id="592" loc="591">κεκλοίμαν εὐλόγως ἐπ' ἔργοις;</TextUnit>
+    <TextUnit id="593" loc="592">αὐτὸς ὁ πατὴρ φυτουργὸς αὐτόχειρ ἄναξ</TextUnit>
+    <TextUnit id="594" loc="593">γένους παλαιόφρων μέγας</TextUnit>
+    <TextUnit id="595" loc="594">τέκτων, τὸ πᾶν μῆχαρ οὔριος Ζεύς.</TextUnit>
+    <TextUnit id="596" loc="595">ὑπ' ἀρχᾶς δ' οὔ τινος θοάζων</TextUnit>
+    <TextUnit id="597" loc="596">τὸ μεῖον κρεισσόνων κρατύνει.</TextUnit>
+    <TextUnit id="598" loc="597">οὔτινος ἄνωθεν ἡμένου σέβει κράτη.</TextUnit>
+    <TextUnit id="599" loc="598">πάρεστι δ' ἔργον ὡς ἔπος</TextUnit>
+    <TextUnit id="600" loc="599">σπεῦσαί τι τῶν βούλιος φέρει φρήν.</TextUnit>
+    <TextUnit id="601" loc="600">θαρσεῖτε παῖδες. εὖ τὰ τῶν ἐγχωρίων:</TextUnit>
+    <TextUnit id="602" loc="601">δήμου δέδοκται παντελῆ ψηφίσματα.</TextUnit>
+    <TextUnit id="603" loc="602">ὦ χαῖρε πρέσβυ, φίλτατ' ἀγγέλλων ἐμοί</TextUnit>
+    <TextUnit id="604" loc="603">ἔνισπε δ' ἡμῖν ποῖ κεκύρωται τέλος,</TextUnit>
+    <TextUnit id="605" loc="604">δήμου κρατοῦσα χεὶρ ὅπῃ πληθύνεται.</TextUnit>
+    <TextUnit id="606" loc="605">ἔδοξεν ̓Αργείοισιν οὐ διχορρόπως,</TextUnit>
+    <TextUnit id="607" loc="606">ἀλλ' ὥστ' ἀνηβῆσαί με γηραιᾷ φρενί:</TextUnit>
+    <TextUnit id="608" loc="607">πανδημίᾳ γὰρ χερσὶ δεξιωνύμοις</TextUnit>
+    <TextUnit id="609" loc="608">ἔφριξεν αἰθὴρ τόνδε κραινόντων λόγον:</TextUnit>
+    <TextUnit id="610" loc="609">ἡμᾶς μετοικεῖν τῆσδε γῆς ἐλευθέρους</TextUnit>
+    <TextUnit id="611" loc="610">κἀρρυσιάστους ξύν τ' ἀσυλίᾳ βροτῶν:</TextUnit>
+    <TextUnit id="612" loc="611">καὶ μήτ' ἐνοίκων μήτ' ἐπηλύδων τινὰ</TextUnit>
+    <TextUnit id="613" loc="612">ἄγειν: ἐὰν δὲ προστιθῇ τὸ καρτερόν,</TextUnit>
+    <TextUnit id="614" loc="613">τὸν μὴ βοηθήσαντα τῶνδε γαμόρων</TextUnit>
+    <TextUnit id="615" loc="614">ἄτιμον εἶναι ξὺν φυγῇ δημηλάτῳ.</TextUnit>
+    <TextUnit id="616" loc="615">τοιάνδ' ἔπειθεν ῥῆσιν ἀμφ' ἡμῶν λέγων</TextUnit>
+    <TextUnit id="617" loc="616">ἄναξ Πελασγῶν, ἱκεσίου Ζηνὸς κότον</TextUnit>
+    <TextUnit id="618" loc="617">μέγαν προφωνῶν μήποτ' εἰσόπιν χρόνου</TextUnit>
+    <TextUnit id="619" loc="618">πόλιν παχῦναι, ξενικὸν ἀστικόν θ' ἅμα</TextUnit>
+    <TextUnit id="620" loc="619">λέγων διπλοῦν μίασμα πρὸ πόλεως φανὲν</TextUnit>
+    <TextUnit id="621" loc="620">ἀμήχανον βόσκημα πημονῆς πέλειν.</TextUnit>
+    <TextUnit id="622" loc="621">τοιαῦτ' ἀκούων χερσὶν ̓Αργεῖος λεὼς</TextUnit>
+    <TextUnit id="623" loc="622">ἔκραν' ἄνευ κλητῆρος ὡς εἶναι τάδε.</TextUnit>
+    <TextUnit id="624" loc="623">δημηγόρους δ' ἤκουσεν εὐπιθὴς στροφὰς</TextUnit>
+    <TextUnit id="625" loc="624">δῆμος Πελασγῶν: Ζεὺς δ' ἐπέκρανεν τέλος</TextUnit>
+    <TextUnit id="626" loc="625">ἄγε δή, λέξωμεν ἐπ' ̓Αργείοις</TextUnit>
+    <TextUnit id="627" loc="626">εὐχὰς ἀγαθάς, ἀγαθῶν ποινάς.</TextUnit>
+    <TextUnit id="628" loc="627">Ζεὺς δ' ἐφορεύοι ξένιος ξενίου</TextUnit>
+    <TextUnit id="629" loc="628">στόματος τιμὰς ἐπ' ἀληθείᾳ,</TextUnit>
+    <TextUnit id="630" loc="629">τέρμον' ἄμεμπτον προσαπαντᾶν.</TextUnit>
+    <TextUnit id="631" loc="630">νῦν ὅτε καί, θεοὶ</TextUnit>
+    <TextUnit id="632" loc="631">διογενεῖς, κλύοιτ' εὐ-</TextUnit>
+    <TextUnit id="633" loc="632">κταῖα γένει χεούσας:</TextUnit>
+    <TextUnit id="634" loc="633">μήποτε πυρίφατον</TextUnit>
+    <TextUnit id="635" loc="634">γᾶν Πελασγίαν πόλιν</TextUnit>
+    <TextUnit id="636" loc="635">τὸν ἄκορον βοᾶς,</TextUnit>
+    <TextUnit id="637" loc="636">κτίσαι μάχλον ̓́Απη,</TextUnit>
+    <TextUnit id="638" loc="637">τὸν ἀρότοις θερί-</TextUnit>
+    <TextUnit id="639" loc="638">ζοντα βροτοὺς ἐν ἄλλοις,</TextUnit>
+    <TextUnit id="640" loc="639">οὕνεκ' ᾤκτισαν ἡμᾶς,</TextUnit>
+    <TextUnit id="641" loc="640">ψῆφον δ' εὔφρον' ἔθεντο,</TextUnit>
+    <TextUnit id="642" loc="641">αἰδοῦνται δ' ἱκέτας Διός,</TextUnit>
+    <TextUnit id="643" loc="642">ποίμναν τάνδ' ἀμέγαρτον:</TextUnit>
+    <TextUnit id="644" loc="643">οὐδὲ μετ' ἀρσένων</TextUnit>
+    <TextUnit id="645" loc="644">ψῆφον ἔθεντ' ἀτιμώ-</TextUnit>
+    <TextUnit id="646" loc="645">σαντες ἔριν γυναικῶν,</TextUnit>
+    <TextUnit id="647" loc="646">Δῖον ἐπιδόμενοι</TextUnit>
+    <TextUnit id="648" loc="647">πράκτορά τε σκοπὸν</TextUnit>
+    <TextUnit id="649" loc="648">δυσπολέμητον, ὃν οὐ</TextUnit>
+    <TextUnit id="650" loc="649">τίς ἂν δόμος ἔχοι</TextUnit>
+    <TextUnit id="651" loc="650">ἐπ' ὀρόφων μιαί-</TextUnit>
+    <TextUnit id="652" loc="651">νοντα; βαρὺς δ' ἐφίζει.</TextUnit>
+    <TextUnit id="653" loc="652">ἅζονται γὰρ ὁμαίμους</TextUnit>
+    <TextUnit id="654" loc="653">Ζηνὸς ἵκτορας ἁγνοῦ.</TextUnit>
+    <TextUnit id="655" loc="654">τοιγάρτοι καθαροῖσι βω-</TextUnit>
+    <TextUnit id="656" loc="655">μοῖς θεοὺς ἀρέσονται.</TextUnit>
+    <TextUnit id="657" loc="656">τοιγὰρ ὑποσκίων</TextUnit>
+    <TextUnit id="658" loc="657">ἐκ στομάτων ποτά-</TextUnit>
+    <TextUnit id="659" loc="658">σθω φιλότιμος εὐχά,</TextUnit>
+    <TextUnit id="660" loc="659">μήποτε λοιμὸς ἀνδρῶν</TextUnit>
+    <TextUnit id="661" loc="660">τάνδε πόλιν κενώσαι:</TextUnit>
+    <TextUnit id="662" loc="661">μηδ' ἐπιχωρίοις ἔρις</TextUnit>
+    <TextUnit id="663" loc="662">πτώμασιν αἱματίσαι πέδον γᾶς.</TextUnit>
+    <TextUnit id="664" loc="663">ἥβας δ' ἄνθος ἄδρεπτον</TextUnit>
+    <TextUnit id="665" loc="664">ἔστω, μηδ' ̓Αφροδίτας</TextUnit>
+    <TextUnit id="666" loc="665">εὐνάτωρ βροτολοιγὸς ̓́Α-</TextUnit>
+    <TextUnit id="667" loc="666">ρης κέρσειεν ἄωτον.</TextUnit>
+    <TextUnit id="668" loc="667">†καὶ γεραροῖσι πρε-</TextUnit>
+    <TextUnit id="669" loc="668">σβυτοδόκοι γεμόν-</TextUnit>
+    <TextUnit id="670" loc="669">των† θυμέλαι φλεγόντων.</TextUnit>
+    <TextUnit id="671" loc="670">τὼς πόλις εὖ νέμοιτο</TextUnit>
+    <TextUnit id="672" loc="671">Ζῆνα μέγαν σεβόντων,</TextUnit>
+    <TextUnit id="673" loc="672">τὸν ξένιον δ' ὑπερτάτως,</TextUnit>
+    <TextUnit id="674" loc="673">ὃς πολιῷ νόμῳ αἶσαν ὀρθοῖ.</TextUnit>
+    <TextUnit id="675" loc="674">τίκτεσθαι δ' ἐφόρους γᾶς</TextUnit>
+    <TextUnit id="676" loc="675">ἄλλους εὐχόμεθ' ἀεί,</TextUnit>
+    <TextUnit id="677" loc="676">̓́Αρτεμιν δ' ̔Εκάταν γυναι-</TextUnit>
+    <TextUnit id="678" loc="677">κῶν λόχους ἐφορεύειν.</TextUnit>
+    <TextUnit id="679" loc="678">μηδέ τις ἀνδροκμὴς</TextUnit>
+    <TextUnit id="680" loc="679">λοιγὸς ἐπελθέτω</TextUnit>
+    <TextUnit id="681" loc="680">τάνδε πόλιν δαί̈ζων,</TextUnit>
+    <TextUnit id="682" loc="681">ἄχορον ἀκίθαριν</TextUnit>
+    <TextUnit id="683" loc="682">δακρυογόνον ̓́Αρη</TextUnit>
+    <TextUnit id="684" loc="683">βοάν τ' ἔνδημον ἐξοπλίζων.</TextUnit>
+    <TextUnit id="685" loc="684">νούσων δ' ἑσμὸς ἀπ' ἀστῶν</TextUnit>
+    <TextUnit id="686" loc="685">ἵζοι κρατὸς ἀτερπής:</TextUnit>
+    <TextUnit id="687" loc="686">εὐμενὴς δ' ὁ Λύκειος ἔ-</TextUnit>
+    <TextUnit id="688" loc="687">στω πάσᾳ νεολαίᾳ.</TextUnit>
+    <TextUnit id="689" loc="688">καρποτελῆ δέ τοι</TextUnit>
+    <TextUnit id="690" loc="689">Ζεὺς ἐπικραινέτω</TextUnit>
+    <TextUnit id="691" loc="690">φέρματι γᾶν πανώρῳ.</TextUnit>
+    <TextUnit id="692" loc="691">πρόνομα δὲ βότ' ἀγροῖς</TextUnit>
+    <TextUnit id="693" loc="692">πολύγονα τελέθοι:</TextUnit>
+    <TextUnit id="694" loc="693">τὸ πᾶν τ' ἐκ δαιμόνων λάχοιεν.</TextUnit>
+    <TextUnit id="695" loc="694">εὔφαμον δ' ἐπὶ βωμοῖς</TextUnit>
+    <TextUnit id="696" loc="695">μοῦσαν θείατ' ἀοιδοί.</TextUnit>
+    <TextUnit id="697" loc="696">ἁγνῶν τ' ἐκ στομάτων φερέ-</TextUnit>
+    <TextUnit id="698" loc="697">σθω φάμα φιλοφόρμιγξ.</TextUnit>
+    <TextUnit id="699" loc="698">φυλάσσοι τ' ἀτρεμαῖα τιμὰς</TextUnit>
+    <TextUnit id="700" loc="699">τὸ δάμιον, τὸ πτόλιν κρατύνει,</TextUnit>
+    <TextUnit id="701" loc="700">προμαθὶς εὐκοινόμητις ἀρχά.</TextUnit>
+    <TextUnit id="702" loc="701">ξένοισί τ' εὐξυμβόλους,</TextUnit>
+    <TextUnit id="703" loc="702">πρὶν ἐξοπλίζειν ̓́Αρη,</TextUnit>
+    <TextUnit id="704" loc="703">δίκας ἄτερ πημάτων διδοῖεν.</TextUnit>
+    <TextUnit id="705" loc="704">θεοὺς δ', οἳ γᾶν ἔχουσιν ἀεὶ</TextUnit>
+    <TextUnit id="706" loc="705">τίοιεν ἐγχωρίοις πατρῴαις</TextUnit>
+    <TextUnit id="707" loc="706">δαφνηφόροις βουθύτοισι τιμαῖς.</TextUnit>
+    <TextUnit id="708" loc="707">τὸ γὰρ τεκόντων σέβας</TextUnit>
+    <TextUnit id="709" loc="708">τρίτον τόδ' ἐν θεσμίοις</TextUnit>
+    <TextUnit id="710" loc="709">Δίκας γέγραπται μεγιστοτίμου.</TextUnit>
+    <TextUnit id="711" loc="710">εὐχὰς μὲν αἰνῶ τάσδε σώφρονας, φίλαι.</TextUnit>
+    <TextUnit id="712" loc="711">ὑμεῖς δὲ μὴ τρέσητ' ἀκούσασαι πατρὸς</TextUnit>
+    <TextUnit id="713" loc="712">ἀπροσδοκήτους τούσδε καὶ νέους λόγους.</TextUnit>
+    <TextUnit id="714" loc="713">ἱκεταδόκου γὰρ τῆσδ' ἀπὸ σκοπῆς ὁρῶ</TextUnit>
+    <TextUnit id="715" loc="714">τὸ πλοῖον. εὔσημον γὰρ οὔ με λανθάνει:</TextUnit>
+    <TextUnit id="716" loc="715">στολμοί τε λαίφους καὶ παραρρύσεις νεώς,</TextUnit>
+    <TextUnit id="717" loc="716">καὶ πρῷρα πρόσθεν ὄμμασιν βλέπους' ὁδόν,</TextUnit>
+    <TextUnit id="718" loc="717">οἴακος εὐθυντῆρος ὑστάτου νεὼς</TextUnit>
+    <TextUnit id="719" loc="718">ἄγαν καλῶς κλύουσα, τοῖσιν οὐ φίλη.</TextUnit>
+    <TextUnit id="720" loc="719">πρέπουσι δ' ἄνδρες νάιοι μελαγχίμοις</TextUnit>
+    <TextUnit id="721" loc="720">γυίοισι λευκῶν ἐκ πεπλωμάτων ἰδεῖν,</TextUnit>
+    <TextUnit id="722" loc="721">καὶ τἄλλα πλοῖα πᾶσά θ' ἡ 'πικουρία</TextUnit>
+    <TextUnit id="723" loc="722">εὔπρεπτος: αὐτὴ δ' ἡγεμὼν ὑπὸ χθόνα</TextUnit>
+    <TextUnit id="724" loc="723">στείλασα λαῖφος παγκρότως ἐρέσσεται.</TextUnit>
+    <TextUnit id="725" loc="724">ἀλλ' ἡσύχως χρὴ καὶ σεσωφρονισμένως</TextUnit>
+    <TextUnit id="726" loc="725">πρὸς πρᾶγμ' ὁρώσας τῶνδε μὴ ἀμελεῖν θεῶν.</TextUnit>
+    <TextUnit id="727" loc="726">ἐγὼ δ' ἀρωγοὺς ξυνδίκους θ' ἥξω λαβών.</TextUnit>
+    <TextUnit id="728" loc="727">ἴσως γὰρ ἂν κῆρυξ τις ἢ πρέσβη μόλοι,</TextUnit>
+    <TextUnit id="729" loc="728">ἄγειν θέλοντες ῥυσίων ἐφάπτορες.</TextUnit>
+    <TextUnit id="730" loc="729">ἀλλ' οὐδὲν ἔσται τῶνδε: μὴ τρέσητέ νιν.</TextUnit>
+    <TextUnit id="731" loc="730">ὅμως δ' ἄμεινον, εἰ βραδύνοιμεν βοῇ,</TextUnit>
+    <TextUnit id="732" loc="731">ἀλκῆς λαθέσθαι τῆσδε μηδαμῶς ποτε.</TextUnit>
+    <TextUnit id="733" loc="732">θάρσει: χρόνῳ τοι κυρίῳ τ' ἐν ἡμέρᾳ</TextUnit>
+    <TextUnit id="734" loc="733">θεοὺς ἀτίζων τις βροτῶν δώσει δίκην.</TextUnit>
+    <TextUnit id="735" loc="734">πάτερ, φοβοῦμαι, νῆες ὡς ὠκύπτεροι</TextUnit>
+    <TextUnit id="736" loc="735">ἥκουσι: μῆκος δ' οὐδὲν ἐν μέσῳ χρόνου.</TextUnit>
+    <TextUnit id="737" loc="736">περίφοβόν μ' ἔχει τάρβος ἐτητύμως</TextUnit>
+    <TextUnit id="738" loc="737">πολυδρόμου φυγᾶς ὄφελος εἴ τί μοι.</TextUnit>
+    <TextUnit id="739" loc="738">παροίχομαι, πάτερ, δείματι.</TextUnit>
+    <TextUnit id="740" loc="739">ἐπεὶ τελεία ψῆφος ̓Αργείων, τέκνα,</TextUnit>
+    <TextUnit id="741" loc="740">θάρσει, μαχοῦνται περὶ σέθεν, σάφ' οἶδ' ἐγώ.</TextUnit>
+    <TextUnit id="742" loc="741">ἐξῶλές ἐστι μάργον Αἰγύπτου γένος</TextUnit>
+    <TextUnit id="743" loc="742">μάχης τ' ἄπληστον: καὶ λέγω πρὸς εἰδότα.</TextUnit>
+    <TextUnit id="744" loc="743">δοριπαγεῖς δ' ἔχοντες κυανώπιδας</TextUnit>
+    <TextUnit id="745" loc="744">νῆας ἔπλευσαν ὧδ' ἐπιτυχεῖ κότῳ</TextUnit>
+    <TextUnit id="746" loc="745">πολεῖ μελαγχίμῳ σὺν στρατῷ.</TextUnit>
+    <TextUnit id="747" loc="746">πολλοὺς δέ γ' εὑρήσουσιν ἐν μεσημβρίας</TextUnit>
+    <TextUnit id="748" loc="747">θάλπει βραχίον' εὖ κατερρινημένους.</TextUnit>
+    <TextUnit id="749" loc="748">μόνην δὲ μὴ πρόλειπε: λίσσομαι, πάτερ.</TextUnit>
+    <TextUnit id="750" loc="749">γυνὴ μονωθεῖς' οὐδέν: οὐκ ἔνεστ' ̓́Αρης.</TextUnit>
+    <TextUnit id="751" loc="750">οὐλόφρονες, δὲ καὶ δολιομήτιδες</TextUnit>
+    <TextUnit id="752" loc="751">δυσάγνοις φρεσίν, κόρακες ὥστε, βω-</TextUnit>
+    <TextUnit id="753" loc="752">μῶν ἀλέγοντες οὐδέν.</TextUnit>
+    <TextUnit id="754" loc="753">καλῶς ἂν ἡμῖν ξυμφέροι ταῦτ' ὦ τέκνα,</TextUnit>
+    <TextUnit id="755" loc="754">εἰ σοί τε καὶ θεοῖσιν ἐχθαιροίατο.</TextUnit>
+    <TextUnit id="756" loc="755">οὐ μὴ τριαίνας τάσδε καὶ θεῶν σέβη</TextUnit>
+    <TextUnit id="757" loc="756">δείσαντες ἡμῶν χεῖρ' ἀπόσχωνται, πάτερ.</TextUnit>
+    <TextUnit id="758" loc="757">περίφρονες δ' ἄγαν ἀνιέρῳ μένει</TextUnit>
+    <TextUnit id="759" loc="758">μεμαργωμένοι κυνοθρασεῖς, θεῶν</TextUnit>
+    <TextUnit id="760" loc="759">οὐδὲν ἐπαί̈οντες.</TextUnit>
+    <TextUnit id="761" loc="760">ἀλλ' ἔστι φήμη τοὺς λύκους κρείσσους κυνῶν</TextUnit>
+    <TextUnit id="762" loc="761">εἶναι: βύβλου δὲ καρπὸς οὐ κρατεῖ στάχυν.</TextUnit>
+    <TextUnit id="763" loc="762">ὡς καὶ ματαίων ἀνοσίων τε κνωδάλων</TextUnit>
+    <TextUnit id="764" loc="763">ἔχοντας ὀργάς, χρὴ φυλάσσεσθαι τάχος.</TextUnit>
+    <TextUnit id="765" loc="764">οὔτοι ταχεῖα ναυτικοῦ στρατοῦ στολή,</TextUnit>
+    <TextUnit id="766" loc="765">οὐδ' ὅρμος, οὗ δεῖ πεισμάτων σωτήρια</TextUnit>
+    <TextUnit id="767" loc="766">ἐς γῆν ἐνεγκεῖν, οὐδ' ἐν ἀγκυρουχίαις</TextUnit>
+    <TextUnit id="768" loc="767">θαρσοῦσι ναῶν ποιμένες παραυτίκα,</TextUnit>
+    <TextUnit id="769" loc="768">ἄλλως τε καὶ μολόντες ἀλίμενον χθόνα</TextUnit>
+    <TextUnit id="770" loc="769">ἐς νύκτ' ἀποστείχοντος ἡλίου. φιλεῖ</TextUnit>
+    <TextUnit id="771" loc="770">ὠδῖνα τίκτειν νὺξ κυβερνήτῃ σοφῷ.</TextUnit>
+    <TextUnit id="772" loc="771">οὕτω γένοιτ' ἂν οὐδ' ἂν ἔκβασις στρατοῦ</TextUnit>
+    <TextUnit id="773" loc="772">καλή, πρὶν ὅρμῳ ναῦν θρασυνθῆναι. σὺ δὲ</TextUnit>
+    <TextUnit id="774" loc="773">φρόνει μὲν ὡς ταρβοῦσα μὴ ἀμελεῖν θεῶν:</TextUnit>
+    <TextUnit id="775" loc="775">πράξας ἀρωγήν: ἄγγελον δ' οὐ μέμψεται</TextUnit>
+    <TextUnit id="776" loc="775">πόλις γέρονθ', ἡβῶντα δ' εὐγλώσσῳ φρενί.</TextUnit>
+    <TextUnit id="777" loc="776">ἰὼ γᾶ βοῦνι, πάνδικον σέβας,</TextUnit>
+    <TextUnit id="778" loc="777">τί πεισόμεσθα; ποῖ φύγωμεν ̓Απίας</TextUnit>
+    <TextUnit id="779" loc="778">χθονός, κελαινὸν εἴ τι κεῦθός ἐστί που;</TextUnit>
+    <TextUnit id="780" loc="779">μέλας γενοίμαν καπνὸς</TextUnit>
+    <TextUnit id="781" loc="780">νέφεσσι γειτονῶν Διός:</TextUnit>
+    <TextUnit id="782" loc="781">τὸ πᾶν δ' ἄφαντος</TextUnit>
+    <TextUnit id="783" loc="782">ἀμπετὴς ἀιδνὸς ὡς</TextUnit>
+    <TextUnit id="784" loc="783">κόνις ἄτερθε πτερύγων ὀλοίμαν.</TextUnit>
+    <TextUnit id="785" loc="784">ἄφυκτον δ' οὐκέτ' ἂν πέλοι κακόν:</TextUnit>
+    <TextUnit id="786" loc="785">κελαινόχρως δὲ πάλλεταί μου καρδία.</TextUnit>
+    <TextUnit id="787" loc="786">πατρὸς σκοπαὶ δέ μ' εἷλον: οἴχομαι φόβῳ.</TextUnit>
+    <TextUnit id="788" loc="787">θέλοιμι δ' ἂν μορσίμου</TextUnit>
+    <TextUnit id="789" loc="788">βρόχου τυχεῖν ἐν ἀρτάναις,</TextUnit>
+    <TextUnit id="790" loc="789">πρὶν ἄνδρ' ἀπευκτὸν</TextUnit>
+    <TextUnit id="791" loc="790">τῷδε χριμφθῆναι χροί̈.</TextUnit>
+    <TextUnit id="792" loc="791">πρόπαρ θανούσας δ' ̓Αίδας ἀνάσσοι.</TextUnit>
+    <TextUnit id="793" loc="792">πόθεν δέ μοι γένοιτ' ἂν αἰθέρος θρόνος,</TextUnit>
+    <TextUnit id="794" loc="793">πρὸς ὃν νέφη μυδηλὰ γίγνεται χιών,</TextUnit>
+    <TextUnit id="795" loc="794">ἢ λισσὰς αἰγίλιψ ἀπρός-</TextUnit>
+    <TextUnit id="796" loc="795">δεικτος οἰόφρων κρεμὰς</TextUnit>
+    <TextUnit id="797" loc="796">γυπιὰς πέτρα, βαθὺ</TextUnit>
+    <TextUnit id="798" loc="797">πτῶμα μαρτυροῦσά μοι,</TextUnit>
+    <TextUnit id="799" loc="798">πρὶν δαί̈κτορος βίᾳ</TextUnit>
+    <TextUnit id="800" loc="799">καρδίας γάμου κυρῆσαι;</TextUnit>
+    <TextUnit id="801" loc="800">κυσὶν δ' ἔπειθ' ἕλωρα κἀπιχωρίοις</TextUnit>
+    <TextUnit id="802" loc="801">ὄρνισι δεῖπνον οὐκ ἀναίνομαι πέλειν:</TextUnit>
+    <TextUnit id="803" loc="802">τὸ γὰρ θανεῖν ἐλευθεροῦ-</TextUnit>
+    <TextUnit id="804" loc="803">ται φιλαιάκτων κακῶν. ἐλθέτω</TextUnit>
+    <TextUnit id="805" loc="804">ἐλθέτω μόρος, πρὸ κοί-</TextUnit>
+    <TextUnit id="806" loc="805">τας γαμηλίου τυχών.</TextUnit>
+    <TextUnit id="807" loc="806">ἀμφυγᾶς τίν' ἔτι πόρον</TextUnit>
+    <TextUnit id="808" loc="807">τέμνω γάμου λυτῆρα;</TextUnit>
+    <TextUnit id="809" loc="808">ἴυζε δ' ὀμφὰν οὐρανίαν</TextUnit>
+    <TextUnit id="810" loc="809">μέλεα μέλη λιτανὰ θεοῖς:</TextUnit>
+    <TextUnit id="811" loc="810">τέλεα δέ πως πελόμενά μοι</TextUnit>
+    <TextUnit id="812" loc="811">λύσιμά τ' ἄχιμά τ' ἔπιδε, πάτερ,</TextUnit>
+    <TextUnit id="813" loc="812">βίαια μὴ φαιδρῶς ὁρῶν</TextUnit>
+    <TextUnit id="814" loc="813">ὄμμασιν ἐνδίκοις.</TextUnit>
+    <TextUnit id="815" loc="815">σεβίζου δ' ἱκέτας σέθεν,</TextUnit>
+    <TextUnit id="816" loc="816">γαιάοχε παγκρατὲς Ζεῦ.</TextUnit>
+    <TextUnit id="817" loc="817">γένος γὰρ Αἰγύπτειον ὕβριν</TextUnit>
+    <TextUnit id="818" loc="818">δύσφορον ἀρσενογενὲς</TextUnit>
+    <TextUnit id="819" loc="819">μετά με δρόμοισι διόμενοι</TextUnit>
+    <TextUnit id="820" loc="820">φυγάδα μάταισι πολυθρόοις</TextUnit>
+    <TextUnit id="821" loc="821">βίαια δίζηνται λαβεῖν.</TextUnit>
+    <TextUnit id="822" loc="822">σὸν δ' ἐπίπαν ζυγὸν</TextUnit>
+    <TextUnit id="823" loc="823">ταλάντου. τί δ' ἄνευ σέθεν</TextUnit>
+    <TextUnit id="824" loc="824">θνατοῖσι τέλειόν ἐστιν;</TextUnit>
+    <TextUnit id="825" loc="825">ό ό ό, ά ά ά:</TextUnit>
+    <TextUnit id="826" loc="826">ὅδε μάρπτις νάιος γάιος.</TextUnit>
+    <TextUnit id="827" loc="827">τῶν πρό, μάρπτι, κάμνοις:</TextUnit>
+    <TextUnit id="828" loc="828">†ἰόφ .. ὀμ .. αὖθι κάκκας νυ</TextUnit>
+    <TextUnit id="829" loc="829">δυϊαν βοᾶν ἀμφαίνω.†</TextUnit>
+    <TextUnit id="830" loc="830">ὁρῶ τάδε φροίμια †πράξαν πόνων</TextUnit>
+    <TextUnit id="831" loc="831">βιαίων ἐμῶν. ἠὲ ἠέ.</TextUnit>
+    <TextUnit id="832" loc="832">βαῖνε φυγᾷ πρὸς ἀλκάν:</TextUnit>
+    <TextUnit id="833" loc="833">†βλοσυρόφρονα χλιδᾷ</TextUnit>
+    <TextUnit id="834" loc="834">δύσφορα ναὶ̈ κἀν γᾷ.</TextUnit>
+    <TextUnit id="835" loc="835">γαϊάναξ προτάσσου.†</TextUnit>
+    <TextUnit id="836" loc="836">σοῦσθε σοῦσθ' ἐπὶ βᾶ-</TextUnit>
+    <TextUnit id="837" loc="837">ριν ὅπως ποδῶν ἔχετε</TextUnit>
+    <TextUnit id="838" loc="838">†οὐκοῦν οὐκοῦν†</TextUnit>
+    <TextUnit id="839" loc="839">τιλμοὶ τιλμοὶ καὶ στιγμοί,</TextUnit>
+    <TextUnit id="840" loc="840">πολυαίμων φόνιος</TextUnit>
+    <TextUnit id="841" loc="841">ἀποκοπὰ κρατός.</TextUnit>
+    <TextUnit id="842" loc="842">σοῦσθε σοῦσθ'† ὀλύμεναι ὀλόμεν' ἐπαμίδα.</TextUnit>
+    <TextUnit id="843" loc="843">εἴθ' ἀνὰ πολύρυτον</TextUnit>
+    <TextUnit id="844" loc="844">ἁλμήεντα πόρον</TextUnit>
+    <TextUnit id="845" loc="845">δεσποσίῳ ξὺν ὕβρει,</TextUnit>
+    <TextUnit id="846" loc="846">γομφοδέτῳ τε δόρει διώλου.</TextUnit>
+    <TextUnit id="847" loc="847">†αἵμονες ὡς ἐπάμιδα</TextUnit>
+    <TextUnit id="848" loc="848">ησυδουπιάπιτα†</TextUnit>
+    <TextUnit id="849" loc="849">†κελεύω βοᾶν μεθέσθαι</TextUnit>
+    <TextUnit id="850" loc="850">ἴχαρ φρενί τ' ἄταν.†</TextUnit>
+    <TextUnit id="851" loc="851">ἰοὺ ἰού.</TextUnit>
+    <TextUnit id="852" loc="852">λεῖφ' ἕδρανα, κί' ἐς δόρυ.</TextUnit>
+    <TextUnit id="853" loc="853">ἀτίετον ἄπολιν οὐ σέβω.</TextUnit>
+    <TextUnit id="854" loc="854">μήποτε πάλιν ἴδοιμ'</TextUnit>
+    <TextUnit id="855" loc="855">ἀλφεσίβοιον ὕδωρ,</TextUnit>
+    <TextUnit id="856" loc="856">ἔνθεν ἀεξόμενον</TextUnit>
+    <TextUnit id="857" loc="857">ζώφυτον αἷμα βροτοῖσι θάλλει.</TextUnit>
+    <TextUnit id="858" loc="858">ἔγγαιος ἐγὼ βαθυχαῖος</TextUnit>
+    <TextUnit id="859" loc="860">†βαθρείας βαθρείας, γέρον.†</TextUnit>
+    <TextUnit id="860" loc="861">σὺ δ' ἐν ναὶ̈ ναὶ̈ βάσῃ</TextUnit>
+    <TextUnit id="861" loc="862">τάχα θέλεος ἀθέλεος,</TextUnit>
+    <TextUnit id="862" loc="863">βίᾳ βίᾳ τε πολλᾷ φροῦδα.</TextUnit>
+    <TextUnit id="863" loc="864">†βάτεαι βαθυμιτροκακὰ παθῶν†</TextUnit>
+    <TextUnit id="864" loc="865">ὀλόμεναι παλάμαις.</TextUnit>
+    <TextUnit id="865" loc="866">αἰαῖ αἰαῖ.</TextUnit>
+    <TextUnit id="866" loc="867">αἲ γὰρ δυσπαλάμως ὄλοιο</TextUnit>
+    <TextUnit id="867" loc="868">δι' ἁλίρρυτον ἄλσος,</TextUnit>
+    <TextUnit id="868" loc="869">κατὰ Σαρπηδόνιον</TextUnit>
+    <TextUnit id="869" loc="870">χῶμα πολύψαμμον ἀλαθεὶς</TextUnit>
+    <TextUnit id="870" loc="871">Εὐρεί̈αισιν αὔραις.</TextUnit>
+    <TextUnit id="871" loc="872">ἴυζε καὶ λάκαζε καὶ κάλει θεούς.</TextUnit>
+    <TextUnit id="872" loc="873">Αἰγυπτίαν γὰρ βᾶριν οὐχ ὑπερθορῇ.</TextUnit>
+    <TextUnit id="873" loc="874">ἴυζε καὶ</TextUnit>
+    <TextUnit id="874" loc="875">βόα, χέον πικρότερον οἰζύος νόμον.</TextUnit>
+    <TextUnit id="875" loc="876">οἰοῖ οἰοῖ,</TextUnit>
+    <TextUnit id="876" loc="877">λύμας, ᾇ σὺ πρὸ γᾶς ὑλάσκων</TextUnit>
+    <TextUnit id="877" loc="878">περί, χάμψα, βρυάζεις:</TextUnit>
+    <TextUnit id="878" loc="879">ὃς ἐπωπᾷ ς', ὁ μέγας</TextUnit>
+    <TextUnit id="879" loc="880">Νεῖλος, ὑβρίζοντά ς' ἀποτρέ-</TextUnit>
+    <TextUnit id="880" loc="881">ψειεν ἄιστον ὕβριν.</TextUnit>
+    <TextUnit id="881" loc="882">βαίνειν κελεύω βᾶριν εἰς ἀμφίστροφον</TextUnit>
+    <TextUnit id="882" loc="883">ὅσον τάχιστα: μηδέ τις σχολαζέτω.</TextUnit>
+    <TextUnit id="883" loc="884">ὁλκὴ γὰρ οὔτοι πλόκαμον οὐδάμ' ἅζεται.</TextUnit>
+    <TextUnit id="884" loc="885">οἰοῖ, πάτερ, βρέτεος ἄρος</TextUnit>
+    <TextUnit id="885" loc="886">ἀτᾷ μ':: ἅλαδ' ἄγει</TextUnit>
+    <TextUnit id="886" loc="887">ἄραχνος ὡς βάδην.</TextUnit>
+    <TextUnit id="887" loc="888">ὄναρ ὄναρ μέλαν,</TextUnit>
+    <TextUnit id="888" loc="889">ὀτοτοτοτοῖ,</TextUnit>
+    <TextUnit id="889" loc="890">μᾶ Γᾶ μᾶ Γᾶ, βοὰν</TextUnit>
+    <TextUnit id="890" loc="891">φοβερὸν ἀπότρεπε,</TextUnit>
+    <TextUnit id="891" loc="892">ὦ πᾶ, Γᾶς παῖ, Ζεῦ.</TextUnit>
+    <TextUnit id="892" loc="893">οὔτοι φοβοῦμαι δαίμονας τοὺς ἐνθάδε:</TextUnit>
+    <TextUnit id="893" loc="894">οὐ γάρ μ' ἔθρεψαν, οὐδ' ἐγήρασαν τροφῇ.</TextUnit>
+    <TextUnit id="894" loc="895">μαιμᾷ πέλας δίπους ὄφις:</TextUnit>
+    <TextUnit id="895" loc="897">ἔχιδνα δ' ὥς μέ τις</TextUnit>
+    <TextUnit id="896" loc="898">πόδα δακοῦς' ἔχει.</TextUnit>
+    <TextUnit id="897" loc="899">ὀτοτοτοτοῖ,</TextUnit>
+    <TextUnit id="898" loc="900">μᾶ Γᾶ μᾶ Γᾶ βοὰν</TextUnit>
+    <TextUnit id="899" loc="900">φοβερὸν ἀπότρεπε,</TextUnit>
+    <TextUnit id="900" loc="901">ὦ πᾶ, Γᾶς παῖ, Ζεῦ.</TextUnit>
+    <TextUnit id="901" loc="902">εἰ μή τις ἐς ναῦν εἶσιν αἰνέσας τάδε,</TextUnit>
+    <TextUnit id="902" loc="903">λακὶς χιτῶνος ἔργον οὐ κατοικτιεῖ.</TextUnit>
+    <TextUnit id="903" loc="904">διωλόμεσθ': ἄσεπτ', ἄναξ, πάσχομεν—</TextUnit>
+    <TextUnit id="904" loc="905">πολλοὺς ἄνακτας, παῖδας Αἰγύπτου τάχα</TextUnit>
+    <TextUnit id="905" loc="906">ὄψεσθε: θαρσεῖτ', οὐκ ἐρεῖτ' ἀναρχίαν.</TextUnit>
+    <TextUnit id="906" loc="907">ἰὼ πόλεως ἀγοὶ πρόμοι, δάμναμαι.</TextUnit>
+    <TextUnit id="907" loc="908">ἕλξειν ἔοιχ' ὑμᾶς ἀποσπάσας κόμης,</TextUnit>
+    <TextUnit id="908" loc="910">ἐπεὶ οὐκ ἀκούετ' ὀξὺ τῶν ἐμῶν λόγων.</TextUnit>
+    <TextUnit id="909" loc="911">οὗτος, τί ποιεῖς; ἐκ ποίου φρονήματος</TextUnit>
+    <TextUnit id="910" loc="912">ἀνδρῶν Πελασγῶν τήνδ' ἀτιμάζεις χθόνα;</TextUnit>
+    <TextUnit id="911" loc="913">ἀλλ' ἦ γυναικῶν ἐς πόλιν δοκεῖς μολεῖν;</TextUnit>
+    <TextUnit id="912" loc="914">κάρβανος ὢν δ' ̔́Ελλησιν ἐγχλίεις ἄγαν:</TextUnit>
+    <TextUnit id="913" loc="915">καὶ πόλλ' ἁμαρτὼν οὐδὲν ὤρθωσας φρενί.</TextUnit>
+    <TextUnit id="914" loc="916">τί δ' ἠμπλάκηται τῶνδ' ἐμοὶ δίκης ἄτερ;</TextUnit>
+    <TextUnit id="915" loc="917">ξένος μὲν εἶναι πρῶτον οὐκ ἐπίστασαι.</TextUnit>
+    <TextUnit id="916" loc="918">πῶς δ' οὐχί; τἄμ' ὀλωλόθ' εὑρίσκων ἄγω.</TextUnit>
+    <TextUnit id="917" loc="919">ποίοισιν εἰπὼν προξένοις ἐγχωρίοις;</TextUnit>
+    <TextUnit id="918" loc="920">̔Ερμῇ μεγίστῳ προξένῳ μαστηρίῳ.</TextUnit>
+    <TextUnit id="919" loc="921">θεοῖσιν εἰπὼν τοὺς θεοὺς οὐδὲν σέβῃ.</TextUnit>
+    <TextUnit id="920" loc="922">τοὺς ἀμφὶ Νεῖλον δαίμονας σεβίζομαι.</TextUnit>
+    <TextUnit id="921" loc="923">οἱ δ' ἐνθάδ' οὐδέν, ὡς ἐγὼ σέθεν κλύω;</TextUnit>
+    <TextUnit id="922" loc="924">ἄγοιμ' ἄν, εἴ τις τάσδε μὴ 'ξαιρήσεται.</TextUnit>
+    <TextUnit id="923" loc="925">κλάοις ἄν, εἰ ψαύσειας, οὐ μάλ' ἐς μακράν.</TextUnit>
+    <TextUnit id="924" loc="926">ἤκουσα τοὔπος δ' οὐδαμῶς φιλόξενον.</TextUnit>
+    <TextUnit id="925" loc="927">οὐ γὰρ ξενοῦμαι τοὺς θεῶν συλήτορας.</TextUnit>
+    <TextUnit id="926" loc="928">λέγοιμ' ἂν ἐλθὼν παισὶν Αἰγύπτου τάδε.</TextUnit>
+    <TextUnit id="927" loc="929">ἀβουκόλητον τοῦτ' ἐμῷ, φρονήματι.</TextUnit>
+    <TextUnit id="928" loc="930">ἀλλ' ὡς ἂν εἰδὼς ἐννέπω σαφέστερον,—</TextUnit>
+    <TextUnit id="929" loc="931">καὶ γὰρ πρέπει κήρυκ' ἀπαγγέλλειν τορῶς</TextUnit>
+    <TextUnit id="930" loc="932">ἕκαστα,—πῶς φῶ, πρὸς τίνος τ' ἀφαιρεθεὶς</TextUnit>
+    <TextUnit id="931" loc="933">ἥκειν γυναικῶν αὐτανέψιον στόλον;</TextUnit>
+    <TextUnit id="932" loc="934">οὔτοι δικάζει ταῦτα μαρτύρων ὕπο</TextUnit>
+    <TextUnit id="933" loc="935">̓́Αρης: τὸ νεῖκος δ' οὐκ ἐν ἀργύρου λαβῇ</TextUnit>
+    <TextUnit id="934" loc="936">ἔλυσεν: ἀλλὰ πολλὰ γίγνεται πάρος</TextUnit>
+    <TextUnit id="935" loc="937">πεσήματ' ἀνδρῶν κἀπολακτισμοὶ βίου.</TextUnit>
+    <TextUnit id="936" loc="938">τί σοι λέγειν χρὴ τοὔνομ'; ἐν χρόνῳ μαθὼν</TextUnit>
+    <TextUnit id="937" loc="939">εἴσῃ σύ τ' αὐτὸς χοἰ ξυνέμποροι σέθεν.</TextUnit>
+    <TextUnit id="938" loc="940">ταύτας δ' ἑκούσας μὲν κατ' εὔνοιαν φρενῶν</TextUnit>
+    <TextUnit id="939" loc="941">ἄγοις ἄν, εἴπερ εὐσεβὴς πίθοι λόγος.</TextUnit>
+    <TextUnit id="940" loc="942">τοία δὲ δημόπρακτος ἐκ πόλεως μία</TextUnit>
+    <TextUnit id="941" loc="943">ψῆφος κέκρανται, μήποτ' ἐκδοῦναι βίᾳ</TextUnit>
+    <TextUnit id="942" loc="944">στόλον γυναικῶν: τῶνδ' ἐφήλωται τορῶς</TextUnit>
+    <TextUnit id="943" loc="945">γόμφος διαμπάξ, ὡς μένειν ἀραρότως.</TextUnit>
+    <TextUnit id="944" loc="946">ταῦτ' οὐ πίναξίν ἐστιν ἐγγεγραμμένα</TextUnit>
+    <TextUnit id="945" loc="947">οὐδ' ἐν πτυχαῖς βίβλων κατεσφραγισμένα,</TextUnit>
+    <TextUnit id="946" loc="948">σαφῆ δ' ἀκούεις ἐξ ἐλευθεροστόμου</TextUnit>
+    <TextUnit id="947" loc="949">γλώσσης. κομίζου δ' ὡς τάχιστ' ἐξ ὀμμάτων.</TextUnit>
+    <TextUnit id="948" loc="950">ἔοιγμεν ἤδη πόλεμον ἀρεῖσθαι νέον.</TextUnit>
+    <TextUnit id="949" loc="951">εἴη δὲ νίκη καὶ κράτη τοῖς ἄρσεσιν.</TextUnit>
+    <TextUnit id="950" loc="952">ἀλλ' ἄρσενάς τοι τῆσδε γῆς οἰκήτορας</TextUnit>
+    <TextUnit id="951" loc="953">εὑρήσετ' οὐ πίνοντας ἐκ κριθῶν μέθυ.</TextUnit>
+    <TextUnit id="952" loc="954">ὑμεῖς δὲ πᾶσαι σὺν φίλαις ὀπάοσι</TextUnit>
+    <TextUnit id="953" loc="955">θράσος λαβοῦσαι στείχετ' εὐερκῆ πόλιν,</TextUnit>
+    <TextUnit id="954" loc="956">πύργων βαθείᾳ μηχανῇ κεκλῃμένην.</TextUnit>
+    <TextUnit id="955" loc="957">καὶ δώματ' ἐστὶ πολλὰ μὲν τὰ δήμια,</TextUnit>
+    <TextUnit id="956" loc="958">δεδωμάτωμαι δ' οὐδ' ἐγὼ σμικρᾷ χερί.</TextUnit>
+    <TextUnit id="957" loc="959">ἔνθ' ὑμίν ἐστιν εὐτύκους ναίειν δόμους</TextUnit>
+    <TextUnit id="958" loc="960">πολλῶν μετ' ἄλλων: εἰ δέ τις μείζων χάρις,</TextUnit>
+    <TextUnit id="959" loc="961">πάρεστιν οἰκεῖν καὶ μονορρύθμους δόμους.</TextUnit>
+    <TextUnit id="960" loc="962">τούτων τὰ λῷστα καὶ τὰ θυμηδέστατα</TextUnit>
+    <TextUnit id="961" loc="963">πάρεστι, λωτίσασθε. προστάτης δ' ἐγὼ</TextUnit>
+    <TextUnit id="962" loc="964">ἀστοί τε πάντες, ὧνπερ ἥδε κραίνεται</TextUnit>
+    <TextUnit id="963" loc="965">ψῆφος. τί τῶνδε κυριωτέρους μένεις;</TextUnit>
+    <TextUnit id="964" loc="966">ἀλλ' ἀντ' ἀγαθῶν ἀγαθοῖσι βρύοις,</TextUnit>
+    <TextUnit id="965" loc="967">δῖε Πελασγῶν.</TextUnit>
+    <TextUnit id="966" loc="968">πέμψον δὲ πρόφρων δεῦρ' ἡμέτερον</TextUnit>
+    <TextUnit id="967" loc="969">πατέρ' εὐθαρσῆ Δαναόν, πρόνοον</TextUnit>
+    <TextUnit id="968" loc="970">καὶ βούλαρχον. τοῦ γὰρ προτέρα</TextUnit>
+    <TextUnit id="969" loc="971">μῆτις, ὅπου χρὴ δώματα ναίειν</TextUnit>
+    <TextUnit id="970" loc="972">καὶ τόπος εὔφρων. πᾶς τις ἐπειπεῖν</TextUnit>
+    <TextUnit id="971" loc="973">ψόγον ἀλλοθρόοις</TextUnit>
+    <TextUnit id="972" loc="974">εὔτυκος: εἴη δὲ τὰ λῷστα.</TextUnit>
+    <TextUnit id="973" loc="975">σύν τ' εὐκλείᾳ καὶ ἀμηνίτῳ</TextUnit>
+    <TextUnit id="974" loc="976">βάξει λαῶν ἐγχώρων</TextUnit>
+    <TextUnit id="975" loc="978">τάσσεσθε, φίλαι δμωίδες, οὕτως</TextUnit>
+    <TextUnit id="976" loc="979">ὡς ἐφ' ἑκάστῃ διεκλήρωσεν</TextUnit>
+    <TextUnit id="977" loc="980">Δαναὸς θεραποντίδα φερνήν.</TextUnit>
+    <TextUnit id="978" loc="980">ὦ παῖδες, ̓Αργείοισιν εὔχεσθαι χρεών,</TextUnit>
+    <TextUnit id="979" loc="981">θύειν τε λείβειν θ', ὡς θεοῖς, ̓Ολυμπίοις,</TextUnit>
+    <TextUnit id="980" loc="982">σπονδάς, ἐπεὶ σωτῆρες οὐ διχορρόπως.</TextUnit>
+    <TextUnit id="981" loc="983">καί μου τὰ μὲν πραχθέντα πρὸς τοὺς ἐγγενεῖς</TextUnit>
+    <TextUnit id="982" loc="984">φίλους πικρῶς ἤκουσαν αὐτανεψίοις:</TextUnit>
+    <TextUnit id="983" loc="985">ἐμοὶ δ' ὀπαδοὺς τούσδε καὶ δορυσσόους</TextUnit>
+    <TextUnit id="984" loc="986">ἔταξαν, ὡς ἔχοιμι τίμιον γέρας,</TextUnit>
+    <TextUnit id="985" loc="987">καὶ μὴ 'ξ ἀέλπτων δορικανεῖ μόρῳ θανὼν</TextUnit>
+    <TextUnit id="986" loc="988">λάθοιμι, χώρᾳ δ' ἄχθος ἀείζων πέλοι.</TextUnit>
+    <TextUnit id="987" loc="989">τοιῶνδε τυγχάνοντας ἐκ πρυμνῆς φρενὸς</TextUnit>
+    <TextUnit id="988" loc="990">χάριν σέβεσθαι τιμιωτέραν χρεών.</TextUnit>
+    <TextUnit id="989" loc="991">καὶ ταῦθ' ἅμ' ἐγγράψασθε πρὸς γεγραμμένοις</TextUnit>
+    <TextUnit id="990" loc="992">πολλοῖσιν ἄλλοις σωφρονίσμασιν πατρός,</TextUnit>
+    <TextUnit id="991" loc="993">ἀγνῶθ' ὅμιλον ἐξελέγχεσθαι χρόνῳ.</TextUnit>
+    <TextUnit id="992" loc="994">πᾶς δ' ἐν μετοίκῳ γλῶσσαν εὔτυκον φέρει</TextUnit>
+    <TextUnit id="993" loc="995">κακήν, τό τ' εἰπεῖν εὐπετὲς μύσαγμά πως.</TextUnit>
+    <TextUnit id="994" loc="996">ὑμᾶς δ' ἐπαινῶ μὴ καταισχύνειν ἐμέ,</TextUnit>
+    <TextUnit id="995" loc="997">ὥραν ἐχούσας τήνδ' ἐπίστρεπτον βροτοῖς.</TextUnit>
+    <TextUnit id="996" loc="998">τέρειν' ὀπώρα δ' εὐφύλακτος οὐδαμῶς:</TextUnit>
+    <TextUnit id="997" loc="999">θῆρες δὲ κηραίνουσι καὶ βροτοί, τί μήν;</TextUnit>
+    <TextUnit id="998" loc="1000">καὶ κνώδαλα πτεροῦντα καὶ πεδοστιβῆ.</TextUnit>
+    <TextUnit id="999" loc="1001">†καρπώματα στάζοντα κηρύσσει Κύπρις</TextUnit>
+    <TextUnit id="1000" loc="1002">καλωρα κωλύουσαν θωσμένειν ἐρῶ,†</TextUnit>
+    <TextUnit id="1001" loc="1003">καὶ παρθένων χλιδαῖσιν εὐμόρφοις ἔπι</TextUnit>
+    <TextUnit id="1002" loc="1004">πᾶς τις παρελθὼν ὄμματος θελκτήριον</TextUnit>
+    <TextUnit id="1003" loc="1005">τόξευμ' ἔπεμψεν, ἱμέρου νικώμενος.</TextUnit>
+    <TextUnit id="1004" loc="1006">πρὸς ταῦτα μὴ πάθωμεν ὧν πολὺς πόνος</TextUnit>
+    <TextUnit id="1005" loc="1007">πολὺς δὲ πόντος οὕνεκ' ἠρόθη δορί,</TextUnit>
+    <TextUnit id="1006" loc="1008">μηδ' αἶσχος ἡμῖν, ἡδονὴν δ' ἐχθροῖς ἐμοῖς</TextUnit>
+    <TextUnit id="1007" loc="1009">πράξωμεν. οἴκησις δὲ καὶ διπλῆ πάρα</TextUnit>
+    <TextUnit id="1008" loc="1010">τὴν μὲν Πελασγός, τὴν δὲ καὶ πόλις διδοῖ,</TextUnit>
+    <TextUnit id="1009" loc="1011">οἰκεῖν λάτρων ἄτερθεν: εὐπετῆ τάδε.</TextUnit>
+    <TextUnit id="1010" loc="1012">μόνον φύλαξαι τάσδ' ἐπιστολὰς πατρός,</TextUnit>
+    <TextUnit id="1011" loc="1013">τὸ σωφρονεῖν τιμῶσα τοῦ βίου πλέον.</TextUnit>
+    <TextUnit id="1012" loc="1014">τἄλλ' εὐτυχοῖμεν πρὸς θεῶν ̓Ολυμπίων.</TextUnit>
+    <TextUnit id="1013" loc="1015">ἐμῆς δ' ὀπώρας οὕνεκ' εὖ θάρσει, πάτερ.</TextUnit>
+    <TextUnit id="1014" loc="1016">εἰ γάρ τι μὴ θεοῖς βεβούλευται νέον,</TextUnit>
+    <TextUnit id="1015" loc="1017">ἴχνος τὸ πρόσθεν οὐ διαστρέψω φρενός.</TextUnit>
+    <TextUnit id="1016" loc="1018">ἴτε μὰν ἀστυάνακτας</TextUnit>
+    <TextUnit id="1017" loc="1019">μάκαρας θεοὺς γανάοντες πολιούχους</TextUnit>
+    <TextUnit id="1018" loc="1020">τε καὶ οἳ χεῦμ' ̓Ερασίνου</TextUnit>
+    <TextUnit id="1019" loc="1021">περιναίουσιν παλαιόν.</TextUnit>
+    <TextUnit id="1020" loc="1022">ὑποδέξασθε δ' ὀπαδοὶ</TextUnit>
+    <TextUnit id="1021" loc="1023">μέλος: αἶνος δὲ πόλιν τήνδε Πελασγῶν</TextUnit>
+    <TextUnit id="1022" loc="1024">ἐχέτω, μηδ' ἔτι Νείλου</TextUnit>
+    <TextUnit id="1023" loc="1025">προχοὰς σέβωμεν ὕμνοις.</TextUnit>
+    <TextUnit id="1024" loc="1026">ποταμοὺς δ' οἳ διὰ χώρας</TextUnit>
+    <TextUnit id="1025" loc="1027">θελεμὸν πῶμα χέουσιν πολύτεκνοι,</TextUnit>
+    <TextUnit id="1026" loc="1028">λιπαροῖς χεύμασι γαίας</TextUnit>
+    <TextUnit id="1027" loc="1029">τόδε μειλίσσοντες οὖδας.</TextUnit>
+    <TextUnit id="1028" loc="1030">ἐπίδοι δ' ̓́Αρτεμις ἁγνὰ</TextUnit>
+    <TextUnit id="1029" loc="1031">στόλον οἰκτιζομένα, μηδ' ὑπ' ἀνάγκας</TextUnit>
+    <TextUnit id="1030" loc="1032">γάμος ἔλθοι Κυθερείας:</TextUnit>
+    <TextUnit id="1031" loc="1033">στυγίων πέλοι τόδ' ἆθλον.</TextUnit>
+    <TextUnit id="1032" loc="1034">Κύπριδος δ' οὐκ ἀμελεῖ θεσμὸς ὅδ' εὔφρων</TextUnit>
+    <TextUnit id="1033" loc="1035">δύναται γὰρ Διὸς ἄγχιστα σὺν ̔́Ηρᾳ.</TextUnit>
+    <TextUnit id="1034" loc="1036">τίεται δ' αἰολόμητις</TextUnit>
+    <TextUnit id="1035" loc="1037">θεὸς ἔργοις ἐπὶ σεμνοῖς.</TextUnit>
+    <TextUnit id="1036" loc="1038">μετάκοινοι δὲ φίλᾷ ματρὶ πάρεισιν</TextUnit>
+    <TextUnit id="1037" loc="1039">Πόθος ᾇ τ' οὐδὲν ἄπαρνον</TextUnit>
+    <TextUnit id="1038" loc="1040">τελέθει θέλκτορι Πειθοῖ.</TextUnit>
+    <TextUnit id="1039" loc="1041">δέδοται δ' ̔Αρμονίᾳ μοῖρ' ̓Αφροδίτας</TextUnit>
+    <TextUnit id="1040" loc="1042">ψεδυρᾷ τρίβῳ τ' ̓Ερώτων.</TextUnit>
+    <TextUnit id="1041" loc="1043">φυγάδεσσιν δ' ἐπιπνοίας κακά τ' ἄλγη</TextUnit>
+    <TextUnit id="1042" loc="1044">πολέμους θ' αἱματόεντας προφοβοῦμαι.</TextUnit>
+    <TextUnit id="1043" loc="1045">τί ποτ' εὔπλοιαν ἔπραξαν</TextUnit>
+    <TextUnit id="1044" loc="1046">ταχυπόμποισι διωγμοῖς;</TextUnit>
+    <TextUnit id="1045" loc="1047">ὅ τί τοι μόρσιμόν ἐστιν, τὸ γένοιτ' ἄν.</TextUnit>
+    <TextUnit id="1046" loc="1048">Διὸς οὐ παρβατός ἐστιν</TextUnit>
+    <TextUnit id="1047" loc="1049">μεγάλα φρὴν ἀπέρατος:</TextUnit>
+    <TextUnit id="1048" loc="1050">μετὰ πολλῶν δὲ γάμων ἅδε τελευτὰ</TextUnit>
+    <TextUnit id="1049" loc="1051">προτερᾶν πέλοι γυναικῶν.</TextUnit>
+    <TextUnit id="1050" loc="1052">ὁ μέγας Ζεὺς ἀπαλέξαι</TextUnit>
+    <TextUnit id="1051" loc="1053">γάμον Αἰγυπτογενῆ μοι.</TextUnit>
+    <TextUnit id="1052" loc="1054">τὸ μὲν ἂν βέλτατον εἴη:</TextUnit>
+    <TextUnit id="1053" loc="1055">σὺ δὲ θέλγοις ἂν ἄθελκτον.</TextUnit>
+    <TextUnit id="1054" loc="1056">σὺ δέ γ' οὐκ οἶσθα τὸ μέλλον.</TextUnit>
+    <TextUnit id="1055" loc="1057">τί δὲ μέλλω φρένα Δίαν</TextUnit>
+    <TextUnit id="1056" loc="1058">καθορᾶν, ὄψιν ἄβυσσον;</TextUnit>
+    <TextUnit id="1057" loc="1059">μέτριον νῦν ἔπος εὔχου:</TextUnit>
+    <TextUnit id="1058" loc="1060">τίνα καιρόν με διδάσκεις;</TextUnit>
+    <TextUnit id="1059" loc="1061">τὰ θεῶν μηδὲν ἀγάζειν.</TextUnit>
+    <TextUnit id="1060" loc="1062">Ζεὺς ἄναξ ἀποστεροί-</TextUnit>
+    <TextUnit id="1061" loc="1063">η γάμον δυσάνορα</TextUnit>
+    <TextUnit id="1062" loc="1064">δάιον, ὅσπερ ̓Ιὼ</TextUnit>
+    <TextUnit id="1063" loc="1065">πημονᾶς ἐλύσατ' εὖ</TextUnit>
+    <TextUnit id="1064" loc="1066">χειρὶ παιωνίᾳ κατασχεθών,</TextUnit>
+    <TextUnit id="1065" loc="1067">εὐμενῆ βίαν κτίσας.</TextUnit>
+    <TextUnit id="1066" loc="1068">καὶ κράτος νέμοι γυναι-</TextUnit>
+    <TextUnit id="1067" loc="1069">ξίν: τὸ βέλτερον κακοῦ</TextUnit>
+    <TextUnit id="1068" loc="1070">καὶ τὸ δίμοιρον αἰνῶ,</TextUnit>
+    <TextUnit id="1069" loc="1071">καὶ δίκᾳ δίκας ἕπε-</TextUnit>
+    <TextUnit id="1070" loc="1072">σθαι, ξὺν εὐχαῖς ἐμαῖς, λυτηρίοις</TextUnit>
+    <TextUnit id="1071" loc="1073">μαχαναῖς θεοῦ πάρα.</TextUnit>
+  </Text>
+</TessDocument>
