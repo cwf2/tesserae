@@ -12,7 +12,7 @@
     <AddedBy>Chris Forstall</AddedBy>
     <URI>urn:cts:latinLit:phi0660.phi001.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>810</MaskUpper><LocusLower>1.1.1</LocusLower><LocusUpper>1.10.68</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>811</MaskLower><MaskUpper>1240</MaskUpper><LocusLower>2.1.1</LocusLower><LocusUpper>2.6.54</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>1241</MaskLower><MaskUpper>1924</MaskUpper><LocusLower>3.1.1</LocusLower><LocusUpper>3.20.4</LocusUpper></Part><Part id="4"><Display>Book Marsi</Display><MaskLower>1925</MaskLower><MaskUpper>1928</MaskUpper><LocusLower>Marsi.1</LocusLower><LocusUpper>Marsi.4</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1.1">Divitias alius fulvo sibi congerat auro</TextUnit>
     <TextUnit id="1" loc="1.1.2">Et teneat culti iugera multa soli,</TextUnit>
     <TextUnit id="2" loc="1.1.3">Quem labor adsiduus vicino terreat hoste,</TextUnit>

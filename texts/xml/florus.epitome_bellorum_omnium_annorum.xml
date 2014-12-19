@@ -12,7 +12,7 @@
     <AddedBy>Anna Glenn</AddedBy>
     <URI>urn:cts:latinLit:phi1242.phi001.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>617</MaskUpper><LocusLower>1.1.pr.1</LocusLower><LocusUpper>1.47.12.14</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>618</MaskLower><MaskUpper>978</MaskUpper><LocusLower>2.1.13.1</LocusLower><LocusUpper>2.34.12.66</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1.pr.1">Populus Romanus a rege Romulo in Caesarem Augustum septingentos per annos tantum operum pace belloque gessit, ut, si quis magnitudinem imperii cum annis conferat, aetatem ultra putet.</TextUnit>
     <TextUnit id="1" loc="1.1.pr.2">Ita late per orbem terrarum arma circumtulit, ut qui res illius legunt non unius populi, sed generis humani facta condiscant. Tot in laboribus periculisque iactatus est, ut ad constituendum eius im-  perium contendisse Virtus et Fortuna videantur.</TextUnit>
     <TextUnit id="2" loc="1.1.pr.3">Qua re cum, si quid aliud, hoc quoque operae pretium sit cognoscere, tamen quia ipsa sibi obstat magnitudo rerumque diversitas aciem intentionis abrumpit, faciam quod solent, qui terrarum situs pingunt: in brevi quasi tabella totam eius imaginem amplectar, non nihil, ut spero, ad admirationem principis populi conlaturus, si pariter atque insemel universam magnitudinem eius ostendere Si quis ergo populum Romanum quasi unum hominem consideret totamque eius aetatem percenseat,</TextUnit>

@@ -458,30 +458,6 @@ if ($score_basis =~ /^feat/) {
 	$score_basis = "stem"; # $feature;
 }
 
-# print all params for debugging
-
-unless ($quiet) {
-
-	print STDERR "target=$target\n";
-	print STDERR "source=$source\n";
-	print STDERR "mask_target_lower=$mask_target_lower\n";
-	print STDERR "mask_target_upper=$mask_target_upper\n";
-	print STDERR "mask_source_lower=$mask_source_lower\n";
-	print STDERR "mask_source_upper=$mask_source_upper\n";
-	print STDERR "lang(target)=" . Tesserae::metadata_get($target, "Lang") . ";\n";
-	print STDERR "lang(source)=" . Tesserae::metadata_get($source, "Lang") . ";\n";
-	for my $feature (@features) {
-		print STDERR "feature=$feature\n";		
-	}
-	print STDERR "stopwords=$stopwords\n";
-	print STDERR "unit=$unit\n";
-	print STDERR "stoplist basis=$stoplist_basis\n";
-	print STDERR "max_dist=$max_dist\n";
-	print STDERR "distance basis=$distance_metric\n";
-	print STDERR "score cutoff=$cutoff\n";
-	print STDERR "score basis=$score_basis\n";
-}
-
 
 #
 # calculate feature frequencies
@@ -532,6 +508,30 @@ my @unit_target    = @{ retrieve("$file_target.$unit") };
 
 unless (defined $mask_target_upper) { $mask_target_upper = $#unit_target }
 unless (defined $mask_target_lower) { $mask_target_lower = 0 }
+
+# print all params for debugging
+
+unless ($quiet) {
+
+	print STDERR "target=$target\n";
+	print STDERR "source=$source\n";
+	print STDERR "mask_target_lower=$mask_target_lower\n";
+	print STDERR "mask_target_upper=$mask_target_upper\n";
+	print STDERR "mask_source_lower=$mask_source_lower\n";
+	print STDERR "mask_source_upper=$mask_source_upper\n";
+	print STDERR "lang(target)=" . Tesserae::metadata_get($target, "Lang") . ";\n";
+	print STDERR "lang(source)=" . Tesserae::metadata_get($source, "Lang") . ";\n";
+	for my $feature (@features) {
+		print STDERR "feature=$feature\n";		
+	}
+	print STDERR "stopwords=$stopwords\n";
+	print STDERR "unit=$unit\n";
+	print STDERR "stoplist basis=$stoplist_basis\n";
+	print STDERR "max_dist=$max_dist\n";
+	print STDERR "distance basis=$distance_metric\n";
+	print STDERR "score cutoff=$cutoff\n";
+	print STDERR "score basis=$score_basis\n";
+}
 
 #
 #

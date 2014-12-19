@@ -12,7 +12,7 @@
     <AddedBy>Neil Bernstein</AddedBy>
     <URI/>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>580</MaskUpper><LocusLower>1.1</LocusLower><LocusUpper>1.581</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>581</MaskLower><MaskUpper>1067</MaskUpper><LocusLower>2.2</LocusLower><LocusUpper>2.488</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>1068</MaskLower><MaskUpper>1527</MaskUpper><LocusLower>3.1</LocusLower><LocusUpper>3.460</LocusUpper></Part><Part id="4"><Display>Book 4</Display><MaskLower>1528</MaskLower><MaskUpper>2171</MaskUpper><LocusLower>4.1</LocusLower><LocusUpper>4.644</LocusUpper></Part><Part id="5"><Display>Book 5</Display><MaskLower>2172</MaskLower><MaskUpper>2698</MaskUpper><LocusLower>5.1</LocusLower><LocusUpper>5.527</LocusUpper></Part><Part id="6"><Display>Book 6</Display><MaskLower>2699</MaskLower><MaskUpper>3470</MaskUpper><LocusLower>6.2</LocusLower><LocusUpper>6.773</LocusUpper></Part><Part id="7"><Display>Book 7</Display><MaskLower>3471</MaskLower><MaskUpper>4011</MaskUpper><LocusLower>7.2</LocusLower><LocusUpper>7.542</LocusUpper></Part><Part id="8"><Display>Book 8</Display><MaskLower>4012</MaskLower><MaskUpper>4666</MaskUpper><LocusLower>8.2</LocusLower><LocusUpper>8.656</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1">Signa, duces gentesque feras Martisque ruinas,</TextUnit>
     <TextUnit id="1" loc="1.2">insidias stragesque uirum durosque labores,</TextUnit>
     <TextUnit id="2" loc="1.3">et Libycas clades et fractos uiribus hostes,</TextUnit>

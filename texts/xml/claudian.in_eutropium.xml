@@ -12,7 +12,7 @@
     <AddedBy/>
     <URI>urn:cts:latinLit:stoa0089.stoa008.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>512</MaskUpper><LocusLower>1.1</LocusLower><LocusUpper>1.513</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>513</MaskLower><MaskUpper>1190</MaskUpper><LocusLower>2.praef.1</LocusLower><LocusUpper>2.602</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1">Semiferos partus metuendaque pignora matri</TextUnit>
     <TextUnit id="1" loc="1.2">moenibus et mediis audi tum nocte luporum</TextUnit>
     <TextUnit id="2" loc="1.3">murmur et attonito pecudes pastore locutas</TextUnit>

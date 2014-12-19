@@ -12,7 +12,7 @@
     <AddedBy>Katherine Roache</AddedBy>
     <URI>urn:cts:latinLit:stoa0045.stoa026.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>51</MaskUpper><LocusLower>1.1</LocusLower><LocusUpper>1.56</LocusUpper></Part><Part id="2"><Display>Book 6</Display><MaskLower>52</MaskLower><MaskUpper>68</MaskUpper><LocusLower>6.1</LocusLower><LocusUpper>6.16</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1">IANUARIAS FASCIBUS SUMPTIS</TextUnit>
     <TextUnit id="1" loc="1.2">IANE, VENI: NOVUS ANNE, VENI: RENOVATE VENI, SOL.</TextUnit>
     <TextUnit id="2" loc="1.4">consulis Ausonii Latiam visure curulem,</TextUnit>

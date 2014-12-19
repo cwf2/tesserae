@@ -12,7 +12,7 @@
     <AddedBy>Chris Forstall</AddedBy>
     <URI/>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>771</MaskUpper><LocusLower>1.1</LocusLower><LocusUpper>1.772</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>772</MaskLower><MaskUpper>1517</MaskUpper><LocusLower>2.1</LocusLower><LocusUpper>2.746</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>1518</MaskLower><MaskUpper>2329</MaskUpper><LocusLower>3.1</LocusLower><LocusUpper>3.812</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1">Siquis in hoc artem populo non novit amandi,</TextUnit>
     <TextUnit id="1" loc="1.2">Hoc legat et lecto carmine doctus amet.</TextUnit>
     <TextUnit id="2" loc="1.3">Arte citae veloque rates remoque moventur,</TextUnit>

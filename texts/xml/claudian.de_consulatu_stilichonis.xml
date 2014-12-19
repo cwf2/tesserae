@@ -12,7 +12,7 @@
     <AddedBy/>
     <URI>urn:cts:latinLit:stoa0089.stoa004.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>384</MaskUpper><LocusLower>1.1</LocusLower><LocusUpper>1.385</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>385</MaskLower><MaskUpper>860</MaskUpper><LocusLower>2.1</LocusLower><LocusUpper>2.476</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>861</MaskLower><MaskUpper>1253</MaskUpper><LocusLower>3.1</LocusLower><LocusUpper>3.369</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1">Continuant superi pleno Romana favore</TextUnit>
     <TextUnit id="1" loc="1.2">gaudia successusque novis successibus augent:</TextUnit>
     <TextUnit id="2" loc="1.3">conubii necdum festivos regia cantus</TextUnit>

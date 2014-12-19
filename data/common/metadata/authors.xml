@@ -1,637 +1,637 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Corpus>
 	<TessAuthor id="achilles_tatius">
-		<AuthorDisplay>Achilles Tatius</AuthorDisplay>
+		<Display>Achilles Tatius</Display>
 		<Birth Cert="0">100</Birth>
 		<Death Cert="0">150</Death>
 	</TessAuthor>
 	<TessAuthor id="aelian">
-		<AuthorDisplay>Aelian</AuthorDisplay>
+		<Display>Aelian</Display>
 		<Birth Cert="0">175</Birth>
 		<Death Cert="0">235</Death>
 	</TessAuthor>
 	<TessAuthor id="aelius_aristides">
-		<AuthorDisplay>Aelius Aristides</AuthorDisplay>
+		<Display>Aelius Aristides</Display>
 		<Birth Cert="1">117</Birth>
 		<Death Cert="1">181</Death>
 	</TessAuthor>
 	<TessAuthor id="aeschines">
-		<AuthorDisplay>Aeschines</AuthorDisplay>
+		<Display>Aeschines</Display>
 		<Birth Cert="1">-389</Birth>
 		<Death Cert="1">-314</Death>
 	</TessAuthor>
 	<TessAuthor id="aeschylus">
-		<AuthorDisplay>Aeschylus</AuthorDisplay>
+		<Display>Aeschylus</Display>
 		<Birth Cert="0">-525</Birth>
 		<Death Cert="0">-456</Death>
 	</TessAuthor>
 	<TessAuthor id="ammianus">
-		<AuthorDisplay>Ammianus Marcellinus</AuthorDisplay>
+		<Display>Ammianus Marcellinus</Display>
 		<Birth Cert="0">325</Birth>
 		<Death Cert="0">391</Death>
 	</TessAuthor>
 	<TessAuthor id="andocides">
-		<AuthorDisplay>Andocides</AuthorDisplay>
+		<Display>Andocides</Display>
 		<Birth Cert="0">-440</Birth>
 		<Death Cert="0">-390</Death>
 	</TessAuthor>
 	<TessAuthor id="anonymous">
-		<AuthorDisplay>Anonymous</AuthorDisplay>
+		<Display>Anonymous</Display>
 		<Birth Cert="0"/>
 		<Death Cert="0"/>
 	</TessAuthor>
 	<TessAuthor id="antiphon">
-		<AuthorDisplay>Antiphon</AuthorDisplay>
+		<Display>Antiphon</Display>
 		<Birth Cert="0">-480</Birth>
 		<Death Cert="0">-411</Death>
 	</TessAuthor>
 	<TessAuthor id="apollodorus">
-		<AuthorDisplay>Apollodorus</AuthorDisplay>
+		<Display>Apollodorus</Display>
 		<Birth Cert="0">-180</Birth>
 		<Death Cert="0">-120</Death>
 	</TessAuthor>
 	<TessAuthor id="apollonius">
-		<AuthorDisplay>Apollonius</AuthorDisplay>
+		<Display>Apollonius</Display>
 		<Birth Cert="0">-280</Birth>
 		<Death Cert="0">-220</Death>
 	</TessAuthor>
 	<TessAuthor id="appian">
-		<AuthorDisplay>Appian</AuthorDisplay>
+		<Display>Appian</Display>
 		<Birth Cert="0">95</Birth>
 		<Death Cert="0">165</Death>
 	</TessAuthor>
 	<TessAuthor id="apuleius">
-		<AuthorDisplay>Apuleius</AuthorDisplay>
+		<Display>Apuleius</Display>
 		<Birth Cert="0">125</Birth>
 		<Death Cert="0">180</Death>
 	</TessAuthor>
 	<TessAuthor id="aretaeus">
-		<AuthorDisplay>Aretaeus</AuthorDisplay>
+		<Display>Aretaeus</Display>
 		<Birth Cert="0">40</Birth>
 		<Death Cert="0">80</Death>
 	</TessAuthor>
 	<TessAuthor id="aristophanes">
-		<AuthorDisplay>Aristophanes</AuthorDisplay>
+		<Display>Aristophanes</Display>
 		<Birth Cert="0">-446</Birth>
 		<Death Cert="0">-386</Death>
 	</TessAuthor>
 	<TessAuthor id="aristotle">
-		<AuthorDisplay>Aristotle</AuthorDisplay>
+		<Display>Aristotle</Display>
 		<Birth Cert="1">-384</Birth>
 		<Death Cert="1">-322</Death>
 	</TessAuthor>
 	<TessAuthor id="athenaeus">
-		<AuthorDisplay>Athenaeus</AuthorDisplay>
+		<Display>Athenaeus</Display>
 		<Birth Cert="0">150</Birth>
 		<Death Cert="0">200</Death>
 	</TessAuthor>
 	<TessAuthor id="augustine">
-		<AuthorDisplay>Augustine</AuthorDisplay>
+		<Display>Augustine</Display>
 		<Birth Cert="1">354</Birth>
 		<Death Cert="1">430</Death>
 	</TessAuthor>
 	<TessAuthor id="ausonius">
-		<AuthorDisplay>Ausonius</AuthorDisplay>
+		<Display>Ausonius</Display>
 		<Birth Cert="0">310</Birth>
 		<Death Cert="0">395</Death>
 	</TessAuthor>
 	<TessAuthor id="bacchylides">
-		<AuthorDisplay>Bacchylides</AuthorDisplay>
+		<Display>Bacchylides</Display>
 		<Birth Cert="0">-499</Birth>
 		<Death Cert="0">-400</Death>
 	</TessAuthor>
 	<TessAuthor id="barnabas">
-		<AuthorDisplay>Barnabas</AuthorDisplay>
+		<Display>Barnabas</Display>
 		<Birth Cert="0">70</Birth>
 		<Death Cert="0">131</Death>
 	</TessAuthor>
 	<TessAuthor id="basil_of_caesarea">
-		<AuthorDisplay>Basil of Caesarea</AuthorDisplay>
+		<Display>Basil of Caesarea</Display>
 		<Birth Cert="0">329</Birth>
 		<Death Cert="1">379</Death>
 	</TessAuthor>
 	<TessAuthor id="bede">
-		<AuthorDisplay>Bede</AuthorDisplay>
+		<Display>Bede</Display>
 		<Birth Cert="0">672</Birth>
 		<Death Cert="1">735</Death>
 	</TessAuthor>
 	<TessAuthor id="bion_of_phlossa">
-		<AuthorDisplay>Bion of Phlossa</AuthorDisplay>
+		<Display>Bion of Phlossa</Display>
 		<Birth Cert="0">-150</Birth>
 		<Death Cert="0">-100</Death>
 	</TessAuthor>
 	<TessAuthor id="boethius">
-		<AuthorDisplay>Boethius</AuthorDisplay>
+		<Display>Boethius</Display>
 		<Birth Cert="0">480</Birth>
 		<Death Cert="0">525</Death>
 	</TessAuthor>
 	<TessAuthor id="caesar">
-		<AuthorDisplay>Julius Caesar</AuthorDisplay>
+		<Display>Julius Caesar</Display>
 		<Birth Cert="1">-100</Birth>
 		<Death Cert="1">-44</Death>
 	</TessAuthor>
 	<TessAuthor id="caesar_augustus">
-		<AuthorDisplay>Caesar Augustus</AuthorDisplay>
+		<Display>Caesar Augustus</Display>
 		<Birth Cert="1">-63</Birth>
 		<Death Cert="1">14</Death>
 	</TessAuthor>
 	<TessAuthor id="callimachus">
-		<AuthorDisplay>Callimachus</AuthorDisplay>
+		<Display>Callimachus</Display>
 		<Birth Cert="0">310</Birth>
 		<Death Cert="1">-240</Death>
 	</TessAuthor>
 	<TessAuthor id="callistratus">
-		<AuthorDisplay>Callistratus</AuthorDisplay>
+		<Display>Callistratus</Display>
 		<Birth Cert="0">350</Birth>
 		<Death Cert="0">400</Death>
 	</TessAuthor>
 	<TessAuthor id="catullus">
-		<AuthorDisplay>Catullus</AuthorDisplay>
+		<Display>Catullus</Display>
 		<Birth Cert="0">-84</Birth>
 		<Death Cert="1">-54</Death>
 	</TessAuthor>
 	<TessAuthor id="celsus">
-		<AuthorDisplay>Celsus</AuthorDisplay>
+		<Display>Celsus</Display>
 		<Birth Cert="0">-35</Birth>
 		<Death Cert="0">50</Death>
 	</TessAuthor>
 	<TessAuthor id="chariton">
-		<AuthorDisplay>Chariton</AuthorDisplay>
+		<Display>Chariton</Display>
 		<Birth Cert="0">20</Birth>
 		<Death Cert="0">80</Death>
 	</TessAuthor>
 	<TessAuthor id="cicero">
-		<AuthorDisplay>Cicero</AuthorDisplay>
+		<Display>Cicero</Display>
 		<Birth Cert="1">-106</Birth>
 		<Death Cert="1">-43</Death>
 	</TessAuthor>
 	<TessAuthor id="claudian">
-		<AuthorDisplay>Claudian</AuthorDisplay>
+		<Display>Claudian</Display>
 		<Birth Cert="0">370</Birth>
 		<Death Cert="1">404</Death>
 	</TessAuthor>
 	<TessAuthor id="clement">
-		<AuthorDisplay>Clement of Alexandria</AuthorDisplay>
+		<Display>Clement of Alexandria</Display>
 		<Birth Cert="0">150</Birth>
 		<Death Cert="0">215</Death>
 	</TessAuthor>
 	<TessAuthor id="colluthus">
-		<AuthorDisplay>Colluthus</AuthorDisplay>
+		<Display>Colluthus</Display>
 		<Birth Cert="0">490</Birth>
 		<Death Cert="0">520</Death>
 	</TessAuthor>
 	<TessAuthor id="columella">
-		<AuthorDisplay>Columella</AuthorDisplay>
+		<Display>Columella</Display>
 		<Birth Cert="1">4</Birth>
 		<Death Cert="0">70</Death>
 	</TessAuthor>
 	<TessAuthor id="corippus">
-		<AuthorDisplay>Corippus</AuthorDisplay>
+		<Display>Corippus</Display>
 		<Birth Cert="0">520</Birth>
 		<Death Cert="0">580</Death>
 	</TessAuthor>
 	<TessAuthor id="curtius_rufus">
-		<AuthorDisplay>Curtius Rufus</AuthorDisplay>
+		<Display>Curtius Rufus</Display>
 		<Birth Cert="0">40</Birth>
 		<Death Cert="0">80</Death>
 	</TessAuthor>
 	<TessAuthor id="demades">
-		<AuthorDisplay>Demades</AuthorDisplay>
+		<Display>Demades</Display>
 		<Birth Cert="0">-380</Birth>
 		<Death Cert="0">-318</Death>
 	</TessAuthor>
 	<TessAuthor id="demetrius">
-		<AuthorDisplay>Demetrius of Phaleron</AuthorDisplay>
+		<Display>Demetrius of Phaleron</Display>
 		<Birth Cert="0">-350</Birth>
 		<Death Cert="0">-280</Death>
 	</TessAuthor>
 	<TessAuthor id="demosthenes">
-		<AuthorDisplay>Demosthenes</AuthorDisplay>
+		<Display>Demosthenes</Display>
 		<Birth Cert="1">-384</Birth>
 		<Death Cert="1">-322</Death>
 	</TessAuthor>
 	<TessAuthor id="dinarchus">
-		<AuthorDisplay>Dinarchus</AuthorDisplay>
+		<Display>Dinarchus</Display>
 		<Birth Cert="0">-361</Birth>
 		<Death Cert="0">-291</Death>
 	</TessAuthor>
 	<TessAuthor id="dionysius_halicarnassensis">
-		<AuthorDisplay>Dionysius of Halicarnassus</AuthorDisplay>
+		<Display>Dionysius of Halicarnassus</Display>
 		<Birth Cert="0">-60</Birth>
 		<Death Cert="0">-7</Death>
 	</TessAuthor>
 	<TessAuthor id="dracontius">
-		<AuthorDisplay>Dracontius</AuthorDisplay>
+		<Display>Dracontius</Display>
 		<Birth Cert="0">455</Birth>
 		<Death Cert="0">505</Death>
 	</TessAuthor>
 	<TessAuthor id="ennius">
-		<AuthorDisplay>Ennius</AuthorDisplay>
+		<Display>Ennius</Display>
 		<Birth Cert="0">-239</Birth>
 		<Death Cert="0">-169</Death>
 	</TessAuthor>
 	<TessAuthor id="ennodius">
-		<AuthorDisplay>Ennodius</AuthorDisplay>
+		<Display>Ennodius</Display>
 		<Birth Cert="0">473</Birth>
 		<Death Cert="1">521</Death>
 	</TessAuthor>
 	<TessAuthor id="epictetus">
-		<AuthorDisplay>Epictetus</AuthorDisplay>
+		<Display>Epictetus</Display>
 		<Birth Cert="0">55</Birth>
 		<Death Cert="1">135</Death>
 	</TessAuthor>
 	<TessAuthor id="euclid">
-		<AuthorDisplay>Euclid</AuthorDisplay>
+		<Display>Euclid</Display>
 		<Birth Cert="0">-320</Birth>
 		<Death Cert="0">-230</Death>
 	</TessAuthor>
 	<TessAuthor id="euripides">
-		<AuthorDisplay>Euripides</AuthorDisplay>
+		<Display>Euripides</Display>
 		<Birth Cert="0">-480</Birth>
 		<Death Cert="1">-406</Death>
 	</TessAuthor>
 	<TessAuthor id="eusebius_caeserea">
-		<AuthorDisplay>Eusebius of Caesarea</AuthorDisplay>
+		<Display>Eusebius of Caesarea</Display>
 		<Birth Cert="0">260</Birth>
 		<Death Cert="0">339</Death>
 	</TessAuthor>
 	<TessAuthor id="flavius_josephus">
-		<AuthorDisplay>Flavius Josephus</AuthorDisplay>
+		<Display>Flavius Josephus</Display>
 		<Birth Cert="1">37</Birth>
 		<Death Cert="0">100</Death>
 	</TessAuthor>
 	<TessAuthor id="florus">
-		<AuthorDisplay>Florus</AuthorDisplay>
+		<Display>Florus</Display>
 		<Birth Cert="0">74</Birth>
 		<Death Cert="0">130</Death>
 	</TessAuthor>
 	<TessAuthor id="galen">
-		<AuthorDisplay>Galen</AuthorDisplay>
+		<Display>Galen</Display>
 		<Birth Cert="0">129</Birth>
 		<Death Cert="0">200</Death>
 	</TessAuthor>
 	<TessAuthor id="gellius">
-		<AuthorDisplay>Gellius</AuthorDisplay>
+		<Display>Gellius</Display>
 		<Birth Cert="0">125</Birth>
 		<Death Cert="0">180</Death>
 	</TessAuthor>
 	<TessAuthor id="glass">
-		<AuthorDisplay>Glass</AuthorDisplay>
+		<Display>Glass</Display>
 		<Birth Cert="0"/>
 		<Death Cert="0"/>
 	</TessAuthor>
 	<TessAuthor id="herodotus">
-		<AuthorDisplay>Herodotus</AuthorDisplay>
+		<Display>Herodotus</Display>
 		<Birth Cert="0">-484</Birth>
 		<Death Cert="0">-425</Death>
 	</TessAuthor>
 	<TessAuthor id="hippocrates">
-		<AuthorDisplay>Hippocrates</AuthorDisplay>
+		<Display>Hippocrates</Display>
 		<Birth Cert="0">-460</Birth>
 		<Death Cert="0">-370</Death>
 	</TessAuthor>
 	<TessAuthor id="homer">
-		<AuthorDisplay>Homer</AuthorDisplay>
+		<Display>Homer</Display>
 		<Birth Cert="0">-799</Birth>
 		<Death Cert="0">-700</Death>
 	</TessAuthor>
 	<TessAuthor id="horace">
-		<AuthorDisplay>Horace</AuthorDisplay>
+		<Display>Horace</Display>
 		<Birth Cert="1">-65</Birth>
 		<Death Cert="1">-8</Death>
 	</TessAuthor>
 	<TessAuthor id="hyperides">
-		<AuthorDisplay>Hyperides</AuthorDisplay>
+		<Display>Hyperides</Display>
 		<Birth Cert="0">-390</Birth>
 		<Death Cert="1">-322</Death>
 	</TessAuthor>
 	<TessAuthor id="isaeus">
-		<AuthorDisplay>Isaeus</AuthorDisplay>
+		<Display>Isaeus</Display>
 		<Birth Cert="0">-399</Birth>
 		<Death Cert="0">-350</Death>
 	</TessAuthor>
 	<TessAuthor id="isocrates">
-		<AuthorDisplay>Isocrates</AuthorDisplay>
+		<Display>Isocrates</Display>
 		<Birth Cert="1">-436</Birth>
 		<Death Cert="1">-338</Death>
 	</TessAuthor>
 	<TessAuthor id="italicus">
-		<AuthorDisplay>Italicus</AuthorDisplay>
+		<Display>Italicus</Display>
 		<Birth Cert="0">50</Birth>
 		<Death Cert="0">100</Death>
 	</TessAuthor>
 	<TessAuthor id="jerome">
-		<AuthorDisplay>Jerome</AuthorDisplay>
+		<Display>Jerome</Display>
 		<Birth Cert="0">347</Birth>
 		<Death Cert="1">420</Death>
 	</TessAuthor>
 	<TessAuthor id="juvenal">
-		<AuthorDisplay>Juvenal</AuthorDisplay>
+		<Display>Juvenal</Display>
 		<Birth Cert="0">180</Birth>
 		<Death Cert="0">240</Death>
 	</TessAuthor>
 	<TessAuthor id="juvencus">
-		<AuthorDisplay>Juvencus</AuthorDisplay>
+		<Display>Juvencus</Display>
 		<Birth Cert="0">300</Birth>
 		<Death Cert="0">350</Death>
 	</TessAuthor>
 	<TessAuthor id="livy">
-		<AuthorDisplay>Livy</AuthorDisplay>
+		<Display>Livy</Display>
 		<Birth Cert="0">-64</Birth>
 		<Death Cert="1">17</Death>
 	</TessAuthor>
 	<TessAuthor id="lucan">
-		<AuthorDisplay>Lucan</AuthorDisplay>
+		<Display>Lucan</Display>
 		<Birth Cert="1">39</Birth>
 		<Death Cert="1">65</Death>
 	</TessAuthor>
 	<TessAuthor id="lucian">
-		<AuthorDisplay>Lucian</AuthorDisplay>
+		<Display>Lucian</Display>
 		<Birth Cert="0">125</Birth>
 		<Death Cert="0">180</Death>
 	</TessAuthor>
 	<TessAuthor id="lucretius">
-		<AuthorDisplay>Lucretius</AuthorDisplay>
+		<Display>Lucretius</Display>
 		<Birth Cert="0">-99</Birth>
 		<Death Cert="0">-55</Death>
 	</TessAuthor>
 	<TessAuthor id="lycophron">
-		<AuthorDisplay>Lycophron</AuthorDisplay>
+		<Display>Lycophron</Display>
 		<Birth Cert="0">-299</Birth>
 		<Death Cert="0">-250</Death>
 	</TessAuthor>
 	<TessAuthor id="lycurgus">
-		<AuthorDisplay>Lycurgus</AuthorDisplay>
+		<Display>Lycurgus</Display>
 		<Birth Cert="0">-390</Birth>
 		<Death Cert="0">-324</Death>
 	</TessAuthor>
 	<TessAuthor id="lysias">
-		<AuthorDisplay>Lysias</AuthorDisplay>
+		<Display>Lysias</Display>
 		<Birth Cert="0">-445</Birth>
 		<Death Cert="0">-380</Death>
 	</TessAuthor>
 	<TessAuthor id="manilius">
-		<AuthorDisplay>Manilius</AuthorDisplay>
+		<Display>Manilius</Display>
 		<Birth Cert="0"/>
 		<Death Cert="0">80</Death>
 	</TessAuthor>
 	<TessAuthor id="marcus_aurelius">
-		<AuthorDisplay>Marcus Aurelius</AuthorDisplay>
+		<Display>Marcus Aurelius</Display>
 		<Birth Cert="1">121</Birth>
 		<Death Cert="1">180</Death>
 	</TessAuthor>
 	<TessAuthor id="marcus_mincuius_felix">
-		<AuthorDisplay>Marcus Minucius Felix</AuthorDisplay>
+		<Display>Marcus Minucius Felix</Display>
 		<Birth Cert="0">150</Birth>
 		<Death Cert="0">270</Death>
 	</TessAuthor>
 	<TessAuthor id="martial">
-		<AuthorDisplay>Martial</AuthorDisplay>
+		<Display>Martial</Display>
 		<Birth Cert="0">38</Birth>
 		<Death Cert="0">102</Death>
 	</TessAuthor>
 	<TessAuthor id="nepos">
-		<AuthorDisplay>Nepos</AuthorDisplay>
+		<Display>Nepos</Display>
 		<Birth Cert="0">-110</Birth>
 		<Death Cert="0">-25</Death>
 	</TessAuthor>
 	<TessAuthor id="nonnus_of_panopolis">
-		<AuthorDisplay>Nonnus of Panopolis</AuthorDisplay>
+		<Display>Nonnus of Panopolis</Display>
 		<Birth Cert="0">500</Birth>
 		<Death Cert="0">550</Death>
 	</TessAuthor>
 	<TessAuthor id="oppian">
-		<AuthorDisplay>Oppian</AuthorDisplay>
+		<Display>Oppian</Display>
 		<Birth Cert="0">150</Birth>
 		<Death Cert="0">199</Death>
 	</TessAuthor>
 	<TessAuthor id="oppian_of_apamea">
-		<AuthorDisplay>Oppian of Apamea</AuthorDisplay>
+		<Display>Oppian of Apamea</Display>
 		<Birth Cert="0">200</Birth>
 		<Death Cert="0">250</Death>
 	</TessAuthor>
 	<TessAuthor id="ovid">
-		<AuthorDisplay>Ovid</AuthorDisplay>
+		<Display>Ovid</Display>
 		<Birth Cert="1">43</Birth>
 		<Death Cert="0">17</Death>
 	</TessAuthor>
 	<TessAuthor id="paulus_diaconus">
-		<AuthorDisplay>Paulus Diaconus</AuthorDisplay>
+		<Display>Paulus Diaconus</Display>
 		<Birth Cert="0">720</Birth>
 		<Death Cert="0">799</Death>
 	</TessAuthor>
 	<TessAuthor id="pausanias">
-		<AuthorDisplay>Pausanias</AuthorDisplay>
+		<Display>Pausanias</Display>
 		<Birth Cert="0">110</Birth>
 		<Death Cert="0">180</Death>
 	</TessAuthor>
 	<TessAuthor id="persius">
-		<AuthorDisplay>Persius</AuthorDisplay>
+		<Display>Persius</Display>
 		<Birth Cert="1">34</Birth>
 		<Death Cert="1">62</Death>
 	</TessAuthor>
 	<TessAuthor id="petronius">
-		<AuthorDisplay>Petronius</AuthorDisplay>
+		<Display>Petronius</Display>
 		<Birth Cert="0">27</Birth>
 		<Death Cert="1">66</Death>
 	</TessAuthor>
 	<TessAuthor id="philostratus_the_athenian">
-		<AuthorDisplay>Philostratus the Athenian</AuthorDisplay>
+		<Display>Philostratus the Athenian</Display>
 		<Birth Cert="0">170</Birth>
 		<Death Cert="0">247</Death>
 	</TessAuthor>
 	<TessAuthor id="philostratus_the_lemnian">
-		<AuthorDisplay>Philostratus the Lemnian</AuthorDisplay>
+		<Display>Philostratus the Lemnian</Display>
 		<Birth Cert="0">190</Birth>
 		<Death Cert="0">230</Death>
 	</TessAuthor>
 	<TessAuthor id="pindar">
-		<AuthorDisplay>Pindar</AuthorDisplay>
+		<Display>Pindar</Display>
 		<Birth Cert="0">-522</Birth>
 		<Death Cert="0">-443</Death>
 	</TessAuthor>
 	<TessAuthor id="plato">
-		<AuthorDisplay>Plato</AuthorDisplay>
+		<Display>Plato</Display>
 		<Birth Cert="0">-428</Birth>
 		<Death Cert="1">-348</Death>
 	</TessAuthor>
 	<TessAuthor id="plautus">
-		<AuthorDisplay>Plautus</AuthorDisplay>
+		<Display>Plautus</Display>
 		<Birth Cert="0">-254</Birth>
 		<Death Cert="1">-184</Death>
 	</TessAuthor>
 	<TessAuthor id="pliny_the_elder">
-		<AuthorDisplay>Pliny the Elder</AuthorDisplay>
+		<Display>Pliny the Elder</Display>
 		<Birth Cert="1">23</Birth>
 		<Death Cert="1">79</Death>
 	</TessAuthor>
 	<TessAuthor id="pliny_the_younger">
-		<AuthorDisplay>Pliny the Younger</AuthorDisplay>
+		<Display>Pliny the Younger</Display>
 		<Birth Cert="1">61</Birth>
 		<Death Cert="0">113</Death>
 	</TessAuthor>
 	<TessAuthor id="plutarch">
-		<AuthorDisplay>Plutarch</AuthorDisplay>
+		<Display>Plutarch</Display>
 		<Birth Cert="0">46</Birth>
 		<Death Cert="0">120</Death>
 	</TessAuthor>
 	<TessAuthor id="polybius">
-		<AuthorDisplay>Polybius</AuthorDisplay>
+		<Display>Polybius</Display>
 		<Birth Cert="0">-200</Birth>
 		<Death Cert="0">-118</Death>
 	</TessAuthor>
 	<TessAuthor id="propertius">
-		<AuthorDisplay>Propertius</AuthorDisplay>
+		<Display>Propertius</Display>
 		<Birth Cert="0">-50</Birth>
 		<Death Cert="0">-15</Death>
 	</TessAuthor>
 	<TessAuthor id="prudentius">
-		<AuthorDisplay>Prudentius</AuthorDisplay>
+		<Display>Prudentius</Display>
 		<Birth Cert="1">348</Birth>
 		<Death Cert="0">413</Death>
 	</TessAuthor>
 	<TessAuthor id="pseudo_cicero">
-		<AuthorDisplay>Pseudo Cicero</AuthorDisplay>
+		<Display>Pseudo Cicero</Display>
 		<Birth Cert="0"/>
 		<Death Cert="0"/>
 	</TessAuthor>
 	<TessAuthor id="pseudo_plutarch">
-		<AuthorDisplay>Pseudo-Plutarch</AuthorDisplay>
+		<Display>Pseudo-Plutarch</Display>
 		<Birth Cert="0">46</Birth>
 		<Death Cert="0">120</Death>
 	</TessAuthor>
 	<TessAuthor id="pseudo_quintilian">
-		<AuthorDisplay>Pseudo-Quintilian</AuthorDisplay>
+		<Display>Pseudo-Quintilian</Display>
 		<Birth Cert="0">35</Birth>
 		<Death Cert="0">100</Death>
 	</TessAuthor>
 	<TessAuthor id="q_cicero">
-		<AuthorDisplay>Q. Cicero</AuthorDisplay>
+		<Display>Q. Cicero</Display>
 		<Birth Cert="1">-102</Birth>
 		<Death Cert="1">-43</Death>
 	</TessAuthor>
 	<TessAuthor id="quintilian">
-		<AuthorDisplay>Quintilian</AuthorDisplay>
+		<Display>Quintilian</Display>
 		<Birth Cert="0">35</Birth>
 		<Death Cert="0">100</Death>
 	</TessAuthor>
 	<TessAuthor id="rutilius">
-		<AuthorDisplay>Rutilius</AuthorDisplay>
+		<Display>Rutilius</Display>
 		<Birth Cert="0">380</Birth>
 		<Death Cert="0">450</Death>
 	</TessAuthor>
 	<TessAuthor id="sallust">
-		<AuthorDisplay>Sallust</AuthorDisplay>
+		<Display>Sallust</Display>
 		<Birth Cert="1">-86</Birth>
 		<Death Cert="0">-35</Death>
 	</TessAuthor>
 	<TessAuthor id="scriptores_historiae_augustae">
-		<AuthorDisplay>Scriptores Historiae Augustae</AuthorDisplay>
+		<Display>Scriptores Historiae Augustae</Display>
 		<Birth Cert="0"/>
 		<Death Cert="0"/>
 	</TessAuthor>
 	<TessAuthor id="seneca">
-		<AuthorDisplay>Seneca</AuthorDisplay>
+		<Display>Seneca</Display>
 		<Birth Cert="0">-4</Birth>
 		<Death Cert="1">65</Death>
 	</TessAuthor>
 	<TessAuthor id="seneca_the_elder">
-		<AuthorDisplay>Seneca the Elder</AuthorDisplay>
+		<Display>Seneca the Elder</Display>
 		<Birth Cert="1">-54</Birth>
 		<Death Cert="0">39</Death>
 	</TessAuthor>
 	<TessAuthor id="servius_honoratus">
-		<AuthorDisplay>Servius Honoratus</AuthorDisplay>
+		<Display>Servius Honoratus</Display>
 		<Birth Cert="0">380</Birth>
 		<Death Cert="0">430</Death>
 	</TessAuthor>
 	<TessAuthor id="silius_italicus">
-		<AuthorDisplay>Silius Italicus</AuthorDisplay>
+		<Display>Silius Italicus</Display>
 		<Birth Cert="0">28</Birth>
 		<Death Cert="0">103</Death>
 	</TessAuthor>
 	<TessAuthor id="sophocles">
-		<AuthorDisplay>Sophocles</AuthorDisplay>
+		<Display>Sophocles</Display>
 		<Birth Cert="0">-497</Birth>
 		<Death Cert="1">-406</Death>
 	</TessAuthor>
 	<TessAuthor id="statius">
-		<AuthorDisplay>Statius</AuthorDisplay>
+		<Display>Statius</Display>
 		<Birth Cert="0">45</Birth>
 		<Death Cert="0">96</Death>
 	</TessAuthor>
 	<TessAuthor id="strabo">
-		<AuthorDisplay>Strabo</AuthorDisplay>
+		<Display>Strabo</Display>
 		<Birth Cert="1">-64</Birth>
 		<Death Cert="0">24</Death>
 	</TessAuthor>
 	<TessAuthor id="suetonius">
-		<AuthorDisplay>Suetonius</AuthorDisplay>
+		<Display>Suetonius</Display>
 		<Birth Cert="0">69</Birth>
 		<Death Cert="0">122</Death>
 	</TessAuthor>
 	<TessAuthor id="tacitus">
-		<AuthorDisplay>Tacitus</AuthorDisplay>
+		<Display>Tacitus</Display>
 		<Birth Cert="0">56</Birth>
 		<Death Cert="0">117</Death>
 	</TessAuthor>
 	<TessAuthor id="terence">
-		<AuthorDisplay>Terence</AuthorDisplay>
+		<Display>Terence</Display>
 		<Birth Cert="0">-195</Birth>
 		<Death Cert="1">-159</Death>
 	</TessAuthor>
 	<TessAuthor id="tertullian">
-		<AuthorDisplay>Tertullian</AuthorDisplay>
+		<Display>Tertullian</Display>
 		<Birth Cert="0">160</Birth>
 		<Death Cert="0">225</Death>
 	</TessAuthor>
 	<TessAuthor id="theocritus">
-		<AuthorDisplay>Theocritus</AuthorDisplay>
+		<Display>Theocritus</Display>
 		<Birth Cert="0">-250</Birth>
 		<Death Cert="0">-200</Death>
 	</TessAuthor>
 	<TessAuthor id="theophrastus">
-		<AuthorDisplay>Theophrastus</AuthorDisplay>
+		<Display>Theophrastus</Display>
 		<Birth Cert="0">-371</Birth>
 		<Death Cert="0">-287</Death>
 	</TessAuthor>
 	<TessAuthor id="thucydides">
-		<AuthorDisplay>Thucydides</AuthorDisplay>
+		<Display>Thucydides</Display>
 		<Birth Cert="0">-460</Birth>
 		<Death Cert="0">-395</Death>
 	</TessAuthor>
 	<TessAuthor id="tibullus">
-		<AuthorDisplay>Tibullus</AuthorDisplay>
+		<Display>Tibullus</Display>
 		<Birth Cert="0">-55</Birth>
 		<Death Cert="1">-19</Death>
 	</TessAuthor>
 	<TessAuthor id="tryphiodorus">
-		<AuthorDisplay>Tryphiodorus</AuthorDisplay>
+		<Display>Tryphiodorus</Display>
 		<Birth Cert="0">220</Birth>
 		<Death Cert="0">280</Death>
 	</TessAuthor>
 	<TessAuthor id="valerius_flaccus">
-		<AuthorDisplay>Valerius Flaccus</AuthorDisplay>
+		<Display>Valerius Flaccus</Display>
 		<Birth Cert="0">1</Birth>
 		<Death Cert="0">90</Death>
 	</TessAuthor>
 	<TessAuthor id="valerius_maximus">
-		<AuthorDisplay>Valerius Maximus</AuthorDisplay>
+		<Display>Valerius Maximus</Display>
 		<Birth Cert="0">1</Birth>
 		<Death Cert="0">40</Death>
 	</TessAuthor>
 	<TessAuthor id="vergil">
-		<AuthorDisplay>Vergil</AuthorDisplay>
+		<Display>Vergil</Display>
 		<Birth Cert="1">-70</Birth>
 		<Death Cert="1">-19</Death>
 	</TessAuthor>
 	<TessAuthor id="vitruvius">
-		<AuthorDisplay>Vitruvius Pollio</AuthorDisplay>
+		<Display>Vitruvius Pollio</Display>
 		<Birth Cert="0">-80</Birth>
 		<Death Cert="0">-15</Death>
 	</TessAuthor>
 	<TessAuthor id="xenophon">
-		<AuthorDisplay>Xenophon</AuthorDisplay>
+		<Display>Xenophon</Display>
 		<Birth Cert="0">-430</Birth>
 		<Death Cert="0">-354</Death>
 	</TessAuthor>

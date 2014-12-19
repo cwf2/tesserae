@@ -12,7 +12,7 @@
     <AddedBy>Jessica Micceri</AddedBy>
     <URI>urn:cts:greekLit:tlg0023.tlg001.perseus-grc1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>796</MaskUpper><LocusLower>1.1</LocusLower><LocusUpper>1.797</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>797</MaskLower><MaskUpper>1484</MaskUpper><LocusLower>2.1</LocusLower><LocusUpper>2.688</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>1485</MaskLower><MaskUpper>2132</MaskUpper><LocusLower>3.1</LocusLower><LocusUpper>3.648</LocusUpper></Part><Part id="4"><Display>Book 4</Display><MaskLower>2133</MaskLower><MaskUpper>2825</MaskUpper><LocusLower>4.1</LocusLower><LocusUpper>4.693</LocusUpper></Part><Part id="5"><Display>Book 5</Display><MaskLower>2826</MaskLower><MaskUpper>3505</MaskUpper><LocusLower>5.1</LocusLower><LocusUpper>5.680</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.1">ἔθνεά τοι πόντοιο πολυσπερέας τε φάλαγγας</TextUnit>
     <TextUnit id="1" loc="1.2">παντοίων νεπόδων, πλωτὸν γένος ̓Αμφιτρίτης,</TextUnit>
     <TextUnit id="2" loc="1.3">ἐξερέω, γαίης ὕπατον κράτος, ̓Αντωνῖνε:</TextUnit>

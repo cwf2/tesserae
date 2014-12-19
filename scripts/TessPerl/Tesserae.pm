@@ -999,11 +999,11 @@ sub metadata_init {
 	# table for recording searchable sub-text units
 
 	db_create_table($dbh, 'parts', [
-		'id int unique',
+		'TextId varchar(128)',
+		'id int',
 		'Display varchar(24)',
 		'MaskLower int',
-		'MaskUpper int',
-		'TextId varchar(128)']
+		'MaskUpper int']
 	);
 
 	# table for recording author data

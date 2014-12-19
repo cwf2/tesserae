@@ -12,7 +12,7 @@
     <AddedBy/>
     <URI>urn:cts:latinLit:stoa0089.stoa009.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>404</MaskUpper><LocusLower>1.praef.1</LocusLower><LocusUpper>1.387</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>405</MaskLower><MaskUpper>951</MaskUpper><LocusLower>2.praef.1</LocusLower><LocusUpper>2.527</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.praef.1">Phoebeo domitus Python cum decidit arcu</TextUnit>
     <TextUnit id="1" loc="1.praef.2">membraque Cirrhaeo fudit anhela iugo,</TextUnit>
     <TextUnit id="2" loc="1.praef.3">qui spiris tegeret montes, hauriret hiatu</TextUnit>

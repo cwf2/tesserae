@@ -12,7 +12,7 @@
     <AddedBy>Anna Glenn</AddedBy>
     <URI/>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>30</MaskUpper><LocusLower>1.fr1</LocusLower><LocusUpper>1.27</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>31</MaskLower><MaskUpper>133</MaskUpper><LocusLower>2.1</LocusLower><LocusUpper>2.103</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>134</MaskLower><MaskUpper>149</MaskUpper><LocusLower>3.1</LocusLower><LocusUpper>3.16</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.fr1">imberba iuventute</TextUnit>
     <TextUnit id="1" loc="1.fr2">Capuam colonis deductis occupabunt, Atellam praesidio communient, Nuceriam, Cumas multitudine suorum obtinebunt, cetera oppida praesidiis devincient.</TextUnit>
     <TextUnit id="2" loc="1.fr3">Venibit igitur sub praecone tota Propontis atque Hellespontus, addicetur omnis ora Lyciorum atque Cilicum, Mysia et Phrygia eidem condicioni legique parebunt.</TextUnit>

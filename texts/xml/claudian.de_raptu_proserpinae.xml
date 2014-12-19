@@ -12,7 +12,7 @@
     <AddedBy/>
     <URI>urn:cts:latinLit:stoa0089.stoa005.perseus-lat1</URI>
   </Metadata>
-  <Text>
+  <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>299</MaskUpper><LocusLower>1.praef.1</LocusLower><LocusUpper>1.288</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>300</MaskLower><MaskUpper>723</MaskUpper><LocusLower>2.praef.1</LocusLower><LocusUpper>2.372</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>724</MaskLower><MaskUpper>1171</MaskUpper><LocusLower>3.1</LocusLower><LocusUpper>3.448</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.praef.1">Inventa secuit primus qui nave profundum</TextUnit>
     <TextUnit id="1" loc="1.praef.2">et rudibus remis sollicitavit aquas,</TextUnit>
     <TextUnit id="2" loc="1.praef.3">qui dubiis ausus committere flatibus alnum</TextUnit>

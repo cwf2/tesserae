@@ -122,6 +122,7 @@ use Pod::Usage;
 # load additional modules necessary for this script
 
 use Storable qw/nstore retrieve/;
+use XML::LibXML;
 
 # initialize some variables
 
@@ -148,84 +149,132 @@ if ($help) {
 # get files to be processed from cmd line args
 
 my @files = @ARGV;
-my %file = %{Tesserae::process_file_list(\@files, {filenames=>1})};
 
-unless (keys %file) {
+unless (@files) {
 
 	print STDERR "No files specified\n";
 	pod2usage(2);
 }
 
-for my $name (keys %file) {
-	my $base = Tesserae::get_base($name) or die "Invalid text";
+for my $file (@files) {	
+	my $doc = eval{XML::LibXML->load_xml(location=>$file)};
+	
+	unless ($doc) {
+		print STDERR "Can't read $file";
+		print STDERR ": $@" if $@;
+		print STDERR "\n";
+	
+		next;
+	}
 
-	my @unit = @{retrieve($base . ".line")};
+	my $root = $doc->documentElement;
+	my $id = $root->getAttribute("id");
+	
+	my $body = $root->findnodes("Text");
+	
+	unless ($body->size == 1) {
+		print STDERR "$file has " . $body->size . " text elements. Skipping.\n";
+		next;
+	}
+	
+	$body = $body->get_node(1);
+	my $textchars = length($body->textContent);
+	
+	unless ($textchars > 25000) {
+		print STDERR "$file is too short to partition. Skipping.\n";
+		next;
+	}
+	
+	my $textunits = $body->findnodes("TextUnit");
+	
+	unless ($textunits->size > 1) {
+		print STDERR "$file doesn't have enough text units to partition. Skipping.\n";
+		next;
+	}
 
 	my @chunk;
 	my $prev;
 
-	my $loc = $unit[0]{LOCUS};
+	my $loc = $textunits->get_node(1)->getAttribute("loc");
 	my @components = split(/\./, $loc);
+	
+	if ($#components == 0) {
+		print STDERR "$file doesn't have major divisions. Skipping\n";
+		next;
+	}
+	
 	$prev = $components[0];
 
-	my @token_id = @{$unit[0]{TOKEN_ID}};
+	my $unit_id = $textunits->get_node(1)->getAttribute("id");
 
 	push @chunk, {
-		display => $prefix . " " . $components[0],
-		loc => [$loc, $loc],
-		token => [$token_id[0], $token_id[-1]]
+		Display => $prefix . " " . $components[0],
+		Locus => [$loc, $loc],
+		Unit => [$unit_id, $unit_id]
 	};
 	
-	for my $unit_id (1..$#unit) {
-		my $loc = $unit[$unit_id]{LOCUS};
+	for my $unit ($textunits->get_nodelist) {
+		my $loc = $unit->getAttribute("loc");
 		my @components = split(/\./, $loc);
-		my @token_id = @{$unit[$unit_id]{TOKEN_ID}};
+		my $unit_id = $unit->getAttribute("id");	
 	
 		if ($components[0] ne $prev) {
 			push @chunk, {
-				display => $prefix . " " . $components[0],
-				loc => [$loc, $loc],
-				token => [$token_id[0], $token_id[-1]]
+				Display => $prefix . " " . $components[0],
+				Locus => [$loc, $loc],
+				Unit => [$unit_id, $unit_id]
 			};
 		}
 		else {
-			$chunk[-1]{loc}[-1] = $loc;
-			$chunk[-1]{token}[-1] = $token_id[-1];		
+			$chunk[-1]{Locus}[-1] = $loc;
+			$chunk[-1]{Unit}[-1] = $unit_id;
 		}
 	
 		$prev = $components[0];
 	}
-
-	print "<Parts text=\"$name\">\n";
-	print xml_part({
-		n => 0,
-		display => "Full Text",
-		loc => join("-", $unit[0]{LOCUS}, $unit[-1]{LOCUS}),
-		mask => join(":", 0, $unit[-1]{TOKEN_ID}[-1])
-	});
-
-
-	for my $i (0..$#chunk) {
 	
-		print xml_part({
-			n => $i + 1,
-			display => $chunk[$i]{display},
-			loc => join("-", @{$chunk[$i]{loc}}),
-			mask => join(":", @{$chunk[$i]{token}})
-		});
+	if (scalar(@chunk) == 1) {
+		print STDERR "$file only has one part. Skipping\n";
+		next;
+	}
+	if (scalar(@chunk) > 30) {
+		print STDERR "$file has too many divisions (" .scalar(@chunk) . "). Skipping\n";
+		next;
+	}
+	if ($textchars/scalar(@chunk) < 10000) {
+		print STDERR "$file has too few chars per part. Skipping.\n";
+		next;
+	}
+	
+	print STDERR "$file divided into " . scalar(@chunk) . " parts.";
+	print STDERR sprintf(" Avg chars %.0f.\n", $textchars/scalar(@chunk));
+
+	my $parts = $doc->createElement("Parts");
+		
+	for my $i (1..scalar(@chunk)) {
+	
+		my $part = $doc->createElement("Part");
+		$part->setAttribute("id", $i);
+		
+		for my $e (
+			[Display => $chunk[$i-1]{Display}],
+			[MaskLower => $chunk[$i-1]{Unit}[0]],
+			[MaskUpper => $chunk[$i-1]{Unit}[1]],
+			[LocusLower => $chunk[$i-1]{Locus}[0]],
+			[LocusUpper => $chunk[$i-1]{Locus}[1]] ) {
+				
+			my $element = $doc->createElement($e->[0]);
+			$element->appendText($e->[1]);
+			$part->appendChild($element);
+		}
+
+		$parts->appendChild($part);
 	}
 
-	print "</Parts>\n";
+	$root->insertBefore($parts, $body);
+	
+	my $file_out = "texts/tmp/$id.xml";
+	
+	$doc->toFile($file_out, 2);
 }
 
-sub xml_part {
-	my $part = shift;
-	
-	return <<END_XML;
-<Part n="$part->{n}">
-	<Display>$part->{display}</Display>
-	<LocRange>$part->{loc}<LocRange>
-	<Mask>$part->{mask}</Mask>
-</Part>
-END_XML
-}

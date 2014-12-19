@@ -172,6 +172,9 @@ my $split_punct = qr/(.*$phrase_delimiter['"’”]?)(\s*)(.*)/;
 my $use_lingua_stem = 0;
 my $stemmer;
 
+# cache for author metadata
+my %author_cache;
+
 #
 # for parallel processing
 #
@@ -343,12 +346,23 @@ for my $file (@files) {
 		. join(",", map {defined $_ ? "\"$_\"" : "NULL"} 
 			($text_id, @text_metadata{@Tesserae::metadata_fields_texts}))
 		. ")");
-
-	# register with parts table 
-	# TODO
 	
 	# check authors table 
-	# TODO
+	{
+		my $auth_exists = $dbh->selectrow_arrayref("select count(id) from authors where id=\"$text_metadata{Author}\"")->[0];
+
+		# if author doesn't already exist there, try to find him/her
+	
+		unless ($auth_exists) {
+			
+			my %auth_rec = %{load_auth($text_metadata{Author})};
+			
+			my $sql = "insert into authors (id, Display, Birth, Death) values ("
+				. join(",", map {"'$_'"} ($text_metadata{Author}, @auth_rec{qw/Display Birth Death/}))
+				. ")";
+			$dbh->do($sql);
+		}
+	}
 	
 	#
 	# initialize variables
@@ -396,11 +410,6 @@ for my $file (@files) {
 		# save the book/poem/line number
 
 		$line[-1]{LOCUS} = $locus;
-
-		# remove html special chars
-
-		$verse =~ s/&[a-z];//ig;
-		$verse =~ s/[<>]//g;
 
 		#
 		# check for enjambement with prev line
@@ -619,7 +628,75 @@ for my $file (@files) {
 	# mark text as indexed by word
 	Tesserae::metadata_set($text_id, "feat_word", 1, $dbh);
 
+	#
+	# add parts to parts table
+	#
+	
+	# clean
+	$dbh->do("delete from parts where TextId=\"$text_id\"");
+	
+	# add full text
+	$dbh->do("insert into parts (TextId, id, Display, MaskLower, MaskUpper) "
+			. "values (\"$text_id\", 0, \"Full Text\", 0, $#token)");
+	
+	# look for parts metadata
+	my $parts = $dom->findnodes("TessDocument/Parts/Part");
+	if ($parts->size) {
+		
+		for my $part ($parts->get_nodelist) {
+			
+			my $part_id = $part->getAttribute("id");
+			my $display = $part->findvalue("Display");
+			my $mask_upper = $part->findvalue("MaskUpper");
+			my $mask_lower = $part->findvalue("MaskLower");
+			
+			next unless (defined ($part_id and $display and $mask_upper and $mask_lower));
+			
+			# mask is given in unit ids; convert to token ids.
+			$mask_upper = $line[$mask_upper]{TOKEN_ID}[-1];
+			$mask_lower = $line[$mask_lower]{TOKEN_ID}[0];
+			
+			my $sql = "insert into parts (id, TextId, Display, MaskUpper, MaskLower) "
+					. "values ($part_id, \"$text_id\", \"$display\", $mask_upper, $mask_lower)"; 
+			$dbh->do($sql);
+		}
+	}
+	
 	$pm->finish if $max_processes;
 }
 
 $pm->wait_all_children if $max_processes;
+
+#
+# subroutines
+#
+
+sub load_auth {
+	my $author = shift;
+	
+	my $file = catfile($fs{data}, "common", "metadata", "authors.xml");
+	
+	unless (scalar keys %author_cache) {
+		my $dom = eval{XML::LibXML->load_xml(location=>$file)};
+		
+		if ($dom) {
+			my $list = $dom->findnodes("Corpus/TessAuthor");
+			
+			if (defined $list and $list->size > 0) {
+				for my $auth_node ($list->get_nodelist) {
+					$author_cache{$auth_node->getAttribute("id")} = {
+						Display => $auth_node->findvalue("Display"),
+						Birth => $auth_node->findvalue("Birth"),
+						Death => $auth_node->findvalue("Death")
+					};
+				}
+			}
+		}
+	}
+	
+	unless ($author_cache{$author}) {
+		die "Can't find author metadata for $author. Please amend $file.";
+	}
+	
+	return $author_cache{$author};
+}
