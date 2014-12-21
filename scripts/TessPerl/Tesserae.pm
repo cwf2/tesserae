@@ -821,7 +821,7 @@ sub process_file_list {
 	
 		my ($name, $path, $suffix) = fileparse($file_in, qr/\.[^.]*/);
 	
-		next unless ($suffix eq ".tess");
+		next unless ($suffix eq ".xml");
 		
 		$list_out{$name} = $file_in;
 	}

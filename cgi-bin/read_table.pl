@@ -273,10 +273,8 @@ my %redirect;
 
 # only consider a subset of units
 
-my $mask_target_lower;
-my $mask_target_upper;
-my $mask_source_lower;
-my $mask_source_upper;
+my $part_target = 0;
+my $part_source = 0;
 
 GetOptions( 
 	'source=s'     => \$source,
@@ -294,10 +292,8 @@ GetOptions(
 	'no-cgi'       => \$no_cgi,
 	'quiet'        => \$quiet,
 	'help'         => \$help,
-	'mtl=i'        => \$mask_target_lower,
-	'mtu=i'        => \$mask_target_upper,
-	'msl=i'        => \$mask_source_lower,
-	'msu=i'        => \$mask_source_upper
+	'part-target=i' => \$part_target,
+	'part-source=i' => \$part_source
 );
 
 #
@@ -403,10 +399,8 @@ else {
 	$multi_cutoff    = $query->param('mcutoff')      || $multi_cutoff;
 	@include         = $query->param('include');
 	$recall_cache    = $query->param('recall_cache') || $recall_cache;
-	$mask_target_lower = $query->param('mtl');
-	$mask_target_upper = $query->param('mtu');
-	$mask_source_lower = $query->param('msl');
-	$mask_source_upper = $query->param('msu');
+	$part_target = $query->param('part_target') || $part_target;
+	$part_source = $query->param('part_source') || $part_source;
 		
 	unless (defined $source) {
 	
@@ -417,7 +411,7 @@ else {
 		die "read_table.pl called from web interface with no target";
 	}
 		
-	$quiet = 1;
+	$quiet = 1 unless $query->param("debug");
 	
 	# how to redirect browser to results
 
@@ -459,6 +453,7 @@ if ($score_basis =~ /^feat/) {
 }
 
 
+
 #
 # calculate feature frequencies
 #
@@ -476,6 +471,32 @@ for my $text_id ($source, $target) {
 	}
 }
 
+# print all params for debugging
+
+unless ($quiet) {
+
+	print STDERR "target=$target\n";
+	print STDERR "part_target=$part_target\n";
+	print STDERR "source=$source\n";
+	print STDERR "part_source=$part_source\n";
+	print STDERR "lang(target)=" . Tesserae::metadata_get($target, "Lang") . ";\n";
+	print STDERR "lang(source)=" . Tesserae::metadata_get($source, "Lang") . ";\n";
+	for my $feature (@features) {
+		print STDERR "feature=$feature\n";		
+	}
+	print STDERR "stopwords=$stopwords\n";
+	print STDERR "unit=$unit\n";
+	print STDERR "stoplist basis=$stoplist_basis\n";
+	print STDERR "max_dist=$max_dist\n";
+	print STDERR "distance basis=$distance_metric\n";
+	print STDERR "score cutoff=$cutoff\n";
+	print STDERR "score basis=$score_basis\n";
+}
+
+# get part info
+
+my ($mask_source_lower, $mask_source_upper) = get_mask($source, $part_source);
+my ($mask_target_lower, $mask_target_upper) = get_mask($target, $part_target);
 
 
 #
@@ -509,29 +530,9 @@ my @unit_target    = @{ retrieve("$file_target.$unit") };
 unless (defined $mask_target_upper) { $mask_target_upper = $#unit_target }
 unless (defined $mask_target_lower) { $mask_target_lower = 0 }
 
-# print all params for debugging
+print STDERR "mask_source=$mask_source_lower:$mask_source_upper\n" unless $quiet;
+print STDERR "mask_target=$mask_target_lower:$mask_target_upper\n" unless $quiet;
 
-unless ($quiet) {
-
-	print STDERR "target=$target\n";
-	print STDERR "source=$source\n";
-	print STDERR "mask_target_lower=$mask_target_lower\n";
-	print STDERR "mask_target_upper=$mask_target_upper\n";
-	print STDERR "mask_source_lower=$mask_source_lower\n";
-	print STDERR "mask_source_upper=$mask_source_upper\n";
-	print STDERR "lang(target)=" . Tesserae::metadata_get($target, "Lang") . ";\n";
-	print STDERR "lang(source)=" . Tesserae::metadata_get($source, "Lang") . ";\n";
-	for my $feature (@features) {
-		print STDERR "feature=$feature\n";		
-	}
-	print STDERR "stopwords=$stopwords\n";
-	print STDERR "unit=$unit\n";
-	print STDERR "stoplist basis=$stoplist_basis\n";
-	print STDERR "max_dist=$max_dist\n";
-	print STDERR "distance basis=$distance_metric\n";
-	print STDERR "score cutoff=$cutoff\n";
-	print STDERR "score basis=$score_basis\n";
-}
 
 #
 #
@@ -597,18 +598,16 @@ for my $feature (@features) {
 		# link every occurrence in one text to every one in the other text
 
 		for my $token_id_target ( @{$index_target{$key}} ) {
+			next if $token_id_target > $mask_target_upper;
+			next if $token_id_target < $mask_target_lower;
 
 			my $unit_id_target = $token_target[$token_id_target]{uc($unit) . '_ID'};
 		
-			next if $unit_id_target > $mask_target_upper;
-			next if $unit_id_target < $mask_target_lower;
-		
 			for my $token_id_source ( @{$index_source{$key}} ) {
+				next if $token_id_source > $mask_source_upper;
+				next if $token_id_source < $mask_source_lower;
 
 				my $unit_id_source = $token_source[$token_id_source]{uc($unit) . '_ID'};
-			
-				next if $unit_id_source > $mask_source_upper;
-				next if $unit_id_source < $mask_source_lower;
 			
 				$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}{$key} = 1;
 				$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}{$key} = 1;
@@ -770,7 +769,9 @@ $t1 = time;
 my %match_meta = (
 
 	SOURCE    => $source,
+	PART_S    => $part_source,
 	TARGET    => $target,
+	PART_T    => $part_target,
 	UNIT      => $unit,
 	MTU       => $mask_target_upper,
 	MTL       => $mask_target_lower,
@@ -1076,4 +1077,21 @@ sub select_file_freq {
 	);
 	
 	return $file_freq;
+}
+
+# get token mask for part texts
+
+sub get_mask {
+	my ($text_id, $part_id) = @_;
+
+	my $dbh = Tesserae::metadata_dbh;
+
+	my $sql = "select MaskLower, MaskUpper from parts where TextId=\"$text_id\" and id=\"$part_id\"";
+
+	my $res = $dbh->selectrow_arrayref($sql);
+
+	my $mask_lower = $res->[0];
+	my $mask_upper = $res->[1];
+
+	return($mask_lower, $mask_upper);
 }

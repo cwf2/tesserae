@@ -178,17 +178,16 @@ my @units;
 
 if ($target and $source) {
 		
-	push @units, {name=>'phrase', display=>'Phrase'};
+	push @units, {value=>'phrase', display=>'Phrase'};
 
 	my $dbh = Tesserae::metadata_dbh;
 
-	my $sql = "select sum(prose) from texts where name=\"$target\" or name=\"$source\";";
-	print STDERR "sql='$sql'\n" unless $quiet;
+	my $sql = "select sum(Prose) from texts where id=\"$target\" or id=\"$source\";";
 
 	my $count = $dbh->selectrow_arrayref($sql)->[0];
 
 	if ($count == 0) {
-		push @units, {name=>'line', display=>'Line'};
+		push @units, {value=>'line', display=>'Line'};
 	}
 }
 

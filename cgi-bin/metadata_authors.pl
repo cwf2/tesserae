@@ -210,12 +210,11 @@ my $sql_str;
 		push @elements, "$k=$v"
 	}
 	
-	$sql_str = "select texts.author, authors.display from authors, texts where "
+	$sql_str = "select texts.Author, authors.Display from authors, texts where "
 		. join(', ', @elements)
-		. " and texts.author==authors.author "
-		. " group by texts.author order by texts.author;";
+		. " and texts.Author==authors.id "
+		. " group by texts.Author order by texts.Author;";
 
-		print STDERR "sql_str='$sql_str'\n" unless $quiet;
 }
 
 #
@@ -233,7 +232,7 @@ my @corpus;
 		for (@$res) {
 
 			push @corpus, {
-				name => $_->[0],
+				value => $_->[0],
 				display => $_->[1],
 			};
 		}

@@ -122,7 +122,7 @@ use JSON;
 
 my $help = 0;
 
-my @allowed_keys = qw/author lang prose/;
+my @allowed_keys = qw/Author Lang Prose/;
 my %val;
 
 # is the program being run from the web or
@@ -210,11 +210,10 @@ my $sql_str;
 		push @elements, "$k=$v"
 	}
 	
-	$sql_str = "select name, author, display, prose from texts where "
+	$sql_str = "select id, Author, Display, Prose from texts where "
 		. join(', ', @elements)
-		. ' order by name;';
+		. ' order by id';
 
-		print STDERR "sql_str='$sql_str'\n" unless $quiet;
 }
 
 #
@@ -232,7 +231,7 @@ my @corpus;
 		for (@$res) {
 
 			push @corpus, {
-				name => $_->[0],
+				value => $_->[0],
 				author => $_->[1],
 				display => $_->[2],
 				class => $_->[3] ? 'prose' : 'verse'

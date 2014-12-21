@@ -126,7 +126,7 @@ use Data::Dumper;
 # initialize some variables
 
 my $help = 0;
-my $name;
+my $text_id;
 
 # is the program being run from the web or
 # from the command line?
@@ -160,8 +160,8 @@ if ($no_cgi) {
 	
 	# otherwise, parse query args
 	
-	$name = shift @ARGV;
-	$name =~ s/name=//;
+	$text_id = shift @ARGV;
+	$text_id =~ s/id=//;
 
 }
 else {
@@ -169,26 +169,26 @@ else {
 
 	# get web-based query args
 	
-	$name = $query->param('name');
+	$text_id = $query->param('textid');
 	$quiet = 1;
 }
 
 
 my @parts;
 
-if ($name) {
+if ($text_id) {
 		
 	my $dbh = Tesserae::metadata_dbh;
 
-	my $sql = "select name, display from parts where fulltext=\"$name\" order by sort;";
-	print STDERR "sql='$sql'\n" unless $quiet;
+	my $sql = "select id, Display from parts where TextId=\"$text_id\" order by id";
 
 	my $res = $dbh->selectall_arrayref($sql);
 
 	if ($res) {
 		for (@$res) {
 
-		push @parts, {name => $_->[0], display => $_->[1]}};
+			push @parts, {value => $_->[0], display => $_->[1]};
+		}
 	}
 }
 
@@ -203,21 +203,4 @@ if ($name) {
 }
 
 
-#
-# subroutines
-#
-
-sub display {
-
-	my $name = shift;
-	
-	my $display = $name;
-
-	$display =~ s/\./ - /g;
-	$display =~ s/\_/ /g;
-
-	$display =~ s/(^|\s)([[:alpha:]])/$1 . uc($2)/eg;
-
-	return $display;
-}
 
