@@ -213,11 +213,11 @@ my $stoplist_basis = "corpus";
 
 # output file
 
-my $file_results = "tesresults";
+my $file_results;
 
 # session id
 
-my $session = "NA";
+my $session;
 
 # is the program being run from the web or
 # from the command line?
@@ -276,49 +276,43 @@ my %redirect;
 my $part_target = 0;
 my $part_source = 0;
 
-GetOptions( 
-	'source=s'     => \$source,
-	'target=s'     => \$target,
-	'unit=s'       => \$unit,
-	'feature=s'    => \@features,
-	'stopwords=i'  => \$stopwords, 
-	'stbasis=s'    => \$stoplist_basis,
-	'binary=s'     => \$file_results,
-	'distance=i'   => \$max_dist,
-	'dibasis=s'    => \$distance_metric,
-	'cutoff=f'     => \$cutoff,
-	'score=s'      => \$score_basis,
-	'benchmark'    => \$bench,
-	'no-cgi'       => \$no_cgi,
-	'quiet'        => \$quiet,
-	'help'         => \$help,
-	'part-target=i' => \$part_target,
-	'part-source=i' => \$part_source
-);
+if ($no_cgi) {
 
-#
-# print usage info if help flag set
-#
+	GetOptions( 
+		'source=s'     => \$source,
+		'target=s'     => \$target,
+		'unit=s'       => \$unit,
+		'feature=s'    => \@features,
+		'stopwords=i'  => \$stopwords, 
+		'stbasis=s'    => \$stoplist_basis,
+		'binary=s'     => \$file_results,
+		'session=s'    => \$session,
+		'distance=i'   => \$max_dist,
+		'dibasis=s'    => \$distance_metric,
+		'cutoff=f'     => \$cutoff,
+		'score=s'      => \$score_basis,
+		'benchmark'    => \$bench,
+		'no-cgi'       => \$no_cgi,
+		'quiet'        => \$quiet,
+		'help'         => \$help,
+		'part-target=i' => \$part_target,
+		'part-source=i' => \$part_source
+	);
 
-if ($help) {
+	# print usage info if help flag set
 
-	pod2usage(-verbose => 2);
-}
+	if ($help) {
 
-# default score basis set by Tesserae.pm
+		pod2usage(-verbose => 2);
+	}
 
-unless (defined $score_basis)  { 
-	
-	$score_basis = "word"; # $Tesserae::feature_score{$feature} || 'word';
-}
+	# make sure both source and target are specified
 
-# html header
-#
-# put this stuff early on so the web browser doesn't
-# give up
+	unless (defined ($source and $target)) {
 
-unless ($no_cgi) {
-
+		pod2usage( -verbose => 1);
+	}
+} else {
 	print header();
 
 	my $stylesheet = "$url{css}/style.css";
@@ -330,60 +324,6 @@ unless ($no_cgi) {
 	<title>Tesserae results</title>
 	<link rel="stylesheet" type="text/css" href="$stylesheet" />
 END
-
-	#
-	# determine the session ID
-	# 
-
-	# open the temp directory
-	# and get the list of existing session files
-
-	opendir(my $dh, $fs{tmp}) || die "can't opendir $fs{tmp}: $!";
-
-	my @tes_sessions = grep { /^tesresults-[0-9a-f]{8}/ && -d catfile($fs{tmp}, $_) } readdir($dh);
-
-	closedir $dh;
-
-	# sort them and get the id of the last one
-
-	@tes_sessions = sort(@tes_sessions);
-
-	$session = $tes_sessions[-1];
-
-	# then add one to it;
-	# if we can't determine the last session id,
-	# then start at 0
-
-	if (defined($session)) {
-
-	   $session =~ s/^.+results-//;
-	}
-	else {
-
-	   $session = "0"
-	}
-
-	# put the id into hex notation to save space and make it look confusing
-
-	$session = sprintf("%08x", hex($session)+1);
-
-	# open the new session file for output
-
-	$file_results = catfile($fs{tmp}, "tesresults-$session");
-}
-
-
-# if web input doesn't seem to be there, 
-# then check command line arguments
-
-if ($no_cgi) {
-
-	unless (defined ($source and $target)) {
-
-		pod2usage( -verbose => 1);
-	}
-}
-else {
 
 	$source          = $query->param('source');
 	$target          = $query->param('target');
@@ -401,6 +341,7 @@ else {
 	$recall_cache    = $query->param('recall_cache') || $recall_cache;
 	$part_target = $query->param('part_target') || $part_target;
 	$part_source = $query->param('part_source') || $part_source;
+	$session = $query->param("session");
 		
 	unless (defined $source) {
 	
@@ -410,7 +351,11 @@ else {
 	
 		die "read_table.pl called from web interface with no target";
 	}
-		
+	unless (defined $session) {
+
+	   die "read_table.pl called from web interface with no session";
+	}
+
 	$quiet = 1 unless $query->param("debug");
 	
 	# how to redirect browser to results
@@ -434,6 +379,34 @@ else {
 END
 
 }
+
+# default score basis set by Tesserae.pm
+
+unless (defined $score_basis)  { 
+	
+	$score_basis = "word"; # $Tesserae::feature_score{$feature} || 'word';
+}
+
+# validate and clean session directory
+
+if (defined $file_results) {
+	unless (-d $file_results) {
+		mkpath($file_results);
+	}
+} else {
+	if (defined $session) {
+		$file_results = catfile($fs{tmp}, "tesresults-$session");
+	}
+}
+
+unless (-d $file_results) {
+	die "Invalid session: $file_results";
+}
+
+rmtree($file_results, {keep_root => 1});
+
+
+# 
 
 unless (@features) { @features = ("word") }
 
@@ -801,9 +774,6 @@ else {
 	print "<p>Writing session data.</p>";
 }
 
-rmtree($file_results);
-mkpath($file_results);
-	
 nstore \%match_target, catfile($file_results, "match.target");
 nstore \%match_source, catfile($file_results, "match.source");
 nstore \%match_score,  catfile($file_results, "match.score" );
