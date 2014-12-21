@@ -198,10 +198,9 @@ my $target;
 
 my $unit = "line";
 
-# feature means the feature set compared: 
-# - choice is 'word' or 'stem'
+# feature means the feature set compared
 
-my $feature = "stem";
+my @features;
 
 # stopwords is the number of words on the stoplist
 
@@ -214,11 +213,11 @@ my $stoplist_basis = "corpus";
 
 # output file
 
-my $file_results = "tesresults";
+my $file_results;
 
 # session id
 
-my $session = "NA";
+my $session;
 
 # is the program being run from the web or
 # from the command line?
@@ -272,106 +271,64 @@ my $score_basis;
 my $frontend = 'default';
 my %redirect;
 
-GetOptions( 
-			'source=s'     => \$source,
-			'target=s'     => \$target,
-			'unit=s'       => \$unit,
-			'feature=s'    => \$feature,
-			'stopwords=i'  => \$stopwords, 
-			'stbasis=s'    => \$stoplist_basis,
-			'binary=s'     => \$file_results,
-			'distance=i'   => \$max_dist,
-			'dibasis=s'    => \$distance_metric,
-			'cutoff=f'     => \$cutoff,
-			'score=s'      => \$score_basis,
-			'benchmark'    => \$bench,
-			'no-cgi'       => \$no_cgi,
-			'quiet'        => \$quiet,
-			'help'         => \$help);
+# only consider a subset of units
 
-#
-# print usage info if help flag set
-#
-
-if ($help) {
-
-	pod2usage(-verbose => 2);
-}
-
-# default score basis set by Tesserae.pm
-
-unless (defined $score_basis)  { 
-	
-	$score_basis = $Tesserae::feature_score{$feature} || 'word';
-}
-
-# html header
-#
-# put this stuff early on so the web browser doesn't
-# give up
-
-unless ($no_cgi) {
-
-	print header();
-
-	#
-	# determine the session ID
-	# 
-
-	# open the temp directory
-	# and get the list of existing session files
-
-	opendir(my $dh, $fs{tmp}) || die "can't opendir $fs{tmp}: $!";
-
-	my @tes_sessions = grep { /^tesresults-[0-9a-f]{8}/ && -d catfile($fs{tmp}, $_) } readdir($dh);
-
-	closedir $dh;
-
-	# sort them and get the id of the last one
-
-	@tes_sessions = sort(@tes_sessions);
-
-	$session = $tes_sessions[-1];
-
-	# then add one to it;
-	# if we can't determine the last session id,
-	# then start at 0
-
-	if (defined($session)) {
-
-	   $session =~ s/^.+results-//;
-	}
-	else {
-
-	   $session = "0"
-	}
-
-	# put the id into hex notation to save space and make it look confusing
-
-	$session = sprintf("%08x", hex($session)+1);
-
-	# open the new session file for output
-
-	$file_results = catfile($fs{tmp}, "tesresults-$session");
-}
-
-
-# if web input doesn't seem to be there, 
-# then check command line arguments
+my $part_target = 0;
+my $part_source = 0;
 
 if ($no_cgi) {
+
+	GetOptions( 
+		'source=s'     => \$source,
+		'target=s'     => \$target,
+		'unit=s'       => \$unit,
+		'feature=s'    => \@features,
+		'stopwords=i'  => \$stopwords, 
+		'stbasis=s'    => \$stoplist_basis,
+		'binary=s'     => \$file_results,
+		'session=s'    => \$session,
+		'distance=i'   => \$max_dist,
+		'dibasis=s'    => \$distance_metric,
+		'cutoff=f'     => \$cutoff,
+		'score=s'      => \$score_basis,
+		'benchmark'    => \$bench,
+		'no-cgi'       => \$no_cgi,
+		'quiet'        => \$quiet,
+		'help'         => \$help,
+		'part-target=i' => \$part_target,
+		'part-source=i' => \$part_source
+	);
+
+	# print usage info if help flag set
+
+	if ($help) {
+
+		pod2usage(-verbose => 2);
+	}
+
+	# make sure both source and target are specified
 
 	unless (defined ($source and $target)) {
 
 		pod2usage( -verbose => 1);
 	}
-}
-else {
+} else {
+	print header();
+
+	my $stylesheet = "$url{css}/style.css";
+
+	print <<END;
+
+<html>
+<head>
+	<title>Tesserae results</title>
+	<link rel="stylesheet" type="text/css" href="$stylesheet" />
+END
 
 	$source          = $query->param('source');
 	$target          = $query->param('target');
 	$unit            = $query->param('unit')         || $unit;
-	$feature         = $query->param('feature')      || $feature;
+	@features        = $query->param('feature');
 	$stopwords       = defined($query->param('stopwords')) ? $query->param('stopwords') : $stopwords;
 	$stoplist_basis  = $query->param('stbasis')      || $stoplist_basis;
 	$max_dist        = $query->param('dist')         || $max_dist;
@@ -382,7 +339,10 @@ else {
 	$multi_cutoff    = $query->param('mcutoff')      || $multi_cutoff;
 	@include         = $query->param('include');
 	$recall_cache    = $query->param('recall_cache') || $recall_cache;
-	
+	$part_target = $query->param('part_target') || $part_target;
+	$part_source = $query->param('part_source') || $part_source;
+	$session = $query->param("session");
+		
 	unless (defined $source) {
 	
 		die "read_table.pl called from web interface with no source";
@@ -391,8 +351,12 @@ else {
 	
 		die "read_table.pl called from web interface with no target";
 	}
-		
-	$quiet = 1;
+	unless (defined $session) {
+
+	   die "read_table.pl called from web interface with no session";
+	}
+
+	$quiet = 1 unless $query->param("debug");
 	
 	# how to redirect browser to results
 
@@ -404,28 +368,68 @@ else {
 	);
 }
 
-#
-# force unit=phrase if either work is prose
-#
-# Note: This is a hack!  Fix later!!
+# default score basis set by Tesserae.pm
 
-if (Tesserae::check_prose_list($target) or Tesserae::check_prose_list($source)) {
+unless (defined $score_basis)  { 
+	
+	$score_basis = "word"; # $Tesserae::feature_score{$feature} || 'word';
+}
+
+# validate and clean session directory
+
+if (defined $file_results) {
+	unless (-d $file_results) {
+		mkpath($file_results);
+	}
+} else {
+	if (defined $session) {
+		$file_results = catfile($fs{tmp}, "tesresults-$session");
+	}
+}
+
+unless (-d $file_results) {
+	die "Invalid session: $file_results";
+}
+
+rmtree($file_results, {keep_root => 1});
+
+
+# 
+
+unless (@features) { @features = ("word") }
+
+# force unit=phrase if either work is prose
+
+if (Tesserae::metadata_get($target, "Prose") or Tesserae::metadata_get($source, "Prose")) {
 
 	$unit = 'phrase';
 }
-
-# assume unicode text names are utf8,
-# whether input via cmd line or cgi
-
-# $target = decode('utf8', $target);
-# $source = decode('utf8', $source);
 
 # if user selected 'feature' as score basis,
 # set it to whatever the feature is
 
 if ($score_basis =~ /^feat/) {
 
-	$score_basis = $feature;
+	$score_basis = "stem"; # $feature;
+}
+
+
+
+#
+# calculate feature frequencies
+#
+
+my %freq;
+
+for my $text_id ($source, $target) {
+	
+	my @f = @features;
+	unless (grep {/$_ eq "word"/} @f) { push @f, "word" }
+	
+	for my $feature (@f) {
+		my $file_freq = select_file_freq($text_id) . ".freq_score_" . $score_basis;
+		$freq{$text_id}{$feature} = Tesserae::stoplist_hash($file_freq);
+	}
 }
 
 # print all params for debugging
@@ -433,12 +437,16 @@ if ($score_basis =~ /^feat/) {
 unless ($quiet) {
 
 	print STDERR "target=$target\n";
+	print STDERR "part_target=$part_target\n";
 	print STDERR "source=$source\n";
-	print STDERR "lang(target)=" . Tesserae::lang($target) . ";\n";
-	print STDERR "lang(source)=" . Tesserae::lang($source) . ";\n";		
-	print STDERR "feature=$feature\n";
-	print STDERR "unit=$unit\n";
+	print STDERR "part_source=$part_source\n";
+	print STDERR "lang(target)=" . Tesserae::metadata_get($target, "Lang") . ";\n";
+	print STDERR "lang(source)=" . Tesserae::metadata_get($source, "Lang") . ";\n";
+	for my $feature (@features) {
+		print STDERR "feature=$feature\n";		
+	}
 	print STDERR "stopwords=$stopwords\n";
+	print STDERR "unit=$unit\n";
 	print STDERR "stoplist basis=$stoplist_basis\n";
 	print STDERR "max_dist=$max_dist\n";
 	print STDERR "distance basis=$distance_metric\n";
@@ -446,32 +454,10 @@ unless ($quiet) {
 	print STDERR "score basis=$score_basis\n";
 }
 
-# start session
+# get part info
 
-rmtree($file_results);
-mkpath($file_results);
-	
-#
-# calculate feature frequencies
-#
-
-# token frequencies from the target text
-
-my $file_freq_target = select_file_freq($target) . ".freq_score_" . $score_basis;
-my %freq_target = %{Tesserae::stoplist_hash($file_freq_target)};
-
-# token frequencies from the source text
-
-my $file_freq_source = select_file_freq($source) . ".freq_score_" . $score_basis;
-my %freq_source = %{Tesserae::stoplist_hash($file_freq_source)};
-
-#
-# basis for stoplist is feature frequency from one or both texts
-#
-
-my @stoplist = @{load_stoplist($stoplist_basis, $stopwords)};
-
-unless ($quiet) { print STDERR "stoplist: " . join(",", @stoplist) . "\n"}
+my ($mask_source_lower, $mask_source_upper) = get_mask($source, $part_source);
+my ($mask_target_lower, $mask_target_upper) = get_mask($target, $part_target);
 
 
 #
@@ -484,22 +470,30 @@ unless ($quiet) {
 	print STDERR "reading source data\n";
 }
 
-my $file_source = catfile($fs{data}, 'v3', Tesserae::lang($source), $source, $source);
+my $file_source = catfile($fs{data}, 'v3', Tesserae::metadata_get($source, "Lang"), $source, $source);
 
 my @token_source   = @{ retrieve("$file_source.token") };
 my @unit_source    = @{ retrieve("$file_source.$unit") };
-my %index_source   = %{ retrieve("$file_source.index_$feature")};
+
+unless (defined $mask_source_upper) { $mask_source_upper = $#unit_source }
+unless (defined $mask_source_lower) { $mask_source_lower = 0 }
 
 unless ($quiet) {
 
 	print STDERR "reading target data\n";
 }
 
-my $file_target = catfile($fs{data}, 'v3', Tesserae::lang($target), $target, $target);
+my $file_target = catfile($fs{data}, 'v3', Tesserae::metadata_get($target, "Lang"), $target, $target);
 
 my @token_target   = @{ retrieve("$file_target.token") };
 my @unit_target    = @{ retrieve("$file_target.$unit") };
-my %index_target   = %{ retrieve("$file_target.index_$feature" ) };
+
+unless (defined $mask_target_upper) { $mask_target_upper = $#unit_target }
+unless (defined $mask_target_lower) { $mask_target_lower = 0 }
+
+print STDERR "mask_source=$mask_source_lower:$mask_source_upper\n" unless $quiet;
+print STDERR "mask_target=$mask_target_lower:$mask_target_upper\n" unless $quiet;
+
 
 #
 #
@@ -519,51 +513,66 @@ my %match_score;
 # consider each key in the source doc
 #
 
-unless ($quiet) {
+my %stoplist;
 
-	print STDERR "comparing $target and $source\n";
-}
+for my $feature (@features) {
 
-# draw a progress bar
+	print STDERR "Checking feature set $feature\n" unless $quiet;
+	
+	# load feature indices
 
-my $pr;
+	my %index_source   = %{ retrieve("$file_source.index_$feature")};
+	my %index_target   = %{ retrieve("$file_target.index_$feature")};
+	
+	# basis for stoplist is feature frequency from one or both texts
 
-if ($no_cgi) {
-	$pr = ProgressBar->new(scalar(keys %index_source), $quiet);
-}
-else {
-	$pr = AJAXProgress->new(scalar(keys %index_source), $file_results);
-	$pr->message("Comparing $source and $target");
-}
+	@{$stoplist{$feature}} = @{load_stoplist($feature, $stoplist_basis, $stopwords)};
+	unless ($quiet) { print STDERR "stoplist: " . join(",", @{$stoplist{$feature}}) . "\n"}
+	
+	# draw a progress bar
+	my $pr;
 
-# start with each key in the source
+	if ($no_cgi) {
+		$pr = ProgressBar->new(scalar(keys %index_source), $quiet);
+	}
+	else {
+		$pr = AJAXProgress->new(scalar(keys %index_source), $file_results);
+		$pr->message("Comparing $source and $target");
+	}
 
-for my $key (keys %index_source) {
+	# start with each key in the source
 
-	# advance the progress bar
+	for my $key (keys %index_source) {
 
-	$pr->advance();
+		# advance the progress bar
 
-	# skip key if it doesn't exist in the target doc
+		$pr->advance();
 
-	next unless ( defined $index_target{$key} );
+		# skip key if it doesn't exist in the target doc
 
-	# skip key if it's in the stoplist
+		next unless ( defined $index_target{$key} );
 
-	next if ( grep { $_ eq $key } @stoplist);
+		# skip key if it's in the stoplist
 
-	# link every occurrence in one text to every one in the other text
+		next if ( grep { $_ eq $key } @{$stoplist{$feature}});
 
-	for my $token_id_target ( @{$index_target{$key}} ) {
+		# link every occurrence in one text to every one in the other text
 
-		my $unit_id_target = $token_target[$token_id_target]{uc($unit) . '_ID'};
+		for my $token_id_target ( @{$index_target{$key}} ) {
+			next if $token_id_target > $mask_target_upper;
+			next if $token_id_target < $mask_target_lower;
+
+			my $unit_id_target = $token_target[$token_id_target]{uc($unit) . '_ID'};
 		
-		for my $token_id_source ( @{$index_source{$key}} ) {
+			for my $token_id_source ( @{$index_source{$key}} ) {
+				next if $token_id_source > $mask_source_upper;
+				next if $token_id_source < $mask_source_lower;
 
-			my $unit_id_source = $token_source[$token_id_source]{uc($unit) . '_ID'};
+				my $unit_id_source = $token_source[$token_id_source]{uc($unit) . '_ID'};
 			
-			$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$key} = 1;
-			$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$key} = 1;
+				$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}{$key} = 1;
+				$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}{$key} = 1;
+			}
 		}
 	}
 }
@@ -583,6 +592,7 @@ $t1 = time;
 my $total_matches = 0;
 
 # draw a progress bar
+my $pr;
 
 if ($no_cgi) {
 
@@ -708,13 +718,6 @@ for my $unit_id_target (keys %match_target) {
 	}
 }
 
-my %feature_notes = (
-	
-	word => "Exact matching only.",
-	stem => "Stem matching enabled.  Forms whose stem is ambiguous will match all possibilities.",
-	syn  => "Stem + synonym matching.  This search is still in development.  Note that stopwords may match on less-common synonyms."
-	);
-
 print "score>>" . (time-$t1) . "\n" if $no_cgi and $bench;
 
 #
@@ -726,18 +729,24 @@ $t1 = time;
 my %match_meta = (
 
 	SOURCE    => $source,
+	PART_S    => $part_source,
 	TARGET    => $target,
+	PART_T    => $part_target,
 	UNIT      => $unit,
-	FEATURE   => $feature,
+	MTU       => $mask_target_upper,
+	MTL       => $mask_target_lower,
+	MSU       => $mask_source_upper,
+	MSL       => $mask_source_lower,
+	FEATURE   => join(":", @features),
 	STOP      => $stopwords,
-	STOPLIST  => [@stoplist],
+	STOPLIST  => [map {(@{$stoplist{$_}})} keys %stoplist],
 	STBASIS   => $stoplist_basis,
 	DIST      => $max_dist,
 	DIBASIS   => $distance_metric,
 	SESSION   => $session,
 	CUTOFF    => $cutoff,
 	SCBASIS   => $score_basis,
-	COMMENT   => $feature_notes{$feature},
+	COMMENT   => "",
 	VERSION   => $Tesserae::VERSION,
 	TOTAL     => $total_matches
 );
@@ -786,11 +795,22 @@ sub dist {
 	
 	my %match_target = %$match_t_ref;
 	my %match_source = %$match_s_ref;
+
+	my $feature = "word";
 	
-	my @target_id = sort {$a <=> $b} keys %match_target;
-	my @source_id = sort {$a <=> $b} keys %match_source;
+	my @target_id = map {
+		{id=>$_, 
+		freq=>$freq{$target}{$feature}{$token_target[$_]{FORM}}
+		}
+	} keys %match_target;
 	
-	my $dist = 0;
+	my @source_id = map { 
+		{id=>$_, 
+		freq=>$freq{$source}{$feature}{$token_source[$_]{FORM}}
+		}
+	} keys %match_source;
+
+	my $dist;
 	
 	#
 	# distance is calculated by one of the following metrics
@@ -803,7 +823,7 @@ sub dist {
 	
 		# sort target token ids by frequency of the forms
 		
-		my @t = sort {$freq_target{$token_target[$a]{FORM}} <=> $freq_target{$token_target[$b]{FORM}}} @target_id; 
+		my @t = map { $_->{id} } sort {$a->{freq} <=> $b->{freq}} @target_id; 
 			      
 		# consider the two lowest;
 		# put them in order from left to right
@@ -820,35 +840,7 @@ sub dist {
 			
 		# now do the same in the source phrase
 			
-		my @s = sort {$freq_source{$token_source[$a]{FORM}} <=> $freq_source{$token_source[$b]{FORM}}} @source_id; 
-		
-		if ($s[0] > $s[1]) { @s[0,1] = @s[1,0] }
-			
-		for ($s[0]..$s[1]) {
-		
-		  $dist++ if $token_source[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# freq_target: as above, but only in the target phrase
-	
-	elsif ($metric eq "freq_target") {
-		
-		my @t = sort {$freq_target{$token_target[$a]{FORM}} <=> $freq_target{$token_target[$b]{FORM}}} @target_id; 
-			
-		if ($t[0] > $t[1]) { @t[0,1] = @t[1,0] }
-			
-		for ($t[0]..$t[1]) {
-		
-		  $dist++ if $token_target[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# freq_source: ditto, but source phrase only
-	
-	elsif ($metric eq "freq_source") {
-		
-		my @s = sort {$freq_source{$token_source[$a]{FORM}} <=> $freq_source{$token_source[$b]{FORM}}} @source_id; 
+		my @s = map {$_->{id}} sort {$a->{freq} <=> $b->{freq}} @source_id; 
 		
 		if ($s[0] > $s[1]) { @s[0,1] = @s[1,0] }
 			
@@ -860,7 +852,9 @@ sub dist {
 	
 	# span: count all words between (and including) first and last matching words
 	
-	elsif ($metric eq "span") {
+	else {
+	
+		my @t = sort {$a <=> $b} map {$_->{id}} @target_id;
 	
 		# check all tokens from the first (lowest-id) matching word
 		# to the last.  increment distance only if token is of type WORD.
@@ -870,38 +864,20 @@ sub dist {
 		  $dist++ if $token_target[$_]{TYPE} eq 'WORD';
 		}
 		
-		for ($source_id[0]..$source_id[-1]) {
-		
-		  $dist++ if $token_source[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# span_target: as above, but in the target only
-	
-	elsif ($metric eq "span_target") {
-		
-		for ($target_id[0]..$target_id[-1]) {
-		
-		  $dist++ if $token_target[$_]{TYPE} eq 'WORD';
-		}
-	}
-	
-	# span_source: ditto, but source only
-	
-	elsif ($metric eq "span_source") {
+		my @s = sort {$a <=> $b} map {$_->{id}} @source_id;
 		
 		for ($source_id[0]..$source_id[-1]) {
 		
 		  $dist++ if $token_source[$_]{TYPE} eq 'WORD';
 		}
 	}
-		
+			
 	return $dist;
 }
 
 sub load_stoplist {
 
-	my ($stoplist_basis, $stopwords) = @_[0,1];
+	my ($feature, $stoplist_basis, $stopwords) = @_;
 	
 	my %basis;
 	my @stoplist;
@@ -958,33 +934,6 @@ sub load_stoplist {
 	return \@stoplist;
 }
 
-sub exact_match {
-
-	my ($ref_target, $ref_source) = @_[0,1];
-
-	my @target_id = keys %$ref_target;
-	my @source_id = keys %$ref_source;
-	
-	my @ttokens;
-	my @stokens;
-		
-	for (@target_id) {
-	
-		push @ttokens, $token_target[$_]{FORM};
-	}
-	
-	for (@source_id) {
-		push @stokens, $token_source[$_]{FORM};
-	}
-	
-	@ttokens = @{Tesserae::uniq(\@ttokens)};
-	@stokens = @{Tesserae::uniq(\@ttokens)};
-	
-	my @exact_match = @{Tesserae::intersection(\@ttokens, \@stokens)};
-	
-	return scalar(@exact_match);
-}
-
 sub score_default {
 	
 	my ($match_t_ref, $match_s_ref, $distance) = @_;
@@ -997,35 +946,41 @@ sub score_default {
 	my $score = 0;
 		
 	for my $token_id_target (keys %match_target ) {
+		
+		for my $feature (keys %{$match_target{$token_id_target}}) {
 									
-		# add the frequency score for this term
+			# add the frequency score for this term
 		
-		my $freq = 1/$freq_target{$token_target[$token_id_target]{FORM}}; 
+			my $freq = 1/$freq{$target}{$feature}{$token_target[$token_id_target]{FORM}};
 				
-		# for 3-grams only, consider how many features the word matches on
+			# for 3-grams only, consider how many features the word matches on
 				
-	if ($feature eq '3gr') {
+			if ($feature eq '3gr') {
 		
-			$freq *= scalar(keys %{$match_target{$token_id_target}});
+				$freq *= scalar(keys %{$match_target{$token_id_target}{$feature}})/5;
+			}
+		
+			$score += $freq;
 		}
-		
-		$score += $freq;
 	}
 	
 	for my $token_id_source ( keys %match_source ) {
 
-		# add the frequency score for this term
+		for my $feature (keys %{$match_source{$token_id_source}}) {
 
-		my $freq = 1/$freq_source{$token_source[$token_id_source]{FORM}};
+			# add the frequency score for this term
+
+			my $freq = 1/$freq{$source}{$feature}{$token_source[$token_id_source]{FORM}};
 		
-		# for 3-grams only, consider how many features the word matches on
+			# for 3-grams only, consider how many features the word matches on
 				
-		if ($feature eq '3gr') {
+			if ($feature eq '3gr') {
 		
-			$freq *= scalar(keys %{$match_source{$token_id_source}});
+				$freq *= scalar(keys %{$match_source{$token_id_source}{$feature}})/5;
+			}
+		
+			$score += $freq;
 		}
-		
-		$score += $freq;
 	}
 	
 	$score = sprintf("%.3f", log($score/$distance));
@@ -1058,27 +1013,34 @@ sub write_multi_list {
 
 sub select_file_freq {
 
-	my $name = shift;
+	my $id = shift;
 	
-	if ($name =~ /\.part\./) {
-	
-		my $origin = $name;
-		$origin =~ s/\.part\..*//;
-		
-		if (defined Tesserae::lang($origin)) {
-		
-			$name = $origin;
-		}
-	}
-	
-	my $lang = Tesserae::lang($name);
+	my $lang = Tesserae::metadata_get($id, "Lang");
 	my $file_freq = catfile(
 		$fs{data}, 
 		'v3', 
 		$lang, 
-		$name, 
-		$name
+		$id, 
+		$id
 	);
 	
 	return $file_freq;
 }
+
+# get token mask for part texts
+
+sub get_mask {
+	my ($text_id, $part_id) = @_;
+
+	my $dbh = Tesserae::metadata_dbh;
+
+	my $sql = "select MaskLower, MaskUpper from parts where TextId=\"$text_id\" and id=\"$part_id\"";
+
+	my $res = $dbh->selectrow_arrayref($sql);
+
+	my $mask_lower = $res->[0];
+	my $mask_upper = $res->[1];
+
+	return($mask_lower, $mask_upper);
+}
+

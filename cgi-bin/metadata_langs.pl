@@ -164,7 +164,7 @@ else {
 # construct query
 #
 
-my $sql_str = "select lang from texts group by lang;";
+my $sql_str = "select Lang from texts group by Lang;";
 
 print STDERR "sql_str='$sql_str'\n" unless $quiet;
 
@@ -184,7 +184,7 @@ my @corpus;
 		for (@$res) {
 
 			push @corpus, {
-				name => $_->[0],
+				id => $_->[0],
 				display => ($Tesserae::lang_display{$_->[0]} || $_->[0])
 			};
 		}

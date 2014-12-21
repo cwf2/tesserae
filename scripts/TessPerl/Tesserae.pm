@@ -99,6 +99,20 @@ my %feature_override = (
 	'porter' => \&porter
 );
 
+# metadata fields for texts
+
+our @metadata_fields_texts = qw/
+	Author
+	Display
+	Abbr
+	Lang
+	Prose
+	PrintSource
+	DigitalSourceDisplay
+	DigitalSourceURL
+	URI	
+	AddedBy
+	/;
 
 # cache for feature lookup
 
@@ -512,26 +526,7 @@ sub check_prose_list {
 
 	my $name = shift;
 	
-	return metadata_get($name, 'prose');
-		
-	# my $file_prose_list = catfile($fs{text}, 'prose_list');
-	#
-	# return 0 unless (-s $file_prose_list);
-	#
-	# open (FH, '<:utf8', $file_prose_list) or die "can't read $file_prose_list";
-	#
-	# while (my $line = <FH>) {
-	#
-	# 	chomp $line;
-	#
-	# 	$line =~ s/#.*//;
-	#
-	# 	next unless $line =~ /\S/;
-	#
-	# 	return 1 if $name =~ /$line/;
-	# }
-	#
-	# return 0;
+	return metadata_get($name, 'prose');		
 }
 
 
@@ -608,33 +603,16 @@ sub text_sort {
 
 sub lang {
 	
-	my ($name, $lang) = @_;
+	my ($id, $lang) = @_;
 	
 	my $dbh = metadata_dbh();
 	
 	if ($lang) {
 		
-		metadata_set($name, 'lang', $lang, $dbh);
+		metadata_set($id, 'Lang', $lang, $dbh);
 	}
 	
-	return metadata_get($name, 'lang', $dbh);
-	
-	# my $file_lang = catfile($fs{data}, 'common', 'lang');
-	#
-	# if (! %lang and -s $file_lang) {
-	#
-	# 	%lang = %{retrieve($file_lang)};
-	# }
-	#
-	# if ($lang) {
-	#
-	# 	$lang{$text} = $lang;
-	# 	nstore \%lang, $file_lang;
-	#
-	# 	metadata_set($text, 'lang', $lang);
-	# }
-	#
-	# return $lang{$text};
+	return metadata_get($id, 'Lang', $dbh);
 }
 
 # check the feature dictionary
@@ -841,28 +819,9 @@ sub process_file_list {
 
 	for my $file_in (@list_in) {
 	
-		# large files split into parts are kept in their
-		# own subdirectories; if an arg has no .tess extension
-		# it may be such a directory
-
-		if (-d $file_in) {
-
-			opendir (DH, $file_in);
-
-			my @parts = (grep {/\.part\./ && -f} map { catfile($file_in, $_) } readdir DH);
-
-			push @list_in, @parts;
-					
-			closedir (DH);
-		
-			# move on to the next full text
-
-			next;
-		}
-	
 		my ($name, $path, $suffix) = fileparse($file_in, qr/\.[^.]*/);
 	
-		next unless ($suffix eq ".tess");
+		next unless ($suffix eq ".xml");
 		
 		$list_out{$name} = $file_in;
 	}
@@ -944,15 +903,15 @@ sub get_base {
 	
 	unless ($lang) {
 	
-		print STDERR "Can't find language for $text. Have you run add_column.pl?\n";
+		print STDERR "Can't find language for $name. Have you run add_column.pl?\n";
 		return undef;
 	}
 	
-	my $base = catfile($fs{data}, 'v3', $lang, $text, $text);
+	my $base = catfile($fs{data}, 'v3', $lang, $name, $name);
 	
 	unless (-e "$base.token") {
 	
-		print STDERR "Can't find token data for $text. Have you run add_column.pl?\n";
+		print STDERR "Can't find token data for $name. Have you run add_column.pl?\n";
 		return undef;
 	}
 	
@@ -968,15 +927,13 @@ sub escape_path {
 }
 
 sub metadata_get {
-	my ($name, $field, $dbh_open) = @_;
+	my ($id, $field, $dbh_open) = @_;
 	
-	$name =~ s/\.part\..*//;
-
 	my $dbh = $dbh_open || metadata_dbh();
 
 	my $value;
 
-	my $res = $dbh->selectrow_arrayref("select $field from $metadata_db_table where name=\"$name\";");
+	my $res = $dbh->selectrow_arrayref("select $field from $metadata_db_table where id=\"$id\";");
 	
 	if ($res) {
 		$value = $res->[0];
@@ -986,13 +943,32 @@ sub metadata_get {
 }
 
 sub metadata_set {
-	my ($name, $field, $value, $dbh_open) = @_;
-
-	$name =~ s/\.part\..*//;
+	my ($id, $field, $value, $dbh_open) = @_;
 
 	my $dbh = $dbh_open || metadata_dbh();
 	
-	$dbh->do("update $metadata_db_table set $field=\"$value\" where name=\"$name\";");
+	$dbh->do("update $metadata_db_table set $field=\"$value\" where id=\"$id\";");
+}
+
+sub metadata_textlist {
+	my ($ref_opt, $dbh_open) = @_;
+	
+	my $dbh = $dbh_open || metadata_dbh();
+
+	my $where_clause = "";
+
+	if (defined $ref_opt) {
+		my %opt = %$ref_opt;
+		
+		if (%opt) {
+			$where_clause = " where " . join(" and ", map {"$_ = '$opt{$_}'"} keys %opt);
+		}
+	}
+	
+	my $sql = "select id from texts" . $where_clause . ";";
+	
+	my $ref = $dbh->selectcol_arrayref($sql);
+	return $ref;
 }
 
 sub metadata_dbh {
@@ -1006,29 +982,37 @@ sub metadata_init {
 	my $dbh = metadata_dbh();
 	
 	db_create_table($dbh, 'texts', [
-		'name varchar(128) unique',
-		'display varchar(80)',
-		'author varchar(40)',
-		'lang char(3)',
-		'abbr varchar(24)',
-		'prose int',
+		'id varchar(128) unique',
+		'Display varchar(80)',
+		'Author varchar(40)',
+		'Lang char(3)',
+		'Abbr varchar(24)',
+		'Prose int',
+		'PrintSource varchar(256)',
+		'DigitalSourceDisplay varchar(24)',
+		'DigitalSourceURL varchar(128)',
+		'URI varchar(80)',
+		'AddedBy varchar(24)',
 		'feat_word int']
 	);
 	
 	# table for recording searchable sub-text units
 
 	db_create_table($dbh, 'parts', [
-		'name varchar(128) unique',
-		'sort int',
-		'display varchar(24)',
-		'fulltext varchar(128)']
+		'TextId varchar(128)',
+		'id int',
+		'Display varchar(24)',
+		'MaskLower int',
+		'MaskUpper int']
 	);
 
 	# table for recording author data
 
 	db_create_table($dbh, "authors", [
-		'author varchar(40) unique',
-		'display varchar(24)']
+		'id varchar(40) unique',
+		'Display varchar(24)',
+		'Birth int',
+		'Death int']
 	);
 }
 

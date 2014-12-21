@@ -1,48 +1,36 @@
 #! /usr/bin/perl
 
-# add_column.pl
-#
-# add a new text to the database
-
 =head1 NAME
 
-add_column.pl - add texts to the tesserae database
+import_xml.pl - add texts to the tesserae database
 
 =head1 SYNOPSIS
 
-perl add_column.pl [options] TEXT [, TEXT2, [DIR], ...] 
+import_xml.pl [options] TEXT [, TEXT2, [DIR], ...] 
 
 =head1 DESCRIPTION
 
-Reads in one or more .tess documents and creates the indices used by read_table.pl
+Reads in one or more .xml documents and creates the indices used by read_table.pl
 to perform Tesserae searches.
 
 This script is usually run on an entire directory of texts at once, when you're
 first setting Tesserae up.  E.g. (from the Tesserae root dir),
 
-   perl scripts/v3/add_column.pl texts/la/*
+   scripts/v3/import_xml.pl texts/xml/*
 
-If the script is passed a directory instead of a file, it will search inside for
-.tess files; this is designed for works which have been partitioned into separate
-files, e.g. by internal "book".  These .part. files are stored inside a directory
-named for the original work.
-
-If you have a file in the I<texts/> directory called I<prose_list>, this will be
-read and any texts whose names are found in the prose list will be added to the
-database in "prose mode".  Because the "line" unit of text doesn't make much sense
-for prose works, in prose mode the line database is just a copy of the phrase one.
+Adapted from add_column.pl; the actual parsing of units and tokens should'be
+unchanged.
 
 =head1 OPTIONS AND ARGUMENTS
 
 =over
 
-=item B<--lang>
+=item B<--override FIELD=VALUE>
 
-Specify the language code for all texts.  By default tries to guess from the
-path, which usually includes this code.  Tells Tesserae where to look for 
-stem dictionaries, etc.
+Manually set any of the metadata fields that should otherwise be read from 
+the source document.
 
-=item B<--parllel N>
+=item B<--parallel N>
 
 Allow up to N processes to run in parallel.  Requires Parallel::ForkManager.
 
@@ -52,10 +40,6 @@ Use the Lingua::Stem module to do stemming instead of internal dictionaries.
 This is the only way to index English works by stem; I don't think it works
 for Latin and almost certainly not for Greek.  The language code will be 
 passed to Lingua::Stem, which must have a stemmer for that code.
-
-=item B<--prose>
-
-Force all texts to be added in prose mode.
 
 =item B<--help>
 
@@ -74,7 +58,7 @@ The contents of this file are subject to the University at Buffalo Public Licens
 
 Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitations under the License.
 
-The Original Code is add_column.pl.
+The Original Code is import_xml.pl.
 
 The Initial Developer of the Original Code is Research Foundation of State University of New York, on behalf of University at Buffalo.
 
@@ -161,6 +145,7 @@ use File::Path qw(mkpath rmtree);
 use File::Basename;
 use File::Copy;
 use Storable qw(nstore retrieve);
+use XML::LibXML;
 use Encode;
 
 # optional modules
@@ -176,7 +161,7 @@ my $override_parallel = Tesserae::check_mod("Parallel::ForkManager");
 # if you match this $1 and $2 will be set to the parts
 # belonging to the left and right phrases respectively
 
-my $split_punct = qr/(.*"?$phrase_delimiter"?)(\s*)(.*)/;
+my $split_punct = qr/(.*$phrase_delimiter['"’”]?)(\s*)(.*)/;
 
 # 
 # initialize some parameters
@@ -187,6 +172,9 @@ my $split_punct = qr/(.*"?$phrase_delimiter"?)(\s*)(.*)/;
 my $use_lingua_stem = 0;
 my $stemmer;
 
+# cache for author metadata
+my %author_cache;
+
 #
 # for parallel processing
 #
@@ -194,20 +182,14 @@ my $stemmer;
 my $max_processes = 0;
 my $pm;
 
-#
-# declare language tools
-#
-
-my $lang_default;
+# manually-specified fields and values
+my @override_list;
 
 # don't print messages to STDERR 
 my $quiet = 0;
 
 # print usage and exit
 my $help = 0;
-
-# flag work as prose (not used yet)
-my $prose = 0;
 
 # allow utf8 output to stderr
 binmode STDERR, ':utf8';
@@ -217,10 +199,9 @@ binmode STDERR, ':utf8';
 #
 
 GetOptions( 
-	"lang=s"          => \$lang_default,
+	"override=s"      => \@override_list,
 	"parallel=i"      => \$max_processes,
 	"quiet"           => \$quiet,
-	"prose"           => \$prose,
 	"use-lingua-stem" => \$use_lingua_stem,
 	"help"            => \$help
 	);
@@ -261,26 +242,29 @@ if ($max_processes) {
 	$pm = Parallel::ForkManager->new($max_processes);
 }
 
+# check override settings
+my %override;
+for (@override_list) {
+	next unless /(\S+)=(\S+)/;
+	$override{$1} = $2;
+}
+
 # get files to be processed from cmd line args
 
 my @files = @ARGV;
-my %file = %{Tesserae::process_file_list(\@files, {filenames=>1})};
 
-unless (keys %file) {
+unless (@files) {
 
 	print STDERR "No files specified\n";
 	pod2usage(2);
 }
 
-# write the abbreviations database
-
-# get_abbr(\%file);
 
 #
 # process the files
 #
 
-for my $name (keys %file) {
+for my $file (@files) {
 				
 	#
 	# fork
@@ -289,6 +273,95 @@ for my $name (keys %file) {
 	if ($max_processes) {
 
 		$pm->start and next;
+	}
+	
+	# parse xml
+	
+	my $dom = eval {XML::LibXML->load_xml(location=>$file)};
+	
+	unless ($dom) {
+		print STDERR "Can't parse $file";
+		print STDERR ": $@" if $@;
+		print STDERR "\n";
+		
+		$pm->finish if $max_processes;
+		next;
+	}
+	
+	# get text id
+	
+	my $text_id = $dom->documentElement->getAttribute("id");
+	unless (defined $text_id and $text_id ne "") {
+		print STDERR "skipping $file: <id> field is missing\n";
+		$pm->finish if $max_processes;
+		next;
+	}
+	
+	# look for header
+	
+	my %text_metadata;
+	my $head = $dom->findnodes("TessDocument/Metadata");
+	if (defined $head and $head->size == 1) {
+		$head=$head->get_node(1);
+		
+		for my $field (@Tesserae::metadata_fields_texts) {			
+			if ($override{$field}){
+				$text_metadata{$field} = $override{$field};
+			} else {
+				$text_metadata{$field} = $head->findvalue($field);
+			}
+			
+			unless ($text_metadata{$field}) {
+				print STDERR "$file lacks metadata field <$field>\n";
+			}
+		}
+	}
+	
+	# validate required fields
+	
+	for my $field (qw/Author Display Lang Prose/) {
+		unless (defined $text_metadata{$field}) {
+			print STDERR "Skipping $file: required metadata is missing\n";
+			$pm->finish if $max_processes;
+			next;
+		}
+	}
+	
+	# make sure there is some text
+	
+	my $body = $dom->findnodes("TessDocument/Text/TextUnit");
+	unless (defined $body and $body->size > 0) {
+		print STDERR "Skipping $file: no text found\n";
+		$pm->finish if $max_processes;
+		next;
+	}
+	
+	# add the text into metadata table
+		
+	my $dbh = Tesserae::metadata_dbh;
+
+	$dbh->do("insert or replace into texts (" 
+		. join(",", "id", @Tesserae::metadata_fields_texts)
+		. ") values (" 
+		. join(",", map {defined $_ ? "\"$_\"" : "NULL"} 
+			($text_id, @text_metadata{@Tesserae::metadata_fields_texts}))
+		. ")");
+	
+	# check authors table 
+	{
+		my $auth_exists = $dbh->selectrow_arrayref("select count(id) from authors where id=\"$text_metadata{Author}\"")->[0];
+
+		# if author doesn't already exist there, try to find him/her
+	
+		unless ($auth_exists) {
+			
+			my %auth_rec = %{load_auth($text_metadata{Author})};
+			
+			my $sql = "insert into authors (id, Display, Birth, Death) values ("
+				. join(",", map {"'$_'"} ($text_metadata{Author}, @auth_rec{qw/Display Birth Death/}))
+				. ")";
+			$dbh->do($sql);
+		}
 	}
 	
 	#
@@ -300,100 +373,20 @@ for my $name (keys %file) {
 	my @phrase = ({});
 
 	my %index_word;
-	my %cit;
-	
-	my $dbh = Tesserae::metadata_dbh;
-	
-	# get the language for this doc.
-	
-	my $lang;
-	
-	if ( defined $lang_default and $lang_default ne "") {
-		
-		$lang = $lang_default;
-	}
-	elsif (Cwd::abs_path($file{$name}) =~ m/$fs{text}\/([a-z]{1,4})\//) {
 
-		$lang = $1;
-	}
+	my $lang = $text_metadata{Lang};
 
-	unless ( $lang ) {
-		warn "Skipping $file{$name}: can't guess language";
-		
-		if ($max_processes) { $pm->finish }
-		next;
-	}
-
-
-	# check prose list
-	
-	my $prose = $prose || check_prose_list($name);
-	
-	# add the text into metadata table
-
-	my $fulltext = $name;
-	my $part_display;
-	my $part_sort;
-
-	if ($fulltext =~ s/\.part\.(.+)//) {
-		my $part = $1;
-
-		if ($part =~ /(\d+)\.(.+)/) {
-			($part_sort, $part) = ($1, $2);
-		}
-		else {
-			$part_sort = int($part);
-			$part = "Book $part";
-		}
-
-		$part_display = display($part);
-	}
-	else {
-		$part_sort = 0;
-		$part_display = "Full Text"; 
-	}
-
-	$dbh->do("insert or replace into parts (name, sort, display, fulltext) "
-			. "values (\"$name\", $part_sort, \"$part_display\", \"$fulltext\");");
-
-	my $author;
-	my $work;
-
-	if ($fulltext =~ /(.+?)\.(.+)/) {
-		$author = $1;
-		$work = $2;
-	}
-	else {
-		$author = "anonymous";
-		$work = $fulltext;
-	}
-
-	$work = display($work);
-	my $auth_display = display($author);
-
-	$dbh->do("insert or replace into texts (name, display, author, lang, prose) "
-		. "values (\"$fulltext\", \"$work\", \"$author\", \"$lang\", $prose);");
-
-	$dbh->do("insert or replace into authors (author, display) values (\"$author\", \"$auth_display\");");
-	
-	#
 	# assume unknown lang is like english
-	#
 	
 	unless (defined $is_word{$lang})  { $is_word{$lang}  = $is_word{en} }
 	unless (defined $non_word{$lang}) { $non_word{$lang} = $non_word{en} }
 
 	# parse and index:
-	#
 	# - every word will get a serial id
 	# - every line is a list of words
 	# - every phrase is a list of words
 
-	print STDERR "Reading text: $name\n" unless $quiet;
-
-	# open the input text
-
-	open (TEXT, "<:utf8", $file{$name}) or die("Can't open file ".$file{$name});
+	print STDERR "Reading text: $text_id\n" unless $quiet;
 
 	# assume first quote mark is a left one
 	
@@ -401,42 +394,22 @@ for my $name (keys %file) {
 
 	# examine each line of the input text
 
-	while (my $l = <TEXT>) {
+	for my $text_unit ($body->get_nodelist) {
+		my $verse = $text_unit->textContent;
+		my $locus = $text_unit->getAttribute("loc");
+		my $unit_id = $text_unit->getAttribute("id");
 		
-		chomp $l;
+		for ($verse, $locus, $unit_id) { 
+			next unless defined $_;
+		}
 
-		# parse a line of text; reads in verse number and the verse. 
-		# Assumption is that a line looks like:
-		# <001>	this is a verse
-
-		$l =~ /^\S*<(.+)>\s+(.+)/;
-		
-		my ($locus, $verse) = ($1, $2);
-
-		# skip lines with no locus or line
-
-		next unless (defined $locus and defined $verse);
-		
 		# start a new line
 		
 		push @line, {};
-
-		# examine the locus of each line
-
-		$locus =~ s/^(.*)\s//;
-		
-		# save abbreviation of auth/work
-		
-		$cit{$1} ++;
 		
 		# save the book/poem/line number
 
 		$line[-1]{LOCUS} = $locus;
-
-		# remove html special chars
-
-		$verse =~ s/&[a-z];//ig;
-		$verse =~ s/[<>]//g;
 
 		#
 		# check for enjambement with prev line
@@ -473,13 +446,6 @@ for my $name (keys %file) {
 				if ($token =~ /TESSFORM(.+?)TESSDISPLAY(.+?)/) {
 				
 					($token, $display) = ($1, $2);
-				}
-
-				# convert display greek to unicode
-
-				if ($lang eq "grc") {
-
-					$display = Tesserae::beta_to_uni($display);
 				}
 
 				# the searchable form 
@@ -579,9 +545,9 @@ for my $name (keys %file) {
 			}
 			else {
 				
-				warn "Can't parse <<$l>> on $name line $.. Skipping.";
+				print STDERR "Can't parse TextUnit $unit_id...skipping.";
 				next;
-			}			
+			}
 		}
 	}
 	
@@ -622,28 +588,18 @@ for my $name (keys %file) {
 			
 		$phrase[$phrase_id]{LOCUS} = $line[$phrase[$phrase_id]{LINE_ID}[0]]{LOCUS};
 	}
-	
-	# save auth/work abbreviation
-	
-	{
-		my @choice = sort {$cit{$b} <=> $cit{$a}} grep {/\w/} keys %cit;
-
-		if ($choice[0]) {
-			Tesserae::metadata_set($name, 'abbr', $choice[0], $dbh);
-		}
-	}
-	
+		
 	#
 	# save the data
 	#
 	
 	# make sure the directory exists
 	
-	my $path_data = catfile($fs{data}, 'v3', $lang, $name);
+	my $path_data = catfile($fs{data}, 'v3', $lang, $text_id);
 	
 	unless (-d $path_data ) { mkpath($path_data) }
 	
-	my $file_out = catfile($path_data, $name);
+	my $file_out = catfile($path_data, $text_id);
 
 	print STDERR "Writing $file_out.token\n" unless $quiet;
 	nstore \@token, "$file_out.token";
@@ -659,19 +615,53 @@ for my $name (keys %file) {
 		
 	# calculate frequencies for stoplist
 
-	Tesserae::write_freq_stop($name, 'word', \%index_word, $quiet);
+	Tesserae::write_freq_stop($text_id, 'word', \%index_word, $quiet);
 	
 	# frequencies for score are the same
 	
-	my $from = catfile($fs{data}, 'v3', $lang, $name, "$name.freq_stop_word");
-	my $to   = catfile($fs{data}, 'v3', $lang, $name, "$name.freq_score_word");
+	my $from = "$file_out.freq_stop_word";
+	my $to   = "$file_out.freq_score_word";
 	
 	print STDERR "Writing $to\n" unless $quiet;
 	copy($from, $to);
 	
 	# mark text as indexed by word
-	Tesserae::metadata_set($name, "feat_word", 1, $dbh);
+	Tesserae::metadata_set($text_id, "feat_word", 1, $dbh);
 
+	#
+	# add parts to parts table
+	#
+	
+	# clean
+	$dbh->do("delete from parts where TextId=\"$text_id\"");
+	
+	# add full text
+	$dbh->do("insert into parts (TextId, id, Display, MaskLower, MaskUpper) "
+			. "values (\"$text_id\", 0, \"Full Text\", 0, $#token)");
+	
+	# look for parts metadata
+	my $parts = $dom->findnodes("TessDocument/Parts/Part");
+	if ($parts->size) {
+		
+		for my $part ($parts->get_nodelist) {
+			
+			my $part_id = $part->getAttribute("id");
+			my $display = $part->findvalue("Display");
+			my $mask_upper = $part->findvalue("MaskUpper");
+			my $mask_lower = $part->findvalue("MaskLower");
+			
+			next unless (defined ($part_id and $display and $mask_upper and $mask_lower));
+			
+			# mask is given in unit ids; convert to token ids.
+			$mask_upper = $line[$mask_upper]{TOKEN_ID}[-1];
+			$mask_lower = $line[$mask_lower]{TOKEN_ID}[0];
+			
+			my $sql = "insert into parts (id, TextId, Display, MaskUpper, MaskLower) "
+					. "values ($part_id, \"$text_id\", \"$display\", $mask_upper, $mask_lower)"; 
+			$dbh->do($sql);
+		}
+	}
+	
 	$pm->finish if $max_processes;
 }
 
@@ -681,94 +671,32 @@ $pm->wait_all_children if $max_processes;
 # subroutines
 #
 
-sub get_abbr {
-
-	my $ref = shift;
+sub load_auth {
+	my $author = shift;
 	
-	my %file = %$ref;
+	my $file = catfile($fs{data}, "common", "metadata", "authors.xml");
 	
-	my $file_abbr = catfile($fs{data}, 'common', 'abbr');	
-	my %abbr = %{retrieve($file_abbr)} if -s $file_abbr;
-	
-	print STDERR "Getting abbreviations from file tags\n" unless $quiet;
-	
-	my $pr = ProgressBar->new(scalar(keys %file));
-	
-	for my $name (keys %file) {
+	unless (scalar keys %author_cache) {
+		my $dom = eval{XML::LibXML->load_xml(location=>$file)};
 		
-		$pr->advance();
-	
-		# open the input text
-
-		my $fh;
-
-		unless (open ($fh, "<:utf8", $file{$name})) { 
+		if ($dom) {
+			my $list = $dom->findnodes("Corpus/TessAuthor");
 			
-			warn "Can't open file $file{$name}: $!";
-			next;
+			if (defined $list and $list->size > 0) {
+				for my $auth_node ($list->get_nodelist) {
+					$author_cache{$auth_node->getAttribute("id")} = {
+						Display => $auth_node->findvalue("Display"),
+						Birth => $auth_node->findvalue("Birth"),
+						Death => $auth_node->findvalue("Death")
+					};
+				}
+			}
 		}
-		
-		my %cit;
-		
-		while (my $line = <$fh>) {
-		
-			next unless $line =~ /<(.+?)>/;
-			
-			my $tag = $1;
-			
-			$tag =~ s/\s+\S+$//;
-			
-			$cit{$tag} ++;
-		}
-		
-		my @choice = sort {$cit{$b} <=> $cit{$a}} grep {/\w/} keys %cit;
-	
-		$abbr{$name} = $choice[0] if $choice[0];
 	}
 	
-	print STDERR "Writing $file_abbr\n";
-	
-	nstore \%abbr, $file_abbr;
-}
-
-sub check_prose_list {
-
-	my $name = shift;
-
-	# if this is a part text, metadata pertains to full text
-	$name =~ s/\.part\..*//;	
-		
-	my $file_prose_list = catfile($fs{text}, 'prose_list');
-	
-	return 0 unless (-s $file_prose_list);
-	
-	open (FH, '<:utf8', $file_prose_list) or die "can't read $file_prose_list";
-	
-	while (my $line = <FH>) { 
-	
-		chomp $line;
-		
-		$line =~ s/#.*//;
-		
-		next unless $line =~ /\S/;
-		
-		return 1 if $name =~ /$line/;
+	unless ($author_cache{$author}) {
+		die "Can't find author metadata for $author. Please amend $file.";
 	}
 	
-	return 0;
+	return $author_cache{$author};
 }
-
-sub display {
-
-	my $name = shift;
-	
-	my $display = $name;
-
-	$display =~ s/\./ - /g;
-	$display =~ s/\_/ /g;
-
-	$display =~ s/(^|\s)([[:alpha:]])/$1 . uc($2)/eg;
-
-	return $display;
-}
-

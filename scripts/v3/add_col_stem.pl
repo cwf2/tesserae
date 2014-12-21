@@ -166,7 +166,7 @@ my $override_parallel = Tesserae::check_mod("Parallel::ForkManager");
 my $help    = 0;
 my $quiet   = 0;
 my $use_lingua_stem = 0;
-my @feature;
+my @features;
 
 #
 # These are for parallel processing
@@ -180,7 +180,7 @@ my $pm;
 GetOptions(
 	'help'            => \$help,
 	'quiet'           => \$quiet,
-	'feature=s'       => \@feature,
+	'feature=s'       => \@features,
 	'use-lingua-stem' => \$use_lingua_stem,
 	'parallel=i'      => \$max_processes
 );
@@ -196,7 +196,7 @@ binmode STDOUT, ':utf8';
 
 # default feature set is stem
 
-@feature = ('stem') unless @feature;
+@features = ('stem') unless @features;
 
 #
 # initialize parallel processing
@@ -230,7 +230,7 @@ if ($use_lingua_stem) {
 
 my @files = map { glob } @ARGV;
 
-@files = @{check_feature_dep(Tesserae::process_file_list(\@files))};
+my @text_ids = @{check_feature_dep(Tesserae::process_file_list(\@files))};
 
 #
 # add feature column to metadata table
@@ -238,17 +238,16 @@ my @files = map { glob } @ARGV;
 
 my $dbh = Tesserae::metadata_dbh;
 
-for my $feature (@feature) {
-	my $sql = "alter table texts add column feat_$feature int default 0;";
-	print STDERR "sql=$sql\n";
-	$dbh->do($sql);
-}
+# check if specified feature columns exist in texts table,
+# create them if they don't
+update_features($dbh, \@features);
+
 
 #
 # process the files
 #
 
-for my $file (@files) {
+for my $text_id (@text_ids) {
 	
 	# fork
 	
@@ -257,13 +256,13 @@ for my $file (@files) {
 		$pm->start and next;
 	}
 	
-	my $lang = Tesserae::lang($file);
+	my $lang = Tesserae::metadata_get($text_id, "Lang");
 		
-	my $file_index_word = catfile($fs{data}, 'v3', $lang, $file, "$file.index_word");
+	my $file_index_word = catfile($fs{data}, 'v3', $lang, $text_id, "$text_id.index_word");
 	
 	my %index_word = %{retrieve($file_index_word)};
 	
-	for my $feature (@feature) {
+	for my $feature (@features) {
 		
 		my %index_feat;
 	
@@ -280,15 +279,15 @@ for my $file (@files) {
 			$index_feat{$feat} = Tesserae::uniq($index_feat{$feat});
 		}
 
-		my $file_index = catfile($fs{data}, 'v3', $lang, $file, "$file.index_$feature");
+		my $file_index = catfile($fs{data}, 'v3', $lang, $text_id, "$text_id.index_$feature");
 	
 		print STDERR "Writing index $file_index\n" unless $quiet;
 		nstore \%index_feat, $file_index;
 		
-		Tesserae::write_freq_stop($file, $feature, \%index_feat, $quiet);
-		Tesserae::write_freq_score($file, $feature, \%index_word, $quiet);
+		Tesserae::write_freq_stop($text_id, $feature, \%index_feat, $quiet);
+		Tesserae::write_freq_score($text_id, $feature, \%index_word, $quiet);
 
-		Tesserae::metadata_set($file, "feat_$feature", 1);
+		Tesserae::metadata_set($text_id, "feat_$feature", 1);
 	}
 	
 	$pm->finish if $max_processes;	
@@ -304,24 +303,47 @@ sub check_feature_dep {
 
 	my $ref = shift;
 
-	my @file = @$ref;	
-	my %file_ok = map {($_, 1)} @file;
+	my @ids = @$ref;
+	my %id_ok = map {($_, 1)} @ids;
 	
-	for my $feature (@feature) {
+	for my $feature (@features) {
 	
 		next unless defined $Tesserae::feature_dep{$feature};
 
-		for my $file (@file) {
+		for my $text_id (@ids) {
 
-			my $file_dep = catfile($fs{data}, 'v3', Tesserae::lang($file), $file, "$file.index_$Tesserae::feature_dep{$feature}");
+			my $file_dep = catfile($fs{data}, 'v3', Tesserae::metadata_get($text_id, "Lang"), $text_id, "$text_id.index_$Tesserae::feature_dep{$feature}");
 
 			unless (-e $file_dep) {
 		
-				$file_ok{$file} = 0
+				$id_ok{$text_id} = 0
 			}
 		}
 	}
 	
-	return [grep { $file_ok{$_} } @file];
+	return [grep { $id_ok{$_} } @ids];
 }
 
+sub update_features {
+	my ($dbh, $feat_ref) = @_;
+	my @features = @$feat_ref;
+	
+	my $table_ref = $dbh->selectall_arrayref("pragma table_info(texts)");
+
+	my %exists;
+	
+	for my $row(@$table_ref) {
+		my $col = $row->[1];
+		next unless $col =~ s/feat_//;
+		
+		$exists{$col} = 1;
+	}
+
+	for my $feature (@features) {
+	
+		unless ($exists{$feature}) {
+			my $sql = "alter table texts add column feat_$feature int default 0";
+			$dbh->do($sql);
+		}
+	}
+}

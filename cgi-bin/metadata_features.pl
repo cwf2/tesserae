@@ -180,7 +180,7 @@ if ($target and $source) {
 		
 	my $dbh = Tesserae::metadata_dbh;
 
-	my $sql = "select * from texts where name=\"$target\" or name=\"$source\";";
+	my $sql = "select * from texts where id=\"$target\" or id=\"$source\";";
 	print STDERR "sql='$sql'\n" unless $quiet;
 
 	my $sth = $dbh->prepare($sql);
@@ -199,7 +199,7 @@ if ($target and $source) {
 	}
 
 	@features = grep { $count{$_} >= $min } keys %count;
-	@features = map {{name=>$_, display=>($Tesserae::feature_display{$_} or $_)}} sort @features;
+	@features = map {{value=>$_, display=>($Tesserae::feature_display{$_} or $_)}} sort @features;
 }
 
 

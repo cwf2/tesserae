@@ -185,7 +185,7 @@ for my $lang (@lang) {
 	
 	# get a list of all the word counts
 
-	my @texts = @{Tesserae::get_textlist($lang, -no_part => 1)};
+	my @texts = @{Tesserae::metadata_textlist({Lang => $lang})};
 	
 	#
 	# combine the counts for each file to get a corpus count

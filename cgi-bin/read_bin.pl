@@ -60,6 +60,10 @@ Presuming that you had previously run read_table.pl using the default name "tesr
 
 % cgi-bin/read_bin.pl --export tab tesresults > results.txt
 
+=head1 KNOWN BUGS
+
+XML output not working as of 12.17.2014.
+
 =head1 SEE ALSO
 
 I<cgi-bin/read_table.pl>
@@ -252,7 +256,7 @@ unless ($no_cgi) {
 
 	my %h = ('-charset'=>'utf-8', '-type'=>'text/html');
 
-	if ($export eq "xml") { $h{'-type'} = "text/xml"; $h{'-attachment'} = "tesresults-$session.xml" }
+#	if ($export eq "xml") { $h{'-type'} = "text/xml"; $h{'-attachment'} = "tesresults-$session.xml" }
 	if ($export eq "csv") { $h{'-type'} = "text/csv"; $h{'-attachment'} = "tesresults-$session.csv" }
 	if ($export eq "tab") { $h{'-type'} = "text/plain"; $h{'-attachment'} = "tesresults-$session.txt" }
 
@@ -310,7 +314,7 @@ my $feature = $meta{FEATURE};
 
 my $stop = $meta{STOP};
 
-my @stoplist = @{$meta{STOPLIST}};
+my @stoplist = ("na");#@{$meta{STOPLIST}};
 
 # stoplist basis
 
@@ -327,10 +331,6 @@ my $distance_metric = $meta{DIBASIS};
 # low-score cutoff
 
 my $cutoff = $meta{CUTOFF};
-
-# score team filter state
-
-my $filter = $meta{FILTER};
 
 # session id
 
@@ -357,8 +357,12 @@ if ($batch eq 'all') {
 # text abbreviations
 
 my %abbr = (
-	$source => Tesserae::metadata_get($source, "abbr"),
-	$target => Tesserae::metadata_get($target, "abbr"),
+	$source => Tesserae::metadata_get($source, "Abbr"),
+	$target => Tesserae::metadata_get($target, "Abbr"),
+);
+my %lang = (
+	$source => Tesserae::metadata_get($source, "Lang"),
+	$target => Tesserae::metadata_get($target, "Lang"),
 );
 
 
@@ -373,11 +377,10 @@ unless ($quiet) {
 	print STDERR "reading source data\n";
 }
 
-my $path_source = catfile($fs{data}, 'v3', Tesserae::lang($source), $source, $source);
+my $path_source = catfile($fs{data}, 'v3', $lang{$source}, $source, $source);
 
 my @token_source   = @{ retrieve( "$path_source.token"    ) };
 my @unit_source    = @{ retrieve( "$path_source.${unit}" ) };
-my %index_source   = %{ retrieve( "$path_source.index_$feature" ) };
 
 # read target text
 
@@ -386,11 +389,10 @@ unless ($quiet) {
 	print STDERR "reading target data\n";
 }
 
-my $path_target = catfile($fs{data}, 'v3', Tesserae::lang($target), $target, $target);
+my $path_target = catfile($fs{data}, 'v3', $lang{$target}, $target, $target);
 
 my @token_target   = @{ retrieve( "$path_target.token"    ) };
 my @unit_target    = @{ retrieve( "$path_target.${unit}" ) };
-my %index_target   = %{ retrieve( "$path_target.index_$feature" ) };
 
 
 #
@@ -408,10 +410,6 @@ elsif ($export eq "csv") {
 elsif ($export eq "tab") {
 
 	print_delim("\t");
-}
-elsif  ($export eq "xml") {
-
-	print_xml();
 }
 
 
@@ -593,6 +591,16 @@ sub print_html {
 	$top =~ s/<!--pager-->/&nav_page()/e;
 	$top =~ s/<!--sorter-->/&re_sort()/e;
 	$top =~ s/<!--session-->/$session/;
+	
+	my $style = <<END;
+	<style type="text/css">
+		.matched_word { color: black; }
+		.matched_stem { color: red; }
+		.matched_3gr { color: blue; }
+	</style>
+END
+
+	$top =~ s/<!--head_insert-->/$style/;
 
 	print $top;
 
@@ -614,18 +622,28 @@ sub print_html {
 
 		my %seen_keys;
 
-		for (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
+		for my $token_id_target (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
 
-			$marked_target{$_} = 1;
+			for my $feature (sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}}) {
+				
+				$marked_target{$token_id_target} = $feature;
 
-			$seen_keys{join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$seen_keys{"<span class=\"matched_$feature\">"
+					. join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}})
+					. "</span>"} = 1;
+			}
 		}
 
-		for (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
+		for my $token_id_source (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
 
-			$marked_source{$_} = 1;
+			for my $feature (sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}}) {
+				
+				$marked_source{$token_id_source} = $feature;
 
-			$seen_keys{join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$seen_keys{"<span class=\"matched_$feature\">" 
+					. join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}})
+					. "</span>"} = 1;
+			}
 		}
 
 		# format the list of all unique shared words
@@ -666,7 +684,8 @@ sub print_html {
 
 		for my $token_id_target (@{$unit_target[$unit_id_target]{TOKEN_ID}}) {
 
-			if (defined $marked_target{$token_id_target}) { print '<span class="matched">' }
+			if (defined $marked_target{$token_id_target}) { 
+				print "<span class=\"matched_$marked_target{$token_id_target}\">" }
 			print $token_target[$token_id_target]{DISPLAY};
 			if (defined $marked_target{$token_id_target}) { print "</span>" }
 		}
@@ -696,7 +715,8 @@ sub print_html {
 
 		for my $token_id_source (@{$unit_source[$unit_id_source]{TOKEN_ID}}) {
 
-			if (defined $marked_source{$token_id_source}) { print '<span class="matched">' }
+			if (defined $marked_source{$token_id_source}) { 
+				print "<span class=\"matched_$marked_source{$token_id_source}\">" }
 			print $token_source[$token_id_source]{DISPLAY};
 			if (defined $marked_source{$token_id_source}) { print '</span>' }
 		}
@@ -719,7 +739,6 @@ sub print_html {
 	}
 
 	my $stoplist = join(", ", @stoplist);
-	my $filtertoggle = $filter ? 'on' : 'off';
 
 	$bottom =~ s/<!--session_id-->/$session/;
 	$bottom =~ s/<!--source-->/$source/;
@@ -732,7 +751,6 @@ sub print_html {
 	$bottom =~ s/<!--maxdist-->/$max_dist/;
 	$bottom =~ s/<!--dibasis-->/$distance_metric/;
 	$bottom =~ s/<!--cutoff-->/$cutoff/;
-	$bottom =~ s/<!--filter-->/$filtertoggle/;
 
 	print $bottom;
 }
@@ -746,7 +764,6 @@ sub print_delim {
 	#
 
 	my $stoplist = join(" ", @stoplist);
-	my $filtertoggle = $filter ? 'on' : 'off';
 
 	print <<END;
 # Tesserae V3 results
@@ -762,7 +779,6 @@ sub print_delim {
 # max_dist  = $max_dist
 # dibasis   = $distance_metric
 # cutoff    = $cutoff
-# filter    = $filtertoggle
 
 END
 
@@ -796,19 +812,25 @@ END
 		# collect the keys
 
 		my %seen_keys;
+		
+		for my $token_id_target (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
 
-		for (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
+			for my $feature (keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}}) {
 
-			$marked_target{$_} = 1;
+				$marked_target{$token_id_target} = $feature;
 
-			$seen_keys{join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$seen_keys{$feature . ":" . join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}})} = 1;
+			}
 		}
 
-		for (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
+		for my $token_id_source (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
 
-			$marked_source{$_} = 1;
+			for my $feature (keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}}) {
 
-			$seen_keys{join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$_}})} = 1;
+				$marked_source{$token_id_source} = 1;
+
+				$seen_keys{$feature . ":" . join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}})} = 1;
+			}
 		}
 
 		# format the list of all unique shared words

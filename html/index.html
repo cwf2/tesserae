@@ -84,30 +84,28 @@
 		</p>
 	
 
+			<select id="sel_preset" onchange="get_authors('target'); get_authors('source')"></select>
+
 			<table class="input">
 				<tr>
 					<th>Source:</th>
 					<td>
-						<select id="sel_source_langs" class="adv" onchange="get_authors('source');">
-						</select><br />
 						<select id="sel_source_authors" onchange="get_texts('source');">
 						</select><br />
-						<select id="sel_source_texts" onchange="get_parts('source');">
+						<select id="sel_source_texts" name="source" onchange="get_parts('source');">
 						</select><br />
-						<select id="sel_source_parts" name="source">
+						<select id="sel_source_parts" name="part_source">
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<th>Target:</th>
 					<td>
-						<select id="sel_target_langs" class="adv" onchange="get_authors('target');">
-						</select><br />
 						<select id="sel_target_authors" onchange="get_texts('target');">
 						</select><br />
-						<select id="sel_target_texts" onchange="get_parts('target');">
+						<select id="sel_target_texts" name="target" onchange="get_parts('target');">
 						</select><br />
-						<select id="sel_target_parts" name="target">
+						<select id="sel_target_parts" name="part_target">
 						</select>
 					</td>
 				</tr>
@@ -162,7 +160,7 @@
 							<select name="score">
 								<option value="word">word</option>
 								<option value="stem">stem</option>
-								<option value="feature" selected="selected">feature</option>								
+								<option value="feature">feature</option>								
 							</select>
 						</td>
 					</tr>
@@ -216,8 +214,7 @@
 			</div>
 
 		<script type="text/javascript">
-			get_langs('target', 'la')
-			get_langs('source', 'la')
+			init_form()
 		</script>
 	</div>
 	<div id="footer">

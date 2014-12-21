@@ -3,12 +3,12 @@ var presets = {
 		target_langs: "la",
 		target_authors: "vergil",
 		target_texts: "vergil.georgics",
-		target_parts: "vergil.georgics.part.1",
+		target_parts: "1",
 
 		source_langs: "la",
 		source_authors: "catullus",
 		source_texts: "catullus.carmina",
-		source_parts: "catullus.carmina",
+		source_parts: "0",
 
 		features: "stem",
 		units: "line"
@@ -17,12 +17,12 @@ var presets = {
 		target_langs: "grc",
 		target_authors: "apollonius",
 		target_texts: "apollonius.argonautica",
-		target_parts: "apollonius.argonautica.part.1",
+		target_parts: "1",
 
 		source_langs: "grc",
 		source_authors: "homer",
 		source_texts: "homer.iliad",
-		source_parts: "homer.iliad",
+		source_parts: "0",
 
 		features: "stem",
 		units: "line"
@@ -31,12 +31,12 @@ var presets = {
 		target_langs: "la",
 		target_authors: "vergil",
 		target_texts: "vergil.aeneid",
-		target_parts: "vergil.aeneid.part.1",
+		target_parts: "1",
 
 		source_langs: "grc",
 		source_authors: "homer",
 		source_texts: "homer.iliad",
-		source_parts: "homer.iliad",
+		source_parts: "0",
 
 		features: "trans1",
 		units: "phrase"
@@ -45,39 +45,27 @@ var presets = {
 		target_langs: "la",
 		target_authors: "lucan",
 		target_texts: "lucan.bellum_civile",
-		target_parts: "lucan.bellum_civile.part.1",
+		target_parts: "1",
 
 		source_langs: "la",
 		source_authors: "vergil",
 		source_texts: "vergil.aeneid",
-		source_parts: "vergil.aeneid.part.1",
+		source_parts: "0",
 
 		features: "stem",
 		units: "phrase"
 	}
 }
 
-function get_langs(prefix) {
-	var request = "/cgi-bin/metadata_langs.pl"
-	var criteria = {}
-	var dest = $("#sel_" + prefix + "_langs")
-	var callback = function(jsonlist) {
-		populate_dropdown(dest, jsonlist)
-		get_authors(prefix)
-	}
-
-	//dest.empty()
-	$.getJSON(request, criteria, callback)
-}
-
 function get_authors(prefix) {
+	var preset = presets[$("#sel_preset").val()]
 	var request = "/cgi-bin/metadata_authors.pl"
 	var criteria = {
-		lang: $("#sel_" + prefix + "_langs").val()
+		lang: preset[prefix + "_langs"]
 	}
 	var dest = $("#sel_" + prefix + "_authors")
 	var callback = function(jsonlist) {
-		populate_dropdown(dest, jsonlist)
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
 		get_texts(prefix)
 	}
 	
@@ -86,13 +74,14 @@ function get_authors(prefix) {
 }
 
 function get_texts(prefix) {
+	var preset = presets[$("#sel_preset").val()]
 	var request = "/cgi-bin/metadata_texts.pl"
 	var criteria = {
-		author: $("#sel_" + prefix + "_authors").val()
+		Author: $("#sel_" + prefix + "_authors").val()
 	}
 	var dest = $("#sel_" + prefix + "_texts")
 	var callback = function(jsonlist) {
-		populate_dropdown(dest, jsonlist)
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
 		get_features()
 		get_units()
 		get_parts(prefix)
@@ -103,9 +92,10 @@ function get_texts(prefix) {
 }
 
 function get_parts(prefix) {
+	var preset = presets[$("#sel_preset").val()]
 	var request = "/cgi-bin/metadata_parts.pl"
 	var criteria = {
-		name: $("#sel_" + prefix + "_texts").val()
+		textid: $("#sel_" + prefix + "_texts").val()
 	}
 	var dest = $("#sel_" + prefix + "_parts")
 	var callback = function(jsonlist) {
@@ -117,6 +107,7 @@ function get_parts(prefix) {
 }
 
 function get_features() {
+	var preset = presets[$("#sel_preset").val()]
 	var request = "/cgi-bin/metadata_features.pl"
 	var criteria = {
 		target: $("#sel_target_texts").val(),
@@ -132,6 +123,7 @@ function get_features() {
 }
 
 function get_units() {
+	var preset = presets[$("#sel_preset").val()]
 	var request = "/cgi-bin/metadata_units.pl"
 	var criteria = {
 		target: $("#sel_target_texts").val(),
@@ -151,28 +143,32 @@ function populate_dropdown(dropdown, jsonlist) {
 
 	for (i in jsonlist) {
 		var o = jQuery("<option />", {
-			value: jsonlist[i].name,
+			value: jsonlist[i].value,
 			text: jsonlist[i].display
 		})
 
 		dropdown.append(o)
+
+		if (selected != undefined) {
+			if (jsonlist[i].value == selected) { 
+				dropdown.val(jsonlist[i].value)
+			}
+		}
 	}
 }
 
+function init_form() {
+	$("#sel_preset").empty()
 
-function set_defaults(preset, dest) {
-/*
-	$("#sel_source_" + dest).val(presets[preset]["source_langs"]).change()
-	$("#sel_source_authors").val(presets[preset]["source_authors"]).change()
-	$("#sel_source_texts").val(presets[preset]["source_texts"]).change()
-	$("#sel_source_parts").val(presets[preset]["source_parts"]).change()
+	for (i in presets) {
+		var o = jQuery("<option />", {
+			value: i,
+			text: i
+		})
+		$("#sel_preset").append(o)
+	}
 
-	$("#sel_target_langs").val(presets[preset]["target_langs"]).change()
-	$("#sel_target_authors").val(presets[preset]["target_authors"]).change()
-	$("#sel_target_texts").val(presets[preset]["target_texts"]).change()
-	$("#sel_target_parts").val(presets[preset]["target_parts"]).change()
-
-	$("#sel_features").val(presets[preset]["features"]).change()
-	$("#sel_units").val(presets[preset]["units"]).change()
-*/
+	get_authors("source")
+	get_authors("target")
 }
+
