@@ -1,0 +1,104 @@
+<html>
+	<head lang="en-US">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="author" content="Neil Coffee, Jean-Pierre Koenig, Shakthi Poornima, Chris Forstall, Roelant Ossewaarde, James Gawley">
+		<meta name="keywords" content="intertext, text analysis, classics, university at buffalo, latin">
+		<meta name="description" content="Intertext analyzer for Latin texts">
+
+		<link href="/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="/images/favicon.ico" rel="shortcut icon"/>
+		
+		<script src="/tesserae.js"></script>
+		<script src="/jquery.js"></script>
+
+		<!--head_insert-->
+
+		<title>Tesserae</title>
+
+	</head>
+	<body>
+
+		<div id="container">
+
+			<div id="header"> 
+		
+			</div>
+				<div id="results_sort">
+					<!--sorter-->
+				</div>
+			
+				<div id="pager">
+					<!--pager-->
+				</div>
+			
+				<!-- Table of results -->
+			
+				<table class="output" id="resultsTable">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="phrase">target phrase</th>
+							<th class="phrase">source phrase</th>
+							<th>matched on</th>
+							<th>score</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--results-->	
+					</tbody>
+				</table>
+		
+				<div style="margin:1em;text-align:left;">
+					<a href="#top">Back to top</a>
+				</div>
+		
+				<div style="margin-left:100px;text-align:left;">
+					<h2>Session Details</h2>
+					<a name="fullinfo"></a>
+					<p>
+						<b>Session ID:</b>
+						<!--session_id-->
+					</p>
+					<p>
+						<b>Source Text:</b>
+						<!--source-->
+						<br>
+						<b>Target Text:</b>
+						<!--target-->
+						<br>
+						<b>Unit:</b>
+						<!--unit-->
+						<br>
+						<b>Feature:</b>
+						<!--feature-->
+						<br>
+						<b>Stoplist size:</b>
+						<!--stoplistsize-->
+						<br>
+						<b>Stoplist basis:</b>
+						<!--stbasis-->
+						<br>
+						<b>Stop words:</b>
+						<!--stoplist-->
+						<br>
+						<b>Max distance:</b>
+						<!--maxdist-->
+						<br>
+						<b>Distance metric:</b>
+						<!--dibasis-->
+						<br>
+						<b>Score cutoff:</b>
+						<!--cutoff-->
+						<br>
+					</p>
+				</div>
+			<div id="footer">
+				<!--footer-->
+			</div>
+		</div>
+		<script type="text/javascript">
+			$.get("/header.html", {}, function(data) { $("#header").html(data)})
+			$.get("/footer.html", {}, function(data) { $("#footer").html(data)})
+		</script>
+	</body>
+</html>

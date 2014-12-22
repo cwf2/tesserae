@@ -215,35 +215,29 @@ my $dec = 0;
 
 my $help;
 
-#
-# command-line arguments
-#
 
-GetOptions(
-	'sort=s'    => \$sort,
-	'reverse'   => \$rev,
-	'page=i'    => \$page,
-	'batch=i'   => \$batch,
-	'session=s' => \$session,
-	'export=s'  => \$export,
-	'decimal=i' => \$dec,
-	'quiet'     => \$quiet,
-	'help'      => \$help );
+if ($no_cgi) {
+	# command-line arguments
 
-#
-# if help requested, print usage
-#
+	GetOptions(
+		'sort=s'    => \$sort,
+		'reverse'   => \$rev,
+		'page=i'    => \$page,
+		'batch=i'   => \$batch,
+		'session=s' => \$session,
+		'export=s'  => \$export,
+		'decimal=i' => \$dec,
+		'quiet'     => \$quiet,
+		'help'      => \$help
+	);
 
-if ($help) {
+	# if help requested, print usage
 
-	pod2usage( -verbose => 2 );
-}
-
-#
-# cgi input
-#
-
-unless ($no_cgi) {
+	if ($help) {
+		pod2usage( -verbose => 2 );
+	}
+} else {
+	# cgi input
 
 	my $query = new CGI || die "$!";
 
@@ -583,8 +577,17 @@ sub print_html {
 	$last  = $first + $batch - 1;
 
 	if ($last > $total_matches) { $last = $total_matches }
+	
+	my $html;
+	{
+		my $file_html = catfile($fs{html}, "results.html");
+		open (my $fh, "<:utf8", $file_html) or die "Can't open $file_html: $!";
 
-	my $html = `php -f $fs{html}/results.php`;
+		while (<$fh>) {
+			$html .= $_;
+		}
+		close($fh);
+	}
 
 	my ($top, $bottom) = split /<!--results-->/, $html;
 
