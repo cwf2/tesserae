@@ -313,17 +313,7 @@ if ($no_cgi) {
 		pod2usage( -verbose => 1);
 	}
 } else {
-	print header();
-
-	my $stylesheet = "$url{css}/style.css";
-
-	print <<END;
-
-<html>
-<head>
-	<title>Tesserae results</title>
-	<link rel="stylesheet" type="text/css" href="$stylesheet" />
-END
+	print header("text/plain");
 
 	$source          = $query->param('source');
 	$target          = $query->param('target');
@@ -366,18 +356,6 @@ END
 		fulltext => "$url{cgi}/fulltext.pl?session=$session",
 		multi    => "$url{cgi}/multitext.pl?session=$session;mcutoff=$multi_cutoff;list=1"
 	);
-
-	
-	print <<END;
-	<meta http-equiv="Refresh" content="0; url='$redirect{$frontend}'">
-	</head>
-	<body>
-		<div class="waiting">
-		<p>
-			Searching...
-		</p>
-END
-
 }
 
 # default score basis set by Tesserae.pm
@@ -542,14 +520,14 @@ for my $feature (@features) {
 	unless ($quiet) { print STDERR "stoplist: " . join(",", @{$stoplist{$feature}}) . "\n"}
 	
 	# draw a progress bar
-
 	my $pr;
 
 	if ($no_cgi) {
 		$pr = ProgressBar->new(scalar(keys %index_source), $quiet);
 	}
 	else {
-		$pr = HTMLProgress->new(scalar(keys %index_source));
+		$pr = AJAXProgress->new(scalar(keys %index_source), $file_results);
+		$pr->message("Comparing $source and $target");
 	}
 
 	# start with each key in the source
@@ -614,9 +592,8 @@ if ($no_cgi) {
 }
 else {
 
-	print "<p>Scoring...</p>\n";
-
-	$pr = HTMLProgress->new(scalar(keys %match_target));
+	$pr = AJAXProgress->new(scalar(keys %match_target), $file_results);
+	$pr->message("Calculating scores...");
 }
 
 #
@@ -769,10 +746,6 @@ if ($no_cgi) {
 	
 	print STDERR "writing $file_results\n" unless $quiet;
 }
-else {
-
-	print "<p>Writing session data.</p>";
-}
 
 nstore \%match_target, catfile($file_results, "match.target");
 nstore \%match_source, catfile($file_results, "match.source");
@@ -784,21 +757,16 @@ if (@include) {
 	write_multi_list($file_results, \@include);
 }
 
+unless ($no_cgi) {
+
+	print encode_json({
+		session=>$session
+	});
+
+	print STDERR "Web process finished: ".(time-$t0) . " seconds\n";
+}
+
 print "store>>" . (time-$t1) . "\n" if $no_cgi and $bench;
-
-print <<END unless ($no_cgi);
-
-	<p>
-      Your search is done.  If you are not redirected automatically, 
-      <a href="$redirect{$frontend}">click here</a>.
-	</p>
-	</div>
-</body>
-</html>
-
-END
-
-
 print "total>>" . (time-$t0)  . "\n" if $no_cgi and $bench;
 
 #
@@ -1065,3 +1033,4 @@ sub get_mask {
 
 	return($mask_lower, $mask_upper);
 }
+

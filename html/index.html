@@ -26,6 +26,85 @@
 				}
 				is_adv = ! is_adv
 			}
+
+			function load_results(session) {
+				var newform = jQuery("<form />", {
+					id: "form_dynamic",
+					action: "/cgi-bin/read_bin.pl",
+					method: "GET"
+				})
+						
+				var inputelement = jQuery("<input />", {
+					type: "text",
+					name: "session",
+					value: session
+				})
+				newform.append(inputelement)
+
+				$("#container").append(newform)
+
+				newform.submit()
+			}
+
+			function read_table(data) {
+				$.post("/cgi-bin/read_table.pl", data, function() {
+						load_results(data.session)
+					})
+
+				init_progress_bar()
+
+				setInterval(function() {update_progress(data.session)}, 500)
+			}
+
+			function launch_search() {
+				$.getJSON("/cgi-bin/init_session.pl", {}, function(r) {
+					var data = {
+						source: $("#sel_source_texts").val(),
+						part_source: $("#sel_source_parts").val(),
+						target: $("#sel_target_texts").val(),
+						part_target: $("#sel_target_parts").val(),
+						unit: $("#sel_units").val(),
+						feature: $("#sel_feature").val(),
+						stopwords: $("#sel_stop").val(),
+						stbasis: $("#sel_stbasis").val(),
+						score: $("#sel_scbasis").val(),
+						dist: $("#sel_dist").val(),
+						dibasis: $("#sel_dibasis").val(),
+						cutoff: $("#sel_cutoff").val(),
+						session: r.session
+					}
+					read_table(data)
+				})
+			}
+
+			function init_progress_bar() {
+				var popup_frame = jQuery("<div />", {id: "cwf_popup_frame"})
+				var popup = jQuery("<div />", {id: "cwf_popup"})
+				var msg_frame = jQuery("<div />", {id: "cwf_msg_frame"})
+				var msg = jQuery("<div />", {id: "cwf_msg"})
+				msg.append("<p>Please wait...</p>")
+				var pbar_frame = jQuery("<div />", {id: "cwf_pbar_frame"})
+				var pbar = jQuery("<progress />", {
+					id: "cwf_pbar",
+					max: "100",
+					value: "0"
+				})
+
+				pbar_frame.append(pbar)
+				msg_frame.append(msg)
+				popup.append(msg_frame)
+				popup.append(pbar_frame)
+				popup_frame.append(popup)
+
+				$("#container").append(popup_frame)
+			}
+
+			function update_progress(session) {
+				$.getJSON("/cgi-bin/progress.pl", {session: session}, function(r) {
+					$("#cwf_pbar").attr("value", r.progress)
+					$("#cwf_msg").html(r.msg)
+				})
+			}
 		</script>
 		
 		<style type="text/css">
@@ -76,9 +155,9 @@
 					<td>
 						<select id="sel_source_authors" onchange="get_texts('source');">
 						</select><br />
-						<select id="sel_source_texts" name="source" onchange="get_parts('source');">
+						<select id="sel_source_texts" onchange="get_parts('source');">
 						</select><br />
-						<select id="sel_source_parts" name="part_source">
+						<select id="sel_source_parts">
 						</select>
 					</td>
 				</tr>
@@ -87,9 +166,9 @@
 					<td>
 						<select id="sel_target_authors" onchange="get_texts('target');">
 						</select><br />
-						<select id="sel_target_texts" name="target" onchange="get_parts('target');">
+						<select id="sel_target_texts" onchange="get_parts('target');">
 						</select><br />
-						<select id="sel_target_parts" name="part_target">
+						<select id="sel_target_parts">
 						</select>
 					</td>
 				</tr>
@@ -114,7 +193,7 @@
 					<tr>
 						<th>Number of stop words:</th>
 						<td>
-							<select name="stopwords">
+							<select id="sel_stop">
 								<option value="0">0</option>
 								<option value="10" selected="selected">10</option>
 								<option value="20">20</option>
@@ -130,7 +209,7 @@
 					<tr>
 						<th>Stoplist basis:</th>
 						<td>
-							<select name="stbasis">
+							<select id="sel_stbasis">
 								<option value="corpus">corpus</option>
 								<option value="target">target</option>
 								<option value="source">source</option>
@@ -141,7 +220,7 @@
 					<tr>
 						<th>Score basis:</th>
 						<td>
-							<select name="score">
+							<select id="sel_scbasis">
 								<option value="word">word</option>
 								<option value="stem">stem</option>
 								<option value="feature">feature</option>								
@@ -151,7 +230,7 @@
 					<tr>
 						<th>Maximum distance:</th>
 						<td>
-							<select name="dist">
+							<select id="sel_dist">
 								<option value="999">no max</option>
 								<option value="5">5 words</option>
 								<option value="10" selected="selected">10 words</option>
@@ -165,7 +244,7 @@
 					<tr>
 						<th>Distance metric:</th>
 						<td>
-							<select name="dibasis">
+							<select id="sel_dibasis">
 								<option value="span">span</option>
 								<option value="span-target">span-target</option>
 								<option value="span-source">span-source</option>
@@ -178,7 +257,7 @@
 					<tr>
 						<th>Drop scores below:</td>
 						<td>
-							<select name="cutoff">
+							<select id="sel_cutoff">
 								<option value="0">no cutoff</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
