@@ -317,9 +317,15 @@ if ($no_cgi) {
 
 	$source          = $query->param('source');
 	$target          = $query->param('target');
-	$unit            = $query->param('unit')         || $unit;
-	@features        = $query->param('feature');
-	$stopwords       = defined($query->param('stopwords')) ? $query->param('stopwords') : $stopwords;
+	$unit            = $query->param('unit')        || $unit;
+	if (defined $query->param('feature[]')) {
+		@features = $query->param('feature[]');
+	} else {
+		@features = $query->param('feature');
+	}
+	if (defined $query->param('stopwords')) {
+		$stopwords = $query->param('stopwords');
+	}
 	$stoplist_basis  = $query->param('stbasis')      || $stoplist_basis;
 	$max_dist        = $query->param('dist')         || $max_dist;
 	$distance_metric = $query->param('dibasis')      || $distance_metric;
@@ -346,16 +352,7 @@ if ($no_cgi) {
 	   die "read_table.pl called from web interface with no session";
 	}
 
-	$quiet = 1 unless $query->param("debug");
-	
-	# how to redirect browser to results
-
-	%redirect = ( 
-		default  => "$url{cgi}/read_bin.pl?session=$session",
-		recall   => "$url{cgi}/check-recall.pl?session=$session;cache=$recall_cache",
-		fulltext => "$url{cgi}/fulltext.pl?session=$session",
-		multi    => "$url{cgi}/multitext.pl?session=$session;mcutoff=$multi_cutoff;list=1"
-	);
+	#$quiet = 1 unless $query->param("debug");
 }
 
 # default score basis set by Tesserae.pm
@@ -446,8 +443,8 @@ unless ($quiet) {
 
 # get part info
 
-my ($mask_source_lower, $mask_source_upper) = get_mask($source, $part_source);
-my ($mask_target_lower, $mask_target_upper) = get_mask($target, $part_target);
+my ($mask_source_lower, $mask_source_upper) = Tesserae::get_mask($source, $part_source);
+my ($mask_target_lower, $mask_target_upper) = Tesserae::get_mask($target, $part_target);
 
 
 #
@@ -1015,22 +1012,5 @@ sub select_file_freq {
 	);
 	
 	return $file_freq;
-}
-
-# get token mask for part texts
-
-sub get_mask {
-	my ($text_id, $part_id) = @_;
-
-	my $dbh = Tesserae::metadata_dbh;
-
-	my $sql = "select MaskLower, MaskUpper from parts where TextId=\"$text_id\" and id=\"$part_id\"";
-
-	my $res = $dbh->selectrow_arrayref($sql);
-
-	my $mask_lower = $res->[0];
-	my $mask_upper = $res->[1];
-
-	return($mask_lower, $mask_upper);
 }
 

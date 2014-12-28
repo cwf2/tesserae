@@ -162,6 +162,7 @@ use CGI qw(:standard);
 use POSIX;
 use Storable qw(nstore retrieve);
 use Encode;
+use JSON;
 
 # allow unicode output
 
@@ -239,8 +240,6 @@ if ($no_cgi) {
 } else {
 	# cgi input
 
-	my $query = new CGI || die "$!";
-
 	$session = $query->param('session')    || die "no session specified from web interface";
 	$sort       = $query->param('sort')    || $sort;
 	$rev        = $query->param('rev')     if defined ($query->param("rev"));
@@ -253,6 +252,7 @@ if ($no_cgi) {
 #	if ($export eq "xml") { $h{'-type'} = "text/xml"; $h{'-attachment'} = "tesresults-$session.xml" }
 	if ($export eq "csv") { $h{'-type'} = "text/csv"; $h{'-attachment'} = "tesresults-$session.csv" }
 	if ($export eq "tab") { $h{'-type'} = "text/plain"; $h{'-attachment'} = "tesresults-$session.txt" }
+	if ($export eq "json") { $h{'-type'} = "application/json"};
 
 	print header(%h);
 
@@ -404,6 +404,9 @@ elsif ($export eq "csv") {
 elsif ($export eq "tab") {
 
 	print_delim("\t");
+}
+elsif ($export eq "json") {
+	print_json();
 }
 
 
@@ -568,6 +571,92 @@ END
 
 }
 
+sub print_json {
+	my $first = $query->param("first");
+	my $last = $query->param("last");
+
+	if (defined $first) {
+		$first = int($first);
+		if ($first < 0) { 
+			$first = 0 
+		} elsif ($first > $total_matches) { 
+			$first = $total_matches 
+		}
+	}
+	else {
+		$first = 0;
+	}
+	if (defined $last) {
+		$last = int($last);
+		if ($last < 0) { 
+			$last = 0 
+		} elsif ($last > $total_matches) { 
+			$last = $total_matches 
+		}
+	}
+	else {
+		$last = $total_matches;
+	}
+
+	if ($first > $last) {
+		($first, $last) = ($last, $first);
+	}
+
+	print STDERR "print_json: first=$first; last=$last\n";
+
+	my @json;
+
+	for my $i ($first..$last) {
+
+		my $unit_id_target = $rec[$i]{target};
+		my $unit_id_source = $rec[$i]{source};
+
+		next unless (defined $unit_id_target and $unit_id_source);
+
+		# get the score
+
+		my $score = sprintf("%.${dec}f", $score{$unit_id_target}{$unit_id_source});
+
+		# a guide to which tokens are marked in each text
+
+		my %marked_target;
+		my %marked_source;
+
+		# collect the keys
+
+		my %seen_keys;
+
+		for my $token_id_target (keys %{$match_target{$unit_id_target}{$unit_id_source}}) {
+
+			for my $feature (sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}}) {
+				
+				$marked_target{$token_id_target} = $feature;
+				$seen_keys{$feature . ":" . join("-", sort keys %{$match_target{$unit_id_target}{$unit_id_source}{$token_id_target}{$feature}})} = 1;
+			}
+		}
+
+		for my $token_id_source (keys %{$match_source{$unit_id_target}{$unit_id_source}}) {
+
+			for my $feature (sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}}) {
+				
+				$marked_source{$token_id_source} = $feature;
+				$seen_keys{$feature . ":" . join("-", sort keys %{$match_source{$unit_id_target}{$unit_id_source}{$token_id_source}{$feature}})} = 1;
+			}
+		}
+
+		push @json, {
+			n => $i,
+			score => $score,
+			unit_source => $unit_id_source,
+			unit_target => $unit_id_target,
+			marked_target => [keys %marked_target],
+			marked_source => [keys %marked_source]
+		};
+	}
+
+	print encode_json(\@json);
+}
+
 sub print_html {
 
 	my $first;
@@ -593,13 +682,14 @@ sub print_html {
 
 	$top =~ s/<!--pager-->/&nav_page()/e;
 	$top =~ s/<!--sorter-->/&re_sort()/e;
-	$top =~ s/<!--session-->/$session/;
+	$top =~ s/<!--session-->/$session/g;
 	
 	my $style = <<END;
 	<style type="text/css">
 		.matched_word { color: black; }
 		.matched_stem { color: red; }
 		.matched_3gr { color: blue; }
+		.matched_syn { color: pink; }
 	</style>
 END
 
@@ -611,6 +701,8 @@ END
 
 		my $unit_id_target = $rec[$i]{target};
 		my $unit_id_source = $rec[$i]{source};
+
+		next unless (defined $unit_id_target and $unit_id_source);
 
 		# get the score
 

@@ -53,6 +53,20 @@ var presets = {
 
 		features: "stem",
 		units: "phrase"
+	},
+	val_flacc: {
+		target_langs: "la",
+		target_authors: "valerius_flaccus",
+		target_texts: "valerius_flaccus.argonautica",
+		target_parts: "9",
+
+		source_langs: "la",
+		source_authors: "vergil",
+		source_texts: "vergil.aeneid",
+		source_parts: "0",
+
+		features: "stem",
+		units: "line"
 	}
 }
 
@@ -134,7 +148,7 @@ function get_units() {
 	}
 	var dest = "units"
 	var callback = function(jsonlist) {
-		populate_dropdown($("#sel_"+dest), jsonlist)
+		populate_dropdown($("#sel_"+dest), jsonlist, preset[dest])
 	}
 
 	$("#sel_"+dest).empty()
@@ -173,5 +187,14 @@ function init_form() {
 
 	get_authors("source")
 	get_authors("target")
+}
+
+function highlight_result(r) {
+	for (var j = 0; j < r.marked_source.length; j ++) {
+		$("#source .t" + r.marked_source[j]).css("color", "red")
+	}
+	for (var j = 0; j < r.marked_target.length; j ++) {
+		$("#target .t" + r.marked_target[j]).css("color", "red")
+	}
 }
 

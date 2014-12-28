@@ -81,43 +81,97 @@ use Storable qw(nstore retrieve);
 # allow unicode output
 
 binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+
+# print debugging messages to stderr?
+
+my $quiet = 0;
+
+# determine file from session id
+
+my $session;
+
+# help flag
+
+my $help;
 
 # is the program being run from the web or
 # from the command line?
 
 my $query = CGI->new() || die "$!";
 
-print header();
+my $no_cgi = defined($query->request_method()) ? 0 : 1;
+
+if ($no_cgi) {
+	# command-line input
+
+	GetOptions(
+		"session=s" => \$session,
+		"quiet" => \$quiet
+	);
+} else {
+	print header();
+
+	# cgi input
+
+	$session = $query->param('session');
+	$quiet = 1;
+}
+
+# load results
+
+my $file;
+
+if (defined $session) {
+
+	$file = catdir($fs{tmp}, "tesresults-" . $session);
+}
+else {
+
+	die "no session specified";
+}
+
 
 #
-# cgi input
+# load the meta info for this search
 #
 
-my $session = $query->param('session')    || die "no session specified from web interface";
+print STDERR "reading $file\n" unless $quiet;
+my %meta = %{retrieve(catfile($file, "match.meta"))};
 
 #
-# create the frameset and redirect to content
-# 
+# laod the template
+#
 
-print <<END;
+my $html = load_template( catfile($fs{html}, "fulltext.html"));
 
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="author" content="Neil Coffee, Jean-Pierre Koenig, Shakthi Poornima, Chris Forstall, Roelant Ossewaarde">
-		<meta name="keywords" content="intertext, text analysis, classics, university at buffalo, latin">
-		<meta name="description" content="Intertext analyzer for Latin texts">
-		<link href="$url{css}/style.css" rel="stylesheet" type="text/css"/>
-		<link href="$url{image}/favicon.ico" rel="shortcut icon"/>
+$html =~ s/<!--session-->/$session/g;
+$html =~ s/\/\*session\*\//"$meta{SESSION}"/;
+$html =~ s/\/\*source\*\//"$meta{SOURCE}"/;
+$html =~ s/\/\*target\*\//"$meta{TARGET}"/;
+$html =~ s/\/\*part_source\*\//"$meta{PART_S}"/;
+$html =~ s/\/\*part_target\*\//"$meta{PART_T}"/;
+$html =~ s/\/\*unit\*\//"$meta{UNIT}"/;
 
-		<title>Tesserae</title>
+# send to browser
 
-	</head>
+print $html;
 
-	<frameset cols="50%,50%">
-		<frame name="left" src="$url{cgi}/frame.fulltext.pl?session=$session;side=left">
-		<frame name="right" src="$url{cgi}/frame.fulltext.pl?session=$session;side=right">
-	</frameset>
-</html>
+#
+# subroutines
+#
 
-END
+sub load_template {
+	my $file = shift;
+
+	my $html;
+
+	open (my $fh, "<:utf8", $file) or die "Can't read $file: $!";
+
+	while (my $line = <$fh>) {
+		$html .= $line;
+	}
+	
+	return $html;
+}
+

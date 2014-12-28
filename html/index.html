@@ -18,11 +18,11 @@
 			function toggle_adv() {
 				if (is_adv) {
 					$(".adv").hide()
-					$("#toggle_adv").text("show advanced")
+					$("#toggle_adv").text("Show advanced")
 				}
 				else {
 					$(".adv").show()
-					$("#toggle_adv").text("hide advanced")
+					$("#toggle_adv").text("Hide advanced")
 				}
 				is_adv = ! is_adv
 			}
@@ -47,6 +47,7 @@
 			}
 
 			function read_table(data) {
+				console.log(data)
 				$.post("/cgi-bin/read_table.pl", data, function() {
 						load_results(data.session)
 					})
@@ -64,7 +65,7 @@
 						target: $("#sel_target_texts").val(),
 						part_target: $("#sel_target_parts").val(),
 						unit: $("#sel_units").val(),
-						feature: $("#sel_feature").val(),
+						feature: $("#sel_features").val(),
 						stopwords: $("#sel_stop").val(),
 						stbasis: $("#sel_stbasis").val(),
 						score: $("#sel_scbasis").val(),
@@ -105,6 +106,14 @@
 					$("#cwf_msg").html(r.msg)
 				})
 			}
+
+			function toggle_multi_feature() {
+				if ($("#chk_multi_feature").is(":checked")) {
+					$("#sel_features").attr("multiple", "multiple")
+				} else {
+					$("#sel_features").removeAttr("multiple")
+				}
+			}
 		</script>
 		
 		<style type="text/css">
@@ -131,14 +140,18 @@
 					Select two poems below to see a list of lines sharing two or more words (regardless of inflectional changes).
 				</p>
 			<p>
-			For explanations of advanced features, see the <a href="/help_advanced.php">Instructions</a> page.
+				<span id="toggle_adv" onclick="toggle_adv()">Show advanced</span>
 			</p>
 	
 			<form action="/" method="get" ID="Form1">
 
-				<select id="sel_preset" onchange="get_authors('target'); get_authors('source')"></select>
-
 				<table class="input">
+					<tr class="adv">
+						<th>Corpus</th>
+						<td>
+							<select id="sel_preset" onchange="get_authors('target'); get_authors('source')"></select>
+						</td>
+					</tr>
 					<tr>
 						<th>Source:</th>
 						<td>
@@ -177,6 +190,7 @@
 							<td>
 								<select id="sel_features" name="feature">
 								</select>
+								<input type="checkbox" id="chk_multi_feature" onchange="toggle_multi_feature()">allow multiple</input>
 							</td>
 						</tr>
 						<tr>

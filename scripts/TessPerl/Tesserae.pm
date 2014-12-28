@@ -1023,4 +1023,21 @@ sub db_create_table {
 	$dbh->do("create table if not exists $table (" . join(",", @cols) . ");");
 }
 
+# get token mask for part texts
+
+sub get_mask {
+	my ($text_id, $part_id) = @_;
+
+	my $dbh = metadata_dbh;
+
+	my $sql = "select MaskLower, MaskUpper from parts where TextId=\"$text_id\" and id=\"$part_id\"";
+
+	my $res = $dbh->selectrow_arrayref($sql);
+
+	my $mask_lower = $res->[0];
+	my $mask_upper = $res->[1];
+
+	return($mask_lower, $mask_upper);
+}
+
 1;
