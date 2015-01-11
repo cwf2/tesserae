@@ -138,7 +138,8 @@ use Pod::Usage;
 
 # load additional modules necessary for this script
 
-use Pod::Html;
+use XML::LibXML;
+use Pod::Simple::HTML;
 
 # initialize some variables
 
@@ -163,208 +164,69 @@ if ($help) {
 }
 
 #Initialize filepath variables for the documents and scripts folders.
-my @perl_scripts = get_perl_scripts($fs{script}, $fs{cgi});
+my @perl_scripts = match_files(qr/\.pl$/, $fs{script}, $fs{cgi});
+my @pod_standalone = match_files(qr/\.pod$/, catfile($fs{doc}, "pod"));
 
-#Make the string which will become the main help page.
-my $html = <<END;
-<html>
-   <head>
-      <meta charset="utf-8">
-      <title>Tesserae Code Documentation</title>
-      <link rel="stylesheet" href="$url{css}/doc.css" type="text/css" />
-   </head>
-   <body>
-      <div id="main">
-         <h1>Code Documentation</h1>
-         <p>
-            This document is designed to help users of the home-version of 
-            Tesserae to install, use, and modify the tool as needed. The 
-            project code can be found at <a 
-            href="github.com/tesserae/tesserae">github.com/tesserae/tesserae
-            </a>.
-	      </p>
-         
-         <h2>Navigating the Folders</h2>
-	      <p>
-            <b>cgi-bin:</b> This folder contains scripts that are read when
-            finding and displaying search results online. The scripts read the
-            user’s specified target and source text data, identify meaningful 
-            instances of intertextuality, and display the results online. 
-            These scripts make up the core part of a Tesserae search request.
-         </p>
-         <p>
-            <b>css:</b> This folder contains files that set the environment 
-            (such as color, font, spacing, etc.) for search results displayed
-            online.
-         </p>
-         <p>
-            <b>data</b>: This folder contains permanent data generated in the 
-            install process.
-         </p>
-         <ul>
-            <li>
-               The batch folder is populated by one of the steps in the batch
-               processing system, which allows multiple features to be run at 
-               once.
-            </li>
-            <li>
-               The bench folder contains pre-run data for test sets, 
-               Aeneid/Iliad and BC/Aeneid. The common folder contains
-               frequently used files such as Greek and Latin dictionaries, 
-               tools for recognizing and storing word stems during a search, 
-               abbreviation lists, stop words lists, etc. Many scripts in the 
-               Tesserae program access these files regularly. 
-            </li>
-            <li>
-               The synonymy folder contains files with Latin and Greek synonym
-               lists from the New Testament comparisons. These files are used
-               by the trans1 and trans2 features.
-            </li>
-            <li>
-               The v3 folder (referring to version three of the Tesserae
-               project) contains the core data files for individual texts. 
-               After running the full install process as detailed above, the
-               user should see at least two subfolders here, grc and la.
-            </li>
-            <li>
-               The Greek and Latin folders contain a large number of folders
-               organized by author in the format author.name_of_work. Each work
-               has nine specific data files as follows:
-               <ul>
-                  <li>
-                     author.name_of_work.freq_score_stem – Each stem in the
-                     text is stored with a frequency statistic calculated by
-                     the number of times that stem appears in that author’s 
-                     corpus divided by the total number of stems in the 
-                     author’s corpus.
-                  </li>
-                  <li>
-                     author.name_of_work.freq_score_word - Each exact word in
-                     the text is stored with a frequency statistic calculated
-                     by the number of times that exact word appears in that 
-                     author’s corpus divided by the total number of words in
-                     the author’s corpus.
-                  </li>
-                  <li>
-                     author.name_of_work.freq_stop_stem – Frequency 
-                     statistics for stop word stems (ie, common stems that are
-                     not considered to make meaningful allusions).
-                  </li>
-                  <li>
-                     author.name_of_work.freq_stop_word - Frequency statistics
-                     for exact stop words (ie, common words that are not 
-                     considered to make meaningful allusions).
-                  </li>
-                  <li>
-                     author.name_of_work.index_stem – An index of each stem 
-                     and its location in the text.
-                  </li>
-                  <li>
-                     author.name_of_work.index_word – An index of each exact
-                     word and its location in the text.
-                  </li>
-                  <li>
-                     author.name_of_work.line  - A hash of the lines in 
-                     which each stem appears.
-                  </li>
-                  <li>
-                     author.name_of_work.phrase – A hash of the phrases 
-                     (sentences) in which each stem appears.
-                  </li> 
-                  <li>
-                     author.name_of_work.token – A hash of the locations of
-                     each word as it appears with its original markers such
-                     as capitalization.
-                  </li>
-               </ul>
-            </li>
-         </ul>
-         <p>
-            <b>doc</b>: This folder contains files with project documentation
-            and user instructions.
-         </p>
-         <p>
-            <b>html</b>: This folder contains files that run the web interface
-            of the Tesserae home page.
-         </p>
-         <p>
-            <b>images</b>: This folder contains a collection of frequently
-            used pictures such as logos, web banners, etc.
-         </p>
-         <p>
-            <b>scripts</b>:
-            <ul>
-END
+# Initialize a hash which will translate file paths to unique integer ids
+# used to store help info
+my %id;
 
+# build html documentation
 
-#Initialize a hash which will contain the script names and the link addresses
-my %toc;
+for my $file_in (@perl_scripts, @pod_standalone) {
 
-foreach my $full_path (@perl_scripts) {
-	
-	my ($vol, $dir, $script) = File::Spec->splitpath($full_path);
+   my $html = generate_html($file_in);
+   unless ($html) {
+      warn "$file_in generated no html documentation";
+      next;
+   }
+
+   $id{$file_in} = scalar(keys %id);
+
+   my $file_out = catfile($fs{doc}, "html", $id{$file_in} . ".html");
+
+   my $fh;
+   unless (open ($fh, ">:utf8", $file_out)) {
+      warn "Can't write $file_out: $!";
+      next;
+   }
    
-	#Use the Pod::Html to call pod2html, which is included with PERL 5 distributions.
-   pod2html(
-      "--infile=$full_path",
-      "--outfile=" . catfile($fs{doc}, "$script.html"),
-      "--css=$url{css}/doc.css"
-   );
-	
-	$toc{$script} = "$url{doc}/$script.html";
+   print STDERR "writing $file_out\n";
+   
+   print $fh $html;
+   close ($fh);
+}
+
+# create html index
+{
+   my $html = html_index_template();
+   
+   my $scripts_index = toc2html(build_toc(\@perl_scripts, {base=>$fs{root}}));
+   my $general_index = toc2html(build_toc(\@pod_standalone, {flat=>1}));
+   
+   $html =~ s/<!--general-->/$general_index/;
+   $html =~ s/<!--scripts-->/$scripts_index/;
+   
+   my $file_out = catfile($fs{doc}, "html", "index.html");
+
+   open (my $fh, ">:utf8", $file_out) or die "Can't write $file_out: $!";
+   print $fh $html;
+   close $fh;
 }
 
 
-#Create the index of documents
 
-foreach my $script (sort keys %toc) {
-	$html .= "\n<li><a href='$toc{$script}'>$script</a></li>\n";
-
-}
-
-$html .= <<END;
-            </ul>
-         </p>
-         <p>
-            <b>texts</b>: This folder contains specially formatted text files
-            that are ready to be run in a search. Each work is a separate .tess
-            file; larger works are also split into separate files for each 
-            book. The structure of this folder is parallel to that of the 
-            data/v3 folder.
-         </p> 
-         <p>
-            <b>tmp</b>: This folder is where temporary output is stored. It 
-            behaves like a scratchpad for Tesserae while a search is running.
-            If the user stops a search in the middle of processing, files 
-            besides err.log, output.txt, temporary-session.xml, and tmp.csv
-            (these are all template files) must be deleted.
-         </p>
-         <p>
-            <b>xsl</b>: This folder contains files which read .xml files for
-            web display
-         </p>
-      </div>
-   </body>
-</html>
-END
-
-my $index_file = catfile($fs{doc}, "index.html");
-
-open (my $fh, ">:utf8", $index_file) or die $!;
-print $fh $html;
-
-# this temp file gets created by the pod2html process
-for my $tmp_file (glob("pod2htm*")) {
-	print STDERR "deleting $tmp_file\n" unless $quiet;
-   unlink $tmp_file;
-}
-
+#
 # subroutines
+#
 
-sub get_perl_scripts {
-   my @dir = @_;
+sub match_files {
+   # recursively search specified directories for files
+   # matching a regular expression
+
+   my ($re, @dir) = @_;
    
-   my @perl_scripts;
+   my @match;
    
    for my $dir (@dir) {
       print STDERR "checking $dir\n" unless $quiet;
@@ -376,11 +238,11 @@ sub get_perl_scripts {
       
       for my $file (@files) {
          if (-d $file) {
-            push @perl_scripts, get_perl_scripts($file);
+            push @match, match_files($re, $file);
          }
          else {
-            if ($file =~ /\.pl$/) {
-               push @perl_scripts, $file;
+            if ($file =~ $re) {
+               push @match, $file;
             }
          }
       }
@@ -388,5 +250,187 @@ sub get_perl_scripts {
       closedir($dh);
    }
    
-   return @perl_scripts;
+   return @match;
+}
+
+
+sub build_toc {
+   # build a table of contents organized by path
+
+   my ($file_ref, $opt_ref) = @_; 
+   my @files = @$file_ref;
+   my %opt;
+   if (defined $opt_ref) {
+      %opt = %$opt_ref;
+   }
+
+   my %toc;
+
+   for my $full_path (@files) {
+      # ignore files that didn't generate html documentation
+      
+      next unless defined $id{$full_path};
+      
+      # add file path to table of contents
+      
+      my ($vol, $dir, $file) = File::Spec->splitpath($full_path);
+   
+      if ($opt{flat}) {
+         # in flat mode, just index the file under its name,
+         # ignoring path and .pod extension, if any
+         $file =~ s/\.pod$//;
+         $toc{$file} = $full_path;
+         
+      } else {
+         # otherwise, store nested directories in order
+   
+         if ($opt{base}) {
+            $dir =~ s/^$opt{base}//;
+         }
+                  
+         my @dir = File::Spec->splitdir($dir);
+                  
+         if ($dir[0] eq "") { 
+            shift @dir;
+         }
+         if ($dir[-1] eq "") {
+            pop @dir;
+         }
+         
+         my $ref = \%toc;
+
+         for my $key (@dir) {
+            unless (exists $ref->{$key}) {
+               $ref->{$key} = {};
+            }
+            $ref = $ref->{$key};
+         }
+
+         $ref->{$file} = $full_path;
+      }
+   }
+   
+   return \%toc;
+}
+
+
+
+sub toc2html {
+   # recursive function to turn table of contents into a 
+   # nested <ul> list of links
+
+   my $toc_ref = shift;
+   
+   my %toc = %$toc_ref;
+      
+   my $ul = "<ul>";
+   
+   for my $key (sort keys %toc) {
+      
+      my $li;
+      
+      if (ref($toc{$key}) eq "HASH") {
+         # if the entry corresponds to a nested subdirectory, 
+         # call this function again recursively
+         
+         $li .= "<li>$key/</li>";
+         $li .= "<li>";
+         $li .= toc2html($toc{$key});
+         $li .= "</li>";
+         
+      } else {
+         # if the entry corresponds to a help file, add it
+         
+         my $id = $id{$toc{$key}};
+         
+         $li .= "<li>";
+         $li .= "<a id=\"doc_$id\" href=\"$url{doc}/$id.html\">";
+         $li .= $key;
+         $li .= "</a>";
+         $li .= "</li>";         
+      } 
+      
+      $ul .= $li;
+   }
+   
+   $ul .= "</ul>";
+  
+   return $ul;
+}
+
+
+sub generate_html {
+   # use Pod::Simple::HTML to generate web page from pod
+   
+   my $file = shift;
+   
+   $Pod::Simple::HTML::Content_decl = q{<meta charset="UTF-8" >};
+   my $p = Pod::Simple::HTML->new;
+   
+   $p->html_css('/css/doc.css');
+   
+   my $html;
+   $p->output_string(\$html);
+   
+   $p->parse_file($file);
+   
+   return $html;
+}
+
+
+sub transform_html {
+   # parse default generated html and extract just the body,
+   # repackaged as a <div> element
+   
+   my $html = shift;
+   
+   my $dom = XML::LibXML->load_html(string=>$html);
+   
+   my $div = $dom->createElement("div");
+   # $div->setAttribute("class", "pod");
+     
+   my $body = $dom->findnodes("//body")->get_node(1);
+   for my $child ($body->childNodes()) {
+      # skip comments
+      next if $child->nodeType == 8;
+      
+      # otherwise, clone children
+      $div->appendChild($child->cloneNode(1));
+   }
+ 
+   return $div->toString();
+}
+
+
+sub html_index_template {
+   # generate html index file
+   
+   my $html = <<END_HTML;
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>Tesserae Documentation</title>
+      <link rel="stylesheet" href="$url{css}/doc.css" type="text/css" />
+      <style type="text/css">
+         div.scripts ul {
+            list-style-type: none;
+         }
+      </style>
+   </head>
+   <body>
+   <div class="general">
+      <h1>Help Topics</h1>
+      <!--general-->
+   </div>
+   <div class="scripts">
+      <h1>Code Documentation</h1>
+      <!--scripts-->
+   </div>
+   </body>
+</html>
+
+END_HTML
+
+   return $html;
 }
