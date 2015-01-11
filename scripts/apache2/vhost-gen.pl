@@ -139,6 +139,8 @@ if ($help) {
 	pod2usage(1);
 }
 
+my $doc_html = catfile($fs{doc}, "html");
+
 
 print <<END;
 
@@ -158,6 +160,13 @@ print <<END;
 		Order allow,deny
 		Allow from All		
 	</Directory>
+   
+   Alias /doc/ $fs{doc}/
+   <Directory "$doc_html">
+      AllowOverride None
+      Order allow,deny
+      Allow from All
+   </Directory>
 		
 	Alias /css/ $fs{css}/
 	<Directory "$fs{css}">
@@ -181,13 +190,13 @@ print <<END;
 		Allow from all
 	</Directory>
 
-	ErrorLog \${APACHE_LOG_DIR}/error.log
+	ErrorLog \${APACHE_LOG_DIR}/tesserae.error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
 	LogLevel warn
 
-	CustomLog \${APACHE_LOG_DIR}/access.log combined
+	CustomLog \${APACHE_LOG_DIR}/tesserae.access.log combined
 
 </VirtualHost>
 
