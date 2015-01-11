@@ -41,13 +41,16 @@
             $.get(url, {}, function(html) {
                doc_handler(html, $("#main"))
             })
+            
+            $("#index ul a").css("font-weight", "normal")
+            $("#doc_" + id).css("font-weight", "bold")
          }
          
-         $(document).ready(function() {
-            doc("50");
-            
+         $(document).ready(function() {            
             $.get("/doc/index.html", {}, function(html) {
-                 doc_handler(html, $("#index"))
+               doc_handler(html, $("#index"))
+               var id = $("#index div.general ul a").attr("id").substring(4)
+               doc(id)
             })
          })
       </script>

@@ -53,8 +53,21 @@ html {
    padding-left: 10px;
 }
 
+#index li {
+   padding-top: 2px;
+}
+
 #index div.scripts ul {
    list-style-type: none;
+}
+
+#index a {
+   text-decoration: none;
+   color: blue;
+}
+
+#index a:visted {
+   color: blue;
 }
 
 #main {

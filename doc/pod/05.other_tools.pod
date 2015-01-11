@@ -1,0 +1,88 @@
+=encoding utf8
+
+=head1 Other Tools
+
+These searches are still in development. They may change without notice,
+perform unpredictably, or include undocumented features. If you like anything
+you see here, please let us know so that we can make its further development
+and inclusion into the main program a priority.
+
+=head2 Multi-text Search
+
+This search tool allows you, in addition to performing an Advanced search for
+parallels between a Target and Source text, to check the results against each
+of the other texts in our Latin corpus. Next to each parallel will be listed
+all the additional loci in the corpus with which it shares two or more words.
+
+Enter your search criteria as in an Advanced Search. Then choose from the list
+of texts at the bottom of the page those against which you want to cross-check
+your results. Note that checking all texts takes some time. If you want most,
+but not all, boxes checked, you may use the "Select All" first and then
+individually un-check texts you don't want to include.
+
+=head2 Full-Text Display
+
+This offers all the same options as the Advanced Search, but displays the
+results differently. Rather than listing parallels one by one, the full text
+of both the source and target are displayed, with matching words from all
+parallels highlighted.
+
+Hover over highlighted words in either text to see a list of corresponding
+phrases and loci in the other text.
+
+If you are a user with suggestions on what features would be useful to you in
+this interface, please send us an email. Note that this display uses HTML
+frames and may not work equally well with all browsers.
+
+=head2 Lucan-Vergil Benchmark Test
+
+This tool is a bit unwieldy, but can be very useful in understanding what sort
+of results different settings are likely to produce. The interface allows you
+to set the options of an Advanced Search, but limited to phrase-based matching
+between Lucan's <em>Civil War</em> Book 1 and Vergil's <em>Aeneid</em>.
+
+The results of your real-time search are then automatically compared against
+our 3,300 parallel benchmark set. This set is composed of parallels returned
+by previous versions of Tesserae as well as some gleaned from professional
+commentaries on Lucan. Each parallel has been hand-inspected by human readers
+and given a rank, or “Type” according to its perceived literary significance,
+roughly on the following scheme:
+
+ 5 More-significant allusion 4 Less-significant allusion 3 Genre-level
+language reuse without specific allusion 2 Non-literary language reuse 1 Error
+
+Of the results of your search, only those which occur in the benchmark set are
+displayed here. In addition to the usual columns, an additional column gives
+the human-assigned Type for each parallel, and another indicates which if any
+of the professional commentaries noted the allusion. The following
+abbreviations are used:
+
+ H Heitland and Haskins (1887) TB Thompson and Bruère (1968) V Viansino
+(1995)</td> R Roche (2009)
+
+For a detailed guide to the parallel types and full bibliographic information
+on the commentaries used, please see the description of our Lucan-Vergil test
+under the “Research” section of our site.
+
+Above the list of results, you will find a summary panel showing for each type
+what portion of the benchmark set your search returned, as well as what
+portion of all commentator-noted parallels were included.
+
+By default, results are sorted in descending order by score.
+
+=head2 LSA Search
+
+This experimental interface allows you to search for thematically similar
+passages using topic-modelling. Despite the name, it uses LSI not LSA.
+
+=head2 Cross-Language Search
+
+An experimental "translation" feature set that allows Greek-Latin matching.
+Unstable.
+
+=head2 Tri-gram Visualizer
+
+This tool allows you to explore the densities of different sound clusters
+using color.
+
+=cut

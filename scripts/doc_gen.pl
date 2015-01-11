@@ -201,8 +201,10 @@ for my $file_in (@perl_scripts, @pod_standalone) {
 {
    my $html = html_index_template();
    
-   my $scripts_index = toc2html(build_toc(\@perl_scripts, {base=>$fs{root}}));
-   my $general_index = toc2html(build_toc(\@pod_standalone, {flat=>1}));
+   my $scripts_index = toc2html(build_toc(\@perl_scripts, 
+      {base=>$fs{root}}));
+   my $general_index = toc2html(build_toc(\@pod_standalone, 
+      {flat=>1}), {pretty=>1});
    
    $html =~ s/<!--general-->/$general_index/;
    $html =~ s/<!--scripts-->/$scripts_index/;
@@ -278,7 +280,6 @@ sub build_toc {
       if ($opt{flat}) {
          # in flat mode, just index the file under its name,
          # ignoring path and .pod extension, if any
-         $file =~ s/\.pod$//;
          $toc{$file} = $full_path;
          
       } else {
@@ -319,13 +320,24 @@ sub toc2html {
    # recursive function to turn table of contents into a 
    # nested <ul> list of links
 
-   my $toc_ref = shift;
+   my ($toc_ref, $opt_ref) = @_;
    
    my %toc = %$toc_ref;
+   my %opt;
+   if (defined $opt_ref) {
+      %opt=%$opt_ref;
+   }
       
    my $ul = "<ul>";
    
    for my $key (sort keys %toc) {
+
+      my $display = $key;
+      if ($opt{pretty}) {
+         $display =~ s/\.pod^//;
+         $display =~ s/^\d+\.//;
+         $display =~ s/_/ /g;
+      }
       
       my $li;
       
@@ -333,7 +345,7 @@ sub toc2html {
          # if the entry corresponds to a nested subdirectory, 
          # call this function again recursively
          
-         $li .= "<li>$key/</li>";
+         $li .= "<li>$display/</li>";
          $li .= "<li>";
          $li .= toc2html($toc{$key});
          $li .= "</li>";
@@ -345,7 +357,7 @@ sub toc2html {
          
          $li .= "<li>";
          $li .= "<a id=\"doc_$id\" href=\"$url{doc}/$id.html\">";
-         $li .= $key;
+         $li .= $display;
          $li .= "</a>";
          $li .= "</li>";         
       } 

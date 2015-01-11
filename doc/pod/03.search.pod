@@ -1,0 +1,175 @@
+=encoding utf8
+
+=head1 Searching with Tesserae
+
+Tesserae can be used either through a web-interface or from the command-line.
+The same settings and parameters are available via either interface, although
+some default settings may be different.
+
+=head2 Search Parameters
+
+Available via the web by clicking "show advanced"; for command-line usage use
+C<cgi-bin/read_table.pl --help>.
+
+=head3 Units
+
+Here you can choose the textual units which are compared. Choices are verse
+lines or grammatical phrases. Phrases are delimited for this purpose by
+editorial punctuation, and parsed automatically.
+
+=head3 Feature Set
+
+This means the textual features which must be shared to consitute a match.
+The default is lemma, meaning two words are judged to match if they share a
+dictionary headword. Setting this to exact form only will require inflected
+forms to match exactly.
+
+Lemma + synonyms is an experimental option which attempts to match forms not
+only to their own dictionary headword but also to headwords having related
+meanings. The relationship between headwords was determined automatically by
+parsing of a Latin-English dictionary; this procedure and the dictionary used
+are under revision and may change.
+
+=head3 Number of Stop Words
+
+To reduce the number of uninteresting results, you can choose to exclude
+matches with high-frequency features. The stoplist is determined for the
+selected feature set by ranking features within the stoplist basis (see
+below) according to frequency, and taking the top N items from this list. The
+default stoplist size for a Basic Search is 10.
+
+Note that the stop list is feature-set specific. If your feature set is
+exact-form only, then inflected forms are used; if the feature set is stems
+or stems + synonyms, then headwords are used. The complete stoplist used in a
+given search is printed at the bottom of each results page.
+
+=head3 Stoplist Basis
+
+By default, the ranked list of features from which the stoplist is drawn is
+calculated across the entire Tesserae corpus. This can be changed to use
+features from the target text only, from the source only, or from just the
+target and source combined.
+
+For example, in a default search, matches against the top 10 most frequent
+headwords in the entire corpus will be ignored. Some of these words may be
+less frequent in the particular texts compared. If you set the stoplist basis
+to “target,” then matches against the top 10 most frequent headwords in the
+target text will be ignored.
+
+=head3 Maximum Distance
+
+This allows you to exclude matches where the matching words are too far from
+each other to be relevant. Distance is measured inclusively in words: two
+adjacent words thus have a distance of 2. Two words with one between them
+have a distance of 3.
+
+B<Note that the way this distance is calculated has recently changed.> If
+your results seem more inclusive compared to Fall 2012 (and you don't want
+this) try setting max distance lower.
+
+=head3 Distance Metric
+
+There are two principal modes for calculating the max distance described
+above. B<Frequency>, the default, attempts to zero in on the most relevant
+words in an allusion, measuring the distance only between the phrase's two
+most infrequent words. B<Span> considers the greatest distance between any
+two matching words in a phrase.
+
+In addition, the max distance threshold can be applied to the sum of the
+distances of the target and source phrases, or only to one or the other. Note
+that this will halve the total distance for each parallel, causing scores to
+be higher.
+
+=head3 Drop Scores Below
+
+This will exclude results based on the score automatically assigned by
+Tesserae. Testing of the scoring system is ongoing, but preliminary results
+show that parallels scoring 6 or above are more likely to be interesting. The
+default is no cutoff.
+
+=head2 Command-line Interface
+
+The process of performing a Tesserae search has two steps, (1) discovery and
+scoring, and (2) retrieval and display.
+
+=head2 Discovery and Scoring
+
+First the search script, I<cgi-bin/read_table.pl> is called. This compares
+two texts, determines which sentences/lines match each other, and saves the
+results as a set of hashs using Storable. One hash stores metadata, three
+others contain co-ordinated search results:
+
+=over
+
+=item match.source
+
+This holds data about which tokens in the source document were matched.
+
+=item match.target
+
+This holds data about which tokens in the target document were matched.
+
+=item match.score
+
+This contains the scores assigned to each parallel.
+
+=back
+
+These three hashes are build on the same basic structure. The first set of
+keys are unit ids in the source document. They point to anonymous hashes
+whose keys are unit ids in the target. Thus a reference of the form
+C<$rec{$unit_id_source}{$unit_id_target}> points to the same parallel in all
+three hashes. Let's imagine the contents of these three files are loaded as
+follows: use Storable;
+
+ my %match_score = %{retrieve("match.score")}; my %match_source =
+%{retrieve("match.source")}; my %match_target = %{retrieve("match.target")};
+
+Then C<$match_score{$unit_id_source}{$unit_id_target}> will produce the score
+for this particular allusion.
+
+In B<match.source> and B<match.target>, things are a bit more complicated.
+Here, the reference is to an anonymous hash whose keys are token ids in the
+source or target text, respectively. So C<keys
+(%{$match.source{$unit_id_source}{$unit_id_target}})> will return the list of
+token ids in the source target that participate in the allusion between a
+certain unit in the source and target; to get the list of tokens in the
+target text, use C<keys
+(%{$match.source{$unit_id_source}{$unit_id_target}})>. The next anonymous
+hash has matched features as its keys. Thus, C<keys
+(%{$match_source{$unit_id_source}{$unit_id_target}{$token_id_source}})> will
+produce the list of features on which a particular token was matched. The
+values to this last embedded hash are for the present just placeholders, and
+aren't used for anything.
+
+=head2 Retrieval and Display
+
+In the second step, the script I<read_bin.pl> reads that binary and turns the
+hash into a nice list. It has three different output modes, one produces a
+paged HTML table for the web interface, one creates a sorted CSV, and the
+last just dumps an XML file with all the data.
+
+When the program is run from the web interface, the storable binaries
+produced by I<read_table.pl> are given incremental session numbers as their
+filenames and they're stored in the I<tmp/> directory. If you're running
+Tesserae from the command line, you can give the results file your own name.
+
+=head2 Command-line Example
+
+Here's how to run the benchmark search. This checks for allusions to Vergil's
+I<Aeneid> in Book 1 of Lucan's I<Pharsalia>. If everything is working, you
+should end up with a CSV file giving a ranked table of pairs of matching
+phrases from the two texts.
+
+ % cgi-bin/read_table.pl --target lucan.pharsalia.part.1 --source
+vergil.aeneid --unit phrase --bin myresults.bin
+
+ % cgi-bin/read_bin.pl --export csv --rev --sort score myresults.bin >
+myresults.csv
+
+=head2 See also
+
+More details on the available options for these scripts can be found in the
+documentation for the respective scripts.
+
+=cut
