@@ -3,7 +3,8 @@
    <head>
       <meta charset="utf-8">
       <title>Tesserae Code Documentation</title>
-      <link rel="stylesheet" href="http://r3_1.tesserae.org/css/doc.css" type="text/css" />
+      <link rel="stylesheet" href="/css/style.css" type="text/css" />
+      <link rel="stylesheet" href="/css/doc.css" type="text/css" />
       <script src="/jquery.js"></script>
       <script type="text/javascript">
          function mod_a(a) {
@@ -39,7 +40,7 @@
          function doc(id) {
             var url = "/doc/" + id + ".html"
             $.get(url, {}, function(html) {
-               doc_handler(html, $("#main"))
+               doc_handler(html, $("#help_content"))
             })
             
             $("#index ul a").css("font-weight", "normal")
@@ -48,27 +49,29 @@
          
          $(document).ready(function() {            
             $.get("/doc/index.html", {}, function(html) {
-               doc_handler(html, $("#index"))
-               var id = $("#index div.general ul a").attr("id").substring(4)
+               doc_handler(html, $("#help_index"))
+               var id = $("#help_index div.general ul a").attr("id").substring(4)
                doc(id)
             })
+            $("#header").load("/header.html")
+            $("#footer").load("/footer.html")
          })
       </script>
    </head>
    <body>
-      <div id="header">
-         This is the header.
-      </div>
-      <div id="content_frame">
-         <div id="index">
-            This is the index
+      <div id="container">
+         <div id="header">
+            This is the header.
          </div>
          <div id="main">
-            This is the content.
+            <div id="help_index">
+            </div>
+            <div id="help_content">
+            </div>
          </div>
-      </div>
-      <div id="footer">
-         This is the footer.
+         <div id="footer">
+            This is the footer.
+         </div>
       </div>
    </body>
 </html>  

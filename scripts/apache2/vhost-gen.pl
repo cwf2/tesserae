@@ -161,7 +161,7 @@ print <<END;
 		Allow from All		
 	</Directory>
    
-   Alias /doc/ $fs{doc}/
+   Alias /doc/ $doc_html/
    <Directory "$doc_html">
       AllowOverride None
       Order allow,deny

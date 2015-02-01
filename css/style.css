@@ -177,6 +177,7 @@ div#results_sort table
 
 div#main
 {
+   position: relative;
 	margin: auto;
 	padding: 25px;
 	text-align: justify;
