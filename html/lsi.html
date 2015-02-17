@@ -37,7 +37,7 @@
          function loadTextList(lang) {
             var elem = $("<select />")
             elem.attr("id", lang + "_texts")
-            elem.load("/textlist." + lang + ".r.html", {}, function() {
+            elem.load("/textlist." + lang + ".r.html", function() {
                $("#textlists").append(elem)
                checkSentinel()
             })
