@@ -10,7 +10,7 @@
     <DigitalSourceDisplay>Perseus</DigitalSourceDisplay>
     <DigitalSourceURL>http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3atext%3a1999.02.0068%3atext%3dRem.</DigitalSourceURL>
     <AddedBy>Chris Forstall</AddedBy>
-    <URI>http://data.perseus.org/texts/urn:cts:latinLit:phi0959.phi005.perseus-lat1</URI>
+    <URI>urn:cts:latinLit:phi0959.phi005.perseus-lat1</URI>
   </Metadata>
   <Text>
     <TextUnit id="0" loc="1">Legerat huius Amor titulum nomenque libelli:</TextUnit>
