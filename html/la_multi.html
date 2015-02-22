@@ -42,7 +42,7 @@
          function loadTextList(lang) {
             var elem = $("<select />")
             elem.attr("id", lang + "_texts")
-            elem.load("/textlist." + lang + ".r.html", {}, function() {
+            elem.load("/textlist." + lang + ".r.html", function() {
                $("#textlists").append(elem)
                checkSentinel()
             })
@@ -79,10 +79,10 @@
 			}
                
          $(document).ready(function() {            
-            $("#nav_main").load("/nav_main.html", {}, function(){
+            $("#nav_main").load("/nav_main.html", function(){
                $("#nav_main_search").addClass("nav_selected")
             })
-            $("#nav_sub").load("/nav_search.html", {}, function(){
+            $("#nav_sub").load("/nav_search.html", function(){
                $("#nav_search_other").addClass("nav_selected")
             })
             $("#footer").load("/footer.html")

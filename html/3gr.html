@@ -24,7 +24,7 @@
          function loadTextList(dest) {
             var elem = $("<select />")
             elem.attr("id", lang[dest] + "_texts")
-            elem.load("/textlist." + lang[dest] + ".r.html", {}, function() {
+            elem.load("/textlist." + lang[dest] + ".r.html", function() {
                $("#textlists").append(elem)
                populate_author(lang[dest], dest)
                set_defaults(lang, selected);
@@ -32,10 +32,10 @@
          }
                   
          $(document).ready(function() {            
-            $("#nav_main").load("/nav_main.html", {}, function(){
+            $("#nav_main").load("/nav_main.html", function(){
                $("#nav_main_search").addClass("nav_selected")
             })
-            $("#nav_sub").load("/nav_search.html", {}, function(){
+            $("#nav_sub").load("/nav_search.html", function(){
                $("#nav_search_other").addClass("nav_selected")
             })
             $("#footer").load("/footer.html")
