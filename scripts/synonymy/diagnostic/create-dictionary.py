@@ -112,7 +112,7 @@ def export_dict(defs, name, quiet):
 			
 			file_export = os.path.join(dir_export, keychar)
 			
-			f = open(file_export, 'a')
+			f = open(file_export.encode('utf8'), 'a')
 		
 		f.write('{0}::{1}\n'.format(head.encode('utf8'), defs[head].encode('utf8')))
 		

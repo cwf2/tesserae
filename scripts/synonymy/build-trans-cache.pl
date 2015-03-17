@@ -194,6 +194,7 @@ for my $lang (qw/grc la/) {
 			$head = Tesserae::standardize($lang, $head);
 			
 			@trans = Tesserae::standardize($lang, @trans);
+         @trans = map { s/:[\.0-9]+$// } @trans;
 			
 			@trans = grep { /\S/ } @trans;
 	

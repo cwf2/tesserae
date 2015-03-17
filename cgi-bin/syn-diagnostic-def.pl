@@ -2,35 +2,24 @@
 
 =head1 NAME
 
-syn-diagnostic-lookup.pl - look up a translation candidates in the dictionary
+syn-diagnostic-def.pl - look up a headword in the lexicon
 
 =head1 SYNOPSIS
 
-syn-diagnostic-lookup.pl [options]
+syn-diagnostic-def.pl [options] QUERY
 
 =head1 DESCRIPTION
 
-A more complete description of what this script does.
+A more complete description of what this script does. Normally meant to serve
+AJAX requests from the syn-diagnostic interface.
 
 =head1 OPTIONS AND ARGUMENTS
 
 =over
 
-=item B<--target>
+=item I<QUERY>
 
-The text whose stems we want to index. Use '*' to list all the stems in the corpus.
-
-=item B<--feature> FEATURE
-
-Specify the feature set to check; repeat to set both feature sets.
-
-=item b<--query> STEM
-
-Specify the greek stem to check against the translation dictionaries.
-
-=item B<--auth> USER
-
-Initiate manual-correction mode. I<USER> should be one of cf, jg, kc, am, nc.
+The term to be looked up.
 
 =item B<--html>
 
@@ -53,13 +42,13 @@ The contents of this file are subject to the University at Buffalo Public Licens
 
 Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitations under the License.
 
-The Original Code is syn-diagnostic-lookup.pl.
+The Original Code is syn-diagnostic-def.pl.
 
 The Initial Developer of the Original Code is Research Foundation of State University of New York, on behalf of University at Buffalo.
 
 Portions created by the Initial Developer are Copyright (C) 2007 Research Foundation of State University of New York, on behalf of University at Buffalo. All Rights Reserved.
 
-Contributor(s): Chris Forstall
+Contributor(s): Chris Forstall <cforstall@gmail.com>
 
 Alternatively, the contents of this file may be used under the terms of either the GNU General Public License Version 2 (the "GPL"), or the GNU Lesser General Public License Version 2.1 (the "LGPL"), in which case the provisions of the GPL or the LGPL are applicable instead of those above. If you wish to allow use of your version of this file only under the terms of either the GPL or the LGPL, and not to allow others to use your version of this file under the terms of the UBPL, indicate your decision by deleting the provisions above and replace them with the notice and other provisions required by the GPL or the LGPL. If you do not delete the provisions above, a recipient may use your version of this file under the terms of any one of the UBPL, the GPL or the LGPL.
 
@@ -126,7 +115,6 @@ BEGIN {
 
 use lib $lib;
 use Tesserae;
-use SynDiagnostic;
 use EasyProgressBar;
 
 # modules to read cmd-line options and print usage
@@ -137,21 +125,19 @@ use Pod::Usage;
 # load additional modules necessary for this script
 
 use CGI qw/:standard/;
-use DBI;
+use Storable;
 use utf8;
 use Encode;
-use JSON;
 
-binmode STDOUT, "utf8";
-binmode STDERR, "utf8";
+binmode STDOUT, 'utf8';
+binmode STDERR, 'utf8';
 
 # initialize some variables
 
 my $query;
-my $feature;
+my $lang;
 my $html;
 my $help;
-my $lang;
 my $quiet;
 
 #
@@ -168,11 +154,10 @@ my $no_cgi = defined($cgi->request_method()) ? 0 : 1;
 if ($no_cgi) {
 	
 	GetOptions(
-		"feature=s" => \$feature,
-      "lang=s"    => \$lang,
-		"help"      => \$help,
-		"html"      => \$html,
-      "quiet"     => \$quiet
+		'help'    => \$help,
+      'quiet'   => \$quiet,
+      'lang=s'  => \$lang,
+		'html'    => \$html
 	);
 	
 	# print usage if the user needs help
@@ -183,60 +168,87 @@ if ($no_cgi) {
    
    $query = shift @ARGV;
    
-   unless($query) {
+   unless ($query) {
       pod2usage(1);
    }
 } else {
 		
-	print header(-charset=>"utf-8", -type=>"application/json");
+	print header('-charset'=>'utf-8', '-type'=>'text/plain');
 
-	$query = $cgi->param("query");
-	$feature = $cgi->param("feature");
+	$query = $cgi->param('query');
 	$html = 1;
    $quiet = 1;
 }
 
 $query = decode("utf8", $query);
-
-$lang = $lang || SynDiagnostic::lang($query);
-
+unless ($lang) {
+   $lang = is_greek($query) ? "grc" : "la";
+}
 $query = Tesserae::standardize($lang, $query);
 
-# load up feature data
-my $ref_data = load_data($feature, $query);
+print STDERR "$query:\n" unless $quiet;
 
-# send to browser
-print encode_json($ref_data);
-
+print load_def($query);
 
 #
 # subroutines
 #
 
-sub load_data {
-   my ($feat, $query) = @_;
+sub load_def {
+   # retrieve definition for a word
    
-   my @data;
+	my $query = shift;
+	
+	my $def = "";
+	
+	if (defined $query and $query ne "") {
 
-   print STDERR "Querying database\n" unless $quiet;
+		my $file = catfile($fs{data}, "synonymy", "dict-diagnostic", substr($query, 0, 1)); 
 
-   my $file_db = catfile($fs{data}, "synonymy", "dict-diagnostic", "syn-diagnostic.db");
-   my $dbh = SynDiagnostic::db_connect($file_db, quiet=>$quiet);
-   
-   my $sql = qq{select rowid,result,score from feat_$feat where query="$query"};
+		if (-s $file) {
+		
+			if (open (my $fh, "<:utf8", $file)) {
+			
+				while (my $rec = <$fh>) {
+					
+					my ($head, $def_) = split(/::/, $rec);
+					
+					my $lang = is_greek($head) ? "grc" : "la";
+					
+					$head = Tesserae::standardize($lang, $head);
+					
+ 					if ($head eq $query) {
+					
+						$def = $def_;
+					
+						last;
+					}
+				}
+			}
+		}
+	}
 
-   print STDERR "$sql\n" unless $quiet;
+	return $def;
+}
 
-   my $ref_results = $dbh->selectall_arrayref($sql);
 
-   for my $row(@$ref_results) {
-      my ($id, $result, $score) = @$row;
-   
-      push @data, {
-         result=>$result, 
-         score=>$score
-      };
-   }
-   
-   return \@data;
+#
+# guess whether a word is greek
+#
+
+sub is_greek {
+
+	my $token = shift;
+	
+	my @c = split(//, $token);
+	
+	for (@c) {
+		
+		if (ord($_) > 255) {
+
+			return 1;
+		}
+	}
+	
+	return 0;
 }

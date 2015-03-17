@@ -146,7 +146,6 @@ use Pod::Usage;
 # load additional modules necessary for this script
 
 use CGI qw/:standard/;
-use CGI::Session;
 use Storable;
 use utf8;
 use DBI;
@@ -161,16 +160,15 @@ my $target   = 'homer.iliad';
 my @feature  = qw/trans1 trans2/;
 my $auth;
 my $query;
-my $html     = 0;
-my $help     = 0;
+my $html;
+my $help;
+my $quiet;
 
 #
 # check for cgi interface
 #
 
 my $cgi = CGI->new() || die "$!";
-my $session; 
-
 my $no_cgi = defined($cgi->request_method()) ? 0 : 1;
 
 #
@@ -185,7 +183,8 @@ if ($no_cgi) {
 		'query=s'   => \$query,
 		'auth=s'    => \$auth,
 		'help'      => \$help,
-		'html'      => \$html
+		'html'      => \$html,
+      'quiet'     => \$quiet
 	);
 
 	# print usage if the user needs help
@@ -194,12 +193,9 @@ if ($no_cgi) {
 
 		pod2usage(1);
 	}
-}
-else {
-	
-	$session = CGI::Session->new(undef, $cgi, {Directory => '/tmp'}, {name=>'syn-diagnostic'});
-	
-	print $session->header('-charset'=>'utf-8', '-type'=>'text/html');
+} else {
+		
+	print header('-charset'=>'utf-8', '-type'=>'text/html');
 
 	$target     = $cgi->param('target')   || $session->param('target')   || $target;
 	$query      = $cgi->param('query')    || $session->param('query');
@@ -207,19 +203,15 @@ else {
 	$feature[1] = $cgi->param('feature2') || $session->param('feature2') || $feature[1];
  	$auth       = $cgi->param('auth')     || $session->param('auth');
 	$html = 1;
+   $quiet = 1;
 }
 
 my $dbh = init_db();
 my %done = %{check_done()};
-
-print_header();
-
 my %index = %{load_lex($target)};
 my %hits = %{check_hits()};
+
 export_lex();
-
-print_footer();
-
 
 #
 # get the list of words for the target text
@@ -250,18 +242,9 @@ sub load_lex {
 
 sub check_hits {
 		
-	if ($no_cgi) {
-	
-		print STDERR "Loading feature data\n";
-	}
-
-	if ($html) {
-	
-		print "<div class=\"summary\">\n";
-		print "<table>\n";
-	}
-
-	my %hits;
+	print STDERR "Loading feature data\n" unless $quiet;
+   
+   my %hits;
 	
 	for my $feature (@feature) {
 		
@@ -274,10 +257,7 @@ sub check_hits {
 
 		my %candidates = %{retrieve($file)};
 		
-		if ($no_cgi) {
-			
-			print STDERR "$feature has " . scalar(keys %candidates) . " keys\n";
-		}
+		print STDERR "$feature has " . scalar(keys %candidates) . " keys\n" unless $quiet;
 	
 		my $count = 0;
 		
@@ -292,83 +272,10 @@ sub check_hits {
 		  
 		my $rate = sprintf("%.0f", 100 * $count / scalar(keys %index));
 		
-		if ($html) {
-		
-			print "<tr><td>$feature</td><td>$rate\%</td>\n";
-		}
-		else {
-		
-			print "$feature: $rate\n"; 
-		}
-	}
-	
-	if ($html) {
-	
-		print "</table>\n";
-		print "</div>\n";
+		print "$feature: $rate\n" unless $quiet;
 	}
 	
 	return \%hits;
-}
-
-
-#
-# page header
-#
-
-sub print_header {
-	
-	if ($html) {
-
-		print <<END_HEAD;
-<html>
-	<head>
-		<link href="/css/style.css" rel="stylesheet" type="text/css" />
-		<style type="text/css">
-			tr {
-				padding: 4px 3px;
-			}
- 			a {
-				text-decoration: none;
-			}
-			a:link, a:visited {
-				color: #0000B0;
-			}
-			a.done {
-				color:grey;
-			}
-			div.summary {
-				margin-bottom:10px;
-			}
-			div.back {
-				padding:3px 3px 8px 3px;
-			}
-		</style>
-	</head>
-	<body>
-	<div class="back">
-		<a style="color:grey;" href="/experimental.php" target="_top">Back to Tesserae</a>
-	</div>
-	<div>
-END_HEAD
-
-		print select_list($target) unless $auth;
-	}
-	else {
-	
-		print "Lexicon for $target\n";
-	}
-}
-
-sub print_footer {
-
-	if ($html) {
-
-		print <<END_FOOT;
-	</div>
-</html>
-END_FOOT
-	}
 }
 
 
@@ -437,42 +344,6 @@ sub export_lex {
 	}
 }
 
-sub select_list {
-	
-	my $target = shift;
-	
-	my $list;
-	
-	for my $name (@{Tesserae::get_textlist('grc', -sort=>1)}) {
-	
-		my $display = $name;
-		$display =~ s/_/ /g;
-		$display =~ s/\./—/;
-		$display =~ s/\./ /g;
-		$display =~ s/\b([a-z])/uc($1)/ge;
-	
-		my $selected = '';
-		$selected = ' selected="selected"' if $name eq $target;
-	
-		$list .= "<option value=\"$name\"$selected>$display</option>\n";
-	}
-	
-	my $html=<<END;
-	
-	<form action="/cgi-bin/syn-diagnostic-index.pl" target="left" method="post" id="Form1">
-
-		<select name="target">
-			<option value="*">Full Corpus</option>
-			$list
-		</select>
-		
-		<input type=\"submit\" value=\"Load\">
-	</form>
-
-END
-	
-	return $html;	
-}
 
 #
 # connect to database

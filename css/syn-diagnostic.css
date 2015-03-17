@@ -1,0 +1,69 @@
+#container {
+   position: absolute;
+   left: 0px;
+   right: 0px;
+   top: 0px;
+   bottom: 0px;
+}
+
+#index {
+   position: absolute;
+   left: 0px;
+   width: 33%;
+   top: 0px;
+   bottom: 0px;
+   border-right: 1px solid black;
+   overflow-x: hidden;
+   overflow-y: auto;
+}
+
+#results {
+   position: absolute;
+   left: 33%;
+   right: 0px;
+   top: 0px;
+   bottom: 0px;
+   overflow-x: hidden;
+   overflow-y: auto;
+   padding: 10px;
+}
+
+h1 {
+   font-size: 100%;
+}
+
+.featureset {
+   padding-top: 10px;
+}
+
+.definition {
+   position: relative;
+   padding: 10px;
+}
+
+.definition .head {
+   position: relative;
+   left: 0px;
+   right: 0px;
+   top: 0px;
+   height: 1.5em;
+   border-bottom: 1px dotted gray;
+}
+
+.definition .body {
+   top: 10px;
+   position: relative;
+}
+
+.definition .query {
+   position: absolute;
+   left: 0px;
+   width: 50%;
+}
+
+.definition .score {
+   position: absolute;
+   right: 0px;
+   width: 50%;
+   text-align: right;
+}
