@@ -10,7 +10,7 @@
     <DigitalSourceDisplay>Perseus</DigitalSourceDisplay>
     <DigitalSourceURL>http://www.perseus.tufts.edu</DigitalSourceURL>
     <AddedBy>Chris Forstall</AddedBy>
-    <URI/>
+    <URI>urn:cts:latinLit:phi0959.phi003.perseus-lat1</URI>
   </Metadata>
   <Text>
     <TextUnit id="0" loc="1">Discite quae faciem commendet cura, puellae,</TextUnit>

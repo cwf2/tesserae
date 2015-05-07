@@ -10,7 +10,7 @@
     <DigitalSourceDisplay>Perseus</DigitalSourceDisplay>
     <DigitalSourceURL>http://www.perseus.tufts.edu</DigitalSourceURL>
     <AddedBy>Chris Forstall</AddedBy>
-    <URI/>
+    <URI>urn:cts:latinLit:phi0959.phi001.perseus-lat1</URI>
   </Metadata>
   <Parts><Part id="1"><Display>Book 1</Display><MaskLower>0</MaskLower><MaskUpper>775</MaskUpper><LocusLower>1.ep.1</LocusLower><LocusUpper>1.15.42</LocusUpper></Part><Part id="2"><Display>Book 2</Display><MaskLower>776</MaskLower><MaskUpper>1587</MaskUpper><LocusLower>2.1.1</LocusLower><LocusUpper>2.19.60</LocusUpper></Part><Part id="3"><Display>Book 3</Display><MaskLower>1588</MaskLower><MaskUpper>2457</MaskUpper><LocusLower>3.1.1</LocusLower><LocusUpper>3.15.20</LocusUpper></Part></Parts><Text>
     <TextUnit id="0" loc="1.ep.1">Qui modo Nasonis fueramus quinque libelli,</TextUnit>

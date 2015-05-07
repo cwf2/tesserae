@@ -10,7 +10,7 @@
     <DigitalSourceDisplay>Latin Library</DigitalSourceDisplay>
     <DigitalSourceURL>http://thelatinlibrary.com</DigitalSourceURL>
     <AddedBy>Chris Forstall</AddedBy>
-    <URI/>
+    <URI>urn:cts:latinLit:phi0893.phi002.perseus-lat1</URI>
   </Metadata>
   <Text>
     <TextUnit id="0" loc="1">Phoebe silvarumque potens Diana,</TextUnit>
