@@ -189,18 +189,31 @@ for my $lang (qw/grc la/) {
 
 			chomp $line;
 	
-			my ($head, @trans) = split(/\s*,\s*/, $line);
+			my ($head, @candidates) = split(/\s*,\s*/, $line);
 	
 			$head = Tesserae::standardize($lang, $head);
 			
-			@trans = Tesserae::standardize($lang, @trans);
+            for (@candidates) {s/:[0-9.-]+//}
+            
+			@candidates = Tesserae::standardize($lang, @candidates);
 			
-			@trans = grep { /\S/ } @trans;
+			@candidates = grep { /\S/ } @candidates;
 	
-			next unless @trans;
+			next unless @candidates;
 	
-			push @{$trans{$head}}, @trans;
+			push @{$trans{$head}}, @candidates;
 		}
+        $pr->finish;
+        close($fh);
+        
+        print STDERR "Consolidating...\n" unless $quiet;
+        $pr = ProgressBar->new(scalar(keys %trans), $quiet);
+        
+        for my $k (keys %trans) {
+            $trans{$k} = Tesserae::uniq($trans{$k});
+            $pr->advance;
+        }
+        $pr->finish;
 
 		#
 		# save as Storable binary
