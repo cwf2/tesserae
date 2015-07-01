@@ -141,53 +141,40 @@ if ($help) {
 
 my $doc_html = catfile($fs{doc}, "html");
 
-
 print <<END;
 
 <VirtualHost *:80>
-	ServerAdmin $admin_email
+    ServerAdmin $admin_email
 
-	<Directory />
-		Options FollowSymLinks
-		AllowOverride None
-		Order deny,allow
-		Deny from All
-	</Directory>
+    <Directory />
+        Require all denied
+    </Directory>
 
 	DocumentRoot $fs{html}/
 	<Directory "$fs{html}">
-		AllowOverride None
-		Order allow,deny
-		Allow from All		
+        Require all granted
 	</Directory>
-   
-   Alias /doc/ $doc_html/
-   <Directory "$doc_html">
-      AllowOverride None
-      Order allow,deny
-      Allow from All
-   </Directory>
+    
+    Alias /doc/ $doc_html/
+    <Directory "$doc_html">
+        Require all granted
+    </Directory>
 		
 	Alias /css/ $fs{css}/
 	<Directory "$fs{css}">
-		AllowOverride None
-		Order allow,deny
-		Allow from all		
+        Require all granted
 	</Directory>
 
 	Alias /images/ $fs{image}/
 	<Directory "$fs{image}">
-		AllowOverride None
-		Order allow,deny
-		Allow from all		
+        Require all granted
 	</Directory>
 
 	ScriptAlias /cgi-bin/ $fs{cgi}/
 	<Directory "$fs{cgi}">
-		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-		Order allow,deny
-		Allow from all
+        AddHandler cgi-script .pl
+        Require all granted
 	</Directory>
 
 	ErrorLog \${APACHE_LOG_DIR}/tesserae.error.log
@@ -197,6 +184,8 @@ print <<END;
 	LogLevel warn
 
 	CustomLog \${APACHE_LOG_DIR}/tesserae.access.log combined
+
+    EnableSendfile off 
 
 </VirtualHost>
 
