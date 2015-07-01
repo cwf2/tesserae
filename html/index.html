@@ -19,13 +19,12 @@
    			"source": "la"
    		}
    		var selected = {
-   			"target": "vergil.georgics.part.1",
-   			"source": "catullus.carmina"
+   			"target": "statius.achilleid.part.4.1,283-396",
+   			"source": "ovid.elegies"
    		}
          var feature = {
             "stem": "lemma",
-            "word": "exact word",
-            "3gr": "character 3-gram"
+            "word": "exact word"
          }
          var isAdvanced = false
    
@@ -47,7 +46,7 @@
                checkSentinel()
             })
          }
-                  
+                           
          $(document).ready(function() {            
             $("#nav_main").load("/nav_main.html", {}, function(){
                $("#nav_main_search").addClass("nav_selected")
@@ -63,7 +62,7 @@
             } else {
                checkSentinel()
             }
-            
+
             for (var k in feature) {
               $("#sel_feature").append($("<option />").val(k).text(feature[k])) 
             }
@@ -72,6 +71,7 @@
                toggleAdvanced(isAdvanced)
                isAdvanced = ! isAdvanced
             })
+            
             $("#sel_auth_source").change(function() {
                populate_work(lang["source"], "source")
             })
@@ -103,13 +103,11 @@
          </div>
          <div id="main">
 
-            <h1>Welcome</h1>
-
-            <p>
-               The Tesserae project aims to provide a flexible and robust web interface for exploring intertextual parallels.
-               Select two poems below to see a list of lines sharing two or more words (regardless of inflectional changes).
-               For advanced search options, select a language from the menu above.
-            </p>	
+         	<h1>Latin Search</h1>
+	
+         	<p>
+         	</p>
+	
          	<form action="/cgi-bin/read_table.pl" method="post" ID="Form1">
 
          		<table class="input">
@@ -227,9 +225,9 @@
          							<option value="4">4</option>
          							<option value="5">5</option>
          							<option value="6">6</option>
-         							<option value="7" selected="selected">7</option>
+         							<option value="7">7</option>
          							<option value="8">8</option>
-         							<option value="9">9</option>
+         							<option value="9" selected="selected">9</option>
          						</select>
          					</td>
          				</tr>

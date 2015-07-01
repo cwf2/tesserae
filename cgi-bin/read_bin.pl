@@ -181,7 +181,7 @@ my $quiet = 0;
 
 # sort algorithm
 
-my $sort = 'score';
+my $sort = 'target';
 
 # first page of results to display
 
@@ -193,7 +193,7 @@ my $batch = 100;
 
 # reverse order ?
 
-my $rev = 1;
+my $rev = 0;
 
 # determine file from session id
 
@@ -205,7 +205,7 @@ my $export = 'html';
 
 # number of decimal places to report in scores
 
-my $dec = 0;
+my $dec = 2;
 
 # help flag
 
@@ -609,7 +609,7 @@ sub print_html {
 		# get the score
 
 		my $score = sprintf("%.${dec}f", $score{$unit_id_target}{$unit_id_source});
-
+		next if $score == 0;
 		# a guide to which tokens are marked in each text
 
 		my %marked_target;

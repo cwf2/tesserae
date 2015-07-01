@@ -692,6 +692,10 @@ else {
 # look at the matches one by one, according to unit id in the target
 #
 
+my ($s_, $t_) = ($source, $target);
+$s_ =~ s/\.part\..*//;
+$t_ =~ s/\.part\..*//;
+
 for my $unit_id_target (keys %match_target) {
 
 	# advance the progress bar
@@ -707,8 +711,12 @@ for my $unit_id_target (keys %match_target) {
 		# 
 		# where source and target are the same text, don't match
 		# a line with itself
-		
-		next if ($source eq $target) and ($unit_id_source == $unit_id_target);
+			
+		if ($s_ eq $t_) {
+			if ($unit_source[$unit_id_source]{LOCUS} eq $unit_target[$unit_id_target]{LOCUS}) {
+				next;
+			}
+		}
 
 		#
 		# remove matches having fewer than 2 matching words
